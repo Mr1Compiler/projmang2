@@ -9,8 +9,8 @@ CREATE TABLE pages (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     icon VARCHAR(255),
-    route VARCHAR(255),
-    status VARCHAR(50),
+    route VARCHAR(255) NOT NULL,
+    status VARCHAR(50) DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -66,6 +66,7 @@ CREATE TABLE workCategories (
     name VARCHAR(255) NOT NULL,
     description TEXT,
     status VARCHAR(50),
+    createdBy INTEGER REFERENCES users(id) ON DELETE SET NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -77,6 +78,7 @@ CREATE TABLE workSubCategories (
     description TEXT,
     percentage DECIMAL(5, 2),
     status VARCHAR(50),
+    createdBy INTEGER REFERENCES users(id) ON DELETE SET NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -96,9 +98,10 @@ CREATE TABLE projects (
     duration INTEGER,
     warningCost DECIMAL(15, 2),
     totalCost DECIMAL(15, 2),
-    status VARCHAR(50),
-    progressPercentage DECIMAL(5, 2),
+    status VARCHAR(50) NOT NULL DEFAULT 'draft',
+    progressPercentage DECIMAL(5, 2) DEFAULT 0,
     notes TEXT,
+    createdBy INTEGER REFERENCES users(id) ON DELETE SET NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -113,9 +116,10 @@ CREATE TABLE workDays (
     workSubCategoryId INTEGER REFERENCES workSubCategories(id) ON DELETE SET NULL,
     workDate DATE NOT NULL,
     description TEXT,
-    status VARCHAR(50),
-    totalCost DECIMAL(15, 2),
+    status VARCHAR(50) NOT NULL DEFAULT 'pending',
+    totalCost DECIMAL(15, 2) DEFAULT 0,
     notes TEXT,
+    createdBy INTEGER REFERENCES users(id) ON DELETE SET NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -166,11 +170,12 @@ CREATE TABLE debtors (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255),
     phone VARCHAR(50),
-    totalDebt DECIMAL(15, 2),
-    currency VARCHAR(10),
+    totalDebt DECIMAL(15, 2) NOT NULL DEFAULT 0,
+    currency VARCHAR(10) NOT NULL DEFAULT 'USD',
     dueDate DATE,
-    status VARCHAR(50),
+    status VARCHAR(50) DEFAULT 'active',
     notes TEXT,
+    createdBy INTEGER REFERENCES users(id) ON DELETE SET NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -184,12 +189,13 @@ CREATE TABLE expenses (
     name VARCHAR(255) NOT NULL,
     amount DECIMAL(15, 2) NOT NULL,
     type VARCHAR(255),
-    expenseDate DATE,
+    expenseDate DATE NOT NULL,
     projectId INTEGER REFERENCES projects(id) ON DELETE SET NULL,
     isDebtor BOOLEAN DEFAULT FALSE,
     debtorId INTEGER DEFAULT NULL REFERENCES debtors(id) ON DELETE SET NULL,
-    status VARCHAR(50),
+    status VARCHAR(50) DEFAULT 'pending',
     notes TEXT,
+    createdBy INTEGER REFERENCES users(id) ON DELETE SET NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -199,9 +205,10 @@ CREATE TABLE income (
     name VARCHAR(255) NOT NULL,
     amount DECIMAL(15, 2) NOT NULL,
     type VARCHAR(255),
-    incomeDate DATE,
-    status VARCHAR(50),
+    incomeDate DATE NOT NULL,
+    status VARCHAR(50) DEFAULT 'pending',
     notes TEXT,
+    createdBy INTEGER REFERENCES users(id) ON DELETE SET NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -226,3 +233,71 @@ CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_username ON users(username);
 CREATE INDEX idx_projects_status ON projects(status);
 CREATE INDEX idx_workDays_workDate ON workDays(workDate);
+
+-- =============================================
+-- UPDATED_AT TRIGGER FUNCTION
+-- =============================================
+
+CREATE OR REPLACE FUNCTION update_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updatedAt = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =============================================
+-- APPLY TRIGGERS TO ALL TABLES WITH updatedAt
+-- =============================================
+
+CREATE TRIGGER update_pages_updated_at
+    BEFORE UPDATE ON pages
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_roles_updated_at
+    BEFORE UPDATE ON roles
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_users_updated_at
+    BEFORE UPDATE ON users
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_workCategories_updated_at
+    BEFORE UPDATE ON workCategories
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_workSubCategories_updated_at
+    BEFORE UPDATE ON workSubCategories
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_projects_updated_at
+    BEFORE UPDATE ON projects
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_workDays_updated_at
+    BEFORE UPDATE ON workDays
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_workDayMaterials_updated_at
+    BEFORE UPDATE ON workDayMaterials
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_workDayLabor_updated_at
+    BEFORE UPDATE ON workDayLabor
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_workDayEquipment_updated_at
+    BEFORE UPDATE ON workDayEquipment
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_debtors_updated_at
+    BEFORE UPDATE ON debtors
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_expenses_updated_at
+    BEFORE UPDATE ON expenses
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER update_income_updated_at
+    BEFORE UPDATE ON income
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
