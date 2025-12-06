@@ -8,9 +8,16 @@ import (
 	"github.com/mustafaameen91/project-managment/backend/internal/models"
 )
 
+type UserCredentials struct {
+	ID       int64
+	Username string
+	Password string
+}
+
 type UserRepositoryInterface interface {
 	GetAll(ctx context.Context) ([]models.User, error)
 	GetByID(ctx context.Context, id int64) (*models.User, error)
+	GetCredentialsByUsername(ctx context.Context, username string) (*UserCredentials, error)
 	Create(ctx context.Context, user *models.User) (*models.User, error)
 	Update(ctx context.Context, id int64, user *models.User) (*models.User, error)
 	Delete(ctx context.Context, id int64) error
@@ -119,6 +126,18 @@ func (r *UserRepository) GetByID(ctx context.Context, id int64) (*models.User, e
 	}
 
 	return &user, nil
+}
+
+func (r *UserRepository) GetCredentialsByUsername(ctx context.Context, username string) (*UserCredentials, error) {
+	query := `SELECT id, username, password FROM users WHERE username = $1`
+
+	var creds UserCredentials
+	err := r.db.QueryRow(ctx, query, username).Scan(&creds.ID, &creds.Username, &creds.Password)
+	if err != nil {
+		return nil, err
+	}
+
+	return &creds, nil
 }
 
 func (r *UserRepository) Delete(ctx context.Context, id int64) error {

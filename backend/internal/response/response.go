@@ -1,30 +1,35 @@
 package response
 
 import (
-	"encoding/json"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
-type Response struct {
-	Success bool        `json:"success"`
-	Data    interface{} `json:"data,omitempty"`
-	Error   string      `json:"error,omitempty"`
+func Success(c *gin.Context, data interface{}) {
+	c.JSON(http.StatusOK, gin.H{"success": true, "data": data})
 }
 
-func JSON(w http.ResponseWriter, status int, data interface{}) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(status)
-	json.NewEncoder(w).Encode(data)
+func Created(c *gin.Context, data interface{}) {
+	c.JSON(http.StatusCreated, gin.H{"success": true, "data": data})
 }
 
-func Success(w http.ResponseWriter, data interface{}) {
-	JSON(w, http.StatusOK, Response{Success: true, Data: data})
+func Error(c *gin.Context, status int, message string) {
+	c.JSON(status, gin.H{"success": false, "error": message})
 }
 
-func Created(w http.ResponseWriter, data interface{}) {
-	JSON(w, http.StatusCreated, Response{Success: true, Data: data})
+func BadRequest(c *gin.Context, message string) {
+	Error(c, http.StatusBadRequest, message)
 }
 
-func Error(w http.ResponseWriter, status int, message string) {
-	JSON(w, status, Response{Success: false, Error: message})
+func Unauthorized(c *gin.Context, message string) {
+	Error(c, http.StatusUnauthorized, message)
+}
+
+func NotFound(c *gin.Context, message string) {
+	Error(c, http.StatusNotFound, message)
+}
+
+func InternalError(c *gin.Context, message string) {
+	Error(c, http.StatusInternalServerError, message)
 }

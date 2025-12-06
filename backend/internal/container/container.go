@@ -1,7 +1,11 @@
 package container
 
 import (
+	"time"
+
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/mustafaameen91/project-managment/backend/internal/auth"
+	"github.com/mustafaameen91/project-managment/backend/internal/config"
 	"github.com/mustafaameen91/project-managment/backend/internal/handlers"
 	"github.com/mustafaameen91/project-managment/backend/internal/repository"
 	"github.com/mustafaameen91/project-managment/backend/internal/services"
@@ -37,10 +41,21 @@ type Container struct {
 	RoleHandler     *handlers.RoleHandler
 	PageHandler     *handlers.PageHandler
 	RolePageHandler *handlers.RolePageHandler
+
+	// Auth
+	AuthHandler      *handlers.AuthHandler
+	JWTManager       *auth.JWTManager
+	PermissionChecker auth.PermissionChecker
 }
 
 // New creates a new container with all dependencies wired up
-func New(db *pgxpool.Pool) *Container {
+func New(db *pgxpool.Pool, cfg *config.Config) *Container {
+	// Parse JWT expiry
+	jwtExpiry, _ := time.ParseDuration(cfg.JWTExpiry)
+	if jwtExpiry == 0 {
+		jwtExpiry = 24 * time.Hour
+	}
+	jwtManager := auth.NewJWTManager(cfg.JWTSecret, jwtExpiry)
 	// Repositories
 	projectRepo := repository.NewProjectRepository(db)
 	workDayRepo := repository.NewWorkDayRepository(db)
@@ -74,6 +89,7 @@ func New(db *pgxpool.Pool) *Container {
 	roleService := services.NewRoleService(roleRepo)
 	pageService := services.NewPageService(pageRepo)
 	rolePageService := services.NewRolePageService(rolePageRepo)
+	authService := services.NewAuthService(userRepo, userRoleRepo, jwtManager)
 
 	// Handlers
 	return &Container{
@@ -92,5 +108,8 @@ func New(db *pgxpool.Pool) *Container {
 		RoleHandler:             handlers.NewRoleHandler(roleService),
 		PageHandler:             handlers.NewPageHandler(pageService),
 		RolePageHandler:         handlers.NewRolePageHandler(rolePageService),
+		AuthHandler:       handlers.NewAuthHandler(authService),
+		JWTManager:        jwtManager,
+		PermissionChecker: userRoleRepo,
 	}
 }

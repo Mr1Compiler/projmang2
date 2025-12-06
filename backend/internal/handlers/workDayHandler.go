@@ -2,11 +2,11 @@ package handlers
 
 import (
 	"errors"
-	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mustafaameen91/project-managment/backend/internal/dtos"
+	"github.com/mustafaameen91/project-managment/backend/internal/response"
 	"github.com/mustafaameen91/project-managment/backend/internal/services"
 )
 
@@ -24,114 +24,114 @@ func NewWorkDayHandler(workDayService *services.WorkDayService) *WorkDayHandler 
 func (h *WorkDayHandler) GetAll(c *gin.Context) {
 	workDays, err := h.workDayService.GetAll(c.Request.Context())
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to fetch work days"})
+		response.InternalError(c, "failed to fetch work days")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": workDays})
+	response.Success(c, workDays)
 }
 
 // GetByID handles GET /workdays/:id
 func (h *WorkDayHandler) GetByID(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid work day id"})
+		response.BadRequest(c, "invalid work day id")
 		return
 	}
 
 	workDay, err := h.workDayService.GetByID(c.Request.Context(), id)
 	if err != nil {
 		if errors.Is(err, services.ErrWorkDayNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to fetch work day"})
+		response.InternalError(c, "failed to fetch work day")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": workDay})
+	response.Success(c, workDay)
 }
 
 // GetByProjectID handles GET /projects/:id/workdays
 func (h *WorkDayHandler) GetByProjectID(c *gin.Context) {
 	projectID, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid project id"})
+		response.BadRequest(c, "invalid project id")
 		return
 	}
 
 	workDays, err := h.workDayService.GetByProjectID(c.Request.Context(), projectID)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to fetch work days"})
+		response.InternalError(c, "failed to fetch work days")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": workDays})
+	response.Success(c, workDays)
 }
 
 // Create handles POST /workdays
 func (h *WorkDayHandler) Create(c *gin.Context) {
 	var req dtos.CreateWorkDay
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": err.Error()})
+		response.BadRequest(c, err.Error())
 		return
 	}
 
 	workDay, err := h.workDayService.Create(c.Request.Context(), req)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to create work day"})
+		response.InternalError(c, "failed to create work day")
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"success": true, "data": workDay})
+	response.Created(c, workDay)
 }
 
 // Update handles PUT /workdays/:id
 func (h *WorkDayHandler) Update(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid work day id"})
+		response.BadRequest(c, "invalid work day id")
 		return
 	}
 
 	var req dtos.UpdateWorkDay
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": err.Error()})
+		response.BadRequest(c, err.Error())
 		return
 	}
 
 	workDay, err := h.workDayService.Update(c.Request.Context(), id, req)
 	if err != nil {
 		if errors.Is(err, services.ErrWorkDayNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to update work day"})
+		response.InternalError(c, "failed to update work day")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": workDay})
+	response.Success(c, workDay)
 }
 
 // Delete handles DELETE /workdays/:id
 func (h *WorkDayHandler) Delete(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid work day id"})
+		response.BadRequest(c, "invalid work day id")
 		return
 	}
 
 	err = h.workDayService.Delete(c.Request.Context(), id)
 	if err != nil {
 		if errors.Is(err, services.ErrWorkDayNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to delete work day"})
+		response.InternalError(c, "failed to delete work day")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": nil})
+	response.Success(c, nil)
 }
 
 // parseID extracts an int64 ID from the URL path

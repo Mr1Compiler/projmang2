@@ -2,11 +2,11 @@ package handlers
 
 import (
 	"errors"
-	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mustafaameen91/project-managment/backend/internal/dtos"
+	"github.com/mustafaameen91/project-managment/backend/internal/response"
 	"github.com/mustafaameen91/project-managment/backend/internal/services"
 )
 
@@ -24,97 +24,97 @@ func NewDebtorHandler(debtorService *services.DebtorService) *DebtorHandler {
 func (h *DebtorHandler) GetAll(c *gin.Context) {
 	debtors, err := h.debtorService.GetAll(c.Request.Context())
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to fetch debtors"})
+		response.InternalError(c, "failed to fetch debtors")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": debtors})
+	response.Success(c, debtors)
 }
 
 // GetByID handles GET /debtors/:id
 func (h *DebtorHandler) GetByID(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid debtor id"})
+		response.BadRequest(c, "invalid debtor id")
 		return
 	}
 
 	debtor, err := h.debtorService.GetByID(c.Request.Context(), id)
 	if err != nil {
 		if errors.Is(err, services.ErrDebtorNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to fetch debtor"})
+		response.InternalError(c, "failed to fetch debtor")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": debtor})
+	response.Success(c, debtor)
 }
 
 // Create handles POST /debtors
 func (h *DebtorHandler) Create(c *gin.Context) {
 	var req dtos.CreateDebtor
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": err.Error()})
+		response.BadRequest(c, err.Error())
 		return
 	}
 
 	debtor, err := h.debtorService.Create(c.Request.Context(), req)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to create debtor"})
+		response.InternalError(c, "failed to create debtor")
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"success": true, "data": debtor})
+	response.Created(c, debtor)
 }
 
 // Update handles PUT /debtors/:id
 func (h *DebtorHandler) Update(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid debtor id"})
+		response.BadRequest(c, "invalid debtor id")
 		return
 	}
 
 	var req dtos.UpdateDebtor
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": err.Error()})
+		response.BadRequest(c, err.Error())
 		return
 	}
 
 	debtor, err := h.debtorService.Update(c.Request.Context(), id, req)
 	if err != nil {
 		if errors.Is(err, services.ErrDebtorNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to update debtor"})
+		response.InternalError(c, "failed to update debtor")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": debtor})
+	response.Success(c, debtor)
 }
 
 // Delete handles DELETE /debtors/:id
 func (h *DebtorHandler) Delete(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid debtor id"})
+		response.BadRequest(c, "invalid debtor id")
 		return
 	}
 
 	err = h.debtorService.Delete(c.Request.Context(), id)
 	if err != nil {
 		if errors.Is(err, services.ErrDebtorNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to delete debtor"})
+		response.InternalError(c, "failed to delete debtor")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": nil})
+	response.Success(c, nil)
 }
 
 // parseID extracts an int64 ID from the URL path

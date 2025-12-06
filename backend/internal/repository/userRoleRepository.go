@@ -2,16 +2,28 @@ package repository
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/mustafaameen91/project-managment/backend/internal/models"
 )
 
+// UserPage represents a page with its permissions for a user
+type UserPage struct {
+	ID          int64    `json:"id"`
+	Name        string   `json:"name"`
+	Route       string   `json:"route"`
+	Icon        *string  `json:"icon"`
+	Permissions []string `json:"permissions"`
+}
+
 type UserRoleRepositoryInterface interface {
 	GetAll(ctx context.Context) ([]models.UserRole, error)
 	GetByID(ctx context.Context, id int64) (*models.UserRole, error)
 	GetByUserID(ctx context.Context, userID int64) ([]models.UserRole, error)
+	GetUserPages(ctx context.Context, userID int64) ([]UserPage, error)
+	HasPermission(ctx context.Context, userID int64, route string, permission string) (bool, error)
 	Create(ctx context.Context, userRole *models.UserRole) (*models.UserRole, error)
 	Delete(ctx context.Context, id int64) error
 }
@@ -124,4 +136,117 @@ func (r *UserRoleRepository) Delete(ctx context.Context, id int64) error {
 		return pgx.ErrNoRows
 	}
 	return nil
+}
+
+// GetUserPages returns all pages a user has access to with their permissions
+// Merges permissions from all roles the user has for each page
+func (r *UserRoleRepository) GetUserPages(ctx context.Context, userID int64) ([]UserPage, error) {
+	query := `
+		SELECT p.id, p.name, p.route, p.icon, rp.permissions
+		FROM userRoles ur
+		JOIN rolePages rp ON ur.roleId = rp.roleId
+		JOIN pages p ON rp.pageId = p.id
+		WHERE ur.userId = $1 AND (p.status = 'active' OR p.status IS NULL)
+		ORDER BY p.name
+	`
+
+	rows, err := r.db.Query(ctx, query, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	// Use map to merge permissions from multiple roles
+	pageMap := make(map[int64]*UserPage)
+	permSet := make(map[int64]map[string]bool)
+
+	for rows.Next() {
+		var pageID int64
+		var name, route string
+		var icon *string
+		var permissionsJSON *string
+
+		err := rows.Scan(&pageID, &name, &route, &icon, &permissionsJSON)
+		if err != nil {
+			return nil, err
+		}
+
+		// Initialize page if not seen before
+		if _, exists := pageMap[pageID]; !exists {
+			pageMap[pageID] = &UserPage{
+				ID:    pageID,
+				Name:  name,
+				Route: route,
+				Icon:  icon,
+			}
+			permSet[pageID] = make(map[string]bool)
+		}
+
+		// Parse and merge permissions
+		if permissionsJSON != nil && *permissionsJSON != "" {
+			var perms []string
+			if err := json.Unmarshal([]byte(*permissionsJSON), &perms); err == nil {
+				for _, p := range perms {
+					permSet[pageID][p] = true
+				}
+			}
+		}
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	// Convert map to slice and assign merged permissions
+	var pages []UserPage
+	for pageID, page := range pageMap {
+		for perm := range permSet[pageID] {
+			page.Permissions = append(page.Permissions, perm)
+		}
+		pages = append(pages, *page)
+	}
+
+	return pages, nil
+}
+
+// HasPermission checks if a user has a specific permission for a route
+// Checks ALL roles the user has - if ANY role grants the permission, access is allowed
+func (r *UserRoleRepository) HasPermission(ctx context.Context, userID int64, route string, permission string) (bool, error) {
+	query := `
+		SELECT rp.permissions
+		FROM userRoles ur
+		JOIN rolePages rp ON ur.roleId = rp.roleId
+		JOIN pages p ON rp.pageId = p.id
+		WHERE ur.userId = $1 AND p.route = $2
+	`
+
+	rows, err := r.db.Query(ctx, query, userID, route)
+	if err != nil {
+		return false, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var permissionsJSON *string
+		if err := rows.Scan(&permissionsJSON); err != nil {
+			return false, err
+		}
+
+		if permissionsJSON == nil || *permissionsJSON == "" {
+			continue
+		}
+
+		var permissions []string
+		if err := json.Unmarshal([]byte(*permissionsJSON), &permissions); err != nil {
+			continue
+		}
+
+		for _, p := range permissions {
+			if p == permission {
+				return true, nil
+			}
+		}
+	}
+
+	return false, rows.Err()
 }

@@ -25,7 +25,7 @@ func main() {
 	log.Println("Connected to database")
 
 	// Build dependencies
-	c := container.New(pool)
+	c := container.New(pool, cfg)
 
 	// Create and start server
 	srv := server.NewServer(cfg.ServerPort, c)

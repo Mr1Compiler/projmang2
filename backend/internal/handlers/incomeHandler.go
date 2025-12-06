@@ -2,11 +2,11 @@ package handlers
 
 import (
 	"errors"
-	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mustafaameen91/project-managment/backend/internal/dtos"
+	"github.com/mustafaameen91/project-managment/backend/internal/response"
 	"github.com/mustafaameen91/project-managment/backend/internal/services"
 )
 
@@ -24,97 +24,97 @@ func NewIncomeHandler(incomeService *services.IncomeService) *IncomeHandler {
 func (h *IncomeHandler) GetAll(c *gin.Context) {
 	incomes, err := h.incomeService.GetAll(c.Request.Context())
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to fetch incomes"})
+		response.InternalError(c, "failed to fetch incomes")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": incomes})
+	response.Success(c, incomes)
 }
 
 // GetByID handles GET /incomes/:id
 func (h *IncomeHandler) GetByID(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid income id"})
+		response.BadRequest(c, "invalid income id")
 		return
 	}
 
 	income, err := h.incomeService.GetByID(c.Request.Context(), id)
 	if err != nil {
 		if errors.Is(err, services.ErrIncomeNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to fetch income"})
+		response.InternalError(c, "failed to fetch income")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": income})
+	response.Success(c, income)
 }
 
 // Create handles POST /incomes
 func (h *IncomeHandler) Create(c *gin.Context) {
 	var req dtos.CreateIncome
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": err.Error()})
+		response.BadRequest(c, err.Error())
 		return
 	}
 
 	income, err := h.incomeService.Create(c.Request.Context(), req)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to create income"})
+		response.InternalError(c, "failed to create income")
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"success": true, "data": income})
+	response.Created(c, income)
 }
 
 // Update handles PUT /incomes/:id
 func (h *IncomeHandler) Update(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid income id"})
+		response.BadRequest(c, "invalid income id")
 		return
 	}
 
 	var req dtos.UpdateIncome
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": err.Error()})
+		response.BadRequest(c, err.Error())
 		return
 	}
 
 	income, err := h.incomeService.Update(c.Request.Context(), id, req)
 	if err != nil {
 		if errors.Is(err, services.ErrIncomeNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to update income"})
+		response.InternalError(c, "failed to update income")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": income})
+	response.Success(c, income)
 }
 
 // Delete handles DELETE /incomes/:id
 func (h *IncomeHandler) Delete(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid income id"})
+		response.BadRequest(c, "invalid income id")
 		return
 	}
 
 	err = h.incomeService.Delete(c.Request.Context(), id)
 	if err != nil {
 		if errors.Is(err, services.ErrIncomeNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to delete income"})
+		response.InternalError(c, "failed to delete income")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": nil})
+	response.Success(c, nil)
 }
 
 // parseID extracts an int64 ID from the URL path

@@ -2,11 +2,11 @@ package handlers
 
 import (
 	"errors"
-	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mustafaameen91/project-managment/backend/internal/dtos"
+	"github.com/mustafaameen91/project-managment/backend/internal/response"
 	"github.com/mustafaameen91/project-managment/backend/internal/services"
 )
 
@@ -24,62 +24,62 @@ func NewWorkDayEquipmentHandler(equipmentService *services.WorkDayEquipmentServi
 func (h *WorkDayEquipmentHandler) GetAll(c *gin.Context) {
 	equipments, err := h.equipmentService.GetAll(c.Request.Context())
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to fetch equipments"})
+		response.InternalError(c, "failed to fetch equipments")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": equipments})
+	response.Success(c, equipments)
 }
 
 // GetByWorkDayID handles GET /workdays/:workDayId/equipments
 func (h *WorkDayEquipmentHandler) GetByWorkDayID(c *gin.Context) {
 	workDayID, err := h.parseID(c, "workDayId")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid work day id"})
+		response.BadRequest(c, "invalid work day id")
 		return
 	}
 
 	equipments, err := h.equipmentService.GetByWorkDayID(c.Request.Context(), workDayID)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to fetch equipments"})
+		response.InternalError(c, "failed to fetch equipments")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": equipments})
+	response.Success(c, equipments)
 }
 
 // GetByID handles GET /workdays/:workDayId/equipments/:id
 func (h *WorkDayEquipmentHandler) GetByID(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid equipment id"})
+		response.BadRequest(c, "invalid equipment id")
 		return
 	}
 
 	equipment, err := h.equipmentService.GetByID(c.Request.Context(), id)
 	if err != nil {
 		if errors.Is(err, services.ErrWorkDayEquipmentNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to fetch equipment"})
+		response.InternalError(c, "failed to fetch equipment")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": equipment})
+	response.Success(c, equipment)
 }
 
 // Create handles POST /workdays/:workDayId/equipments
 func (h *WorkDayEquipmentHandler) Create(c *gin.Context) {
 	workDayID, err := h.parseID(c, "workDayId")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid work day id"})
+		response.BadRequest(c, "invalid work day id")
 		return
 	}
 
 	var req dtos.CreateWorkDayEquipment
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": err.Error()})
+		response.BadRequest(c, err.Error())
 		return
 	}
 
@@ -88,59 +88,59 @@ func (h *WorkDayEquipmentHandler) Create(c *gin.Context) {
 
 	equipment, err := h.equipmentService.Create(c.Request.Context(), req)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to create equipment"})
+		response.InternalError(c, "failed to create equipment")
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"success": true, "data": equipment})
+	response.Created(c, equipment)
 }
 
 // Update handles PUT /workdays/:workDayId/equipments/:id
 func (h *WorkDayEquipmentHandler) Update(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid equipment id"})
+		response.BadRequest(c, "invalid equipment id")
 		return
 	}
 
 	var req dtos.UpdateWorkDayEquipment
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": err.Error()})
+		response.BadRequest(c, err.Error())
 		return
 	}
 
 	equipment, err := h.equipmentService.Update(c.Request.Context(), id, req)
 	if err != nil {
 		if errors.Is(err, services.ErrWorkDayEquipmentNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to update equipment"})
+		response.InternalError(c, "failed to update equipment")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": equipment})
+	response.Success(c, equipment)
 }
 
 // Delete handles DELETE /workdays/:workDayId/equipments/:id
 func (h *WorkDayEquipmentHandler) Delete(c *gin.Context) {
 	id, err := h.parseID(c, "id")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "invalid equipment id"})
+		response.BadRequest(c, "invalid equipment id")
 		return
 	}
 
 	err = h.equipmentService.Delete(c.Request.Context(), id)
 	if err != nil {
 		if errors.Is(err, services.ErrWorkDayEquipmentNotFound) {
-			c.JSON(http.StatusNotFound, gin.H{"success": false, "error": err.Error()})
+			response.NotFound(c, err.Error())
 			return
 		}
-		c.JSON(http.StatusInternalServerError, gin.H{"success": false, "error": "failed to delete equipment"})
+		response.InternalError(c, "failed to delete equipment")
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"success": true, "data": nil})
+	response.Success(c, nil)
 }
 
 // parseID extracts an int64 ID from the URL path
