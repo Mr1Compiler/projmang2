@@ -1,22 +1,20 @@
 package db
 
 import (
-	"database/sql"
-	"fmt"
+	"context"
+
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func Connect(host, port, user, password, dbname string) (*sql.DB, error) {
-	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
-
-	db, err := sql.Open("postgres", dsn)
+func Connect(ctx context.Context, dsn string) (*pgxpool.Pool, error) {
+	pool, err := pgxpool.New(ctx, dsn)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := db.Ping(); err != nil {
+	if err := pool.Ping(ctx); err != nil {
 		return nil, err
 	}
 
-	return db, nil
+	return pool, nil
 }
