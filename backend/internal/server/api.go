@@ -40,5 +40,5 @@ func (s *Server) Router() *gin.Engine {
 
 func (s *Server) Run() error {
 	log.Printf("Server starting on port %s", s.port)
-	return s.router.Run(":" + s.port)
+	return s.router.Run("0.0.0.0:" + s.port)
 }

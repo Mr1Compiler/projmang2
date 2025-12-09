@@ -3,6 +3,7 @@ package auth
 import (
 	"context"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -84,4 +85,68 @@ func GetUserID(c *gin.Context) (int64, bool) {
 		return 0, false
 	}
 	return userID.(int64), true
+}
+
+// AuditLogger interface for audit logging
+type AuditLogger interface {
+	Log(ctx context.Context, actorID *int64, action, targetType string, targetID *int64, method, status, ipAddress string)
+}
+
+// AuditMiddleware logs actions to audit log
+func AuditMiddleware(auditService AuditLogger, action, targetType string) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Next()
+
+		status := "success"
+		if c.Writer.Status() >= 400 {
+			status = "failure"
+		}
+
+		var actorID *int64
+		if userID, exists := c.Get(UserIDKey); exists {
+			id := userID.(int64)
+			actorID = &id
+		}
+
+		var targetID *int64
+		if idStr := c.Param("id"); idStr != "" {
+			if id, err := strconv.ParseInt(idStr, 10, 64); err == nil {
+				targetID = &id
+			}
+		}
+
+		auditService.Log(
+			c.Request.Context(),
+			actorID,
+			action,
+			targetType,
+			targetID,
+			c.Request.Method,
+			status,
+			c.ClientIP(),
+		)
+	}
+}
+
+// AuditAuthMiddleware for login/logout (no authenticated user yet)
+func AuditAuthMiddleware(auditService AuditLogger, action string) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Next()
+
+		status := "success"
+		if c.Writer.Status() >= 400 {
+			status = "failure"
+		}
+
+		auditService.Log(
+			c.Request.Context(),
+			nil,
+			action,
+			"auth",
+			nil,
+			c.Request.Method,
+			status,
+			c.ClientIP(),
+		)
+	}
 }

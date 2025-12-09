@@ -12,11 +12,14 @@ func RegisterDebtorRoutes(rg *gin.RouterGroup, c *container.Container) {
 	authz := func(perm string) gin.HandlerFunc {
 		return auth.AuthorizationMiddleware(c.PermissionChecker, "/debtors", perm)
 	}
+	audit := func(action string) gin.HandlerFunc {
+		return auth.AuditMiddleware(c.AuditLogService, action, "debtor")
+	}
 	{
 		debtors.GET("", authz("read"), c.DebtorHandler.GetAll)
 		debtors.GET("/:id", authz("read"), c.DebtorHandler.GetByID)
-		debtors.POST("", authz("write"), c.DebtorHandler.Create)
-		debtors.PUT("/:id", authz("write"), c.DebtorHandler.Update)
-		debtors.DELETE("/:id", authz("delete"), c.DebtorHandler.Delete)
+		debtors.POST("", authz("write"), audit("create"), c.DebtorHandler.Create)
+		debtors.PUT("/:id", authz("write"), audit("update"), c.DebtorHandler.Update)
+		debtors.DELETE("/:id", authz("delete"), audit("delete"), c.DebtorHandler.Delete)
 	}
 }

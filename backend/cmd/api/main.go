@@ -7,10 +7,14 @@ import (
 	"github.com/mustafaameen91/project-managment/backend/internal/config"
 	"github.com/mustafaameen91/project-managment/backend/internal/container"
 	"github.com/mustafaameen91/project-managment/backend/internal/db"
+	"github.com/mustafaameen91/project-managment/backend/internal/logger"
 	"github.com/mustafaameen91/project-managment/backend/internal/server"
 )
 
 func main() {
+	// Initialize logger
+	logger.Init()
+
 	// Load config from .env
 	cfg := config.Load()
 

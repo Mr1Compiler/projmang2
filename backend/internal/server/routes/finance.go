@@ -13,12 +13,15 @@ func RegisterFinanceRoutes(rg *gin.RouterGroup, c *container.Container) {
 	expensesAuthz := func(perm string) gin.HandlerFunc {
 		return auth.AuthorizationMiddleware(c.PermissionChecker, "/expenses", perm)
 	}
+	auditExpense := func(action string) gin.HandlerFunc {
+		return auth.AuditMiddleware(c.AuditLogService, action, "expense")
+	}
 	{
 		expenses.GET("", expensesAuthz("read"), c.ExpenseHandler.GetAll)
 		expenses.GET("/:id", expensesAuthz("read"), c.ExpenseHandler.GetByID)
-		expenses.POST("", expensesAuthz("write"), c.ExpenseHandler.Create)
-		expenses.PUT("/:id", expensesAuthz("write"), c.ExpenseHandler.Update)
-		expenses.DELETE("/:id", expensesAuthz("delete"), c.ExpenseHandler.Delete)
+		expenses.POST("", expensesAuthz("write"), auditExpense("create"), c.ExpenseHandler.Create)
+		expenses.PUT("/:id", expensesAuthz("write"), auditExpense("update"), c.ExpenseHandler.Update)
+		expenses.DELETE("/:id", expensesAuthz("delete"), auditExpense("delete"), c.ExpenseHandler.Delete)
 	}
 
 	// Income
@@ -26,11 +29,14 @@ func RegisterFinanceRoutes(rg *gin.RouterGroup, c *container.Container) {
 	incomeAuthz := func(perm string) gin.HandlerFunc {
 		return auth.AuthorizationMiddleware(c.PermissionChecker, "/income", perm)
 	}
+	auditIncome := func(action string) gin.HandlerFunc {
+		return auth.AuditMiddleware(c.AuditLogService, action, "income")
+	}
 	{
 		income.GET("", incomeAuthz("read"), c.IncomeHandler.GetAll)
 		income.GET("/:id", incomeAuthz("read"), c.IncomeHandler.GetByID)
-		income.POST("", incomeAuthz("write"), c.IncomeHandler.Create)
-		income.PUT("/:id", incomeAuthz("write"), c.IncomeHandler.Update)
-		income.DELETE("/:id", incomeAuthz("delete"), c.IncomeHandler.Delete)
+		income.POST("", incomeAuthz("write"), auditIncome("create"), c.IncomeHandler.Create)
+		income.PUT("/:id", incomeAuthz("write"), auditIncome("update"), c.IncomeHandler.Update)
+		income.DELETE("/:id", incomeAuthz("delete"), auditIncome("delete"), c.IncomeHandler.Delete)
 	}
 }

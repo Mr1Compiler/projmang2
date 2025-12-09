@@ -13,14 +13,17 @@ func RegisterUserRoutes(rg *gin.RouterGroup, c *container.Container) {
 	usersAuthz := func(perm string) gin.HandlerFunc {
 		return auth.AuthorizationMiddleware(c.PermissionChecker, "/users", perm)
 	}
+	audit := func(action string) gin.HandlerFunc {
+		return auth.AuditMiddleware(c.AuditLogService, action, "user")
+	}
 	{
 		users.GET("", usersAuthz("read"), c.UserHandler.GetAll)
 		users.GET("/:id", usersAuthz("read"), c.UserHandler.GetByID)
-		users.POST("", usersAuthz("write"), c.UserHandler.Create)
-		users.PUT("/:id", usersAuthz("write"), c.UserHandler.Update)
-		users.DELETE("/:id", usersAuthz("delete"), c.UserHandler.Delete)
-		users.PUT("/:id/password", usersAuthz("updatePassword"), c.UserHandler.UpdatePassword)
-		users.PATCH("/:id/status", usersAuthz("updateStatus"), c.UserHandler.UpdateStatus)
+		users.POST("", usersAuthz("write"), audit("create"), c.UserHandler.Create)
+		users.PUT("/:id", usersAuthz("write"), audit("update"), c.UserHandler.Update)
+		users.DELETE("/:id", usersAuthz("delete"), audit("delete"), c.UserHandler.Delete)
+		users.PUT("/:id/password", usersAuthz("updatePassword"), audit("password_change"), c.UserHandler.UpdatePassword)
+		users.PATCH("/:id/status", usersAuthz("updateStatus"), audit("status_change"), c.UserHandler.UpdateStatus)
 
 		// Nested route under user
 		users.GET("/:id/roles", usersAuthz("read"), c.UserRoleHandler.GetByUserID)
@@ -31,10 +34,13 @@ func RegisterUserRoutes(rg *gin.RouterGroup, c *container.Container) {
 	userRolesAuthz := func(perm string) gin.HandlerFunc {
 		return auth.AuthorizationMiddleware(c.PermissionChecker, "/user-roles", perm)
 	}
+	auditUserRole := func(action string) gin.HandlerFunc {
+		return auth.AuditMiddleware(c.AuditLogService, action, "user_role")
+	}
 	{
 		userRoles.GET("", userRolesAuthz("read"), c.UserRoleHandler.GetAll)
 		userRoles.GET("/:id", userRolesAuthz("read"), c.UserRoleHandler.GetByID)
-		userRoles.POST("", userRolesAuthz("write"), c.UserRoleHandler.Create)
-		userRoles.DELETE("/:id", userRolesAuthz("delete"), c.UserRoleHandler.Delete)
+		userRoles.POST("", userRolesAuthz("write"), auditUserRole("assign_role"), c.UserRoleHandler.Create)
+		userRoles.DELETE("/:id", userRolesAuthz("delete"), auditUserRole("remove_role"), c.UserRoleHandler.Delete)
 	}
 }

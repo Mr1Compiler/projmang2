@@ -43,9 +43,12 @@ type Container struct {
 	RolePageHandler *handlers.RolePageHandler
 
 	// Auth
-	AuthHandler      *handlers.AuthHandler
-	JWTManager       *auth.JWTManager
+	AuthHandler       *handlers.AuthHandler
+	JWTManager        *auth.JWTManager
 	PermissionChecker auth.PermissionChecker
+
+	// Audit
+	AuditLogService *services.AuditLogService
 }
 
 // New creates a new container with all dependencies wired up
@@ -80,6 +83,7 @@ func New(db *pgxpool.Pool, cfg *config.Config) *Container {
 	pageRepo := repository.NewPageRepository(db)
 	rolePageRepo := repository.NewRolePageRepository(db)
 	refreshTokenRepo := repository.NewRefreshTokenRepository(db)
+	auditLogRepo := repository.NewAuditLogRepository(db)
 
 	// Services
 	projectService := services.NewProjectService(projectRepo)
@@ -98,6 +102,7 @@ func New(db *pgxpool.Pool, cfg *config.Config) *Container {
 	pageService := services.NewPageService(pageRepo)
 	rolePageService := services.NewRolePageService(rolePageRepo)
 	authService := services.NewAuthService(userRepo, userRoleRepo, refreshTokenRepo, jwtManager, refreshExpiry)
+	auditLogService := services.NewAuditLogService(auditLogRepo)
 
 	// Handlers
 	return &Container{
@@ -119,5 +124,6 @@ func New(db *pgxpool.Pool, cfg *config.Config) *Container {
 		AuthHandler:       handlers.NewAuthHandler(authService),
 		JWTManager:        jwtManager,
 		PermissionChecker: userRoleRepo,
+		AuditLogService:   auditLogService,
 	}
 }
