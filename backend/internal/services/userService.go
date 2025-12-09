@@ -67,6 +67,7 @@ func (s *UserService) Create(ctx context.Context, req dtos.CreateUser) (*dtos.Us
 		return nil, err
 	}
 
+	defaultStatus := "active"
 	user := &models.User{
 		Username: req.Username,
 		Email:    req.Email,
@@ -74,6 +75,7 @@ func (s *UserService) Create(ctx context.Context, req dtos.CreateUser) (*dtos.Us
 		FullName: req.FullName,
 		Phone:    req.Phone,
 		JobTitle: req.JobTitle,
+		Status:   &defaultStatus,
 	}
 
 	created, err := s.userRepo.Create(ctx, user)

@@ -21,6 +21,7 @@ func RegisterWorkDayRoutes(rg *gin.RouterGroup, c *container.Container) {
 		workDays.GET("/:id", workDaysAuthz("read"), c.WorkDayHandler.GetByID)
 		workDays.POST("", workDaysAuthz("write"), auditWorkDay("create"), c.WorkDayHandler.Create)
 		workDays.PUT("/:id", workDaysAuthz("write"), auditWorkDay("update"), c.WorkDayHandler.Update)
+		workDays.PATCH("/:id/complete", workDaysAuthz("write"), auditWorkDay("complete"), c.WorkDayHandler.Complete)
 		workDays.DELETE("/:id", workDaysAuthz("delete"), auditWorkDay("delete"), c.WorkDayHandler.Delete)
 	}
 

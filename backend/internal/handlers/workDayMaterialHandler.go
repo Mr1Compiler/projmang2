@@ -76,22 +76,13 @@ func (h *WorkDayMaterialHandler) GetByID(c *gin.Context) {
 	response.Success(c, material)
 }
 
-// Create handles POST /workdays/:workDayId/materials
+// Create handles POST /workday-materials
 func (h *WorkDayMaterialHandler) Create(c *gin.Context) {
-	workDayID, err := h.parseID(c, "workDayId")
-	if err != nil {
-		response.BadRequest(c, "invalid work day id")
-		return
-	}
-
 	var req dtos.CreateWorkDayMaterial
 	if err := c.ShouldBindJSON(&req); err != nil {
 		response.ValidationError(c, err)
 		return
 	}
-
-	// Set workDayId from URL path
-	req.WorkDayID = workDayID
 
 	material, err := h.materialService.Create(c.Request.Context(), req)
 	if err != nil {

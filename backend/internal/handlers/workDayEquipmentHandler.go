@@ -76,22 +76,13 @@ func (h *WorkDayEquipmentHandler) GetByID(c *gin.Context) {
 	response.Success(c, equipment)
 }
 
-// Create handles POST /workdays/:workDayId/equipments
+// Create handles POST /workday-equipment
 func (h *WorkDayEquipmentHandler) Create(c *gin.Context) {
-	workDayID, err := h.parseID(c, "workDayId")
-	if err != nil {
-		response.BadRequest(c, "invalid work day id")
-		return
-	}
-
 	var req dtos.CreateWorkDayEquipment
 	if err := c.ShouldBindJSON(&req); err != nil {
 		response.ValidationError(c, err)
 		return
 	}
-
-	// Set workDayId from URL path
-	req.WorkDayID = workDayID
 
 	equipment, err := h.equipmentService.Create(c.Request.Context(), req)
 	if err != nil {

@@ -87,7 +87,7 @@ func New(db *pgxpool.Pool, cfg *config.Config) *Container {
 
 	// Services
 	projectService := services.NewProjectService(projectRepo)
-	workDayService := services.NewWorkDayService(workDayRepo)
+	workDayService := services.NewWorkDayService(workDayRepo, projectRepo, workSubCategoryRepo)
 	workDayMaterialService := services.NewWorkDayMaterialService(workDayMaterialRepo)
 	workDayLaborService := services.NewWorkDayLaborService(workDayLaborRepo)
 	workDayEquipmentService := services.NewWorkDayEquipmentService(workDayEquipmentRepo)

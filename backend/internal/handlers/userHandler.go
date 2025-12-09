@@ -144,7 +144,7 @@ func (h *UserHandler) UpdatePassword(c *gin.Context) {
 		return
 	}
 
-	err = h.userService.UpdatePassword(c.Request.Context(), id, req.NewPassword)
+	err = h.userService.UpdatePassword(c.Request.Context(), id, req.Password)
 	if err != nil {
 		if errors.Is(err, services.ErrUserNotFound) {
 			response.NotFound(c, err.Error())

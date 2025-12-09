@@ -48,6 +48,11 @@ func ValidationError(c *gin.Context, err error) {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "errors": errs})
 		return
 	}
+	// Handle date/time parsing errors with user-friendly message
+	if strings.Contains(err.Error(), "parsing time") {
+		BadRequest(c, "invalid date format, use RFC3339 (e.g., 2025-01-15T00:00:00Z)")
+		return
+	}
 	BadRequest(c, err.Error())
 }
 

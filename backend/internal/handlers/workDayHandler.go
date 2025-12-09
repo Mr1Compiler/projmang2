@@ -141,6 +141,35 @@ func (h *WorkDayHandler) Delete(c *gin.Context) {
 	response.Success(c, nil)
 }
 
+// Complete handles PATCH /workdays/:id/complete
+func (h *WorkDayHandler) Complete(c *gin.Context) {
+	id, err := h.parseID(c, "id")
+	if err != nil {
+		response.BadRequest(c, "invalid work day id")
+		return
+	}
+
+	workDay, err := h.workDayService.Complete(c.Request.Context(), id)
+	if err != nil {
+		if errors.Is(err, services.ErrWorkDayNotFound) {
+			response.NotFound(c, err.Error())
+			return
+		}
+		if errors.Is(err, services.ErrWorkDayAlreadyCompleted) {
+			response.BadRequest(c, err.Error())
+			return
+		}
+		if errors.Is(err, services.ErrWorkDayNoSubCategory) {
+			response.BadRequest(c, err.Error())
+			return
+		}
+		response.InternalError(c, "failed to complete work day")
+		return
+	}
+
+	response.Success(c, workDay)
+}
+
 // parseID extracts an int64 ID from the URL path
 func (h *WorkDayHandler) parseID(c *gin.Context, param string) (int64, error) {
 	idStr := c.Param(param)

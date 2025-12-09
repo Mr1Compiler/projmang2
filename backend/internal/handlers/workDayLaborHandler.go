@@ -76,22 +76,13 @@ func (h *WorkDayLaborHandler) GetByID(c *gin.Context) {
 	response.Success(c, labor)
 }
 
-// Create handles POST /workdays/:workDayId/labors
+// Create handles POST /workday-labor
 func (h *WorkDayLaborHandler) Create(c *gin.Context) {
-	workDayID, err := h.parseID(c, "workDayId")
-	if err != nil {
-		response.BadRequest(c, "invalid work day id")
-		return
-	}
-
 	var req dtos.CreateWorkDayLabor
 	if err := c.ShouldBindJSON(&req); err != nil {
 		response.ValidationError(c, err)
 		return
 	}
-
-	// Set workDayId from URL path
-	req.WorkDayID = workDayID
 
 	labor, err := h.laborService.Create(c.Request.Context(), req)
 	if err != nil {

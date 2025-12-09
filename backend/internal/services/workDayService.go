@@ -11,16 +11,26 @@ import (
 )
 
 var (
-	ErrWorkDayNotFound = errors.New("work day not found")
+	ErrWorkDayNotFound         = errors.New("work day not found")
+	ErrWorkDayAlreadyCompleted = errors.New("work day already completed")
+	ErrWorkDayNoSubCategory    = errors.New("work day has no subcategory assigned")
 )
 
 type WorkDayService struct {
-	workDayRepo repository.WorkDayRepositoryInterface
+	workDayRepo         repository.WorkDayRepositoryInterface
+	projectRepo         repository.ProjectRepositoryInterface
+	workSubCategoryRepo repository.WorkSubCategoryRepositoryInterface
 }
 
-func NewWorkDayService(workDayRepo repository.WorkDayRepositoryInterface) *WorkDayService {
+func NewWorkDayService(
+	workDayRepo repository.WorkDayRepositoryInterface,
+	projectRepo repository.ProjectRepositoryInterface,
+	workSubCategoryRepo repository.WorkSubCategoryRepositoryInterface,
+) *WorkDayService {
 	return &WorkDayService{
-		workDayRepo: workDayRepo,
+		workDayRepo:         workDayRepo,
+		projectRepo:         projectRepo,
+		workSubCategoryRepo: workSubCategoryRepo,
 	}
 }
 
@@ -132,6 +142,57 @@ func (s *WorkDayService) Delete(ctx context.Context, id int64) error {
 		return err
 	}
 	return nil
+}
+
+func (s *WorkDayService) Complete(ctx context.Context, id int64) (*dtos.WorkDay, error) {
+	// Get the work day
+	workDay, err := s.workDayRepo.GetByID(ctx, id)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, ErrWorkDayNotFound
+		}
+		return nil, err
+	}
+
+	// Check if already completed
+	if workDay.Status == "completed" {
+		return nil, ErrWorkDayAlreadyCompleted
+	}
+
+	// Check if work day has a subcategory assigned
+	if workDay.WorkSubCategoryID == nil {
+		return nil, ErrWorkDayNoSubCategory
+	}
+
+	// Get the subcategory to get its percentage
+	subCategory, err := s.workSubCategoryRepo.GetByID(ctx, *workDay.WorkSubCategoryID)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, ErrWorkSubCategoryNotFound
+		}
+		return nil, err
+	}
+
+	// Update project progress percentage if subcategory has a percentage
+	if subCategory.Percentage != nil && *subCategory.Percentage > 0 {
+		err = s.projectRepo.UpdateProgressPercentage(ctx, workDay.ProjectID, *subCategory.Percentage)
+		if err != nil {
+			if errors.Is(err, pgx.ErrNoRows) {
+				return nil, ErrProjectNotFound
+			}
+			return nil, err
+		}
+	}
+
+	// Update work day status to completed
+	workDay.Status = "completed"
+	updated, err := s.workDayRepo.Update(ctx, id, workDay)
+	if err != nil {
+		return nil, err
+	}
+
+	dto := toWorkDayDTO(updated)
+	return &dto, nil
 }
 
 // DTO conversion helpers
