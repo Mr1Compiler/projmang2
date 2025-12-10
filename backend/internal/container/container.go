@@ -34,8 +34,9 @@ type Container struct {
 	DebtorHandler *handlers.DebtorHandler
 
 	// User
-	UserHandler     *handlers.UserHandler
-	UserRoleHandler *handlers.UserRoleHandler
+	UserHandler       *handlers.UserHandler
+	UserRoleHandler   *handlers.UserRoleHandler
+	TeamMemberHandler *handlers.TeamMemberHandler
 
 	// Role & Permissions
 	RoleHandler     *handlers.RoleHandler
@@ -79,6 +80,7 @@ func New(db *pgxpool.Pool, cfg *config.Config) *Container {
 	debtorRepo := repository.NewDebtorRepository(db)
 	userRepo := repository.NewUserRepository(db)
 	userRoleRepo := repository.NewUserRoleRepository(db)
+	teamMemberRepo := repository.NewTeamMemberRepository(db)
 	roleRepo := repository.NewRoleRepository(db)
 	pageRepo := repository.NewPageRepository(db)
 	rolePageRepo := repository.NewRolePageRepository(db)
@@ -98,6 +100,7 @@ func New(db *pgxpool.Pool, cfg *config.Config) *Container {
 	debtorService := services.NewDebtorService(debtorRepo)
 	userService := services.NewUserService(userRepo, userRoleRepo, refreshTokenRepo)
 	userRoleService := services.NewUserRoleService(userRoleRepo)
+	teamMemberService := services.NewTeamMemberService(teamMemberRepo)
 	roleService := services.NewRoleService(roleRepo)
 	pageService := services.NewPageService(pageRepo)
 	rolePageService := services.NewRolePageService(rolePageRepo)
@@ -118,12 +121,13 @@ func New(db *pgxpool.Pool, cfg *config.Config) *Container {
 		DebtorHandler:           handlers.NewDebtorHandler(debtorService),
 		UserHandler:             handlers.NewUserHandler(userService),
 		UserRoleHandler:         handlers.NewUserRoleHandler(userRoleService),
+		TeamMemberHandler:       handlers.NewTeamMemberHandler(teamMemberService),
 		RoleHandler:             handlers.NewRoleHandler(roleService),
 		PageHandler:             handlers.NewPageHandler(pageService),
 		RolePageHandler:         handlers.NewRolePageHandler(rolePageService),
-		AuthHandler:       handlers.NewAuthHandler(authService),
-		JWTManager:        jwtManager,
-		PermissionChecker: userRoleRepo,
-		AuditLogService:   auditLogService,
+		AuthHandler:             handlers.NewAuthHandler(authService),
+		JWTManager:              jwtManager,
+		PermissionChecker:       userRoleRepo,
+		AuditLogService:         auditLogService,
 	}
 }

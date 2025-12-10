@@ -25,5 +25,6 @@ func RegisterProjectRoutes(rg *gin.RouterGroup, c *container.Container) {
 		// Nested resources under project
 		projects.GET("/:id/workdays", authz("read"), c.WorkDayHandler.GetByProjectID)
 		projects.GET("/:id/expenses", authz("read"), c.ExpenseHandler.GetByProjectID)
+		projects.GET("/:id/team-members", authz("read"), c.TeamMemberHandler.GetByProjectID)
 	}
 }

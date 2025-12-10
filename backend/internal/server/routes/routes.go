@@ -27,5 +27,6 @@ func RegisterRoutes(router *gin.Engine, c *container.Container) {
 	RegisterFinanceRoutes(api, c)
 	RegisterDebtorRoutes(api, c)
 	RegisterUserRoutes(api, c)
+	RegisterTeamMemberRoutes(api, c)
 	RegisterRoleRoutes(api, c)
 }
