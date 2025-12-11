@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/mustafa91ameen/prjalgo/backend/internal/dtos"
+	"github.com/mustafa91ameen/prjalgo/backend/internal/logger"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/models"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/repository"
 )
@@ -28,8 +29,17 @@ func (s *AuditLogService) Log(ctx context.Context, actorID *int64, action, targe
 	}
 
 	// Fire and forget - don't block the main operation
+	// Use WithoutCancel to ensure audit log completes even if request context is cancelled
+	detachedCtx := context.WithoutCancel(ctx)
 	go func() {
-		_ = s.repo.Create(context.Background(), log)
+		defer func() {
+			if r := recover(); r != nil {
+				logger.Error("audit log panic", "error", r, "action", action, "targetType", targetType)
+			}
+		}()
+		if err := s.repo.Create(detachedCtx, log); err != nil {
+			logger.Error("failed to create audit log", "error", err, "action", action, "targetType", targetType)
+		}
 	}()
 }
 
