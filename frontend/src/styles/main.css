@@ -1,0 +1,329 @@
+/* ========================================
+   نظام CSS الشامل - نظام إدارة المشاريع
+   Comprehensive CSS System - Project Management System
+   ======================================== */
+
+/* استيراد ملفات النظام */
+@import './colors.css';
+@import './typography.css';
+@import './spacing.css';
+
+/* Material Design Icons - Working solution */
+@import url('https://cdn.jsdelivr.net/npm/@mdi/font@7.x/css/materialdesignicons.min.css');
+
+/* MDI Icon base styles */
+.mdi {
+  font-family: "Material Design Icons" !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  display: inline-block !important;
+  line-height: 1 !important;
+  text-rendering: auto !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* Ensure proper icon sizing */
+.mdi {
+  font-size: inherit !important;
+}
+
+/* Force proper font loading */
+@font-face {
+  font-family: "Material Design Icons";
+  src: url("https://cdn.jsdelivr.net/npm/@mdi/font@7.x/fonts/materialdesignicons-webfont.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/npm/@mdi/font@7.x/fonts/materialdesignicons-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   إعدادات النظام العامة
+   ======================================== */
+
+/* إعدادات CSS العامة */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+  direction: rtl;
+  text-align: right;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  line-height: var(--line-height-normal);
+}
+
+/* ========================================
+   تحسينات Vuetify
+   ======================================== */
+
+/* تحسين الخطوط في Vuetify */
+.v-application {
+  font-family: var(--font-primary) !important;
+  direction: rtl !important;
+}
+
+/* تحسين النصوص */
+.v-application .text-h1,
+.v-application .text-h2,
+.v-application .text-h3,
+.v-application .text-h4,
+.v-application .text-h5,
+.v-application .text-h6 {
+  font-family: var(--font-display) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+/* تحسين الأزرار */
+.v-btn {
+  font-family: var(--font-primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+  text-transform: none !important;
+  border-radius: var(--radius-lg) !important;
+}
+
+/* تحسين البطاقات */
+.v-card {
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-md) !important;
+  transition: all 0.3s ease !important;
+}
+
+.v-card:hover {
+  box-shadow: var(--shadow-lg) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* تحسين الجداول */
+.v-data-table {
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+}
+
+.v-data-table-header {
+  background-color: var(--background-tertiary) !important;
+}
+
+.v-data-table__tr:hover {
+  background-color: var(--background-secondary) !important;
+}
+
+/* تحسين النماذج */
+.v-field {
+  border-radius: var(--radius-lg) !important;
+}
+
+.v-field--focused {
+  box-shadow: 0 0 0 2px var(--shadow-primary) !important;
+}
+
+/* تحسين القوائم */
+.v-list {
+  border-radius: var(--radius-lg) !important;
+}
+
+.v-list-item {
+  border-radius: var(--radius-md) !important;
+  margin: var(--space-1) !important;
+}
+
+/* تحسين التنقل */
+.v-navigation-drawer {
+  border-radius: 0 var(--radius-2xl) var(--radius-2xl) 0 !important;
+}
+
+.v-app-bar {
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl) !important;
+}
+
+/* ========================================
+   فئات مساعدة مخصصة
+   ======================================== */
+
+/* فئة للنصوص العربية المحسنة */
+.arabic-text {
+  font-family: var(--font-primary) !important;
+  direction: rtl !important;
+  text-align: right !important;
+  font-feature-settings: 'liga', 'kern', 'calt' !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* فئة للبطاقات المحسنة */
+.enhanced-card {
+  background: var(--card-background) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: var(--radius-2xl) !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.enhanced-card:hover {
+  box-shadow: var(--card-hover-shadow) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* فئة للأزرار المحسنة */
+.enhanced-btn {
+  border-radius: var(--radius-lg) !important;
+  font-weight: var(--font-weight-medium) !important;
+  text-transform: none !important;
+  transition: all 0.3s ease !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.enhanced-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* فئة للإحصائيات */
+.stat-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--radius-2xl) !important;
+  box-shadow: var(--shadow-md) !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--shadow-xl) !important;
+}
+
+/* فئة للعناوين المحسنة */
+.enhanced-title {
+  font-family: var(--font-display) !important;
+  font-weight: var(--font-weight-bold) !important;
+  background: var(--gradient-primary) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  text-shadow: 0 2px 4px var(--shadow-light) !important;
+}
+
+/* فئة للشعارات المحسنة */
+.enhanced-logo {
+  filter: drop-shadow(0 4px 8px var(--shadow-medium)) !important;
+  border-radius: var(--radius-full) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  padding: var(--space-2) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* ========================================
+   تحسينات الاستجابة
+   ======================================== */
+
+/* شاشات صغيرة */
+@media (max-width: 600px) {
+  .v-card {
+    border-radius: var(--radius-lg) !important;
+  }
+  
+  .enhanced-card {
+    border-radius: var(--radius-xl) !important;
+  }
+  
+  .stat-card {
+    border-radius: var(--radius-xl) !important;
+  }
+}
+
+/* شاشات متوسطة */
+@media (min-width: 601px) and (max-width: 960px) {
+  .v-card {
+    border-radius: var(--radius-xl) !important;
+  }
+}
+
+/* شاشات كبيرة */
+@media (min-width: 961px) {
+  .v-card {
+    border-radius: var(--radius-2xl) !important;
+  }
+}
+
+/* ========================================
+   تحسينات الأداء
+   ======================================== */
+
+/* تحسين التمرير */
+.v-main {
+  scroll-behavior: smooth !important;
+}
+
+/* تحسين الرسوم المتحركة */
+.v-ripple__container {
+  animation-duration: 0.3s !important;
+}
+
+/* تحسين الذاكرة */
+.v-fade-transition-enter-active,
+.v-fade-transition-leave-active {
+  transition: opacity 0.3s ease !important;
+}
+
+/* ========================================
+   تحسينات إضافية
+   ======================================== */
+
+/* تحسين التركيز */
+.v-btn:focus,
+.v-field:focus,
+.v-list-item:focus {
+  outline: 2px solid var(--color-primary) !important;
+  outline-offset: 2px !important;
+}
+
+/* تحسين التحديد */
+::selection {
+  background-color: var(--color-primary) !important;
+  color: var(--text-white) !important;
+}
+
+::-moz-selection {
+  background-color: var(--color-primary) !important;
+  color: var(--text-white) !important;
+}
+
+/* تحسين التمرير */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
+}

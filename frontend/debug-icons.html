@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تشخيص الأيقونات</title>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .debug-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .icon-test {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .mdi {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .css-test {
+            font-family: "Material Design Icons";
+            font-size: 48px;
+            color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <h1>تشخيص مشكلة الأيقونات</h1>
+    
+    <div class="debug-section">
+        <h2>اختبار 1: أيقونات MDI عادية</h2>
+        <div class="icon-test">
+            <i class="mdi mdi-home"></i>
+            <p>mdi-home</p>
+        </div>
+        <div class="icon-test">
+            <i class="mdi mdi-trending-up" style="color: #f44336;"></i>
+            <p>mdi-trending-up</p>
+        </div>
+        <div class="icon-test">
+            <i class="mdi mdi-currency-usd" style="color: #2196f3;"></i>
+            <p>mdi-currency-usd</p>
+        </div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>اختبار 2: CSS مباشر</h2>
+        <div class="icon-test">
+            <span class="css-test">&#xF2B0;</span>
+            <p>CSS مباشر - home</p>
+        </div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>اختبار 3: Unicode مباشر</h2>
+        <div class="icon-test">
+            <span style="font-family: 'Material Design Icons'; font-size: 48px; color: #4caf50;">&#xF2B0;</span>
+            <p>Unicode مباشر</p>
+        </div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>معلومات التشخيص</h2>
+        <p>إذا كانت الأيقونات لا تظهر، فقد تكون المشكلة في:</p>
+        <ul>
+            <li>تحميل مكتبة الأيقونات</li>
+            <li>تضارب في CSS</li>
+            <li>مشكلة في الخط</li>
+        </ul>
+    </div>
+</body>
+</html>

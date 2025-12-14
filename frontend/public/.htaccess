@@ -1,0 +1,12 @@
+# إعادة التوجيه من المنفذ 3000 إلى 3004
+RewriteEngine On
+
+# إعادة توجيه جميع الطلبات من localhost:3000 إلى localhost:3004
+RewriteCond %{HTTP_HOST} ^localhost:3000$ [NC]
+RewriteRule ^(.*)$ http://localhost:3004/$1 [R=301,L]
+
+# إعادة توجيه الصفحات المحددة
+RewriteRule ^test-work-details\.html$ http://localhost:3004/test-work-details.html [R=301,L]
+RewriteRule ^equipment-details\.html$ http://localhost:3004/equipment-details.html [R=301,L]
+RewriteRule ^labor-details\.html$ http://localhost:3004/labor-details.html [R=301,L]
+RewriteRule ^materials-expenses-details\.html$ http://localhost:3004/materials-expenses-details.html [R=301,L]

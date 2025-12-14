@@ -1,0 +1,595 @@
+/* ========================================
+   نظام تنسيق الكتابة الشامل
+   Typography System - Arabic RTL Support
+   ======================================== */
+
+/* الخطوط العربية الأساسية */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Tajawal:wght@200;300;400;500;700;800;900&family=Noto+Sans+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* متغيرات الخطوط */
+:root {
+  /* الخطوط الأساسية */
+  --font-primary: 'Cairo', 'Tajawal', 'Noto Sans Arabic', 'Arial', sans-serif;
+  --font-secondary: 'Tajawal', 'Cairo', 'Noto Sans Arabic', 'Arial', sans-serif;
+  --font-display: 'Cairo', 'Tajawal', 'Noto Sans Arabic', 'Arial', sans-serif;
+  
+  /* أحجام الخطوط */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  --font-size-6xl: 3.75rem;   /* 60px */
+  
+  /* أوزان الخطوط */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+  
+  /* ارتفاع السطر */
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  
+  /* المسافات بين الأحرف */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+}
+
+/* ========================================
+   تطبيق الخطوط على النظام
+   ======================================== */
+
+/* الخط الأساسي للنظام */
+.arabic-app,
+.v-application {
+  font-family: var(--font-primary) !important;
+  direction: rtl !important;
+  text-align: right !important;
+  font-feature-settings: 'liga', 'kern';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   تنسيق العناوين
+   ======================================== */
+
+/* العناوين الرئيسية */
+.text-h1,
+h1,
+.h1 {
+  font-family: var(--font-display) !important;
+  font-size: var(--font-size-4xl) !important;
+  font-weight: var(--font-weight-bold) !important;
+  line-height: var(--line-height-tight) !important;
+  letter-spacing: var(--letter-spacing-tight) !important;
+  color: var(--text-primary) !important;
+}
+
+.text-h2,
+h2,
+.h2 {
+  font-family: var(--font-display) !important;
+  font-size: var(--font-size-3xl) !important;
+  font-weight: var(--font-weight-bold) !important;
+  line-height: var(--line-height-tight) !important;
+  letter-spacing: var(--letter-spacing-tight) !important;
+  color: var(--text-primary) !important;
+}
+
+.text-h3,
+h3,
+.h3 {
+  font-family: var(--font-display) !important;
+  font-size: var(--font-size-2xl) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  line-height: var(--line-height-snug) !important;
+  letter-spacing: var(--letter-spacing-normal) !important;
+  color: var(--text-primary) !important;
+}
+
+.text-h4,
+h4,
+.h4 {
+  font-family: var(--font-display) !important;
+  font-size: var(--font-size-xl) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  line-height: var(--line-height-snug) !important;
+  letter-spacing: var(--letter-spacing-normal) !important;
+  color: var(--text-primary) !important;
+}
+
+.text-h5,
+h5,
+.h5 {
+  font-family: var(--font-display) !important;
+  font-size: var(--font-size-lg) !important;
+  font-weight: var(--font-weight-medium) !important;
+  line-height: var(--line-height-normal) !important;
+  letter-spacing: var(--letter-spacing-normal) !important;
+  color: var(--text-primary) !important;
+}
+
+.text-h6,
+h6,
+.h6 {
+  font-family: var(--font-display) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-medium) !important;
+  line-height: var(--line-height-normal) !important;
+  letter-spacing: var(--letter-spacing-normal) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ========================================
+   تنسيق النصوص العادية
+   ======================================== */
+
+/* النص الأساسي */
+.text-body-1,
+.body-1 {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-normal) !important;
+  line-height: var(--line-height-relaxed) !important;
+  letter-spacing: var(--letter-spacing-normal) !important;
+  color: var(--text-primary) !important;
+}
+
+.text-body-2,
+.body-2 {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-sm) !important;
+  font-weight: var(--font-weight-normal) !important;
+  line-height: var(--line-height-normal) !important;
+  letter-spacing: var(--letter-spacing-normal) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* النصوص الصغيرة */
+.text-caption,
+.caption {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-xs) !important;
+  font-weight: var(--font-weight-normal) !important;
+  line-height: var(--line-height-snug) !important;
+  letter-spacing: var(--letter-spacing-wide) !important;
+  color: var(--text-tertiary) !important;
+}
+
+/* العناوين الفرعية */
+.text-subtitle-1,
+.subtitle-1 {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-lg) !important;
+  font-weight: var(--font-weight-medium) !important;
+  line-height: var(--line-height-normal) !important;
+  letter-spacing: var(--letter-spacing-normal) !important;
+  color: var(--text-secondary) !important;
+}
+
+.text-subtitle-2,
+.subtitle-2 {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-medium) !important;
+  line-height: var(--line-height-snug) !important;
+  letter-spacing: var(--letter-spacing-normal) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ========================================
+   تنسيق الأزرار
+   ======================================== */
+
+/* نص الأزرار */
+.v-btn {
+  font-family: var(--font-primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+  letter-spacing: var(--letter-spacing-wide) !important;
+  text-transform: none !important;
+}
+
+/* أزرار صغيرة */
+.v-btn--size-small {
+  font-size: var(--font-size-sm) !important;
+}
+
+/* أزرار عادية */
+.v-btn--size-default {
+  font-size: var(--font-size-base) !important;
+}
+
+/* أزرار كبيرة */
+.v-btn--size-large {
+  font-size: var(--font-size-lg) !important;
+}
+
+/* أزرار ضخمة */
+.v-btn--size-x-large {
+  font-size: var(--font-size-xl) !important;
+}
+
+/* ========================================
+   تنسيق النماذج
+   ======================================== */
+
+/* تسميات الحقول */
+.v-label {
+  font-family: var(--font-primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+  font-size: var(--font-size-sm) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* نصوص الحقول */
+.v-field__input {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-normal) !important;
+  color: var(--text-primary) !important;
+}
+
+/* نصوص المساعدة */
+.v-messages {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-xs) !important;
+  color: var(--text-tertiary) !important;
+}
+
+/* ========================================
+   تنسيق الجداول
+   ======================================== */
+
+/* رؤوس الجداول */
+.v-data-table-header__content {
+  font-family: var(--font-primary) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  font-size: var(--font-size-sm) !important;
+  color: var(--text-primary) !important;
+  text-transform: none !important;
+}
+
+/* خلايا الجداول */
+.v-data-table__td {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-sm) !important;
+  font-weight: var(--font-weight-normal) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ========================================
+   تنسيق القوائم
+   ======================================== */
+
+/* عناصر القائمة */
+.v-list-item-title {
+  font-family: var(--font-primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+  font-size: var(--font-size-base) !important;
+  /* color: var(--text-primary) !important; */
+}
+
+.v-list-item-subtitle {
+  font-family: var(--font-primary) !important;
+  font-weight: var(--font-weight-normal) !important;
+  font-size: var(--font-size-sm) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ========================================
+   تنسيق البطاقات
+   ======================================== */
+
+/* عناوين البطاقات */
+.v-card-title {
+  font-family: var(--font-display) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  font-size: var(--font-size-lg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* نصوص البطاقات */
+.v-card-text {
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-normal) !important;
+  line-height: var(--line-height-relaxed) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ========================================
+   تنسيق التنقل
+   ======================================== */
+
+/* عناوين التنقل */
+.v-toolbar-title {
+  font-family: var(--font-display) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  font-size: var(--font-size-lg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* عناصر القائمة الجانبية */
+.v-navigation-drawer .v-list-item-title {
+  font-family: var(--font-primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+  font-size: var(--font-size-base) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ========================================
+   تنسيق الحالات والألوان
+   ======================================== */
+
+/* نص أبيض */
+.text-white {
+  color: #ffffff !important;
+}
+
+/* نص رئيسي */
+.text-primary {
+  color: var(--text-primary, #1976d2) !important;
+}
+
+/* نص ثانوي */
+.text-secondary {
+  color: var(--text-secondary, #757575) !important;
+}
+
+/* نص مساعد */
+.text-tertiary {
+  color: var(--text-tertiary, #9e9e9e) !important;
+}
+
+/* نص نجاح */
+.text-success {
+  color: #4caf50 !important;
+}
+
+/* نص تحذير */
+.text-warning {
+  color: #ff9800 !important;
+}
+
+/* نص خطأ */
+.text-error {
+  color: #f44336 !important;
+}
+
+/* ========================================
+   تنسيق الأوزان
+   ======================================== */
+
+.font-weight-light {
+  font-weight: var(--font-weight-light) !important;
+}
+
+.font-weight-normal {
+  font-weight: var(--font-weight-normal) !important;
+}
+
+.font-weight-medium {
+  font-weight: var(--font-weight-medium) !important;
+}
+
+.font-weight-semibold {
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+.font-weight-bold {
+  font-weight: var(--font-weight-bold) !important;
+}
+
+.font-weight-extrabold {
+  font-weight: var(--font-weight-extrabold) !important;
+}
+
+.font-weight-black {
+  font-weight: var(--font-weight-black) !important;
+}
+
+/* ========================================
+   تنسيق الأحجام
+   ======================================== */
+
+.text-xs {
+  font-size: var(--font-size-xs) !important;
+}
+
+.text-sm {
+  font-size: var(--font-size-sm) !important;
+}
+
+.text-base {
+  font-size: var(--font-size-base) !important;
+}
+
+.text-lg {
+  font-size: var(--font-size-lg) !important;
+}
+
+.text-xl {
+  font-size: var(--font-size-xl) !important;
+}
+
+.text-2xl {
+  font-size: var(--font-size-2xl) !important;
+}
+
+.text-3xl {
+  font-size: var(--font-size-3xl) !important;
+}
+
+.text-4xl {
+  font-size: var(--font-size-4xl) !important;
+}
+
+.text-5xl {
+  font-size: var(--font-size-5xl) !important;
+}
+
+.text-6xl {
+  font-size: var(--font-size-6xl) !important;
+}
+
+/* ========================================
+   تنسيق المحاذاة
+   ======================================== */
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+/* ========================================
+   تنسيق التحويل
+   ======================================== */
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-lowercase {
+  text-transform: lowercase !important;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+
+.text-none {
+  text-transform: none !important;
+}
+
+/* ========================================
+   تنسيق المسافات
+   ======================================== */
+
+.letter-spacing-tighter {
+  letter-spacing: var(--letter-spacing-tighter) !important;
+}
+
+.letter-spacing-tight {
+  letter-spacing: var(--letter-spacing-tight) !important;
+}
+
+.letter-spacing-normal {
+  letter-spacing: var(--letter-spacing-normal) !important;
+}
+
+.letter-spacing-wide {
+  letter-spacing: var(--letter-spacing-wide) !important;
+}
+
+.letter-spacing-wider {
+  letter-spacing: var(--letter-spacing-wider) !important;
+}
+
+.letter-spacing-widest {
+  letter-spacing: var(--letter-spacing-widest) !important;
+}
+
+/* ========================================
+   تنسيق ارتفاع السطر
+   ======================================== */
+
+.leading-tight {
+  line-height: var(--line-height-tight) !important;
+}
+
+.leading-snug {
+  line-height: var(--line-height-snug) !important;
+}
+
+.leading-normal {
+  line-height: var(--line-height-normal) !important;
+}
+
+.leading-relaxed {
+  line-height: var(--line-height-relaxed) !important;
+}
+
+.leading-loose {
+  line-height: var(--line-height-loose) !important;
+}
+
+/* ========================================
+   تنسيق خاص للعربية
+   ======================================== */
+
+/* تحسين عرض النصوص العربية */
+.arabic-text {
+  font-feature-settings: 'liga', 'kern', 'calt';
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: 'liga', 'kern', 'calt';
+  -moz-font-feature-settings: 'liga', 'kern', 'calt';
+}
+
+/* تحسين الأرقام العربية */
+.arabic-numbers {
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ========================================
+   تنسيق الاستجابة
+   ======================================== */
+
+/* شاشات صغيرة */
+@media (max-width: 600px) {
+  :root {
+    --font-size-xs: 0.7rem;
+    --font-size-sm: 0.8rem;
+    --font-size-base: 0.9rem;
+    --font-size-lg: 1rem;
+    --font-size-xl: 1.1rem;
+    --font-size-2xl: 1.3rem;
+    --font-size-3xl: 1.6rem;
+    --font-size-4xl: 2rem;
+  }
+}
+
+/* شاشات متوسطة */
+@media (min-width: 601px) and (max-width: 960px) {
+  :root {
+    --font-size-base: 0.95rem;
+    --font-size-lg: 1.05rem;
+    --font-size-xl: 1.15rem;
+  }
+}
+
+/* شاشات كبيرة */
+@media (min-width: 961px) {
+  :root {
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+  }
+}

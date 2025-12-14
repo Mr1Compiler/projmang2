@@ -1,0 +1,530 @@
+/* ========================================
+   التأثيرات البصرية المحسنة - نظام إدارة المشاريع
+   تم التطوير بواسطة: ارتكاز للحلول البرمجية
+   ======================================== */
+
+/* ========================================
+   1. تأثيرات الحركة والانتقالات
+   ======================================== */
+
+/* انتقالات سلسة للعناصر */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-transition-fast {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-transition-slow {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* تأثيرات hover متطورة */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow-hover);
+  transform: scale(1.05);
+}
+
+/* تأثيرات التكبير */
+.scale-on-hover {
+  transition: transform 0.3s ease;
+}
+
+.scale-on-hover:hover {
+  transform: scale(1.1);
+}
+
+.scale-on-click:active {
+  transform: scale(0.95);
+}
+
+/* ========================================
+   2. تأثيرات الضوء والظلال
+   ======================================== */
+
+/* تأثير الضوء المتحرك */
+.light-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.light-sweep::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.light-sweep:hover::before {
+  left: 100%;
+}
+
+/* تأثير الظل المتحرك */
+.shadow-follow {
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-follow:hover {
+  box-shadow: var(--shadow-glow);
+}
+
+/* تأثير الإضاءة الداخلية */
+.inner-glow {
+  position: relative;
+}
+
+.inner-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(30, 64, 175, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.inner-glow:hover::before {
+  opacity: 1;
+}
+
+/* ========================================
+   3. تأثيرات النصوص
+   ======================================== */
+
+/* تأثير النص المتوهج */
+.text-glow {
+  text-shadow: 0 0 10px rgba(30, 64, 175, 0.5);
+  transition: text-shadow 0.3s ease;
+}
+
+.text-glow:hover {
+  text-shadow: 0 0 20px rgba(30, 64, 175, 0.8);
+}
+
+/* تأثير النص المتحرك */
+.text-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* تأثير النص المتلألئ */
+.text-shimmer {
+  background: linear-gradient(90deg, #666, #fff, #666);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ========================================
+   4. تأثيرات الأيقونات
+   ======================================== */
+
+/* تأثير الأيقونة المتدورة */
+.icon-spin {
+  transition: transform 0.3s ease;
+}
+
+.icon-spin:hover {
+  transform: rotate(360deg);
+}
+
+/* تأثير الأيقونة المتذبذبة */
+.icon-bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* تأثير الأيقونة المتلألئة */
+.icon-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* تأثير الأيقونة المتوهجة */
+.icon-glow {
+  filter: drop-shadow(0 0 10px rgba(30, 64, 175, 0.5));
+  transition: filter 0.3s ease;
+}
+
+.icon-glow:hover {
+  filter: drop-shadow(0 0 20px rgba(30, 64, 175, 0.8));
+}
+
+/* ========================================
+   5. تأثيرات الخلفيات
+   ======================================== */
+
+/* تأثير الخلفية المتدرجة المتحركة */
+.gradient-animation {
+  background: linear-gradient(45deg, #1e40af, #3b82f6, #7c3aed, #a855f7);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* تأثير الخلفية الشفافة */
+.glass-effect {
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+
+/* تأثير الخلفية المرقطة */
+.particle-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 20% 80%, rgba(30, 64, 175, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 40%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* ========================================
+   6. تأثيرات الأزرار
+   ======================================== */
+
+/* تأثير الزر المتوهج */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-glow:hover::before {
+  left: 100%;
+}
+
+.btn-glow:hover {
+  box-shadow: var(--shadow-glow-hover);
+  transform: translateY(-2px);
+}
+
+/* تأثير الزر المتذبذب */
+.btn-bounce {
+  transition: all 0.3s ease;
+}
+
+.btn-bounce:hover {
+  animation: bounce 0.6s ease;
+}
+
+/* تأثير الزر المتدور */
+.btn-rotate {
+  transition: all 0.3s ease;
+}
+
+.btn-rotate:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+/* ========================================
+   7. تأثيرات البطاقات
+   ======================================== */
+
+/* تأثير البطاقة المتوهجة */
+.card-glow {
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-card);
+}
+
+.card-glow:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-5px);
+}
+
+/* تأثير البطاقة الشفافة */
+.card-glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+
+/* تأثير البطاقة المتحركة */
+.card-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ========================================
+   8. تأثيرات النماذج
+   ======================================== */
+
+/* تأثير الحقل المضيء */
+.input-glow {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.input-glow:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+  transform: translateY(-1px);
+}
+
+/* تأثير الحقل المتذبذب */
+.input-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* ========================================
+   9. تأثيرات الجداول
+   ======================================== */
+
+/* تأثير الصف المتوهج */
+.table-row-glow {
+  transition: all 0.3s ease;
+}
+
+.table-row-glow:hover {
+  background: linear-gradient(90deg, rgba(30, 64, 175, 0.1), rgba(124, 58, 237, 0.1));
+  transform: scale(1.01);
+  box-shadow: var(--shadow-light);
+}
+
+/* تأثير الجدول المتدرج */
+.table-gradient {
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(124, 58, 237, 0.05));
+}
+
+/* ========================================
+   10. تأثيرات التنقل
+   ======================================== */
+
+/* تأثير الرابط المتوهج */
+.link-glow {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.link-glow::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: width 0.3s ease;
+}
+
+.link-glow:hover::after {
+  width: 100%;
+}
+
+/* تأثير القائمة المتدرجة */
+.menu-gradient {
+  background: var(--gradient-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.menu-gradient:hover::before {
+  left: 100%;
+}
+
+/* ========================================
+   11. تأثيرات الاستجابة
+   ======================================== */
+
+/* تأثير التحميل المتدرج */
+.loading-gradient {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* تأثير الظهور التدريجي */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* تأثير الانزلاق */
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* ========================================
+   12. تأثيرات خاصة
+   ======================================== */
+
+/* تأثير المطر */
+.rain-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.rain-effect::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, rgba(30, 64, 175, 0.1), transparent);
+  animation: rain 2s linear infinite;
+}
+
+@keyframes rain {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* تأثير النجمة المتلألئة */
+.star-twinkle {
+  animation: twinkle 1.5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+/* تأثير الموجة */
+.wave-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.1), transparent);
+  animation: wave 2s linear infinite;
+}
+
+@keyframes wave {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ========================================
+   13. فئات مساعدة للتأثيرات
+   ======================================== */
+
+/* إخفاء التأثيرات للمستخدمين الذين يفضلون الحركة المحدودة */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* تحسين الأداء */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* تأثيرات للشاشات عالية الدقة */
+@media (min-resolution: 2dppx) {
+  .high-dpi {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}

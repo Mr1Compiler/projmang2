@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة المشاريع - إعادة التوجيه</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            direction: rtl;
+        }
+        
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            margin: 2rem;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            color: #1e3a8a;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border-right: 4px solid #1e3a8a;
+        }
+        
+        .old-url {
+            color: #ef4444;
+            text-decoration: line-through;
+            font-family: monospace;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .new-url {
+            color: #10b981;
+            font-family: monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .countdown {
+            font-size: 3rem;
+            color: #1e3a8a;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            background: #3b82f6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background: #6b7280;
+        }
+        
+        .btn-secondary:hover {
+            background: #9ca3af;
+        }
+        
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .page-link {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .page-link:hover {
+            background: #e9ecef;
+            border-color: #1e3a8a;
+            transform: translateY(-2px);
+        }
+        
+        .page-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🔄</div>
+        <h1>نظام إدارة المشاريع</h1>
+        <div class="subtitle">تم تحديث عنوان الموقع إلى المنفذ الجديد</div>
+        
+        <div class="info-box">
+            <div style="margin-bottom: 1rem;">
+                <strong>العنوان القديم:</strong><br>
+                <span class="old-url">localhost:3000</span>
+            </div>
+            <div>
+                <strong>العنوان الجديد:</strong><br>
+                <span class="new-url">localhost:3004</span>
+            </div>
+        </div>
+        
+        <div class="countdown" id="countdown">5</div>
+        <div style="margin-bottom: 2rem;">سيتم إعادة التوجيه تلقائياً خلال <span id="seconds">5</span> ثانية</div>
+        
+        <div>
+            <a href="http://localhost:3004/" class="btn">الانتقال الآن</a>
+            <a href="http://localhost:3004/test-work-details.html" class="btn btn-secondary">صفحة الاختبار</a>
+        </div>
+        
+        <div class="pages-grid">
+            <a href="http://localhost:3004/test-work-details.html" class="page-link">
+                <span class="page-icon">📋</span>
+                <strong>تفاصيل يوم العمل</strong>
+            </a>
+            <a href="http://localhost:3004/equipment-details.html" class="page-link">
+                <span class="page-icon">🚜</span>
+                <strong>تفاصيل الآليات</strong>
+            </a>
+            <a href="http://localhost:3004/labor-details.html" class="page-link">
+                <span class="page-icon">👷</span>
+                <strong>تفاصيل العمال</strong>
+            </a>
+            <a href="http://localhost:3004/materials-expenses-details.html" class="page-link">
+                <span class="page-icon">💰</span>
+                <strong>تفاصيل المواد</strong>
+            </a>
+        </div>
+        
+        <div class="footer">
+            © 2024 ارتكاز للحلول البرمجية - erticaz.com
+        </div>
+    </div>
+
+    <script>
+        let seconds = 5;
+        const countdownElement = document.getElementById('countdown');
+        const secondsElement = document.getElementById('seconds');
+        
+        const timer = setInterval(() => {
+            seconds--;
+            countdownElement.textContent = seconds;
+            secondsElement.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = 'http://localhost:3004/';
+            }
+        }, 1000);
+        
+        // إعادة التوجيه الفوري عند النقر على أي مكان
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'A') {
+                clearInterval(timer);
+                window.location.href = 'http://localhost:3004/';
+            }
+        });
+    </script>
+</body>
+</html>

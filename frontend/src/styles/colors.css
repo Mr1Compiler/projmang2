@@ -1,0 +1,463 @@
+/* ========================================
+   نظام الألوان الشامل
+   Color System - Arabic RTL Support
+   ======================================== */
+
+/* متغيرات الألوان الأساسية */
+:root {
+  /* الألوان الأساسية - نظام نيلي موحد */
+  --color-primary: #4338ca;
+  --color-primary-light: #6366f1;
+  --color-primary-dark: #3730a3;
+  --color-primary-variant: #312e81;
+  
+  /* الألوان الثانوية */
+  --color-secondary: #424242;
+  --color-secondary-light: #6d6d6d;
+  --color-secondary-dark: #212121;
+  
+  /* ألوان النجاح */
+  --color-success: #4caf50;
+  --color-success-light: #81c784;
+  --color-success-dark: #388e3c;
+  
+  /* ألوان التحذير */
+  --color-warning: #ff9800;
+  --color-warning-light: #ffb74d;
+  --color-warning-dark: #f57c00;
+  
+  /* ألوان الخطأ */
+  --color-error: #f44336;
+  --color-error-light: #e57373;
+  --color-error-dark: #d32f2f;
+  
+  /* ألوان المعلومات */
+  --color-info: #2196f3;
+  --color-info-light: #64b5f6;
+  --color-info-dark: #1976d2;
+  
+  /* ألوان النص */
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --text-tertiary: #9e9e9e;
+  --text-disabled: #bdbdbd;
+  --text-hint: #bdbdbd;
+  --text-white: #ffffff;
+  
+  /* ألوان الخلفية - نظام نيلي موحد */
+  --background-primary: #ffffff;
+  --background-secondary: #f8fafc;
+  --background-tertiary: #f1f5f9;
+  --background-dark: #1e293b;
+  --background-surface: #ffffff;
+  --background-indigo-light: #eef2ff;
+  --background-indigo-medium: #e0e7ff;
+  --background-indigo-dark: #c7d2fe;
+  
+  /* ألوان الحدود - نظام نيلي موحد */
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-dark: #64748b;
+  --border-primary: var(--color-primary);
+  --border-indigo: #c7d2fe;
+  --border-indigo-light: #e0e7ff;
+  
+  /* ألوان الظلال */
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.2);
+  --shadow-dark: rgba(0, 0, 0, 0.3);
+  --shadow-primary: rgba(67, 56, 202, 0.3);
+  
+  /* ألوان التدرجات - نظام نيلي موحد */
+  --gradient-primary: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
+  --gradient-secondary: linear-gradient(135deg, #3730a3 0%, #4338ca 100%);
+  --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --gradient-error: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  --gradient-info: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  
+  /* ألوان الحالات */
+  --status-active: var(--color-success);
+  --status-pending: var(--color-warning);
+  --status-completed: var(--color-info);
+  --status-cancelled: var(--color-error);
+  --status-draft: var(--color-secondary);
+  
+  /* ألوان الكروت */
+  --card-background: var(--background-surface);
+  --card-border: var(--border-light);
+  --card-shadow: var(--shadow-light);
+  --card-hover-shadow: var(--shadow-medium);
+  
+  /* ألوان الأزرار */
+  --btn-primary-bg: var(--color-primary);
+  --btn-primary-text: var(--text-white);
+  --btn-primary-hover: var(--color-primary-dark);
+  
+  --btn-secondary-bg: var(--color-secondary);
+  --btn-secondary-text: var(--text-white);
+  --btn-secondary-hover: var(--color-secondary-dark);
+  
+  --btn-success-bg: var(--color-success);
+  --btn-success-text: var(--text-white);
+  --btn-success-hover: var(--color-success-dark);
+  
+  --btn-warning-bg: var(--color-warning);
+  --btn-warning-text: var(--text-white);
+  --btn-warning-hover: var(--color-warning-dark);
+  
+  --btn-error-bg: var(--color-error);
+  --btn-error-text: var(--text-white);
+  --btn-error-hover: var(--color-error-dark);
+  
+  --btn-outlined-border: var(--color-primary);
+  --btn-outlined-text: var(--color-primary);
+  --btn-outlined-hover-bg: var(--color-primary);
+  --btn-outlined-hover-text: var(--text-white);
+}
+
+/* ========================================
+   تطبيق الألوان على Vuetify
+   ======================================== */
+
+/* ألوان Vuetify الأساسية */
+.v-theme--light {
+  --v-theme-primary: var(--color-primary);
+  --v-theme-secondary: var(--color-secondary);
+  --v-theme-success: var(--color-success);
+  --v-theme-warning: var(--color-warning);
+  --v-theme-error: var(--color-error);
+  --v-theme-info: var(--color-info);
+  
+  --v-theme-surface: var(--background-surface);
+  --v-theme-background: var(--background-primary);
+  
+  --v-theme-on-primary: var(--text-white);
+  --v-theme-on-secondary: var(--text-white);
+  --v-theme-on-success: var(--text-white);
+  --v-theme-on-warning: var(--text-white);
+  --v-theme-on-error: var(--text-white);
+  --v-theme-on-info: var(--text-white);
+  --v-theme-on-surface: var(--text-primary);
+  --v-theme-on-background: var(--text-primary);
+}
+
+/* ========================================
+   فئات الألوان المساعدة
+   ======================================== */
+
+/* ألوان النص */
+.text-primary { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-tertiary { color: var(--text-tertiary) !important; }
+.text-disabled { color: var(--text-disabled) !important; }
+.text-hint { color: var(--text-hint) !important; }
+.text-white { color: var(--text-white) !important; }
+
+/* ألوان النص النيلية */
+.text-indigo { color: var(--color-primary) !important; }
+.text-indigo-light { color: var(--color-primary-light) !important; }
+.text-indigo-dark { color: var(--color-primary-dark) !important; }
+
+/* ألوان الخلفية */
+.bg-primary { background-color: var(--color-primary) !important; }
+.bg-secondary { background-color: var(--color-secondary) !important; }
+.bg-success { background-color: var(--color-success) !important; }
+.bg-warning { background-color: var(--color-warning) !important; }
+.bg-error { background-color: var(--color-error) !important; }
+.bg-info { background-color: var(--color-info) !important; }
+
+.bg-surface { background-color: var(--background-surface) !important; }
+.bg-background { background-color: var(--background-primary) !important; }
+
+/* ألوان الخلفية النيلية */
+.bg-indigo-light { background-color: var(--background-indigo-light) !important; }
+.bg-indigo-medium { background-color: var(--background-indigo-medium) !important; }
+.bg-indigo-dark { background-color: var(--background-indigo-dark) !important; }
+
+/* ألوان الحدود */
+.border-primary { border-color: var(--border-primary) !important; }
+.border-light { border-color: var(--border-light) !important; }
+.border-medium { border-color: var(--border-medium) !important; }
+.border-dark { border-color: var(--border-dark) !important; }
+
+/* ألوان الحدود النيلية */
+.border-indigo { border-color: var(--border-indigo) !important; }
+.border-indigo-light { border-color: var(--border-indigo-light) !important; }
+
+/* ألوان الحالات */
+.status-active { color: var(--status-active) !important; }
+.status-pending { color: var(--status-pending) !important; }
+.status-completed { color: var(--status-completed) !important; }
+.status-cancelled { color: var(--status-cancelled) !important; }
+.status-draft { color: var(--status-draft) !important; }
+
+/* ألوان التدرجات */
+.gradient-primary { background: var(--gradient-primary) !important; }
+.gradient-secondary { background: var(--gradient-secondary) !important; }
+.gradient-success { background: var(--gradient-success) !important; }
+.gradient-warning { background: var(--gradient-warning) !important; }
+.gradient-error { background: var(--gradient-error) !important; }
+.gradient-info { background: var(--gradient-info) !important; }
+
+/* تدرجات إضافية */
+.gradient-indigo-soft { background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%) !important; }
+.gradient-indigo-medium { background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%) !important; }
+.gradient-indigo-strong { background: linear-gradient(135deg, #c7d2fe 0%, #a5b4fc 100%) !important; }
+
+/* ========================================
+   ألوان مخصصة للمكونات
+   ======================================== */
+
+/* ألوان السايد بار */
+.sidebar-bg {
+  background: var(--gradient-primary) !important;
+}
+
+/* ألوان الصفحات */
+.page-bg-indigo {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #c7d2fe 100%) !important;
+}
+
+.page-bg-indigo-dark {
+  background: linear-gradient(135deg, #4338ca 0%, #3730a3 50%, #312e81 100%) !important;
+}
+
+/* ألوان البطاقات المحسنة */
+.card-indigo {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--border-indigo-light) !important;
+  box-shadow: 0 4px 6px -1px rgba(67, 56, 202, 0.1), 0 2px 4px -1px rgba(67, 56, 202, 0.06) !important;
+}
+
+.card-indigo:hover {
+  box-shadow: 0 10px 15px -3px rgba(67, 56, 202, 0.1), 0 4px 6px -2px rgba(67, 56, 202, 0.05) !important;
+  transform: translateY(-2px) !important;
+}
+
+.sidebar-text {
+  color: var(--text-white) !important;
+}
+
+/* ألوان البطاقات */
+.card-bg {
+  background-color: var(--card-background) !important;
+  border: 1px solid var(--card-border) !important;
+  box-shadow: 0 2px 4px var(--card-shadow) !important;
+}
+
+.card-bg:hover {
+  box-shadow: 0 4px 8px var(--card-hover-shadow) !important;
+}
+
+/* ألوان الأزرار */
+.btn-primary {
+  background-color: var(--btn-primary-bg) !important;
+  color: var(--btn-primary-text) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover) !important;
+}
+
+.btn-secondary {
+  background-color: var(--btn-secondary-bg) !important;
+  color: var(--btn-secondary-text) !important;
+}
+
+.btn-secondary:hover {
+  background-color: var(--btn-secondary-hover) !important;
+}
+
+.btn-success {
+  background-color: var(--btn-success-bg) !important;
+  color: var(--btn-success-text) !important;
+}
+
+.btn-success:hover {
+  background-color: var(--btn-success-hover) !important;
+}
+
+.btn-warning {
+  background-color: var(--btn-warning-bg) !important;
+  color: var(--btn-warning-text) !important;
+}
+
+.btn-warning:hover {
+  background-color: var(--btn-warning-hover) !important;
+}
+
+.btn-error {
+  background-color: var(--btn-error-bg) !important;
+  color: var(--btn-error-text) !important;
+}
+
+.btn-error:hover {
+  background-color: var(--btn-error-hover) !important;
+}
+
+.btn-outlined {
+  border: 2px solid var(--btn-outlined-border) !important;
+  color: var(--btn-outlined-text) !important;
+  background-color: transparent !important;
+}
+
+.btn-outlined:hover {
+  background-color: var(--btn-outlined-hover-bg) !important;
+  color: var(--btn-outlined-hover-text) !important;
+}
+
+/* أزرار نيلي مخصصة */
+.btn-indigo {
+  background: var(--gradient-primary) !important;
+  color: var(--text-white) !important;
+  border: none !important;
+  box-shadow: 0 4px 6px -1px rgba(67, 56, 202, 0.1), 0 2px 4px -1px rgba(67, 56, 202, 0.06) !important;
+}
+
+.btn-indigo:hover {
+  background: var(--gradient-secondary) !important;
+  box-shadow: 0 10px 15px -3px rgba(67, 56, 202, 0.1), 0 4px 6px -2px rgba(67, 56, 202, 0.05) !important;
+  transform: translateY(-1px) !important;
+}
+
+.btn-indigo-outlined {
+  border: 2px solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  background-color: transparent !important;
+}
+
+.btn-indigo-outlined:hover {
+  background-color: var(--color-primary) !important;
+  color: var(--text-white) !important;
+}
+
+/* ========================================
+   ألوان الجداول
+   ======================================== */
+
+.table-header {
+  background-color: var(--background-tertiary) !important;
+  color: var(--text-primary) !important;
+}
+
+.table-row:nth-child(even) {
+  background-color: var(--background-secondary) !important;
+}
+
+.table-row:nth-child(odd) {
+  background-color: var(--background-primary) !important;
+}
+
+.table-row:hover {
+  background-color: var(--background-tertiary) !important;
+}
+
+/* ========================================
+   ألوان النماذج
+   ======================================== */
+
+.form-field-focused {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 2px var(--shadow-primary) !important;
+}
+
+.form-field-error {
+  border-color: var(--color-error) !important;
+  color: var(--color-error) !important;
+}
+
+.form-field-success {
+  border-color: var(--color-success) !important;
+  color: var(--color-success) !important;
+}
+
+/* ========================================
+   ألوان التنبيهات
+   ======================================== */
+
+.alert-success {
+  background-color: var(--color-success-light) !important;
+  color: var(--color-success-dark) !important;
+  border: 1px solid var(--color-success) !important;
+}
+
+.alert-warning {
+  background-color: var(--color-warning-light) !important;
+  color: var(--color-warning-dark) !important;
+  border: 1px solid var(--color-warning) !important;
+}
+
+.alert-error {
+  background-color: var(--color-error-light) !important;
+  color: var(--color-error-dark) !important;
+  border: 1px solid var(--color-error) !important;
+}
+
+.alert-info {
+  background-color: var(--color-info-light) !important;
+  color: var(--color-info-dark) !important;
+  border: 1px solid var(--color-info) !important;
+}
+
+/* ========================================
+   ألوان الاستجابة
+   ======================================== */
+
+/* الوضع المظلم */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-tertiary: #808080;
+    --text-disabled: #606060;
+    
+    --background-primary: #121212;
+    --background-secondary: #1e1e1e;
+    --background-tertiary: #2a2a2a;
+    --background-surface: #1e1e1e;
+    
+    --border-light: #404040;
+    --border-medium: #606060;
+    --border-dark: #808080;
+    
+    --card-background: var(--background-surface);
+    --card-border: var(--border-light);
+  }
+}
+
+/* ========================================
+   ألوان مخصصة للمشاريع
+   ======================================== */
+
+.project-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%) !important;
+  border: 1px solid var(--border-light) !important;
+  transition: all 0.3s ease !important;
+}
+
+.project-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px var(--shadow-medium) !important;
+}
+
+.project-status-active {
+  background-color: var(--color-success) !important;
+  color: var(--text-white) !important;
+}
+
+.project-status-pending {
+  background-color: var(--color-warning) !important;
+  color: var(--text-white) !important;
+}
+
+.project-status-completed {
+  background-color: var(--color-info) !important;
+  color: var(--text-white) !important;
+}
+
+.project-status-cancelled {
+  background-color: var(--color-error) !important;
+  color: var(--text-white) !important;
+}

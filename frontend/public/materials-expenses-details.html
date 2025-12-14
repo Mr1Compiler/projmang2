@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المواد والمصاريف اليومية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            direction: rtl;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 320px;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 1rem;
+        }
+        
+        .sidebar-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sidebar-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .sidebar-menu {
+            padding: 1rem;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-4px);
+        }
+        
+        .menu-item.active {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+            transform: translateX(-4px);
+        }
+        
+        .menu-icon {
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .menu-text {
+            font-weight: 500;
+        }
+        
+        .sidebar-features {
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .features-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.75rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .feature-icon {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+        
+        .feature-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8rem;
+        }
+        
+        .sidebar-footer {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            text-align: center;
+        }
+        
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+        }
+        
+        /* Main Content with Sidebar */
+        .main-content {
+            margin-right: 320px;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .section-header {
+            background: #dc2626;
+            color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .search-bar {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .search-btn:hover {
+            background: #b91c1c;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #f8f9fa;
+            padding: 1rem;
+            text-align: right;
+            font-weight: bold;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        td {
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        tr:hover {
+            background: #f9fafb;
+        }
+        
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+        
+        .pagination {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .pagination-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .pagination-btn {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .pagination-btn:hover {
+            background: #4b5563;
+        }
+        
+        .pagination-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .rows-select {
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: white;
+        }
+        
+        .add-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 1rem 1.5rem;
+        }
+        
+        .add-btn:hover {
+            background: #1e40af;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            background: #6b7280;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #374151;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            min-height: 100px;
+            resize: vertical;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        
+        .save-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        
+        .save-btn:hover {
+            background: #1e40af;
+        }
+        
+        .cancel-btn {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .cancel-btn:hover {
+            background: #4b5563;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                margin-bottom: 1rem;
+            }
+            
+            .main-content {
+                margin-right: 0;
+            }
+            
+            .container {
+                padding: 0.5rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .pagination {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+            
+            .pagination-left,
+            .pagination-right {
+                justify-content: center;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">🏗️</div>
+            <div class="sidebar-title">نظام إدارة المشاريع</div>
+            <div class="sidebar-subtitle">نظام شامل لإدارة المشاريع والمهندسين والمصاريف</div>
+        </div>
+        
+        <div class="sidebar-menu">
+            <div class="menu-item" onclick="navigateTo('/')">
+                <span class="menu-icon">🏠</span>
+                <span class="menu-text">الرئيسية</span>
+            </div>
+            <div class="menu-item active" onclick="navigateTo('/project-management')">
+                <span class="menu-icon">📁</span>
+                <span class="menu-text">المشاريع</span>
+            </div>
+            <div class="menu-item" onclick="navigateTo('/engineers')">
+                <span class="menu-icon">👷</span>
+                <span class="menu-text">المهندسين</span>
+            </div>
+            <div class="menu-item" onclick="navigateTo('/categories')">
+                <span class="menu-icon">🏷️</span>
+                <span class="menu-text">التصنيفات</span>
+            </div>
+            <div class="menu-item" onclick="navigateTo('/administrative-expenses')">
+                <span class="menu-icon">💰</span>
+                <span class="menu-text">المصاريف الإدارية</span>
+            </div>
+            <div class="menu-item" onclick="navigateTo('/expenses')">
+                <span class="menu-icon">📊</span>
+                <span class="menu-text">المصروفات العامة</span>
+            </div>
+            <div class="menu-item" onclick="navigateTo('/income')">
+                <span class="menu-icon">📈</span>
+                <span class="menu-text">الإيرادات</span>
+            </div>
+            <div class="menu-item" onclick="navigateTo('/debtors')">
+                <span class="menu-icon">💳</span>
+                <span class="menu-text">المديونون</span>
+            </div>
+            <div class="menu-item" onclick="navigateTo('/users')">
+                <span class="menu-icon">👥</span>
+                <span class="menu-text">المستخدمين</span>
+            </div>
+        </div>
+        
+        <div class="sidebar-features">
+            <div class="features-title">المميزات الرئيسية</div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">📊</span>
+                    <span class="feature-text">تقارير المشاريع</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">👥</span>
+                    <span class="feature-text">إدارة الفريق</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🧮</span>
+                    <span class="feature-text">إدارة المالية</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🛡️</span>
+                    <span class="feature-text">أمان عالي</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="footer-text">© 2024 ارتكاز للحلول البرمجية</div>
+            <div class="footer-text">erticaz.com</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>تفاصيل المواد والمصاريف اليومية</h1>
+            <button class="back-btn" onclick="goBack()">العودة إلى تفاصيل يوم العمل</button>
+        </div>
+
+        <!-- Materials Section -->
+        <div class="section">
+            <div class="section-header">المواد</div>
+            
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="البحث في المواد...">
+                <button class="search-btn">بحث</button>
+            </div>
+            
+            <button class="add-btn" onclick="addMaterial()">إضافة مادة جديدة</button>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>التسلسل</th>
+                            <th>نوع المادة</th>
+                            <th>الكمية</th>
+                            <th>السعر</th>
+                            <th>اسم السائق</th>
+                            <th>السعر الكلي</th>
+                            <th>التفاصيل</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>mad</td>
+                            <td>30</td>
+                            <td>120</td>
+                            <td>ali</td>
+                            <td>3600</td>
+                            <td>none</td>
+                            <td>
+                                <button class="delete-btn" onclick="deleteMaterial(1)">حذف</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>hjghjg</td>
+                            <td>30</td>
+                            <td>2500</td>
+                            <td>gf</td>
+                            <td>75000</td>
+                            <td>jh</td>
+                            <td>
+                                <button class="delete-btn" onclick="deleteMaterial(2)">حذف</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination">
+                <div class="pagination-left">
+                    <button class="pagination-btn">&lt;</button>
+                    <button class="pagination-btn">&gt;</button>
+                    <span>of 2 1-2</span>
+                </div>
+                <div class="pagination-right">
+                    <select class="rows-select">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span>:Rows per page</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Expenses Section -->
+        <div class="section">
+            <div class="section-header">المصاريف اليومية</div>
+            
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="البحث في المصاريف...">
+                <button class="search-btn">بحث</button>
+            </div>
+            
+            <button class="add-btn" onclick="addExpense()">إضافة مصروف جديد</button>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>التسلسل</th>
+                            <th>نوع النثرية</th>
+                            <th>العدد</th>
+                            <th>الأجرة اليومية</th>
+                            <th>المجموع</th>
+                            <th>التفاصيل</th>
+                            <th>الهاتف</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="8" class="no-data">No data available</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination">
+                <div class="pagination-left">
+                    <button class="pagination-btn">&lt;</button>
+                    <button class="pagination-btn">&gt;</button>
+                </div>
+                <div class="pagination-right">
+                    <select class="rows-select">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                    <span>:Rows per page</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Material Modal -->
+    <div class="modal-overlay" id="addMaterialModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">إضافة مادة</h3>
+                <button class="close-btn" onclick="closeMaterialModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">نوع المادة</label>
+                    <input type="text" class="form-input" id="materialType" placeholder="أدخل نوع المادة">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">الكمية</label>
+                    <input type="number" class="form-input" id="quantity" value="0" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">IQD السعر</label>
+                    <input type="number" class="form-input" id="price" placeholder="أدخل السعر" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">IQD السعر الكلي</label>
+                    <input type="number" class="form-input" id="totalPrice" placeholder="سيتم حسابه تلقائياً" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">اسم السائق</label>
+                    <input type="text" class="form-input" id="driverName" placeholder="أدخل اسم السائق">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">التفاصيل</label>
+                    <textarea class="form-textarea" id="details" placeholder="أدخل التفاصيل الإضافية"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel-btn" onclick="closeMaterialModal()">إلغاء</button>
+                <button class="save-btn" onclick="saveMaterial()">حفظ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Expense Modal -->
+    <div class="modal-overlay" id="addExpenseModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">إضافة صنف جديد</h3>
+                <button class="close-btn" onclick="closeExpenseModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">نوع النثرية</label>
+                    <input type="text" class="form-input" id="expenseType" placeholder="أدخل نوع النثرية">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">العدد</label>
+                    <input type="number" class="form-input" id="expenseCount" value="0" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">IQD الاجرة اليومية</label>
+                    <input type="number" class="form-input" id="dailyWage" placeholder="أدخل الاجرة اليومية" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">IQD المجموع</label>
+                    <input type="number" class="form-input" id="expenseTotal" placeholder="سيتم حسابه تلقائياً" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">التفاصيل</label>
+                    <textarea class="form-textarea" id="expenseDetails" placeholder="أدخل التفاصيل الإضافية"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">الهاتف</label>
+                    <input type="tel" class="form-input" id="phoneNumber" placeholder="أدخل رقم الهاتف">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="save-btn" onclick="saveExpense()" style="width: 100%; margin: 0;">حفظ</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(path) {
+            window.location.href = 'http://localhost:3004' + path;
+        }
+        function goBack() {
+            window.location.href = 'http://localhost:3004/test-work-details.html';
+        }
+        
+        function addMaterial() {
+            document.getElementById('addMaterialModal').style.display = 'flex';
+            // Focus on first input
+            document.getElementById('materialType').focus();
+        }
+        
+        function addExpense() {
+            document.getElementById('addExpenseModal').style.display = 'flex';
+            // Focus on first input
+            document.getElementById('expenseType').focus();
+        }
+        
+        function closeMaterialModal() {
+            document.getElementById('addMaterialModal').style.display = 'none';
+            // Clear form
+            document.getElementById('materialType').value = '';
+            document.getElementById('quantity').value = '0';
+            document.getElementById('price').value = '';
+            document.getElementById('totalPrice').value = '';
+            document.getElementById('driverName').value = '';
+            document.getElementById('details').value = '';
+        }
+        
+        function closeExpenseModal() {
+            document.getElementById('addExpenseModal').style.display = 'none';
+            // Clear form
+            document.getElementById('expenseType').value = '';
+            document.getElementById('expenseCount').value = '0';
+            document.getElementById('dailyWage').value = '';
+            document.getElementById('expenseTotal').value = '';
+            document.getElementById('expenseDetails').value = '';
+            document.getElementById('phoneNumber').value = '';
+        }
+        
+        function saveMaterial() {
+            const materialType = document.getElementById('materialType').value;
+            const quantity = document.getElementById('quantity').value;
+            const price = document.getElementById('price').value;
+            const totalPrice = document.getElementById('totalPrice').value;
+            const driverName = document.getElementById('driverName').value;
+            const details = document.getElementById('details').value;
+            
+            if (!materialType || !quantity || !price || !driverName) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            // Here you would typically save to database
+            alert('تم حفظ المادة بنجاح!\n\nنوع المادة: ' + materialType + '\nالكمية: ' + quantity + '\nالسعر: ' + price + ' IQD\nالسعر الكلي: ' + totalPrice + ' IQD\nاسم السائق: ' + driverName);
+            
+            closeMaterialModal();
+        }
+        
+        function saveExpense() {
+            const expenseType = document.getElementById('expenseType').value;
+            const expenseCount = document.getElementById('expenseCount').value;
+            const dailyWage = document.getElementById('dailyWage').value;
+            const expenseTotal = document.getElementById('expenseTotal').value;
+            const expenseDetails = document.getElementById('expenseDetails').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            
+            if (!expenseType || !expenseCount || !dailyWage) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            // Here you would typically save to database
+            alert('تم حفظ المصروف بنجاح!\n\nنوع النثرية: ' + expenseType + '\nالعدد: ' + expenseCount + '\nالاجرة اليومية: ' + dailyWage + ' IQD\nالمجموع: ' + expenseTotal + ' IQD\nالهاتف: ' + phoneNumber);
+            
+            closeExpenseModal();
+        }
+        
+        function deleteMaterial(id) {
+            if (confirm('هل تريد حذف هذه المادة؟')) {
+                alert('تم حذف المادة رقم ' + id);
+            }
+        }
+        
+        function deleteExpense(id) {
+            if (confirm('هل تريد حذف هذا المصروف؟')) {
+                alert('تم حذف المصروف رقم ' + id);
+            }
+        }
+        
+        // Auto-calculate totals
+        document.addEventListener('DOMContentLoaded', function() {
+            // Material calculation
+            const quantityInput = document.getElementById('quantity');
+            const priceInput = document.getElementById('price');
+            const totalPriceInput = document.getElementById('totalPrice');
+            
+            function calculateMaterialTotal() {
+                const quantity = parseFloat(quantityInput.value) || 0;
+                const price = parseFloat(priceInput.value) || 0;
+                const total = quantity * price;
+                totalPriceInput.value = total.toFixed(2);
+            }
+            
+            if (quantityInput && priceInput && totalPriceInput) {
+                quantityInput.addEventListener('input', calculateMaterialTotal);
+                priceInput.addEventListener('input', calculateMaterialTotal);
+            }
+            
+            // Expense calculation
+            const expenseCountInput = document.getElementById('expenseCount');
+            const dailyWageInput = document.getElementById('dailyWage');
+            const expenseTotalInput = document.getElementById('expenseTotal');
+            
+            function calculateExpenseTotal() {
+                const count = parseFloat(expenseCountInput.value) || 0;
+                const wage = parseFloat(dailyWageInput.value) || 0;
+                const total = count * wage;
+                expenseTotalInput.value = total.toFixed(2);
+            }
+            
+            if (expenseCountInput && dailyWageInput && expenseTotalInput) {
+                expenseCountInput.addEventListener('input', calculateExpenseTotal);
+                dailyWageInput.addEventListener('input', calculateExpenseTotal);
+            }
+        });
+        
+        // Show success message when page loads
+        window.onload = function() {
+            console.log('✅ صفحة المواد والمصاريف تم تحميلها بنجاح!');
+        };
+    </script>
+</body>
+</html>
