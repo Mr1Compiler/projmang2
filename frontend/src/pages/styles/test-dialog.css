@@ -1,0 +1,9 @@
+/**
+ * test-dialog Page Styles
+ * Extracted from test-dialog.vue
+ */
+.test-dialog-page {
+  padding: 2rem;
+  min-height: 100vh;
+  background: #f5f5f5;
+}

@@ -101,6 +101,12 @@
 import SmartIcon from '@/components/SmartIcon.vue'
 </script>
 
+
+<style>
+/* Import page styles */
+@import './styles/test-icons-final.css';
+</style>
+
 <style scoped>
-/* Component-specific styles if needed */
+/* Component-specific overrides (if any) */
 </style>

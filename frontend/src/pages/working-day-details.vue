@@ -34,10 +34,12 @@ onMounted(() => {
 })
 </script>
 
+
+<style>
+/* Import page styles */
+@import './styles/working-day-details.css';
+</style>
+
 <style scoped>
-.working-day-details-page {
-  min-height: 100vh;
-  background: #f5f5f5;
-  padding: 20px 0;
-}
+/* Component-specific overrides (if any) */
 </style>

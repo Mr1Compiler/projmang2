@@ -37,10 +37,12 @@ import { ref } from 'vue'
 const showDialog = ref(false)
 </script>
 
+
+<style>
+/* Import page styles */
+@import './styles/test-dialog.css';
+</style>
+
 <style scoped>
-.test-dialog-page {
-  padding: 2rem;
-  min-height: 100vh;
-  background: #f5f5f5;
-}
+/* Component-specific overrides (if any) */
 </style>

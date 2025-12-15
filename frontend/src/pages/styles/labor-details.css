@@ -1,0 +1,686 @@
+/**
+ * labor-details Page Styles
+ * Extracted from labor-details.vue
+ */
+.labor-details-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%) !important;
+  color: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transform: translateX(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.page-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  font-size: 1.3rem;
+  opacity: 0.95;
+  margin: 0.8rem 0 0 0;
+  font-weight: 400;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.section-card {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.section-title {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  color: white;
+  font-weight: 800;
+  font-size: 1.4rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 1.25rem 1.5rem !important;
+}
+
+/* تحسين تصميم شريط البحث */
+.search-container {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #bfdbfe 100%);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+  border: 2px solid #93c5fd;
+  position: relative;
+}
+
+.search-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #60a5fa, #3b82f6, #2563eb);
+  border-radius: 12px 12px 0 0;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.search-field {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.search-field :deep(.v-field) {
+  background-color: #ffffff !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  border: 2px solid #3b82f6 !important;
+  transition: all 0.3s ease;
+}
+
+.search-field :deep(.v-field__input) {
+  background-color: #ffffff !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  border: 2px solid #3b82f6 !important;
+  transition: all 0.3s ease;
+}
+
+.search-field :deep(.v-field__outline) {
+  border-color: #3b82f6 !important;
+  border-width: 2px !important;
+}
+
+.search-field :deep(.v-field--focused .v-field__outline) {
+  border-color: #2563eb !important;
+  border-width: 3px !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+}
+
+.search-field :deep(.v-field__input):focus {
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4) !important;
+  border-color: #2563eb !important;
+  transform: translateY(-1px);
+}
+
+.search-field :deep(.v-label) {
+  color: #1e40af !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  opacity: 1 !important;
+}
+
+.search-field :deep(.v-label--active),
+.search-field :deep(.v-field__label--active) {
+  color: #1e40af !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+.search-field :deep(.v-field__input input) {
+  color: #111827 !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+}
+
+.search-field :deep(.v-field__prepend-inner) {
+  color: #3b82f6 !important;
+}
+
+.search-field :deep(.v-field__prepend-inner .v-icon) {
+  color: #3b82f6 !important;
+  font-size: 24px !important;
+}
+
+.search-field :deep(.v-field__prepend-inner i) {
+  color: #3b82f6 !important;
+}
+
+.search-btn {
+  height: 56px;
+  min-width: 120px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-transform: none;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(25, 118, 210, 0.4);
+}
+
+/* أنماط أزرار الإضافة */
+.add-btn {
+  height: 56px;
+  min-width: 140px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-transform: none;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%) !important;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+  background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%) !important;
+}
+
+.data-table {
+  margin-top: 1rem;
+}
+
+/* ========================================
+   تنسيقات الجدول - نفس تنسيقات الموارد البشرية
+   ======================================== */
+
+.data-table-card {
+  background: rgba(255, 249, 249, 0.95);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.table-title {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  color: #ffffff !important;
+  padding: 20px 24px !important;
+  border-radius: 12px 12px 0 0 !important;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3) !important;
+  margin: 0 !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  text-align: right !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.indigo-title {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.title-text {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.project-table {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100% !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.project-table .v-data-table__th {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 1.1rem !important;
+  text-align: center !important;
+  padding: 18px 14px !important;
+  border-bottom: 3px solid #6d28d9 !important;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5) !important;
+  letter-spacing: 1px !important;
+}
+
+.project-table .v-data-table__td {
+  padding: 16px 12px !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  text-align: center !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  vertical-align: middle !important;
+}
+
+.project-table .v-data-table__wrapper tbody tr:nth-child(even) {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+}
+
+.project-table .v-data-table__wrapper tbody tr:nth-child(odd) {
+  background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%) !important;
+}
+
+.project-table .v-data-table__wrapper tbody tr:hover {
+  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15) !important;
+  transition: all 0.3s ease !important;
+}
+
+.project-table .serial-number {
+  color: #000000 !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%) !important;
+  padding: 6px 12px !important;
+  border-radius: 8px !important;
+  display: inline-block !important;
+  min-width: 40px !important;
+  text-align: center !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.project-table .project-name {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  text-align: right !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  display: inline-block !important;
+  max-width: 200px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.project-table .date-text {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  font-family: 'Arial', 'Helvetica', sans-serif !important;
+}
+
+.project-table .cost-text {
+  color: #000000 !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  font-family: 'Arial', 'Helvetica', sans-serif !important;
+  direction: ltr !important;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%) !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  display: inline-block !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #d1d5db !important;
+  white-space: nowrap !important;
+  min-width: 100px !important;
+  text-align: center !important;
+}
+
+.project-table .category-chip {
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  color: #000000 !important;
+  background: #f3f4f6 !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn {
+  min-width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.dialog-card {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.dialog-title {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+  color: white;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.dialog-content {
+  padding: 2rem;
+}
+
+.dialog-actions {
+  padding: 1rem 2rem;
+  background: #f8f9fa;
+}
+
+/* Modal Styles - تطبيق تصميم إضافة يوم عمل */
+.modal-card {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.modal-header {
+  background: #007bff !important;
+  color: white !important;
+  padding: 1rem 1.5rem !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.close-btn {
+  color: white !important;
+  min-width: 32px !important;
+  height: 32px !important;
+}
+
+.modal-content {
+  padding: 2rem !important;
+  background: white;
+}
+
+.modal-content :deep(.v-field) {
+  border-radius: 8px !important;
+  background: #fafafa !important;
+  transition: all 0.3s ease !important;
+}
+
+.modal-content :deep(.v-field:hover) {
+  background: #f5f5f5 !important;
+  border-color: #666 !important;
+}
+
+.modal-content :deep(.v-field__input) {
+  color: #1e3a8a !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  text-shadow: none !important;
+}
+
+.modal-content :deep(.v-label),
+.modal-content :deep(.v-field__label),
+.modal-content :deep(.v-label--active),
+.modal-content :deep(.v-field__label--active),
+.modal-content :deep(.v-label--floating),
+.modal-content :deep(.v-field__label--floating) {
+  color: #000 !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  background: white !important;
+  padding: 0 8px !important;
+}
+
+.modal-content :deep(.v-field--focused .v-label),
+.modal-content :deep(.v-field--focused .v-field__label) {
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+
+.modal-content :deep(.v-field__outline) {
+  border-color: #333 !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+  box-shadow: 0 0 0 1px rgba(51, 51, 51, 0.2) !important;
+}
+
+.modal-content :deep(.v-field--focused .v-field__outline) {
+  border-color: #007bff !important;
+  border-width: 3px !important;
+  border-style: solid !important;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3) !important;
+  outline: none !important;
+}
+
+.modal-content :deep(.v-field__input::placeholder) {
+  color: #1e3a8a !important;
+  opacity: 0.7 !important;
+  font-weight: 500 !important;
+}
+
+/* Dropdown Menu Styling */
+.modal-content :deep(.v-list),
+.modal-content :deep(.v-menu__content),
+.modal-content :deep(.v-overlay__content) {
+  background: white !important;
+  border: 2px solid #333 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  max-height: 300px !important;
+  overflow-y: auto !important;
+}
+
+.modal-content :deep(.v-list .v-list-item__content),
+.modal-content :deep(.v-menu__content .v-list-item__content),
+.modal-content :deep(.v-overlay__content .v-list-item__content) {
+  color: #1e3a8a !important;
+}
+
+.modal-content :deep(.v-list .v-list-item-title),
+.modal-content :deep(.v-menu__content .v-list-item-title),
+.modal-content :deep(.v-overlay__content .v-list-item-title) {
+  color: #1e3a8a !important;
+  font-weight: 600 !important;
+}
+
+.modal-content :deep(.v-list-item),
+.modal-content :deep(.v-menu__content .v-list-item),
+.modal-content :deep(.v-overlay__content .v-list-item) {
+  color: #1e3a8a !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  padding: 0.75rem 1rem !important;
+  border-bottom: 1px solid #e9ecef !important;
+  transition: all 0.2s ease !important;
+}
+
+.modal-content :deep(.v-list-item:hover),
+.modal-content :deep(.v-menu__content .v-list-item:hover),
+.modal-content :deep(.v-overlay__content .v-list-item:hover) {
+  background: #f8f9fa !important;
+  color: #007bff !important;
+  font-weight: 700 !important;
+}
+
+.modal-content :deep(.v-list-item--active),
+.modal-content :deep(.v-menu__content .v-list-item--active),
+.modal-content :deep(.v-overlay__content .v-list-item--active) {
+  background: #007bff !important;
+  color: white !important;
+  font-weight: 700 !important;
+}
+
+.modal-content :deep(.v-list-item--active:hover),
+.modal-content :deep(.v-menu__content .v-list-item--active:hover),
+.modal-content :deep(.v-overlay__content .v-list-item--active:hover) {
+  background: #0056b3 !important;
+  color: white !important;
+}
+
+.modal-footer {
+  padding: 1rem 1.5rem !important;
+  background: #f8f9fa !important;
+  border-top: 1px solid #dee2e6 !important;
+}
+
+.save-btn {
+  background: #007bff !important;
+  color: white !important;
+  font-weight: 600;
+  padding: 0.75rem 2rem !important;
+}
+
+/* Animations */
+.glass-effect {
+  backdrop-filter: blur(15px);
+}
+
+.page-header.glass-effect {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%) !important;
+}
+
+.gradient-animation {
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.text-glow {
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+.fade-in {
+  animation: fadeIn 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+/* تأثيرات إضافية للرأس */
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  animation: shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .labor-details-page {
+    padding: 1rem;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .dialog-content {
+    padding: 1rem;
+  }
+  
+  .search-box {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .search-btn, .add-btn {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .search-container {
+    padding: 0.75rem;
+  }
+  
+  .search-field {
+    margin-bottom: 0.5rem;
+  }
+}
+

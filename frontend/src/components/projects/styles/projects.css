@@ -1,0 +1,478 @@
+/**
+ * Project Components - Shared Styles
+ * This file contains all shared styles for project-related components
+ */
+
+/* ============================================
+   CSS Variables - Project Theme
+   ============================================ */
+:root {
+  --project-primary: #1976d2;
+  --project-primary-light: #42a5f5;
+  --project-primary-dark: #1565c0;
+  --project-success: #10b981;
+  --project-warning: #f59e0b;
+  --project-error: #ef4444;
+  --project-info: #3b82f6;
+  --project-grey: #6b7280;
+  --project-border: #e2e8f0;
+  --project-bg: #f8fafc;
+  --project-card-radius: 16px;
+  --project-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   Stat Cards - Shared Styles
+   ============================================ */
+.stat-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-radius: var(--project-card-radius) !important;
+  transition: var(--project-transition);
+  position: relative;
+  overflow: hidden;
+  height: 100% !important;
+  min-height: 140px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.stat-card:hover {
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+  background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%) !important;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(135deg, var(--project-primary) 0%, var(--project-primary-light) 100%);
+  border-radius: 24px 24px 0 0;
+  z-index: 1;
+}
+
+.stat-card h3 {
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 10px !important;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  text-align: center !important;
+  line-height: 1.1;
+  position: relative;
+  z-index: 2;
+}
+
+.stat-card p {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  margin: 0;
+  color: #424242 !important;
+  position: relative;
+  z-index: 3;
+  letter-spacing: 0.5px;
+}
+
+.stat-icon {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 1.2rem;
+  padding: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(245, 241, 241, 0.8) 0%, rgba(248, 250, 252, 0.8) 100%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: var(--project-transition);
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   Project Cards - Shared Styles
+   ============================================ */
+.project-card {
+  height: 100% !important;
+  min-height: 400px !important;
+  border-radius: var(--project-card-radius) !important;
+  transition: var(--project-transition) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 1px solid var(--project-border) !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--project-info), #8b5cf6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+  border-color: var(--project-info) !important;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card-title {
+  padding: 1.5rem 1.5rem 1rem !important;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  border-bottom: 1px solid var(--project-border);
+}
+
+.project-card-content {
+  padding: 1.5rem !important;
+  flex-grow: 1;
+}
+
+.project-card-actions {
+  padding: 1rem 1.5rem 1.5rem 1.5rem !important;
+  background: #fafbfc !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.project-name {
+  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #4338ca !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.3px !important;
+  text-align: right !important;
+  word-wrap: break-word !important;
+}
+
+.project-description {
+  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  color: #374151 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right !important;
+  min-height: 4.5rem;
+}
+
+/* ============================================
+   Detail Items - Shared Styles
+   ============================================ */
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border-left: 3px solid var(--project-info);
+  transition: var(--project-transition);
+}
+
+.detail-item:hover {
+  background: #e2e8f0;
+  transform: translateX(4px);
+}
+
+.detail-text {
+  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  color: #4b5563 !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  text-align: right !important;
+  word-wrap: break-word !important;
+}
+
+/* ============================================
+   Progress Section - Shared Styles
+   ============================================ */
+.progress-section {
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  margin-top: 1rem;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-label {
+  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  color: #374151 !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+}
+
+.progress-percentage {
+  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  color: #4338ca !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  background: rgba(67, 56, 202, 0.1) !important;
+  padding: 6px 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(67, 56, 202, 0.2) !important;
+}
+
+/* ============================================
+   Dialog Styles - Shared
+   ============================================ */
+.dialog-header {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 25%, #1e88e5 50%, #42a5f5 75%, #64b5f6 100%) !important;
+  padding: 1.5rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+}
+
+.dialog-body {
+  padding: 1.5rem !important;
+  background: #f8f9fa !important;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem !important;
+  background: #f8f9fa;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ============================================
+   Form Fields - Shared Styles
+   ============================================ */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+}
+
+.custom-input {
+  border-radius: 8px !important;
+}
+
+/* ============================================
+   Buttons - Shared Styles
+   ============================================ */
+.cancel-btn {
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  padding: 0.75rem 1.5rem !important;
+}
+
+.save-btn {
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  padding: 0.75rem 1.5rem !important;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+}
+
+.details-btn {
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.5px !important;
+  padding: 0.75rem 1.5rem !important;
+  text-transform: none !important;
+}
+
+.details-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3) !important;
+}
+
+.add-btn {
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  padding: 0.75rem 1.5rem !important;
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+}
+
+/* ============================================
+   Team Section - Shared Styles
+   ============================================ */
+.team-management-section {
+  margin: 1.5rem 0;
+}
+
+.team-management-card {
+  border-radius: var(--project-card-radius) !important;
+  overflow: hidden;
+}
+
+.team-section-header {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: white !important;
+  padding: 1.5rem !important;
+}
+
+.team-stat-card {
+  border-radius: 12px !important;
+  transition: var(--project-transition);
+}
+
+.team-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ============================================
+   Filters - Shared Styles
+   ============================================ */
+.filters-card {
+  border-radius: var(--project-card-radius) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 1px solid var(--project-border) !important;
+}
+
+.search-input,
+.filter-select {
+  border-radius: 12px !important;
+}
+
+/* ============================================
+   Delete Dialog - Shared Styles
+   ============================================ */
+.delete-dialog {
+  border-radius: 20px !important;
+  overflow: hidden !important;
+}
+
+.delete-dialog .dialog-header {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%) !important;
+  padding: 2rem !important;
+  justify-content: center;
+}
+
+.delete-btn {
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ============================================
+   Responsive - Shared Breakpoints
+   ============================================ */
+@media (max-width: 1200px) {
+  .stat-card {
+    min-height: 120px !important;
+    padding: 0.8rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .stat-card {
+    min-height: 100px !important;
+    padding: 0.6rem !important;
+  }
+
+  .stat-card h3 {
+    font-size: 1.5rem !important;
+  }
+
+  .project-card {
+    min-height: 350px !important;
+  }
+
+  .project-card-title,
+  .project-card-content {
+    padding: 1rem !important;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-card {
+    min-height: 90px !important;
+    padding: 0.5rem !important;
+  }
+
+  .stat-card h3 {
+    font-size: 1.2rem !important;
+  }
+}

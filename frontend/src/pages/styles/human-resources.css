@@ -1,0 +1,1083 @@
+/**
+ * human-resources Page Styles
+ * Extracted from human-resources.vue
+ */
+/* ========================================
+   تنسيقات الصفحة الأساسية
+   ======================================== */
+
+.data-page {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.human-resources-page {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.centered-content {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.fullscreen-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.page-header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 8px;
+  animation: star-twinkle 2s ease-in-out infinite;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: rgb(246, 246, 246);
+  margin-bottom: 6px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: rgba(243, 240, 240, 0.9);
+  margin: 0;
+}
+
+.stats-row {
+  margin-bottom: 30px;
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  justify-content: center;
+}
+
+.stats-row .v-col {
+  padding: 8px;
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, rgba(99, 102, 241, 0.5) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.search-card {
+  background: linear-gradient(135deg, #4783cc 0%, #4d5abb 100%) !important;
+  border: 2px solid #365e93 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(200, 11, 11, 0.1) !important;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+}
+
+/* ========================================
+   تأثيرات بصرية
+   ======================================== */
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.gradient-animation {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  animation: gradient-shift 3s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.text-glow {
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.star-twinkle {
+  animation: star-twinkle 2s ease-in-out infinite;
+}
+
+@keyframes star-twinkle {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg); 
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.1) rotate(180deg); 
+    opacity: 0.8;
+  }
+}
+
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-glow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card-glow:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-glow {
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover .icon-glow {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+/* ========================================
+   تنسيقات الجدول
+   ======================================== */
+
+.data-table-card {
+  background: rgba(255, 249, 249, 0.95);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.table-title {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  color: #ffffff !important;
+  padding: 20px 24px !important;
+  border-radius: 12px 12px 0 0 !important;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3) !important;
+  margin: 0 !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  text-align: right !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.indigo-title {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.title-text {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.project-table {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100% !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.project-table .v-data-table__th {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  text-align: center !important;
+  padding: 12px 10px !important;
+  border-bottom: 3px solid #6d28d9 !important;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5) !important;
+  letter-spacing: 0.5px !important;
+}
+
+.project-table .v-data-table__td {
+  padding: 10px 8px !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  text-align: center !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  vertical-align: middle !important;
+}
+
+.project-table .v-data-table__wrapper tbody tr:nth-child(even) {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+}
+
+.project-table .v-data-table__wrapper tbody tr:nth-child(odd) {
+  background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%) !important;
+}
+
+.project-table .v-data-table__wrapper tbody tr:hover {
+  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15) !important;
+  transition: all 0.3s ease !important;
+}
+
+.project-table .serial-number {
+  color: #000000 !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%) !important;
+  padding: 4px 10px !important;
+  border-radius: 8px !important;
+  display: inline-block !important;
+  min-width: 35px !important;
+  text-align: center !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.project-table .project-name {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  text-align: right !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  display: inline-block !important;
+  max-width: 200px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.project-table .date-text {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  font-family: 'Arial', 'Helvetica', sans-serif !important;
+}
+
+.project-table .cost-text {
+  color: #000000 !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  font-family: 'Arial', 'Helvetica', sans-serif !important;
+  direction: ltr !important;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%) !important;
+  padding: 6px 12px !important;
+  border-radius: 8px !important;
+  display: inline-block !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #d1d5db !important;
+  white-space: nowrap !important;
+  min-width: 90px !important;
+  text-align: center !important;
+}
+
+.project-table .v-chip {
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  padding: 4px 10px !important;
+  border-radius: 8px !important;
+  color: #000000 !important;
+  background: #f3f4f6 !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn {
+  min-width: 36px !important;
+  height: 36px !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ========================================
+   تنسيق الحقول والنماذج
+   ======================================== */
+
+.image-style-dialog {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(5, 150, 105, 0.3);
+}
+
+.dialog-header {
+  background: linear-gradient(135deg, #059669, #10b981);
+  padding: 20px;
+  color: white;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.close-btn {
+  color: white !important;
+}
+
+.dialog-body {
+  padding: 30px;
+  background: white !important;
+}
+
+.form-tabs {
+  margin-bottom: 20px;
+}
+
+.form-fields {
+  margin-bottom: 20px;
+}
+
+.form-field {
+  margin-bottom: 16px;
+}
+
+.form-field .v-field__input {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  background: white !important;
+  padding: 12px 16px !important;
+}
+
+.form-field .v-field__input input,
+.form-field .v-field__input textarea {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  background: white !important;
+}
+
+.form-field .v-label,
+.form-field .v-field__label,
+.form-field .v-label--active,
+.form-field .v-field__label--active,
+.form-field .v-label--floating,
+.form-field .v-field__label--floating {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+  opacity: 1 !important;
+  background: white !important;
+  padding: 0 8px !important;
+}
+
+.form-field .v-field--focused .v-label,
+.form-field .v-field--focused .v-field__label {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+.form-field .v-field__outline {
+  border-color: #d1d5db !important;
+  border-width: 2px !important;
+}
+
+.form-field .v-field--focused .v-field__outline {
+  border-color: #6b7280 !important;
+  border-width: 3px !important;
+  box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.1) !important;
+}
+
+.form-field .v-field:hover .v-field__outline {
+  border-color: #9ca3af !important;
+}
+
+/* تنسيق خاص للقوائم المنسدلة */
+.form-field .v-select .v-field__input {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  padding: 12px 16px !important;
+}
+
+.form-field .v-select .v-field__outline {
+  border-color: #d1d5db !important;
+  border-width: 2px !important;
+}
+
+.form-field .v-select .v-label {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  background: white !important;
+}
+
+.form-field .v-select .v-field--focused .v-field__outline {
+  border-color: #6b7280 !important;
+  border-width: 3px !important;
+  box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.1) !important;
+}
+
+/* تنسيق القوائم المنسدلة المفتوحة - ألوان سوداء */
+.form-field .black-list .v-menu__content,
+.form-field .black-list .v-overlay__content {
+  background: white !important;
+  border: 2px solid #1a1a1a !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.form-field .black-list .v-menu__content .v-list-item,
+.form-field .black-list .v-overlay__content .v-list-item {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  padding: 12px 16px !important;
+  background: white !important;
+}
+
+.form-field .black-list .v-menu__content .v-list-item:hover,
+.form-field .black-list .v-overlay__content .v-list-item:hover {
+  background: #f5f5f5 !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+.form-field .black-list .v-menu__content .v-list-item--active,
+.form-field .black-list .v-overlay__content .v-list-item--active {
+  background: #1a1a1a !important;
+  color: white !important;
+  font-weight: 700 !important;
+}
+
+/* تنسيق شامل لجميع القوائم المنسدلة في الحوار */
+.image-style-dialog .v-menu__content .v-list-item,
+.image-style-dialog .v-overlay__content .v-list-item {
+  color: #000000 !important;
+  background: white !important;
+}
+
+.image-style-dialog .v-menu__content .v-list-item:hover,
+.image-style-dialog .v-overlay__content .v-list-item:hover {
+  background: #f5f5f5 !important;
+  color: #000000 !important;
+}
+
+.image-style-dialog .v-menu__content .v-list-item--active,
+.image-style-dialog .v-overlay__content .v-list-item--active {
+  background: #1a1a1a !important;
+  color: white !important;
+}
+
+/* تنسيقات إضافية قوية للتسميات - ضمان الوضوح */
+.image-style-dialog .form-field .v-text-field .v-label,
+.image-style-dialog .form-field .v-select .v-label,
+.image-style-dialog .form-field .v-textarea .v-label {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+.image-style-dialog .form-field .v-text-field .v-field--focused .v-label,
+.image-style-dialog .form-field .v-select .v-field--focused .v-label,
+.image-style-dialog .form-field .v-textarea .v-field--focused .v-label {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+.image-style-dialog .form-field .v-text-field .v-field__input input,
+.image-style-dialog .form-field .v-textarea .v-field__input textarea {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+}
+
+.dialog-actions {
+  padding: 20px 30px;
+  background: #f1f5f9;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+</style>
+
+<style scoped>
+/* تنسيقات قوية للتسميات باستخدام :deep() */
+.image-style-dialog :deep(.v-label),
+.image-style-dialog :deep(.v-field__label) {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+  opacity: 1 !important;
+  background: white !important;
+}
+
+.image-style-dialog :deep(.v-label--active),
+.image-style-dialog :deep(.v-field__label--active),
+.image-style-dialog :deep(.v-label--floating),
+.image-style-dialog :deep(.v-field__label--floating) {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  background: white !important;
+}
+
+.image-style-dialog :deep(.v-field--focused .v-label),
+.image-style-dialog :deep(.v-field--focused .v-field__label) {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  background: white !important;
+}
+
+.image-style-dialog :deep(.v-field__input),
+.image-style-dialog :deep(.v-field__input input),
+.image-style-dialog :deep(.v-field__input textarea) {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  background: white !important;
+}
+</style>
+
+<style>
+/* تنسيقات شاملة للتسميات بدون scope */
+.image-style-dialog .v-label,
+.image-style-dialog .v-field__label {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+.image-style-dialog .v-field--focused .v-label,
+.image-style-dialog .v-field--focused .v-field__label {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+.image-style-dialog .v-field__input,
+.image-style-dialog .v-field__input input,
+.image-style-dialog .v-field__input textarea {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  background: white !important;
+}
+
+/* ========================================
+   تنسيق نافذة التفاصيل
+   ======================================== */
+
+.details-dialog {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.details-header {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+}
+
+.details-body {
+  padding: 30px;
+  background: white !important;
+}
+
+.details-tabs {
+  margin-bottom: 20px;
+}
+
+.info-content {
+  padding: 10px 0;
+}
+
+.info-card {
+  margin-bottom: 20px;
+  border-radius: 12px;
+}
+
+.info-card-title {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+  color: white !important;
+  padding: 15px 20px !important;
+  font-weight: 700 !important;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* تحسين وضوح النصوص في قسم البصمة */
+.fingerprint-status-section .info-label,
+.fingerprint-info .info-label {
+  color: #374151 !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+}
+
+.fingerprint-status-section .info-value,
+.fingerprint-info .info-value {
+  color: #111827 !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.details-table {
+  margin-top: 20px;
+}
+
+.rating-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.certificate-item {
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border-left: 4px solid #059669;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+/* ========================================
+   تنسيق القياسات والأرقام
+   ======================================== */
+
+.stat-icon {
+  margin-bottom: 8px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.1) rotate(5deg);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+}
+
+.stat-card .stat-icon .v-icon {
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-icon .v-icon {
+  transform: scale(1.15);
+}
+
+.stat-number {
+  font-size: 1.1rem !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+  margin: 4px 0 !important;
+  letter-spacing: -0.5px;
+}
+
+.stat-currency {
+  font-size: 1.3rem !important;
+  line-height: 1.3 !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+  margin: 4px 0 !important;
+  letter-spacing: -0.5px;
+}
+
+.stat-card h3 {
+  min-height: 45px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  text-align: center !important;
+  padding: 2px 4px !important;
+  margin: 0 !important;
+}
+
+.stat-card p {
+  margin: 0 !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px;
+  opacity: 0.9;
+}
+
+.stat-card {
+  min-height: 150px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 4px;
+}
+
+/* تحسين وضوح النص في مربع متوسط الراتب */
+.average-salary-value {
+  color: #7c3aed !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 4px rgba(124, 58, 237, 0.2) !important;
+  letter-spacing: 0.5px !important;
+}
+
+.average-salary-label {
+  color: #6d28d9 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(109, 40, 217, 0.15) !important;
+  opacity: 1 !important;
+}
+
+.average-salary-icon .v-icon {
+  color: #7c3aed !important;
+  filter: drop-shadow(0 2px 4px rgba(124, 58, 237, 0.3)) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .centered-content,
+  .fullscreen-content {
+    max-width: 100% !important;
+    padding: 0 15px !important;
+  }
+}
+
+.fingerprint-card {
+  border-radius: 12px;
+  border: 2px solid rgba(199, 210, 254, 0.5);
+  background: linear-gradient(135deg, rgba(238, 242, 255, 0.5) 0%, rgba(224, 231, 255, 0.3) 100%);
+}
+
+.fingerprint-title {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+  color: white !important;
+  font-weight: 700 !important;
+}
+
+.fingerprint-status {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.fingerprint-hint {
+  text-align: center;
+  font-style: italic;
+  color: #6366f1 !important;
+}
+
+/* ألوان البصمة المسجلة - بنفسجي/نيلي */
+.fingerprint-registered {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3) !important;
+}
+
+.fingerprint-registered-small {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  color: white !important;
+}
+
+.fingerprint-status-chip {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  color: white !important;
+}
+
+/* ألوان البصمة غير المسجلة - بنفسجي فاتح/أزرق */
+.fingerprint-pending {
+  background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
+}
+
+.fingerprint-pending-small {
+  background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%) !important;
+  color: white !important;
+}
+
+/* أزرار البصمة */
+.fingerprint-btn {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.fingerprint-btn:hover {
+  background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 100%) !important;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.fingerprint-btn:disabled {
+  background: linear-gradient(135deg, #a5b4fc 0%, #c7d2fe 100%) !important;
+  opacity: 0.6 !important;
+}
+
+.fingerprint-delete-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.fingerprint-delete-btn:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.fingerprint-chip {
+  transition: all 0.3s ease !important;
+}
+
+.fingerprint-chip:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4) !important;
+}
+
+.fingerprint-management-card {
+  border-radius: 12px;
+  border: 2px solid rgba(199, 210, 254, 0.5);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(238, 242, 255, 0.8) 100%);
+}
+
+.fingerprint-card-title {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+  color: white !important;
+  font-weight: 700 !important;
+  padding: 20px !important;
+}
+
+.fingerprint-content {
+  padding: 10px 0;
+}
+
+.fingerprint-status-section {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(238, 242, 255, 0.5) 0%, rgba(224, 231, 255, 0.3) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(199, 210, 254, 0.3);
+}
+
+.fingerprint-status-section .section-title {
+  color: #1a1a1a !important;
+  font-weight: 800 !important;
+  font-size: 1.6rem !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.fingerprint-info {
+  text-align: right;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  border-left: 4px solid #7c3aed;
+}
+
+.fingerprint-info .info-label {
+  color: #374151 !important;
+  font-weight: 800 !important;
+  font-size: 1rem !important;
+}
+
+.fingerprint-info .info-value {
+  color: #111827 !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+}
+
+.fingerprint-actions {
+  padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .human-resources-page {
+    padding: 10px !important;
+  }
+
+  .stats-row .v-col {
+    padding: 6px !important;
+  }
+  
+  .stat-card {
+    min-height: 140px !important;
+    padding: 10px 8px !important;
+  }
+  
+  .stat-icon {
+    width: 48px !important;
+    height: 48px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .stat-number {
+    font-size: 1rem !important;
+  }
+  
+  .stat-currency {
+    font-size: 1.1rem !important;
+  }
+  
+  .stat-card p {
+    font-size: 0.75rem !important;
+  }
+  
+  .stat-card h3 {
+    min-height: 35px !important;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .page-subtitle {
+    font-size: 1rem;
+  }
+}

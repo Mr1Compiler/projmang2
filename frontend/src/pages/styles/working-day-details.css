@@ -1,0 +1,9 @@
+/**
+ * working-day-details Page Styles
+ * Extracted from working-day-details.vue
+ */
+.working-day-details-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20px 0;
+}
