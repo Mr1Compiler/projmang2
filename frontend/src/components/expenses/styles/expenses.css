@@ -10,7 +10,7 @@
   background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%) !important;
   border: 1px solid rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 .card-glow:hover {
@@ -19,12 +19,12 @@
 
 /* Smooth transitions */
 .smooth-transition {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 /* Hover lift effect */
 .hover-lift {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 .hover-lift:hover {
@@ -62,7 +62,7 @@
 
 /* Project table */
 .project-table {
-  font-size: 0.95rem;
+  font-size: var(--font-size-base-minus);
 }
 
 .project-table th {

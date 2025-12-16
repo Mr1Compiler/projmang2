@@ -71,7 +71,7 @@
       <v-card class="filters-card">
         <v-card-title class="filters-header">
           <v-icon size="32" color="white" class="mr-2">mdi-filter</v-icon>
-          <span class="text-h4 font-weight-black" style="color: #ffffff; font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif; text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3); letter-spacing: 1px; font-size: 1.6rem;">فلترة المهام</span>
+          <span class="text-h4 font-weight-black" style="color: #ffffff; font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif; text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3); letter-spacing: 1px; font-size: var(--font-size-2xl-plus);">فلترة المهام</span>
         </v-card-title>
         <v-card-text>
           <v-row>
@@ -129,7 +129,7 @@
       <v-card class="tasks-card">
         <v-card-title class="tasks-header">
           <v-icon size="18" color="white" class="mr-2">mdi-clipboard-list</v-icon>
-          <span class="text-h4 font-weight-black" style="color: #ffffff; font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); letter-spacing: 0.2px; font-size: 0.9rem;">قائمة المهام</span>
+          <span class="text-h4 font-weight-black" style="color: #ffffff; font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); letter-spacing: 0.2px; font-size: var(--font-size-sm-plus);">قائمة المهام</span>
           <v-spacer />
           <v-btn
             color="primary"

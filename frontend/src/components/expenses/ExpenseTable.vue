@@ -150,7 +150,7 @@ const tableHeaders = [
 
 .title-text {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: var(--font-size-base-plus);
 }
 
 .serial-number {
@@ -178,7 +178,7 @@ const tableHeaders = [
 
 .notes-text {
   color: #6b7280;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
 }
 
 .action-buttons {

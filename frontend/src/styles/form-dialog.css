@@ -28,7 +28,7 @@
 }
 
 .header-title {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
 }
 
@@ -55,7 +55,7 @@
   font-weight: 600 !important;
   background: white !important;
   border-radius: 8px !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   padding: 12px 16px !important;
 }
 
@@ -75,7 +75,7 @@
 .form-field .v-label {
   color: #059669 !important;
   font-weight: 700 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   background: white !important;
   padding: 0 8px !important;
 }
@@ -96,7 +96,7 @@
 .form-field .v-field--focused .v-label {
   color: #059669 !important;
   font-weight: 700 !important;
-  font-size: 0.875rem !important;
+  font-size: var(--font-size-sm) !important;
   background: white !important;
   padding: 0 8px !important;
   margin: 0 !important;
@@ -116,7 +116,7 @@
 .form-field .v-select .v-field__input {
   color: #1a1a1a !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   padding: 12px 16px !important;
 }
 
@@ -128,7 +128,7 @@
 .form-field .v-select .v-label {
   color: #059669 !important;
   font-weight: 700 !important;
-  font-size: 0.875rem !important;
+  font-size: var(--font-size-sm) !important;
   background: white !important;
   padding: 0 8px !important;
   margin: 0 !important;
@@ -147,21 +147,21 @@
 .form-field .v-messages__message {
   color: #dc2626 !important;
   font-weight: 500 !important;
-  font-size: 0.8rem !important;
+  font-size: var(--font-size-xs-plus) !important;
 }
 
 /* تحسين ألوان النصوص في الحقول */
 .form-field .v-field__input::placeholder {
   color: #6b7280 !important;
   font-weight: 500 !important;
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
 }
 
 /* تحسين ألوان النصوص المكتوبة */
 .form-field .v-field__input input {
   color: #1a1a1a !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
 }
 
 /* إصلاح شامل للنصوص في الحقول */
@@ -179,7 +179,7 @@
 .form-field .v-textarea .v-field__input {
   color: #1a1a1a !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   line-height: 1.5 !important;
 }
 
@@ -208,7 +208,7 @@
 .form-field .v-list-item {
   color: #1a1a1a !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   padding: 12px 16px !important;
 }
 

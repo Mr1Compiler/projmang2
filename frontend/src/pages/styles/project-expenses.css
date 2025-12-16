@@ -3,44 +3,44 @@
  * Extracted from project-expenses.vue
  */
 .project-expenses-page {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-200) 100%);
   min-height: 100vh;
-  padding: 20px;
+  padding: var(--space-5);
 }
 
 /* Header Styles */
 .header-card {
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%) !important;
+  background: linear-gradient(135deg, var(--color-blue-800) 0%, var(--color-blue-500) 100%) !important;
   color: white !important;
-  border-radius: 16px !important;
+  border-radius: var(--radius-2xl) !important;
 }
 
 .page-title {
-  font-size: 2.5rem !important;
+  font-size: var(--font-size-4xl-plus) !important;
   font-weight: 800 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: var(--space-2) !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 .page-subtitle {
-  font-size: 1.2rem !important;
+  font-size: var(--font-size-lg-plus) !important;
   opacity: 0.9 !important;
   margin: 0 !important;
 }
 
 .header-actions {
   display: flex;
-  gap: 12px;
+  gap: var(--space-3);
   align-items: center;
 }
 
 .add-btn-header {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-500) 100%) !important;
   color: white !important;
   font-weight: 700 !important;
-  font-size: 1rem !important;
-  padding: 12px 20px !important;
-  border-radius: 12px !important;
+  font-size: var(--font-size-base) !important;
+  padding: var(--space-3) 20px !important;
+  border-radius: var(--radius-xl) !important;
   box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3) !important;
   text-transform: none !important;
   letter-spacing: 0.5px !important;
@@ -52,17 +52,17 @@
 }
 
 .add-btn-header .v-icon {
-  margin-right: 8px !important;
-  font-size: 1.1rem !important;
+  margin-inline-end: var(--space-2) !important;
+  font-size: var(--font-size-base-plus) !important;
 }
 
 .back-btn {
   background: rgba(255, 255, 255, 0.2) !important;
   color: white !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 12px !important;
+  border-radius: var(--radius-xl) !important;
   font-weight: 600 !important;
-  padding: 12px 24px !important;
+  padding: var(--space-3) 24px !important;
 }
 
 .back-btn:hover {
@@ -72,45 +72,45 @@
 
 /* Info Card Styles */
 .info-card {
-  border-radius: 16px !important;
-  border: 2px solid #e2e8f0 !important;
+  border-radius: var(--radius-2xl) !important;
+  border: 2px solid var(--color-slate-200) !important;
 }
 
 .info-title {
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
-  color: #1e40af !important;
+  background: linear-gradient(135deg, var(--color-slate-100) 0%, var(--color-slate-200) 100%) !important;
+  color: var(--color-blue-800) !important;
   font-weight: 700 !important;
-  font-size: 1.3rem !important;
-  border-bottom: 2px solid #e2e8f0 !important;
+  font-size: var(--font-size-xl) !important;
+  border-bottom: var(--space-0-5) solid var(--color-slate-200) !important;
 }
 
 .info-item {
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 
 .info-label {
   font-weight: 600 !important;
-  color: #64748b !important;
+  color: var(--color-slate-500) !important;
   display: block !important;
-  margin-bottom: 4px !important;
-  font-size: 0.9rem !important;
+  margin-bottom: var(--space-1) !important;
+  font-size: var(--font-size-sm-plus) !important;
 }
 
 .info-value {
   font-weight: 700 !important;
-  color: #1e293b !important;
-  font-size: 1.1rem !important;
+  color: var(--color-slate-800) !important;
+  font-size: var(--font-size-base-plus) !important;
 }
 
 .info-value.cost {
-  color: #059669 !important;
-  font-size: 1.3rem !important;
+  color: var(--color-emerald-600) !important;
+  font-size: var(--font-size-xl) !important;
 }
 
 /* Statistics Cards */
 .stat-card {
-  border-radius: 16px !important;
-  transition: all 0.3s ease !important;
+  border-radius: var(--radius-2xl) !important;
+  transition: all var(--transition-normal) !important;
   border: 2px solid transparent !important;
 }
 
@@ -120,53 +120,53 @@
 }
 
 .total-expenses {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
-  border-color: #3b82f6 !important;
+  background: linear-gradient(135deg, var(--color-blue-100) 0%, var(--color-blue-200) 100%) !important;
+  border-color: var(--color-blue-500) !important;
 }
 
 .remaining-budget {
-  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%) !important;
-  border-color: #22c55e !important;
+  background: linear-gradient(135deg, var(--color-green-100) 0%, var(--color-green-200) 100%) !important;
+  border-color: var(--color-green-500) !important;
 }
 
 .expense-count {
-  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%) !important;
-  border-color: #6366f1 !important;
+  background: linear-gradient(135deg, var(--color-indigo-100) 0%, var(--color-indigo-200) 100%) !important;
+  border-color: var(--color-indigo-500) !important;
 }
 
 .budget-usage {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
-  border-color: #f59e0b !important;
+  background: linear-gradient(135deg, var(--color-amber-100) 0%, var(--color-amber-200) 100%) !important;
+  border-color: var(--color-amber-500) !important;
 }
 
 .stat-number {
-  font-size: 2.5rem !important;
+  font-size: var(--font-size-4xl-plus) !important;
   font-weight: 800 !important;
-  margin: 12px 0 8px 0 !important;
-  color: #1e293b !important;
+  margin: var(--space-3) 0 8px 0 !important;
+  color: var(--color-slate-800) !important;
 }
 
 .stat-label {
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   font-weight: 600 !important;
-  color: #64748b !important;
+  color: var(--color-slate-500) !important;
   margin: 0 !important;
 }
 
 /* Table Styles */
 .expenses-table-card {
-  border-radius: 16px !important;
-  border: 2px solid #e9d5ff !important;
+  border-radius: var(--radius-2xl) !important;
+  border: 2px solid var(--color-violet-200) !important;
   box-shadow: 0 8px 25px rgba(124, 58, 237, 0.1) !important;
-  background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%) !important;
+  background: linear-gradient(135deg, var(--text-white) 0%, var(--color-violet-50) 100%) !important;
 }
 
 .table-title {
-  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%) !important;
-  color: #7c3aed !important;
+  background: linear-gradient(135deg, var(--color-violet-100) 0%, var(--color-violet-200) 100%) !important;
+  color: var(--color-violet-600) !important;
   font-weight: 800 !important;
-  font-size: 1.5rem !important;
-  border-bottom: 3px solid #c4b5fd !important;
+  font-size: var(--font-size-2xl) !important;
+  border-bottom: var(--space-3) solid var(--color-violet-300) !important;
   text-shadow: 0 2px 4px rgba(124, 58, 237, 0.2) !important;
   letter-spacing: 0.5px !important;
 }
@@ -176,18 +176,18 @@
 }
 
 .expenses-table {
-  border-radius: 12px !important;
+  border-radius: var(--radius-xl) !important;
   overflow: hidden !important;
 }
 
 .expenses-table .v-data-table__th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-align: center !important;
   padding: 1.2rem 0.8rem !important;
-  border-bottom: 4px solid #065f46 !important;
+  border-bottom: var(--space-1) solid var(--color-emerald-800) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
   position: relative !important;
@@ -200,30 +200,30 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #ffffff 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, var(--text-white) 50%, transparent 100%);
   opacity: 0.3;
 }
 
 .expenses-table .v-data-table__td {
-  background: #ffffff !important;
-  color: #1f2937 !important;
+  background: var(--text-white) !important;
+  color: var(--color-gray-800) !important;
   font-weight: 700 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   padding: 1rem 0.8rem !important;
-  border-bottom: 1px solid #e5e7eb !important;
+  border-bottom: var(--space-px) solid var(--color-gray-200) !important;
   text-align: center !important;
-  transition: all 0.3s ease !important;
+  transition: all var(--transition-normal) !important;
   vertical-align: middle !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .expenses-table .v-data-table__wrapper tbody tr:nth-child(even) .v-data-table__td {
-  background: #f8fafc !important;
+  background: var(--color-slate-50) !important;
 }
 
 .expenses-table .v-data-table__wrapper tbody tr:hover .v-data-table__td {
-  background: #f9fafb !important;
-  color: #111827 !important;
+  background: var(--color-gray-50) !important;
+  color: var(--color-gray-900) !important;
   font-weight: 700 !important;
   transform: scale(1.01) !important;
   box-shadow: 0 4px 12px rgba(4, 120, 87, 0.15) !important;
@@ -232,57 +232,57 @@
 /* Custom Text Styles */
 .serial-number {
   font-weight: 700 !important;
-  color: #374151 !important;
-  background: #f3f4f6 !important;
-  padding: 6px 10px !important;
-  border-radius: 8px !important;
-  font-size: 1rem !important;
-  border: 1px solid #d1d5db !important;
+  color: var(--color-gray-700) !important;
+  background: var(--color-gray-100) !important;
+  padding: var(--space-1-5) 10px !important;
+  border-radius: var(--radius-lg) !important;
+  font-size: var(--font-size-base) !important;
+  border: 1px solid var(--color-gray-300) !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
 .expense-type-chip {
   font-weight: 700 !important;
-  font-size: 0.9rem !important;
-  border-radius: 12px !important;
-  padding: 4px 12px !important;
+  font-size: var(--font-size-sm-plus) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: var(--space-1) 12px !important;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
 }
 
 .amount-text {
   font-weight: 700 !important;
-  color: #059669 !important;
-  font-size: 1rem !important;
-  background: #ecfdf5 !important;
-  padding: 4px 8px !important;
-  border-radius: 6px !important;
-  border: 1px solid #a7f3d0 !important;
-  font-family: 'Arial', sans-serif !important;
+  color: var(--color-emerald-600) !important;
+  font-size: var(--font-size-base) !important;
+  background: var(--color-emerald-50) !important;
+  padding: var(--space-1) 8px !important;
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--color-emerald-200) !important;
+  font-family: var(--font-primary) !important;
   direction: ltr !important;
 }
 
 .date-text {
   font-weight: 600 !important;
-  color: #374151 !important;
-  font-size: 0.95rem !important;
-  background: #f3f4f6 !important;
-  padding: 4px 8px !important;
-  border-radius: 6px !important;
-  border: 1px solid #d1d5db !important;
+  color: var(--color-gray-700) !important;
+  font-size: var(--font-size-base-minus) !important;
+  background: var(--color-gray-100) !important;
+  padding: var(--space-1) 8px !important;
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--color-gray-300) !important;
 }
 
 .status-chip {
   font-weight: 700 !important;
-  font-size: 0.9rem !important;
-  border-radius: 12px !important;
-  padding: 6px 12px !important;
+  font-size: var(--font-size-sm-plus) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: var(--space-1-5) 12px !important;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Action Buttons */
 .action-buttons {
   display: flex;
-  gap: 4px;
+  gap: var(--space-1);
   align-items: center;
   justify-content: center;
 }
@@ -290,12 +290,12 @@
 .action-btn {
   min-width: 32px !important;
   height: 32px !important;
-  border-radius: 6px !important;
-  transition: all 0.3s ease !important;
+  border-radius: var(--radius-md) !important;
+  transition: all var(--transition-normal) !important;
 }
 
 .details-btn {
-  color: #1e40af !important;
+  color: var(--color-blue-800) !important;
   background: rgba(30, 64, 175, 0.1) !important;
 }
 
@@ -305,7 +305,7 @@
 }
 
 .edit-btn {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
   background: rgba(5, 150, 105, 0.1) !important;
 }
 
@@ -315,7 +315,7 @@
 }
 
 .delete-btn {
-  color: #dc2626 !important;
+  color: var(--color-red-600) !important;
   background: rgba(220, 38, 38, 0.1) !important;
 }
 
@@ -329,18 +329,18 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 16px 0;
-  border-bottom: 2px solid #e2e8f0;
-  margin-bottom: 20px;
+  padding: var(--space-4) 0;
+  border-bottom: var(--space-0-5) solid var(--color-slate-200);
+  margin-bottom: var(--space-5);
 }
 
 .add-expense-btn {
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%) !important;
+  background: linear-gradient(135deg, var(--color-blue-800) 0%, var(--color-blue-500) 100%) !important;
   color: white !important;
   font-weight: 700 !important;
-  font-size: 1.1rem !important;
-  padding: 12px 24px !important;
-  border-radius: 12px !important;
+  font-size: var(--font-size-base-plus) !important;
+  padding: var(--space-3) 24px !important;
+  border-radius: var(--radius-xl) !important;
   box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3) !important;
   text-transform: none !important;
   letter-spacing: 0.5px !important;
@@ -352,34 +352,34 @@
 }
 
 .add-expense-btn .v-icon {
-  margin-right: 8px !important;
-  font-size: 1.2rem !important;
+  margin-inline-end: var(--space-2) !important;
+  font-size: var(--font-size-lg-plus) !important;
 }
 
 /* FAB Button */
 .add-expense-fab {
   position: fixed !important;
-  bottom: 24px !important;
-  right: 24px !important;
-  z-index: 1000 !important;
+  bottom: var(--space-6) !important;
+  inset-inline-end: var(--space-6) !important;
+  z-index: var(--z-modal) !important;
 }
 
 /* Add Expense Dialog Styles */
 .add-expense-dialog {
-  border-radius: 20px !important;
+  border-radius: var(--radius-2xl) !important;
   overflow: hidden !important;
   box-shadow: 0 20px 40px rgba(210, 40, 176, 0.2) !important;
-  border: 3px solid #0c24ad !important;
-  background: linear-gradient(135deg, #190244 0%, #7300e7 100%) !important;
+  border: 3px solid var(--color-blue-800) !important;
+  background: linear-gradient(135deg, var(--color-violet-950) 0%, var(--color-violet-600) 100%) !important;
 }
 
 .dialog-header {
-  background: linear-gradient(135deg, #2a38d1 0%, #423cac 100%) !important;
+  background: linear-gradient(135deg, var(--color-indigo-600) 0%, var(--color-indigo-500) 100%) !important;
   color: rgb(255, 255, 255) !important;
   font-weight: 800 !important;
-    font-size: 1.4rem !important;
-  padding: 24px 28px !important;
-  border-bottom: 3px solid #000000 !important;
+    font-size: var(--font-size-xl-plus) !important;
+  padding: var(--space-6) 28px !important;
+  border-bottom: var(--space-3) solid var(--text-primary) !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -387,7 +387,7 @@
 .close-btn {
   color: rgb(14, 7, 7) !important;
   background: rgba(255, 255, 255, 0.2) !important;
-  border-radius: 8px !important;
+  border-radius: var(--radius-lg) !important;
 }
 
 .close-btn:hover {
@@ -396,117 +396,117 @@
 }
 
 .dialog-content {
-  padding: 28px !important;
-  background: linear-gradient(135deg, #7505e5 0%, #5d35cb 100%) !important;
+  padding: var(--space-6) !important;
+  background: linear-gradient(135deg, var(--color-violet-600) 0%, var(--color-violet-500) 100%) !important;
   border-radius: 0 0 16px 16px !important;
 }
 
 .form-field {
-  margin-bottom: 16px !important;
+  margin-bottom: var(--space-4) !important;
 }
 
 .form-field .v-field {
-  border-radius: 12px !important;
-  background: linear-gradient(135deg, #eeecec 0%, #b2095b 100%) !important;
+  border-radius: var(--radius-xl) !important;
+  background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-rose-700) 100%) !important;
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1) !important;
-  border: 2px solid #7409e7 !important;
+  border: 2px solid var(--color-violet-600) !important;
 }
 
 .form-field .v-field__outline {
-  border: 2px solid #f8f6f6 !important;
-  border-radius: 12px !important;
+  border: 2px solid var(--color-gray-50) !important;
+  border-radius: var(--radius-xl) !important;
 }
 
 .form-field .v-field--focused .v-field__outline {
-  border-color: #7c3aed !important;
+  border-color: var(--color-violet-600) !important;
   box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2) !important;
 }
 
 .form-field .v-label {
-  color: #7c3aed !important;
+  color: var(--color-violet-600) !important;
   font-weight: 700 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
 }
 
 .form-field .v-field__input {
-  color: #1e293b !important;
+  color: var(--color-slate-800) !important;
   font-weight: 600 !important;
-  font-size: 1.05rem !important;
+  font-size: var(--font-size-base-plus) !important;
 }
 
 /* Dropdown Menu Styling */
 .form-field .v-list {
-  background: linear-gradient(135deg, #000000 0%, #1a0033 100%) !important;
-  border-radius: 12px !important;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--color-violet-950) 100%) !important;
+  border-radius: var(--radius-xl) !important;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8) !important;
-  border: 4px solid #ff6b35 !important;
+  border: 4px solid var(--color-orange-500) !important;
   backdrop-filter: blur(15px) !important;
 }
 
 .form-field .v-list-item {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 900 !important;
-  font-size: 1.3rem !important;
-  padding: 20px 28px !important;
-  transition: all 0.3s ease !important;
-  border-bottom: 3px solid rgba(255, 255, 255, 0.5) !important;
+  font-size: var(--font-size-xl) !important;
+  padding: var(--space-5) 28px !important;
+  transition: all var(--transition-normal) !important;
+  border-bottom: var(--space-3) solid rgba(255, 255, 255, 0.5) !important;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.9) !important;
   letter-spacing: 1px !important;
-  background: linear-gradient(135deg, #2a0033 0%, #1a0022 100%) !important;
+  background: linear-gradient(135deg, var(--color-violet-950) 0%, var(--color-violet-950) 100%) !important;
 }
 
 .form-field .v-list-item:hover {
-  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%) !important;
-  color: #000000 !important;
+  background: linear-gradient(135deg, var(--color-orange-500) 0%, var(--color-orange-400) 100%) !important;
+  color: var(--text-primary) !important;
   transform: translateX(10px) !important;
   box-shadow: 0 8px 25px rgba(255, 107, 53, 0.7) !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
-  border-left: 6px solid #000000 !important;
+  border-inline-start: 6px solid var(--text-primary) !important;
   font-weight: 900 !important;
 }
 
 .form-field .v-list-item--active {
-  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%) !important;
-  color: #000000 !important;
+  background: linear-gradient(135deg, var(--color-orange-500) 0%, var(--color-orange-400) 100%) !important;
+  color: var(--text-primary) !important;
   font-weight: 900 !important;
   box-shadow: 0 10px 30px rgba(255, 107, 53, 0.8) !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
-  border-left: 6px solid #000000 !important;
+  border-inline-start: 6px solid var(--text-primary) !important;
   transform: scale(1.05) !important;
 }
 
 .dialog-actions {
-  padding: 20px 28px !important;
-  background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%) !important;
-  border-top: 2px solid #e9d5ff !important;
+  padding: var(--space-5) 28px !important;
+  background: linear-gradient(135deg, var(--text-white) 0%, var(--color-violet-50) 100%) !important;
+  border-top: var(--space-0-5) solid var(--color-violet-200) !important;
   border-radius: 0 0 16px 16px !important;
 }
 
 .cancel-btn {
-  color: #7c3aed !important;
+  color: var(--color-violet-600) !important;
   font-weight: 700 !important;
-  padding: 14px 28px !important;
-  border-radius: 12px !important;
-  margin-left: 12px !important;
-  background: linear-gradient(135deg, #1a05d5 0%, #fdfbff 100%) !important;
-  border: 2px solid #fdfdff !important;
+  padding: var(--space-3-5) 28px !important;
+  border-radius: var(--radius-xl) !important;
+  margin-inline-start: var(--space-3) !important;
+  background: linear-gradient(135deg, var(--color-indigo-700) 0%, var(--color-gray-50) 100%) !important;
+  border: 2px solid var(--color-gray-50) !important;
   box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2) !important;
 }
 
 .cancel-btn:hover {
-  background: linear-gradient(135deg, #f0efef 0%, #ddd6fe 100%) !important;
+  background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-violet-200) 100%) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3) !important;
 }
 
 .save-btn {
-  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%) !important;
+  background: linear-gradient(135deg, var(--color-violet-600) 0%, var(--color-violet-500) 100%) !important;
   color: white !important;
   font-weight: 800 !important;
-  padding: 14px 28px !important;
-  border-radius: 12px !important;
+  padding: var(--space-3-5) 28px !important;
+  border-radius: var(--radius-xl) !important;
   box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4) !important;
-  border: 2px solid #6d28d9 !important;
+  border: 2px solid var(--color-violet-700) !important;
 }
 
 .save-btn:hover {
@@ -515,30 +515,30 @@
 }
 
 .save-btn:disabled {
-  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%) !important;
-  color: #94a3b8 !important;
+  background: linear-gradient(135deg, var(--color-slate-200) 0%, var(--color-slate-300) 100%) !important;
+  color: var(--color-slate-400) !important;
   box-shadow: none !important;
   transform: none !important;
-  border-color: #cbd5e1 !important;
+  border-color: var(--color-slate-300) !important;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .project-expenses-page {
-    padding: 10px;
+    padding: var(--space-2-5);
   }
   
   .page-title {
-    font-size: 2rem !important;
+    font-size: var(--font-size-3xl-plus) !important;
   }
   
   .stat-number {
-    font-size: 2rem !important;
+    font-size: var(--font-size-3xl-plus) !important;
   }
   
   .action-buttons {
     flex-direction: column;
-    gap: 2px;
+    gap: var(--space-0-5);
   }
   
   .action-btn {
@@ -551,41 +551,41 @@
    تحسين إضافي لعناوين الجدول - Additional Table Headers
    ======================================== */
 .expenses-table table thead tr th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .expenses-table table thead tr th .v-data-table-header__content {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .expenses-table table thead tr th .v-data-table-header__content .v-data-table-header__sort-icon {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3)) !important;
 }
 
 /* CSS إضافي لضمان التطبيق */
 .expenses-table .v-data-table__wrapper table thead tr th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .expenses-table .v-data-table__wrapper table thead tr th .v-data-table-header__content {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -594,79 +594,79 @@
 <style>
 /* CSS غير محدود النطاق لضمان تطبيق التغييرات */
 .expenses-table table tbody tr td {
-  color: #1f2937 !important;
+  color: var(--color-gray-800) !important;
   font-weight: 700 !important;
-  font-size: 1.1rem !important;
-  background: #ffffff !important;
-  border-bottom: 1px solid #e5e7eb !important;
+  font-size: var(--font-size-base-plus) !important;
+  background: var(--text-white) !important;
+  border-bottom: var(--space-px) solid var(--color-gray-200) !important;
   padding: 1rem 0.8rem !important;
   vertical-align: middle !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .expenses-table table tbody tr:hover td {
-  background: #f9fafb !important;
-  color: #111827 !important;
+  background: var(--color-gray-50) !important;
+  color: var(--color-gray-900) !important;
   font-weight: 800 !important;
 }
 
 .expenses-table table tbody tr:nth-child(even) td {
-  background: #f8fafc !important;
+  background: var(--color-slate-50) !important;
 }
 
 .expenses-table table tbody tr:nth-child(even):hover td {
-  background: #f1f5f9 !important;
+  background: var(--color-slate-100) !important;
 }
 
 /* تحسين وضوح النصوص داخل الخلايا */
 .expenses-table .serial-number {
-  color: #374151 !important;
+  color: var(--color-gray-700) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
-  background: #f3f4f6 !important;
-  padding: 8px 12px !important;
-  border-radius: 8px !important;
-  border: 2px solid #d1d5db !important;
+  font-size: var(--font-size-base-plus) !important;
+  background: var(--color-gray-100) !important;
+  padding: var(--space-2) 12px !important;
+  border-radius: var(--radius-lg) !important;
+  border: 2px solid var(--color-gray-300) !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .expenses-table .amount-text {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
-  background: #ecfdf5 !important;
-  padding: 6px 10px !important;
-  border-radius: 6px !important;
-  border: 2px solid #a7f3d0 !important;
-  font-family: 'Arial', sans-serif !important;
+  font-size: var(--font-size-base-plus) !important;
+  background: var(--color-emerald-50) !important;
+  padding: var(--space-1-5) 10px !important;
+  border-radius: var(--radius-md) !important;
+  border: 2px solid var(--color-emerald-200) !important;
+  font-family: var(--font-primary) !important;
   direction: ltr !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .expenses-table .date-text {
-  color: #374151 !important;
+  color: var(--color-gray-700) !important;
   font-weight: 700 !important;
-  font-size: 1rem !important;
-  background: #f3f4f6 !important;
-  padding: 6px 10px !important;
-  border-radius: 6px !important;
-  border: 2px solid #d1d5db !important;
+  font-size: var(--font-size-base) !important;
+  background: var(--color-gray-100) !important;
+  padding: var(--space-1-5) 10px !important;
+  border-radius: var(--radius-md) !important;
+  border: 2px solid var(--color-gray-300) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* CSS إضافي لضمان التطبيق */
 .v-data-table.expenses-table table tbody tr td {
-  color: #1f2937 !important;
+  color: var(--color-gray-800) !important;
   font-weight: 700 !important;
-  font-size: 1.1rem !important;
-  background: #ffffff !important;
+  font-size: var(--font-size-base-plus) !important;
+  background: var(--text-white) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .v-data-table.expenses-table table tbody tr:hover td {
-  background: #f9fafb !important;
-  color: #111827 !important;
+  background: var(--color-gray-50) !important;
+  color: var(--color-gray-900) !important;
   font-weight: 800 !important;
 }
 
@@ -674,63 +674,63 @@
    تحسين وضوح بيانات الجدول - Table Data Clarity
    ======================================== */
 .expenses-table table tbody tr td {
-  color: #1f2937 !important;
+  color: var(--color-gray-800) !important;
   font-weight: 700 !important;
-  font-size: 1.1rem !important;
-  background: #ffffff !important;
-  border-bottom: 1px solid #e5e7eb !important;
+  font-size: var(--font-size-base-plus) !important;
+  background: var(--text-white) !important;
+  border-bottom: var(--space-px) solid var(--color-gray-200) !important;
   padding: 1rem 0.8rem !important;
   vertical-align: middle !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .expenses-table table tbody tr:hover td {
-  background: #f9fafb !important;
-  color: #111827 !important;
+  background: var(--color-gray-50) !important;
+  color: var(--color-gray-900) !important;
   font-weight: 800 !important;
 }
 
 .expenses-table table tbody tr:nth-child(even) td {
-  background: #f8fafc !important;
+  background: var(--color-slate-50) !important;
 }
 
 .expenses-table table tbody tr:nth-child(even):hover td {
-  background: #f1f5f9 !important;
+  background: var(--color-slate-100) !important;
 }
 
 /* تحسين وضوح النصوص داخل الخلايا */
 .expenses-table .serial-number {
-  color: #374151 !important;
+  color: var(--color-gray-700) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
-  background: #f3f4f6 !important;
-  padding: 8px 12px !important;
-  border-radius: 8px !important;
-  border: 2px solid #d1d5db !important;
+  font-size: var(--font-size-base-plus) !important;
+  background: var(--color-gray-100) !important;
+  padding: var(--space-2) 12px !important;
+  border-radius: var(--radius-lg) !important;
+  border: 2px solid var(--color-gray-300) !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .expenses-table .amount-text {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
-  background: #ecfdf5 !important;
-  padding: 6px 10px !important;
-  border-radius: 6px !important;
-  border: 2px solid #a7f3d0 !important;
-  font-family: 'Arial', sans-serif !important;
+  font-size: var(--font-size-base-plus) !important;
+  background: var(--color-emerald-50) !important;
+  padding: var(--space-1-5) 10px !important;
+  border-radius: var(--radius-md) !important;
+  border: 2px solid var(--color-emerald-200) !important;
+  font-family: var(--font-primary) !important;
   direction: ltr !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .expenses-table .date-text {
-  color: #374151 !important;
+  color: var(--color-gray-700) !important;
   font-weight: 700 !important;
-  font-size: 1rem !important;
-  background: #f3f4f6 !important;
-  padding: 6px 10px !important;
-  border-radius: 6px !important;
-  border: 2px solid #d1d5db !important;
+  font-size: var(--font-size-base) !important;
+  background: var(--color-gray-100) !important;
+  padding: var(--space-1-5) 10px !important;
+  border-radius: var(--radius-md) !important;
+  border: 2px solid var(--color-gray-300) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
 }

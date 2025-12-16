@@ -8,7 +8,7 @@
 
 /* صفحة البيانات العامة */
 .data-page {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: linear-gradient(135deg, var(--color-indigo-400) 0%, var(--color-violet-600) 100%) !important;
   color: var(--text-dark);
   min-height: 100vh;
   padding: 0 !important;
@@ -33,11 +33,11 @@
 
 /* رأس الصفحة المحسن */
 .page-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%) !important;
+  background: linear-gradient(135deg, var(--color-indigo-400) 0%, var(--color-violet-600) 50%, var(--color-indigo-400) 100%) !important;
   backdrop-filter: blur(20px);
-  border-radius: 16px;
-  padding: 20px 30px;
-  margin-bottom: 20px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-5) 30px;
+  margin-bottom: var(--space-5);
   text-align: center !important;
   border: 2px solid rgba(255, 255, 255, 0.3);
   position: relative;
@@ -56,14 +56,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2-5);
   width: 100%;
   text-align: center;
 }
 
 .page-icon {
-  font-size: 2rem;
+  font-size: var(--font-size-3xl-plus);
   display: inline-block;
   animation: iconFloat 3s ease-in-out infinite;
 }
@@ -104,7 +104,7 @@
   align-items: center;
   gap: 2rem;
   position: relative;
-  z-index: 2;
+  z-index: var(--z-base);
   width: 100%;
   justify-content: flex-start;
 }
@@ -113,7 +113,7 @@
   width: 80px;
   height: 80px;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
+  border-radius: var(--radius-2xl);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,7 +122,7 @@
 }
 
 .header-icon i {
-  font-size: 2.5rem;
+  font-size: var(--font-size-4xl-plus);
   color: white;
 }
 
@@ -133,7 +133,7 @@
 .page-title {
   color: white !important;
   font-weight: 800 !important;
-  font-size: 1.5rem !important;
+  font-size: var(--font-size-2xl) !important;
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   letter-spacing: 0.5px;
@@ -141,7 +141,7 @@
 
 .page-subtitle {
   color: rgba(255, 255, 255, 0.9) !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   font-weight: 400;
   margin: 0;
   text-align: center;
@@ -149,41 +149,41 @@
 
 .header-stats {
   position: relative;
-  z-index: 2;
-  text-align: left;
+  z-index: var(--z-base);
+  text-align: start;
   min-width: 300px;
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 
 .stat-item {
   background: rgba(255, 255, 255, 0.15);
   padding: 1rem 1.5rem;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .stat-label {
   display: block;
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm-plus);
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 0.5rem;
 }
 
 .stat-value {
   display: block;
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg-plus);
   font-weight: 600;
   color: white;
   direction: ltr;
-  text-align: left;
+  text-align: start;
 }
 
 /* بطاقات الإحصائيات المحسنة */
 .stat-card {
   background: white !important;
-  border-radius: 20px !important;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius-2xl) !important;
+  transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
   min-height: 180px;
@@ -201,40 +201,40 @@
   align-items: center;
   gap: 1rem;
   padding: 1.5rem 1.5rem 1rem 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: var(--space-px) solid rgba(0, 0, 0, 0.05);
 }
 
 .card-icon {
   width: 50px;
   height: 50px;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   color: white;
 }
 
 .card-icon.success {
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-600));
 }
 
 .card-icon.info {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(135deg, var(--color-blue-500), var(--color-blue-700));
 }
 
 .card-icon.warning {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
+  background: linear-gradient(135deg, var(--color-amber-500), var(--color-amber-600));
 }
 
 .card-icon.primary {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  background: linear-gradient(135deg, var(--color-violet-500), var(--color-violet-600));
 }
 
 .card-title {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   font-weight: 600;
-  color: #374151;
+  color: var(--color-gray-700);
   flex: 1;
 }
 
@@ -243,32 +243,32 @@
 }
 
 .card-value {
-  font-size: 1.6rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
   margin-bottom: 0.5rem;
   direction: ltr;
-  text-align: left;
+  text-align: start;
 }
 
 .card-value.success {
-  color: #10b981;
+  color: var(--color-emerald-500);
 }
 
 .card-value.info {
-  color: #3b82f6;
+  color: var(--color-blue-500);
 }
 
 .card-value.warning {
-  color: #f59e0b;
+  color: var(--color-amber-500);
 }
 
 .card-value.primary {
-  color: #8b5cf6;
+  color: var(--color-violet-500);
 }
 
 .card-subtitle {
-  font-size: 0.9rem;
-  color: #6b7280;
+  font-size: var(--font-size-sm-plus);
+  color: var(--color-gray-500);
   font-weight: 500;
 }
 
@@ -292,14 +292,14 @@
 /* بطاقة الجدول المحسنة */
 .data-table-card {
   background: var(--bg-white) !important;
-  border-radius: 16px !important;
+  border-radius: var(--radius-2xl) !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
 }
 
 .data-table-card .v-card-title {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border-radius: 16px 16px 0 0;
-  border-bottom: 1px solid #e2e8f0;
+  background: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-200) 100%);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  border-bottom: var(--space-px) solid var(--color-slate-200);
   font-weight: 600 !important;
   color: var(--text-dark) !important;
 }
@@ -309,28 +309,28 @@
 }
 
 .data-table-card .v-data-table-header {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
 }
 
 .data-table-card .v-data-table-header th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
   font-weight: 600 !important;
-  font-size: 0.9rem !important;
+  font-size: var(--font-size-sm-plus) !important;
   text-align: center !important;
   vertical-align: middle !important;
   font-style: normal !important;
   text-transform: none !important;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border-bottom: var(--space-0-5) solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .data-table-card .v-data-table tbody tr {
-  border-bottom: 1px solid #f1f5f9 !important;
+  border-bottom: var(--space-px) solid var(--color-slate-100) !important;
 }
 
 .data-table-card .v-data-table tbody tr:hover {
-  background: #f8fafc !important;
+  background: var(--color-slate-50) !important;
 }
 
 /* ========================================
@@ -352,48 +352,48 @@
 .data-table-card .v-data-table-header th,
 .data-table-card .v-data-table-header th *,
 .data-table-card .v-data-table thead th,
-.data-table-card .v-data-table thead th * {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+.data-table-card .v-data-table thead th {
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
   text-align: center !important;
   vertical-align: middle !important;
   font-style: normal !important;
   text-transform: none !important;
   font-weight: 600 !important;
-  font-size: 0.9rem !important;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+  font-size: var(--font-size-sm-plus) !important;
+  border-bottom: var(--space-0-5) solid rgba(255, 255, 255, 0.2) !important;
 }
 
 /* إصلاح لون النص داخل الجدول */
 .data-table-card .v-data-table tbody td {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 500 !important;
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
   text-align: center !important;
   vertical-align: middle !important;
 }
 
-.data-table-card .v-data-table tbody td * {
-  color: #1a1a1a !important;
+.data-table-card .v-data-table tbody td {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في خلايا الجدول */
 .data-table-card .v-data-table .v-data-table__td {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
-.data-table-card .v-data-table .v-data-table__td * {
-  color: #1a1a1a !important;
+.data-table-card .v-data-table .v-data-table__td {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في القوالب المخصصة */
 .data-table-card .v-data-table .font-weight-bold {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 .data-table-card .v-data-table .text-success {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
 }
 
 /* إصلاح شامل لجميع النصوص في الجدول */
@@ -402,7 +402,7 @@
 .data-table-card .v-data-table tbody tr td span,
 .data-table-card .v-data-table tbody tr td div,
 .data-table-card .v-data-table tbody tr td p {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في أزرار الإجراءات */
@@ -416,8 +416,8 @@
 
 /* إصلاح النصوص في القوالب المخصصة */
 .data-table-card .v-data-table template,
-.data-table-card .v-data-table template * {
-  color: #1a1a1a !important;
+.data-table-card .v-data-table template {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح شامل لجميع الجداول في الصفحة */
@@ -426,10 +426,10 @@
 .v-data-table tbody tr td,
 .v-data-table tbody tr td *,
 .v-data-table .v-data-table__td,
-.v-data-table .v-data-table__td * {
-  color: #1a1a1a !important;
+.v-data-table .v-data-table__td {
+  color: var(--color-neutral-850) !important;
   font-weight: 500 !important;
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
   text-align: center !important;
   vertical-align: middle !important;
 }
@@ -438,17 +438,17 @@
 .v-data-table thead th,
 .v-data-table thead th *,
 .v-data-table .v-data-table-header th,
-.v-data-table .v-data-table-header th * {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+.v-data-table .v-data-table-header th {
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
   text-align: center !important;
   vertical-align: middle !important;
   font-style: normal !important;
   text-transform: none !important;
   font-weight: 600 !important;
-  font-size: 0.9rem !important;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+  font-size: var(--font-size-sm-plus) !important;
+  border-bottom: var(--space-0-5) solid rgba(255, 255, 255, 0.2) !important;
 }
 
 /* إصلاح النصوص في جميع خلايا الجدول */
@@ -456,7 +456,7 @@
 .v-data-table tbody tr td div,
 .v-data-table tbody tr td p,
 .v-data-table tbody tr td button {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   text-align: center !important;
   vertical-align: middle !important;
   font-style: normal !important;
@@ -470,7 +470,7 @@
 .data-page .v-data-table tbody tr,
 .data-page .v-data-table tbody tr *,
 .data-page .v-data-table tbody tr td,
-.data-page .v-data-table tbody tr td * {
+.data-page .v-data-table tbody tr td {
   text-align: center !important;
   vertical-align: middle !important;
   font-style: normal !important;
@@ -480,10 +480,10 @@
 .data-page .v-data-table thead,
 .data-page .v-data-table thead *,
 .data-page .v-data-table thead th,
-.data-page .v-data-table thead th * {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+.data-page .v-data-table thead th {
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
   text-align: center !important;
   vertical-align: middle !important;
   font-style: normal !important;
@@ -494,13 +494,13 @@
 .income-table :deep(.v-data-table-header th),
 .income-table :deep(.v-data-table__wrapper table thead tr th),
 .income-table :deep(.v-data-table__wrapper table thead tr th *) {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
   font-weight: 600 !important;
-  font-size: 0.9rem !important;
-  padding: 12px 10px !important;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+  font-size: var(--font-size-sm-plus) !important;
+  padding: var(--space-3) 10px !important;
+  border-bottom: var(--space-0-5) solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .income-table :deep(.v-data-table-header th *),
@@ -515,9 +515,9 @@
 .income-table :deep(.v-data-table-header th .v-icon),
 .income-table :deep(.v-data-table-header th .v-data-table-header__sort-badge),
 .income-table :deep(.v-data-table-header th .v-data-table-header__sort-icon) {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  fill: #ffffff !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
+  fill: var(--text-white) !important;
 }
 
 /* ضمان أن جميع النصوص في عناوين الجدول بيضاء */
@@ -532,9 +532,9 @@
 .data-table-card .income-table :deep(.v-data-table__wrapper table thead tr),
 .data-table-card .income-table :deep(.v-data-table__wrapper table thead tr th),
 .data-table-card .income-table :deep(.v-data-table__wrapper table thead tr th *) {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  fill: #ffffff !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
+  fill: var(--text-white) !important;
 }
 
 /* قواعد شاملة إضافية لضمان اللون الأبيض */
@@ -561,10 +561,10 @@
 .data-table-card :deep(.v-data-table__th *),
 .data-table-card :deep(.v-data-table__th span),
 .data-table-card :deep(.v-data-table__th div) {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  fill: #ffffff !important;
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
+  fill: var(--text-white) !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
 }
 
 /* تطبيق اللون الأبيض على أيقونات وأزرار في عناوين الجدول */
@@ -576,15 +576,15 @@
 .data-table-card :deep(.v-data-table__wrapper table thead tr th .v-icon),
 .data-table-card :deep(.v-data-table__wrapper table thead tr th i),
 .data-table-card :deep(.v-data-table__wrapper table thead tr th svg) {
-  color: #ffffff !important;
-  fill: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+  color: var(--text-white) !important;
+  fill: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
 }
 
 /* إصلاح خاص لصفحة الإيرادات */
 .income-page .v-data-table tbody td,
-.income-page .v-data-table tbody td * {
-  color: #1a1a1a !important;
+.income-page .v-data-table tbody td {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح نهائي شامل لجميع النصوص في الجدول */
@@ -595,8 +595,8 @@
 .data-page .v-data-table tbody tr,
 .data-page .v-data-table tbody tr *,
 .data-page .v-data-table tbody tr td,
-.data-page .v-data-table tbody tr td * {
-  color: #1a1a1a !important;
+.data-page .v-data-table tbody tr td {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في جميع العناصر */
@@ -605,12 +605,12 @@
 .data-page .v-data-table span,
 .data-page .v-data-table div,
 .data-page .v-data-table p {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* استثناء للنصوص الخضراء (المبالغ) */
 .data-page .v-data-table .text-success {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
 }
 
 /* أزرار الإجراءات */
@@ -622,15 +622,15 @@
 }
 
 .add-button {
-  background: linear-gradient(135deg, #10b981, #059669) !important;
+  background: linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-600)) !important;
   color: white !important;
-  border-radius: 16px !important;
-  padding: 16px 32px !important;
+  border-radius: var(--radius-2xl) !important;
+  padding: var(--space-4) 32px !important;
   font-weight: 600 !important;
   text-transform: none !important;
   box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3) !important;
-  transition: all 0.3s ease !important;
-  font-size: 1rem !important;
+  transition: all var(--transition-normal) !important;
+  font-size: var(--font-size-base) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -650,15 +650,15 @@
 }
 
 .export-button {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+  background: linear-gradient(135deg, var(--color-blue-500), var(--color-blue-700)) !important;
   color: white !important;
-  border-radius: 16px !important;
-  padding: 16px 32px !important;
+  border-radius: var(--radius-2xl) !important;
+  padding: var(--space-4) 32px !important;
   font-weight: 600 !important;
   text-transform: none !important;
   box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3) !important;
-  transition: all 0.3s ease !important;
-  font-size: 1rem !important;
+  transition: all var(--transition-normal) !important;
+  font-size: var(--font-size-base) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -679,16 +679,16 @@
 
 /* نافذة الحوار المحسنة */
 .v-dialog .v-card {
-  border-radius: 16px !important;
+  border-radius: var(--radius-2xl) !important;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2) !important;
 }
 
 .v-dialog .v-card-title {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border-radius: 16px 16px 0 0;
-  border-bottom: 1px solid #e2e8f0;
+  background: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-200) 100%);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  border-bottom: var(--space-px) solid var(--color-slate-200);
   font-weight: 600 !important;
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* ========================================
@@ -702,16 +702,16 @@
 .v-dialog .v-card-text,
 .v-dialog .v-card-text *,
 .v-dialog .v-form,
-.v-dialog .v-form * {
-  color: #1a1a1a !important;
+.v-dialog .v-form {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح التسميات في النافذة المنبثقة */
 .v-dialog .v-label,
 .v-dialog .v-label *,
 .v-dialog .v-field__label,
-.v-dialog .v-field__label * {
-  color: #1a1a1a !important;
+.v-dialog .v-field__label {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في الحقول */
@@ -719,8 +719,8 @@
 .v-dialog .v-textarea .v-field__input,
 .v-dialog .v-select .v-field__input,
 .v-dialog .v-field__input,
-.v-dialog .v-field__input * {
-  color: #1a1a1a !important;
+.v-dialog .v-field__input {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح خلفية الحقول */
@@ -728,15 +728,15 @@
 .v-dialog .v-textarea .v-field,
 .v-dialog .v-select .v-field {
   background: white !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1px solid var(--color-slate-200) !important;
 }
 
 /* إصلاح القوائم المنسدلة في النافذة المنبثقة */
 .v-dialog .v-menu__content,
 .v-dialog .v-menu__content *,
 .v-dialog .v-overlay__content,
-.v-dialog .v-overlay__content * {
-  color: #1a1a1a !important;
+.v-dialog .v-overlay__content {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -746,7 +746,7 @@
 .v-dialog .v-list-item *,
 .v-dialog .v-list-item-title,
 .v-dialog .v-list-item-subtitle {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -755,30 +755,28 @@
 .v-dialog .v-card-text div,
 .v-dialog .v-card-text p,
 .v-dialog .v-card-text label {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح رسائل التحقق */
 .v-dialog .v-messages,
 .v-dialog .v-messages *,
 .v-dialog .v-message {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح شامل لجميع النصوص في النافذة المنبثقة */
-.v-dialog *,
-.v-dialog * *,
-.v-dialog .v-card *,
-.v-dialog .v-card * * {
-  color: #1a1a1a !important;
+.v-dialog,
+.v-dialog .v-card {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح خاص للقوائم المنسدلة */
 .v-dialog .v-select__menu,
 .v-dialog .v-select__menu *,
 .v-dialog .v-select__menu .v-list-item,
-.v-dialog .v-select__menu .v-list-item * {
-  color: #1a1a1a !important;
+.v-dialog .v-select__menu .v-list-item {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -790,8 +788,8 @@
 .v-dialog .v-textarea,
 .v-dialog .v-textarea *,
 .v-dialog .v-select,
-.v-dialog .v-select * {
-  color: #1a1a1a !important;
+.v-dialog .v-select {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح خلفية النافذة المنبثقة */
@@ -807,16 +805,16 @@
 .v-dialog .v-application,
 .v-dialog .v-application *,
 .v-dialog .v-application .v-card,
-.v-dialog .v-application .v-card * {
-  color: #1a1a1a !important;
+.v-dialog .v-application .v-card {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في جميع العناصر */
 .v-dialog .v-card-title span,
 .v-dialog .v-card-title *,
 .v-dialog .v-card-actions,
-.v-dialog .v-card-actions * {
-  color: #1a1a1a !important;
+.v-dialog .v-card-actions {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في الأزرار (استثناء) */
@@ -830,7 +828,7 @@
 
 /* أزرار النافذة */
 .dialog-actions .v-btn {
-  border-radius: 8px !important;
+  border-radius: var(--radius-lg) !important;
   text-transform: none !important;
   font-weight: 500 !important;
 }
@@ -846,62 +844,62 @@
   }
   
   .stat-card h3 {
-    font-size: 2rem !important;
+    font-size: var(--font-size-3xl-plus) !important;
   }
   
   .stat-card .stat-icon {
-    font-size: 2.5rem !important;
+    font-size: var(--font-size-4xl-plus) !important;
   }
   
   .page-title {
-    font-size: 2rem !important;
+    font-size: var(--font-size-3xl-plus) !important;
   }
 }
 
 @media (max-width: 600px) {
   .stat-card {
     min-height: 160px;
-    padding: 16px !important;
+    padding: var(--space-4) !important;
   }
   
   .stat-card h3 {
-    font-size: 1.8rem !important;
+    font-size: var(--font-size-3xl) !important;
   }
   
   .stat-card .stat-icon {
-    font-size: 2rem !important;
+    font-size: var(--font-size-3xl-plus) !important;
   }
   
   .page-title {
-    font-size: 1.8rem !important;
+    font-size: var(--font-size-3xl) !important;
   }
   
   .page-subtitle {
-    font-size: 1rem !important;
+    font-size: var(--font-size-base) !important;
   }
 }
 
 /* تحسينات إضافية */
 .v-card {
-  border-radius: 16px !important;
+  border-radius: var(--radius-2xl) !important;
 }
 
 .v-btn {
-  border-radius: 8px !important;
+  border-radius: var(--radius-lg) !important;
   text-transform: none !important;
   font-weight: 500 !important;
 }
 
 .v-text-field .v-field {
-  border-radius: 8px !important;
+  border-radius: var(--radius-lg) !important;
 }
 
 .v-select .v-field {
-  border-radius: 8px !important;
+  border-radius: var(--radius-lg) !important;
 }
 
 .v-textarea .v-field {
-  border-radius: 8px !important;
+  border-radius: var(--radius-lg) !important;
 }
 
 /* تأثيرات النصوص */

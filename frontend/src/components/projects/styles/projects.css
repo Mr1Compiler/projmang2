@@ -18,7 +18,7 @@
   --project-border: #e2e8f0;
   --project-bg: #f8fafc;
   --project-card-radius: 16px;
-  --project-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --project-transition: all var(--transition-normal);
 }
 
 /* ============================================
@@ -62,7 +62,7 @@
 }
 
 .stat-card h3 {
-  font-size: 2.2rem !important;
+  font-size: var(--font-size-4xl) !important;
   font-weight: 800 !important;
   margin-bottom: 10px !important;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
@@ -73,7 +73,7 @@
 }
 
 .stat-card p {
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   font-weight: 600 !important;
   text-align: center !important;
   margin: 0;
@@ -122,7 +122,7 @@
   height: 4px;
   background: linear-gradient(90deg, var(--project-info), #8b5cf6);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-normal);
 }
 
 .project-card:hover {
@@ -153,21 +153,21 @@
 }
 
 .project-name {
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
-  font-size: 0.95rem !important;
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-base-minus) !important;
   font-weight: 800 !important;
   color: #4338ca !important;
   margin: 0 !important;
   line-height: 1.3 !important;
   letter-spacing: 0.3px !important;
-  text-align: right !important;
+  text-align: end !important;
   word-wrap: break-word !important;
 }
 
 .project-description {
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  font-family: var(--font-primary) !important;
   color: #374151 !important;
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
   line-height: 1.6 !important;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -175,7 +175,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: right !important;
+  text-align: end !important;
   min-height: 4.5rem;
 }
 
@@ -189,7 +189,7 @@
   padding: 0.75rem;
   background: #f8fafc;
   border-radius: 12px;
-  border-left: 3px solid var(--project-info);
+  border-inline-start: 3px solid var(--project-info);
   transition: var(--project-transition);
 }
 
@@ -199,12 +199,12 @@
 }
 
 .detail-text {
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  font-family: var(--font-primary) !important;
   color: #4b5563 !important;
-  font-size: 0.75rem !important;
+  font-size: var(--font-size-xs) !important;
   font-weight: 600 !important;
   line-height: 1.4 !important;
-  text-align: right !important;
+  text-align: end !important;
   word-wrap: break-word !important;
 }
 
@@ -227,16 +227,16 @@
 }
 
 .progress-label {
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  font-family: var(--font-primary) !important;
   color: #374151 !important;
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
   font-weight: 700 !important;
 }
 
 .progress-percentage {
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  font-family: var(--font-primary) !important;
   color: #4338ca !important;
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
   font-weight: 800 !important;
   background: rgba(67, 56, 202, 0.1) !important;
   padding: 6px 12px !important;
@@ -256,10 +256,10 @@
 }
 
 .header-title {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
   color: white;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .dialog-body {
@@ -288,10 +288,10 @@
 }
 
 .field-label {
-  font-size: 0.95rem;
+  font-size: var(--font-size-base-minus);
   font-weight: 600;
   color: #374151;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .custom-input {
@@ -323,7 +323,7 @@
 .details-btn {
   border-radius: 12px !important;
   font-weight: 600 !important;
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
   letter-spacing: 0.5px !important;
   padding: 0.75rem 1.5rem !important;
   text-transform: none !important;
@@ -469,7 +469,7 @@
   }
 
   .stat-card h3 {
-    font-size: 1.5rem !important;
+    font-size: var(--font-size-2xl) !important;
   }
 
   .project-card {
@@ -493,6 +493,6 @@
   }
 
   .stat-card h3 {
-    font-size: 1.2rem !important;
+    font-size: var(--font-size-lg-plus) !important;
   }
 }

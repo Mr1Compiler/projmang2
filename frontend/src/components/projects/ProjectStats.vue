@@ -138,7 +138,7 @@ const formattedBudget = computed(() => {
 .stat-card .v-icon {
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 60px !important;
+  font-size: var(--font-size-6xl) !important;
   width: 60px !important;
   height: 60px !important;
 }
@@ -207,7 +207,7 @@ const formattedBudget = computed(() => {
   }
 
   .stat-card .v-icon {
-    font-size: 40px !important;
+    font-size: var(--font-size-4xl-plus) !important;
     width: 40px !important;
     height: 40px !important;
   }
@@ -219,7 +219,7 @@ const formattedBudget = computed(() => {
   }
 
   .stat-card .v-icon {
-    font-size: 32px !important;
+    font-size: var(--font-size-3xl-plus) !important;
     width: 32px !important;
     height: 32px !important;
   }

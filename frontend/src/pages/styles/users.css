@@ -13,10 +13,10 @@
 
 /* تحسين ألوان صفحة المستخدمين - نفس تصميم الصفحات الأخرى */
 .data-page {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #2e3cbc;
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 100%);
+  color: var(--color-indigo-700);
   min-height: 100vh;
-  padding: 20px;
+  padding: var(--space-5);
   overflow-x: hidden;
   width: 100%;
   box-sizing: border-box;
@@ -24,16 +24,16 @@
 
 /* العنوان المحسن - نفس تصميم الصفحات الأخرى */
 .page-header {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%) !important;
+  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
   backdrop-filter: blur(20px);
-  border-radius: 16px;
-  padding: 20px 30px;
-  margin-bottom: 20px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-5) 30px;
+  margin-bottom: var(--space-5);
   text-align: center !important;
   border: 2px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+  box-shadow: var(--shadow-blue-xl);
   animation: gradient-animation 8s ease infinite;
   background-size: 200% 200%;
   display: flex;
@@ -47,8 +47,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2-5);
   width: 100%;
   text-align: center;
 }
@@ -82,7 +82,7 @@
 }
 
 .page-icon {
-  font-size: 2rem;
+  font-size: var(--font-size-3xl-plus);
   display: inline-block;
   animation: iconFloat 3s ease-in-out infinite;
 }
@@ -117,7 +117,7 @@
 }
 
 .page-title {
-  font-size: 2rem;
+  font-size: var(--font-size-3xl-plus);
   font-weight: 800;
   color: rgb(246, 246, 246);
   margin: 0;
@@ -127,7 +127,7 @@
   width: auto;
   line-height: 1.2;
   letter-spacing: 0.5px;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .text-glow {
@@ -150,7 +150,7 @@
 }
 
 .page-subtitle {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   color: rgba(243, 240, 240, 0.9);
   margin: 0;
   padding: 0;
@@ -158,7 +158,7 @@
   width: 100%;
   line-height: 1.4;
   letter-spacing: 0.3px;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
   font-weight: 500;
 }
 
@@ -170,12 +170,12 @@
 /* البطاقات المحسنة */
 .v-card {
   background: rgba(83, 69, 205, 0.95) !important;
-  color: #e2c0cf !important;
+  color: var(--color-violet-200) !important;
   border: 1px solid rgba(224, 12, 118, 0.1) !important;
   box-shadow: 0 8px 32px rgba(79, 70, 229, 0.15) !important;
   backdrop-filter: blur(10px);
-  border-radius: 16px !important;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius-2xl) !important;
+  transition: all var(--transition-normal);
   overflow: hidden;
 }
 
@@ -186,31 +186,31 @@
 }
 
 .v-card-title {
-  color: #1e293b !important;
+  color: var(--color-slate-800) !important;
   font-weight: 700 !important;
-  font-size: 1.2rem !important;
+  font-size: var(--font-size-lg-plus) !important;
   background: linear-gradient(135deg, rgba(27, 18, 186, 0.05) 0%, rgba(124, 58, 237, 0.08) 100%);
-  border-bottom: 1px solid rgba(79, 70, 229, 0.1);
+  border-bottom: var(--space-px) solid rgba(79, 70, 229, 0.1);
   padding: 1.5rem !important;
 }
 
 /* استثناء شريط عنوان جدول المستخدمين */
 .users-table .v-card-title {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%) !important;
-  color: #ffffff !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
+  color: var(--text-white) !important;
+  border-bottom: var(--space-px) solid rgba(255, 255, 255, 0.3) !important;
 }
 
 .v-card-text {
-  color: #475569 !important;
+  color: var(--color-slate-600) !important;
   padding: 1.5rem !important;
 }
 
 /* الجداول المحسنة */
 .v-data-table {
   background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.9) 100%) !important;
-  color: #1a1a1a !important;
-  border-radius: 24px !important;
+  color: var(--color-neutral-850) !important;
+  border-radius: var(--radius-3xl) !important;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(148, 163, 184, 0.1) !important;
   border: 1px solid rgba(148, 163, 184, 0.2);
@@ -227,15 +227,15 @@
   bottom: 0;
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%);
   pointer-events: none;
-  z-index: 1;
+  z-index: var(--z-base);
 }
 
 .v-data-table th {
   background: linear-gradient(135deg, rgba(71, 85, 105, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 700 !important;
-  font-size: 0.95rem !important;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.3) !important;
+  font-size: var(--font-size-base-minus) !important;
+  border-bottom: var(--space-px) solid rgba(148, 163, 184, 0.3) !important;
   padding: 1.5rem 1.2rem !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   position: relative;
@@ -243,7 +243,7 @@
   backdrop-filter: blur(10px);
   letter-spacing: 0.025em;
   text-transform: uppercase;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
 }
 
 .v-data-table th::after {
@@ -254,8 +254,8 @@
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, var(--color-blue-500), var(--color-violet-500));
+  transition: width var(--transition-normal);
 }
 
 .v-data-table th:hover::after {
@@ -263,14 +263,14 @@
 }
 
 .v-data-table td {
-  color: #1a1a1a !important;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.1) !important;
+  color: var(--color-neutral-850) !important;
+  border-bottom: var(--space-px) solid rgba(148, 163, 184, 0.1) !important;
   padding: 1.5rem 1.2rem !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
   background: rgba(248, 250, 252, 0.9);
   backdrop-filter: blur(10px);
   position: relative;
-  z-index: 2;
+  z-index: var(--z-base);
   font-weight: 500;
 }
 
@@ -283,7 +283,7 @@
   width: 3px;
   background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.5), transparent);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-normal);
 }
 
 .v-data-table tbody tr:hover td::before {
@@ -293,18 +293,18 @@
 .v-data-table tbody tr:hover td {
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.05) 100%) !important;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  border-radius: 12px;
-  margin: 4px 8px;
+  box-shadow: var(--shadow-popup);
+  border-radius: var(--radius-xl);
+  margin: var(--space-1) 8px;
 }
 
 /* الأزرار المحسنة */
 .v-btn {
   font-weight: 600 !important;
-  border-radius: 12px !important;
+  border-radius: var(--radius-xl) !important;
   text-transform: none !important;
   box-shadow: 0 4px 12px rgba(202, 176, 191, 0.15) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 .v-btn:hover {
@@ -313,13 +313,13 @@
 }
 
 .v-btn.v-btn--variant-elevated {
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
+  background: linear-gradient(135deg, var(--color-indigo-600) 0%, var(--color-violet-600) 100%) !important;
   color: white !important;
   box-shadow: 0 4px 20px rgba(79, 70, 229, 0.3) !important;
 }
 
 .v-btn.v-btn--variant-elevated:hover {
-  background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%) !important;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-violet-700) 100%) !important;
   box-shadow: 0 8px 30px rgba(79, 70, 229, 0.4) !important;
 }
 
@@ -327,11 +327,11 @@
 .v-data-table .v-btn {
   min-width: 40px !important;
   height: 40px !important;
-  border-radius: 12px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-card-hover) !important;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(148, 163, 184, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 /* ========================================
@@ -351,7 +351,7 @@
 /* قواعد أكثر تحديداً للأزرار */
 .v-data-table .v-btn[icon="mdi-eye"],
 .v-data-table .v-btn .v-icon[mdi-eye] {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-700) 100%) !important;
   color: white !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4) !important;
   border: none !important;
@@ -359,7 +359,7 @@
 
 .v-data-table .v-btn[icon="mdi-pencil"],
 .v-data-table .v-btn .v-icon[mdi-pencil] {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%) !important;
   color: white !important;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
   border: none !important;
@@ -367,7 +367,7 @@
 
 .v-data-table .v-btn[icon="mdi-key"],
 .v-data-table .v-btn .v-icon[mdi-key] {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%) !important;
   color: white !important;
   box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4) !important;
   border: none !important;
@@ -375,7 +375,7 @@
 
 .v-data-table .v-btn[icon="mdi-delete"],
 .v-data-table .v-btn .v-icon[mdi-delete] {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  background: linear-gradient(135deg, var(--color-red-500) 0%, var(--color-red-600) 100%) !important;
   color: white !important;
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
   border: none !important;
@@ -417,7 +417,7 @@
 /* إصلاح النصوص في الأزرار الملونة */
 .v-data-table .v-btn .v-icon {
   color: white !important;
-  font-size: 18px !important;
+  font-size: var(--font-size-lg) !important;
 }
 
 /* تأثيرات إضافية للأزرار الملونة */
@@ -451,7 +451,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+  transition: left var(--transition-slow);
 }
 
 .v-data-table .v-btn:hover::before {
@@ -460,22 +460,22 @@
 
 /* قواعد إضافية لضمان تطبيق الألوان */
 .v-data-table .v-btn:has(.v-icon.mdi-eye) {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-700) 100%) !important;
   color: white !important;
 }
 
 .v-data-table .v-btn:has(.v-icon.mdi-pencil) {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%) !important;
   color: white !important;
 }
 
 .v-data-table .v-btn:has(.v-icon.mdi-key) {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%) !important;
   color: white !important;
 }
 
 .v-data-table .v-btn:has(.v-icon.mdi-delete) {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  background: linear-gradient(135deg, var(--color-red-500) 0%, var(--color-red-600) 100%) !important;
   color: white !important;
 }
 
@@ -485,7 +485,7 @@
   border: none !important;
   min-width: 40px !important;
   height: 40px !important;
-  border-radius: 12px !important;
+  border-radius: var(--radius-xl) !important;
 }
 
 /* تأثيرات إضافية للأزرار الملونة */
@@ -497,25 +497,25 @@
 /* قواعد بديلة باستخدام class names */
 .v-data-table .v-btn.view-btn,
 .v-data-table .v-btn[data-action="view"] {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-700) 100%) !important;
   color: white !important;
 }
 
 .v-data-table .v-btn.edit-btn,
 .v-data-table .v-btn[data-action="edit"] {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%) !important;
   color: white !important;
 }
 
 .v-data-table .v-btn.reset-btn,
 .v-data-table .v-btn[data-action="reset"] {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%) !important;
   color: white !important;
 }
 
 .v-data-table .v-btn.delete-btn,
 .v-data-table .v-btn[data-action="delete"] {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  background: linear-gradient(135deg, var(--color-red-500) 0%, var(--color-red-600) 100%) !important;
   color: white !important;
 }
 
@@ -533,28 +533,28 @@
 .v-data-table .view-btn,
 .v-data-table .view-btn .v-btn__content,
 .v-data-table .view-btn .v-icon {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-700) 100%) !important;
   color: white !important;
 }
 
 .v-data-table .edit-btn,
 .v-data-table .edit-btn .v-btn__content,
 .v-data-table .edit-btn .v-icon {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%) !important;
   color: white !important;
 }
 
 .v-data-table .reset-btn,
 .v-data-table .reset-btn .v-btn__content,
 .v-data-table .reset-btn .v-icon {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%) !important;
   color: white !important;
 }
 
 .v-data-table .delete-btn,
 .v-data-table .delete-btn .v-btn__content,
 .v-data-table .delete-btn .v-icon {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  background: linear-gradient(135deg, var(--color-red-500) 0%, var(--color-red-600) 100%) !important;
   color: white !important;
 }
 
@@ -564,8 +564,8 @@
 .reset-password-dialog .v-card,
 .delete-confirm-dialog .v-card {
   background: linear-gradient(135deg, rgba(248, 250, 252, 0.98) 0%, rgba(241, 245, 249, 0.95) 100%) !important;
-  border-radius: 20px !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+  border-radius: var(--radius-2xl) !important;
+  box-shadow: var(--shadow-modal-lg) !important;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(148, 163, 184, 0.2);
 }
@@ -575,14 +575,14 @@
 .reset-password-dialog .dialog-header,
 .delete-confirm-dialog .dialog-header {
   background: linear-gradient(135deg, rgba(71, 85, 105, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
-  color: #ffffff !important;
-  border-radius: 20px 20px 0 0 !important;
+  color: var(--text-white) !important;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0 !important;
   padding: 1.5rem 2rem !important;
 }
 
 .view-user-dialog .v-list-item-title,
 .view-user-dialog .v-list-item-subtitle {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* تنسيق شامل لنافذة تعديل المستخدم */
@@ -592,41 +592,41 @@
 .edit-user-dialog .v-field__outline,
 .edit-user-dialog .v-field__append-inner,
 .edit-user-dialog .v-field__prepend-inner {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: rgba(255, 255, 255, 0.95) !important;
   border: 1px solid rgba(148, 163, 184, 0.3) !important;
-  border-radius: 12px !important;
+  border-radius: var(--radius-xl) !important;
 }
 
 .edit-user-dialog .v-field:hover,
 .edit-user-dialog .v-field:focus-within {
   border-color: rgba(59, 130, 246, 0.5) !important;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
+  box-shadow: var(--ring-blue-sm) !important;
 }
 
 .edit-user-dialog .v-field__input {
-  padding: 12px 16px !important;
+  padding: var(--space-3) 16px !important;
   font-weight: 500 !important;
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
 }
 
 .edit-user-dialog .v-label {
   font-weight: 600 !important;
-  color: #374151 !important;
-  margin-bottom: 4px !important;
+  color: var(--color-gray-700) !important;
+  margin-bottom: var(--space-1) !important;
 }
 
 .edit-user-dialog .v-icon {
-  color: #6b7280 !important;
+  color: var(--color-gray-500) !important;
 }
 
 .edit-user-dialog .v-select__selection {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 500 !important;
 }
 
 .edit-user-dialog .v-list-item {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -636,51 +636,51 @@
 
 .edit-user-dialog .v-list-item--active {
   background: rgba(59, 130, 246, 0.2) !important;
-  color: #1d4ed8 !important;
+  color: var(--color-blue-700) !important;
 }
 
 /* تنسيق عنوان نافذة التعديل */
 .edit-user-dialog .dialog-title h2 {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 700 !important;
-  font-size: 1.5rem !important;
+  font-size: var(--font-size-2xl) !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 .edit-user-dialog .dialog-title .v-icon {
-  color: #10b981 !important;
+  color: var(--color-emerald-500) !important;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)) !important;
 }
 
 /* تنسيق أزرار نافذة التعديل */
 .edit-user-dialog .dialog-actions .v-btn {
-  border-radius: 12px !important;
+  border-radius: var(--radius-xl) !important;
   font-weight: 600 !important;
   text-transform: none !important;
-  padding: 12px 24px !important;
+  padding: var(--space-3) 24px !important;
   min-width: 120px !important;
 }
 
 .edit-user-dialog .dialog-actions .v-btn[color="success"] {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%) !important;
   color: white !important;
   box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3) !important;
 }
 
 .edit-user-dialog .dialog-actions .v-btn[color="success"]:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-700) 100%) !important;
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4) !important;
   transform: translateY(-2px) !important;
 }
 
 .edit-user-dialog .dialog-actions .v-btn[color="grey"] {
-  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%) !important;
+  background: linear-gradient(135deg, var(--color-gray-500) 0%, var(--color-gray-600) 100%) !important;
   color: white !important;
   box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3) !important;
 }
 
 .edit-user-dialog .dialog-actions .v-btn[color="grey"]:hover {
-  background: linear-gradient(135deg, #4b5563 0%, #374151 100%) !important;
+  background: linear-gradient(135deg, var(--color-gray-600) 0%, var(--color-gray-700) 100%) !important;
   box-shadow: 0 6px 20px rgba(107, 114, 128, 0.4) !important;
   transform: translateY(-2px) !important;
 }
@@ -688,8 +688,8 @@
 /* تنسيق الصورة الشخصية */
 .edit-user-dialog .v-avatar {
   border: 3px solid rgba(59, 130, 246, 0.3) !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
-  transition: all 0.3s ease !important;
+  box-shadow: var(--shadow-popup) !important;
+  transition: all var(--transition-normal) !important;
 }
 
 .edit-user-dialog .v-avatar:hover {
@@ -708,36 +708,36 @@
 }
 
 .edit-user-dialog .v-col {
-  padding: 8px 12px !important;
+  padding: var(--space-2) 12px !important;
 }
 
 /* تأثيرات الإدخال */
 .edit-user-dialog .v-field--focused {
   border-color: rgba(59, 130, 246, 0.8) !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+  box-shadow: var(--ring-blue-soft) !important;
   transform: translateY(-1px) !important;
 }
 
 .edit-user-dialog .v-field--error {
   border-color: rgba(239, 68, 68, 0.8) !important;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+  box-shadow: var(--ring-red) !important;
 }
 
 /* رسائل التحقق */
 .edit-user-dialog .v-messages {
-  color: #ef4444 !important;
-  font-size: 0.875rem !important;
+  color: var(--color-red-500) !important;
+  font-size: var(--font-size-sm) !important;
   font-weight: 500 !important;
 }
 
 .edit-user-dialog .v-messages__message {
-  color: #ef4444 !important;
+  color: var(--color-red-500) !important;
 }
 
 /* تأثيرات التمرير */
 .edit-user-dialog .v-field,
 .edit-user-dialog .v-btn {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: all var(--transition-normal) !important;
 }
 
 /* تحسين الظلال */
@@ -749,24 +749,24 @@
 .v-text-field input,
 .v-select input,
 .v-textarea textarea {
-  color: #1e293b !important;
-  background: #ffffff !important;
+  color: var(--color-slate-800) !important;
+  background: var(--text-white) !important;
 }
 
 .v-text-field label,
 .v-select label,
 .v-textarea label {
-  color: #64748b !important;
+  color: var(--color-slate-500) !important;
 }
 
 .logo-section {
-  border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 16px;
+  border-bottom: var(--space-px) solid var(--color-neutral-200);
+  margin-bottom: var(--space-4);
 }
 
 .menu-item {
-  transition: all 0.3s ease;
-  border-radius: 12px;
+  transition: all var(--transition-normal);
+  border-radius: var(--radius-xl);
 }
 
 .menu-item:hover {
@@ -775,12 +775,12 @@
 
 .menu-item.v-list-item--active {
   background-color: rgba(79, 70, 229, 0.12);
-  color: #4f46e5;
+  color: var(--color-indigo-600);
 }
 
 .project-item {
-  transition: all 0.3s ease;
-  border-radius: 8px;
+  transition: all var(--transition-normal);
+  border-radius: var(--radius-lg);
 }
 
 .project-item:hover {
@@ -789,47 +789,47 @@
 
 .top-bar {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-  border-bottom: 1px solid rgba(79, 70, 229, 0.1);
+  border-bottom: var(--space-px) solid rgba(79, 70, 229, 0.1);
   box-shadow: 0 4px 20px rgba(79, 70, 229, 0.1);
   backdrop-filter: blur(10px);
 }
 
 .search-field {
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
 }
 
 .main-content {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 100%);
   min-height: calc(100vh - 70px);
 }
 
 .page-header {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%) !important;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-blue-xl);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .filters-card {
-  border-radius: 16px;
+  border-radius: var(--radius-2xl);
   box-shadow: 0 8px 32px rgba(67, 56, 202, 0.2);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 100%);
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.2);
-  padding: 8px;
+  padding: var(--space-2);
 }
 
 .filters-card .v-card-text {
   background: transparent !important;
-  padding: 16px !important;
+  padding: var(--space-4) !important;
 }
 
 .filters-card .v-select,
 .filters-card .v-text-field {
   background: rgba(255, 255, 255, 0.15) !important;
-  border-radius: 12px !important;
+  border-radius: var(--radius-xl) !important;
 }
 
 .filters-card .v-select .v-field__outline,
@@ -846,69 +846,69 @@
 
 .filters-card .v-select .v-field__input,
 .filters-card .v-text-field .v-field__input {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 600 !important;
 }
 
 .filters-card .v-select .v-field__append-inner,
 .filters-card .v-select .v-field__prepend-inner {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
 }
 
 .filters-card .v-btn {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.3) 100%) !important;
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 700 !important;
   border: 2px solid rgba(255, 255, 255, 0.4) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: var(--shadow-card-lg) !important;
 }
 
 .filters-card .v-btn:hover {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.4) 100%) !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: var(--shadow-heavy) !important;
 }
 
 .users-table {
-  border-radius: 20px;
+  border-radius: var(--radius-2xl);
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-  background: #ffffff !important;
+  box-shadow: var(--shadow-soft-lg);
+  background: var(--text-white) !important;
   position: relative;
-  transition: all 0.4s ease;
+  transition: all var(--transition-normal);
 }
 
 .users-table .v-card-title {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
+  border-bottom: var(--space-px) solid rgba(255, 255, 255, 0.3) !important;
   padding: 1.5rem !important;
   position: relative !important;
-  color: #ffffff !important;
+  color: var(--text-white) !important;
 }
 
-.users-table .v-card-title * {
-  color: #ffffff !important;
+.users-table .v-card-title {
+  color: var(--text-white) !important;
 }
 
 .users-table .v-card-title .v-icon {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
 }
 
 .users-table .v-card-title span {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
 .users-table .v-card-title .v-btn {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
 }
 
 .users-table .v-card-title .v-btn .v-btn__content {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
 }
 
 .chart-card {
-    border-radius: 16px;
+    border-radius: var(--radius-2xl);
     box-shadow: 0 8px 32px rgba(79, 70, 229, 0.15);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
     backdrop-filter: blur(10px);
@@ -928,7 +928,7 @@
   }
 
   .v-data-table tbody tr {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all var(--transition-normal);
   }
 
   .v-data-table tbody tr:nth-child(even) td {
@@ -941,18 +941,18 @@
 
   /* تأثيرات للأعمدة */
   .v-data-table td:first-child {
-    border-right: 3px solid rgba(219, 15, 172, 0.3);
+    border-inline-end: 3px solid rgba(219, 15, 172, 0.3);
   }
 
   .v-data-table td:last-child {
-    border-left: 3px solid rgba(219, 15, 172, 0.3);
+    border-inline-start: 3px solid rgba(219, 15, 172, 0.3);
   }
 
   /* تأثير للصور الشخصية */
   .v-avatar {
     border: 2px solid rgba(59, 130, 246, 0.3);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all var(--transition-normal);
     backdrop-filter: blur(10px);
   }
 
@@ -966,8 +966,8 @@
   .v-chip {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(148, 163, 184, 0.2);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    box-shadow: var(--shadow-soft);
+    transition: all var(--transition-normal);
   }
 
   .v-chip:hover {
@@ -983,8 +983,8 @@
   /* تحسين شريط التنقل (Pagination) */
   .v-pagination {
     background: linear-gradient(135deg, rgba(71, 72, 135, 0.9) 0%, rgba(76, 86, 194, 0.8) 100%);
-    border-radius: 15px;
-    padding: 15px;
+    border-radius: var(--radius-2xl);
+    padding: var(--space-4);
     box-shadow: 0 8px 25px rgba(219, 15, 172, 0.2);
     border: 2px solid rgba(210, 0, 171, 0.15);
   }
@@ -993,7 +993,7 @@
     background: linear-gradient(135deg, rgba(219, 15, 172, 0.7) 0%, rgba(236, 72, 153, 0.5) 100%) !important;
     color: white !important;
     margin: 0 3px;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
     min-width: 40px;
     height: 40px;
     box-shadow: 0 4px 12px rgba(219, 15, 172, 0.3);
@@ -1014,22 +1014,21 @@
   /* تحسين عداد العناصر */
   .v-data-table-footer {
     background: linear-gradient(135deg, rgba(71, 85, 105, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%);
-    color: #ffffff !important;
-    border-radius: 0 0 24px 24px;
-    padding: 20px 24px;
+    color: var(--text-white) !important;
+    border-radius: 0 0 var(--radius-3xl) var(--radius-3xl);
+    padding: var(--space-5) 24px;
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(148, 163, 184, 0.3);
+    border-top: var(--space-px) solid rgba(148, 163, 184, 0.3);
   }
 
   /* إصلاح النصوص في التذييل */
-  .v-data-table-footer *,
-  .v-data-table-footer * * {
-    color: #ffffff !important;
+  .v-data-table-footer {
+    color: var(--text-white) !important;
   }
 
   .v-data-table-footer .v-select {
     background: rgba(59, 130, 246, 0.1);
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
     border: 1px solid rgba(59, 130, 246, 0.3);
     backdrop-filter: blur(10px);
   }
@@ -1041,7 +1040,7 @@
   .v-data-table-footer .v-pagination .v-btn {
     background: rgba(59, 130, 246, 0.1);
     border: 1px solid rgba(59, 130, 246, 0.3);
-    color: #f8fafc;
+    color: var(--color-slate-50);
     backdrop-filter: blur(10px);
   }
 
@@ -1091,7 +1090,7 @@
 
   /* تأثير للعناصر التفاعلية */
   .v-data-table td {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all var(--transition-normal);
   }
 
   .v-data-table td:hover {
@@ -1111,15 +1110,15 @@
   .v-data-table .d-flex,
   .v-data-table .d-flex *,
   .v-data-table .align-center,
-  .v-data-table .align-center * {
-    color: #1a1a1a !important;
+  .v-data-table .align-center {
+    color: var(--color-neutral-850) !important;
   }
 
   /* إصلاح النصوص في خلايا المستخدم */
   .v-data-table .font-weight-medium,
   .v-data-table .text-caption,
   .v-data-table .text-body-2 {
-    color: #1a1a1a !important;
+    color: var(--color-neutral-850) !important;
     font-weight: 500 !important;
   }
 
@@ -1127,8 +1126,8 @@
   .v-data-table .v-chip,
   .v-data-table .v-chip *,
   .v-data-table .v-chip .v-chip__content,
-  .v-data-table .v-chip .v-chip__content * {
-    color: #ffffff !important;
+  .v-data-table .v-chip .v-chip__content {
+    color: var(--text-white) !important;
     font-weight: 600 !important;
   }
 
@@ -1136,8 +1135,8 @@
   .v-data-table .v-avatar,
   .v-data-table .v-avatar *,
   .v-data-table .v-img,
-  .v-data-table .v-img * {
-    color: #1a1a1a !important;
+  .v-data-table .v-img {
+    color: var(--color-neutral-850) !important;
   }
 
   /* إصلاح النصوص في أزرار الإجراءات */
@@ -1145,12 +1144,12 @@
   .v-data-table .v-btn *,
   .v-data-table .v-btn .v-icon,
   .v-data-table .v-btn .v-btn__content {
-    color: #ffffff !important;
+    color: var(--text-white) !important;
   }
 
   /* إصلاح النصوص في التواريخ */
   .v-data-table .text-body-2 {
-    color: #1a1a1a !important;
+    color: var(--color-neutral-850) !important;
     font-weight: 500 !important;
   }
 
@@ -1161,7 +1160,7 @@
   .v-data-table .text-body-2,
   .v-data-table .text-subtitle-1,
   .v-data-table .text-subtitle-2 {
-    color: #1a1a1a !important;
+    color: var(--color-neutral-850) !important;
     font-weight: 500 !important;
   }
 
@@ -1170,7 +1169,7 @@
   .v-data-table div,
   .v-data-table p,
   .v-data-table label {
-    color: #1a1a1a !important;
+    color: var(--color-neutral-850) !important;
   }
 
   /* إصلاح النصوص في العناصر المحددة */
@@ -1178,31 +1177,31 @@
   .v-data-table .v-list-item *,
   .v-data-table .v-list-item-title,
   .v-data-table .v-list-item-subtitle {
-    color: #1a1a1a !important;
+    color: var(--color-neutral-850) !important;
   }
 
   /* إصلاح نهائي شامل لجميع النصوص */
   .v-data-table .v-application,
   .v-data-table .v-application *,
   .v-data-table .v-application .v-data-table,
-  .v-data-table .v-application .v-data-table * {
-    color: #1a1a1a !important;
+  .v-data-table .v-application .v-data-table {
+    color: var(--color-neutral-850) !important;
   }
 
   /* إصلاح النصوص في جميع الحالات */
   .v-data-table .v-data-table__wrapper,
   .v-data-table .v-data-table__wrapper *,
   .v-data-table .v-data-table__wrapper table,
-  .v-data-table .v-data-table__wrapper table * {
-    color: #1a1a1a !important;
+  .v-data-table .v-data-table__wrapper table {
+    color: var(--color-neutral-850) !important;
   }
 
   /* إصلاح خاص للنصوص المختلطة */
   .v-data-table .me-3,
   .v-data-table .me-3 *,
   .v-data-table .gap-1,
-  .v-data-table .gap-1 * {
-    color: #1a1a1a !important;
+  .v-data-table .gap-1 {
+    color: var(--color-neutral-850) !important;
   }
 
   /* تنسيق نافذة إضافة المستخدم */
@@ -1210,22 +1209,22 @@
     background: linear-gradient(135deg, rgba(209, 155, 180, 0.95) 0%, rgba(67, 74, 178, 0.9) 100%);
     backdrop-filter: blur(15px);
     border: 2px solid rgba(210, 0, 171, 0.2);
-    border-radius: 20px;
+    border-radius: var(--radius-2xl);
     overflow: hidden;
   }
 
   .dialog-header {
     background: linear-gradient(135deg, rgba(41, 5, 23, 0.8) 0%, rgba(219, 15, 172, 0.6) 100%);
     color: rgb(189, 111, 111);
-    padding: 20px 24px;
-    border-bottom: 2px solid rgba(210, 0, 171, 0.3);
+    padding: var(--space-5) 24px;
+    border-bottom: var(--space-0-5) solid rgba(210, 0, 171, 0.3);
   }
 
   .dialog-title {
     display: flex;
     align-items: center;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: var(--font-size-2xl);
   }
 
   .dialog-title h2 {
@@ -1239,20 +1238,20 @@
   }
 
   .dialog-content {
-    padding: 30px 24px;
+    padding: var(--space-8) 24px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
   }
 
   .dialog-actions {
-    padding: 20px 24px;
+    padding: var(--space-5) 24px;
     background: linear-gradient(135deg, rgba(71, 72, 135, 0.8) 0%, rgba(76, 86, 194, 0.7) 100%);
-    border-top: 2px solid rgba(210, 0, 171, 0.3);
+    border-top: var(--space-0-5) solid rgba(210, 0, 171, 0.3);
   }
 
   .user-avatar-upload {
     border: 3px solid rgba(219, 15, 172, 0.5);
     box-shadow: 0 8px 25px rgba(219, 15, 172, 0.3);
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
   }
 
   .user-avatar-upload:hover {
@@ -1264,16 +1263,16 @@
   .add-user-dialog .v-text-field,
   .add-user-dialog .v-select,
   .add-user-dialog .v-textarea {
-    margin-bottom: 8px;
+    margin-bottom: var(--space-2);
   }
 
   .add-user-dialog .v-text-field .v-field,
   .add-user-dialog .v-select .v-field,
   .add-user-dialog .v-textarea .v-field {
     background: rgba(124, 93, 196, 0.9);
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
     border: 1px solid rgba(219, 15, 172, 0.2);
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
   }
 
   .add-user-dialog .v-text-field .v-field:hover,
@@ -1292,10 +1291,10 @@
 
   /* تأثيرات إضافية للنافذة */
   .add-user-dialog .v-btn {
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
     font-weight: 600;
     text-transform: none;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
   }
 
   .add-user-dialog .v-btn:hover {
@@ -1305,14 +1304,14 @@
 
   /* تحسين التحقق من صحة البيانات */
   .add-user-dialog .v-messages {
-    color: #d32f2f;
-    font-size: 0.875rem;
+    color: var(--color-error-dark);
+    font-size: var(--font-size-sm);
     font-weight: 500;
   }
 
   /* تأثيرات الأيقونات */
   .add-user-dialog .v-icon {
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
   }
 
   .add-user-dialog .v-text-field:hover .v-icon,
@@ -1328,7 +1327,7 @@
   justify-content: center;
   height: 200px;
   background: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(124, 58, 237, 0.08) 100%);
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   border: 2px dashed rgba(79, 70, 229, 0.2);
 }
 
@@ -1388,12 +1387,12 @@
 
 /* الشرائح المحسنة */
 .v-chip {
-  border-radius: 15px !important;
+  border-radius: var(--radius-2xl) !important;
   font-weight: 700 !important;
   box-shadow: 0 4px 15px rgba(219, 15, 172, 0.3) !important;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   background: linear-gradient(135deg, rgba(219, 15, 172, 0.8) 0%, rgba(236, 72, 153, 0.6) 100%) !important;
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   border: 1px solid rgba(255, 255, 255, 0.2);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
@@ -1420,7 +1419,7 @@
 /* التصميم المتجاوب */
 @media (max-width: 960px) {
   .main-content {
-    padding: 16px;
+    padding: var(--space-4);
   }
   
   .header-content {
@@ -1428,17 +1427,17 @@
   }
   
   .page-title {
-    font-size: 2.2rem !important;
+    font-size: var(--font-size-4xl) !important;
   }
   
   .title-icon {
-    font-size: 3rem;
+    font-size: var(--font-size-5xl);
   }
 }
 
 @media (max-width: 600px) {
   .page-header {
-    padding: 16px;
+    padding: var(--space-4);
   }
   
   .header-content {
@@ -1448,15 +1447,15 @@
   }
   
   .page-title {
-    font-size: 2rem !important;
+    font-size: var(--font-size-3xl-plus) !important;
   }
   
   .page-subtitle {
-    font-size: 1.1rem !important;
+    font-size: var(--font-size-base-plus) !important;
   }
   
   .title-icon {
-    font-size: 2.5rem;
+    font-size: var(--font-size-4xl-plus);
   }
 }
 
@@ -1471,9 +1470,9 @@
 .add-user-dialog .v-field__label--active,
 .add-user-dialog .v-label--floating,
 .add-user-dialog .v-field__label--floating {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 800 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   opacity: 1 !important;
   background: white !important;
   padding: 0 8px !important;
@@ -1487,9 +1486,9 @@
 .add-user-dialog .v-field--focused .v-field__label--active,
 .add-user-dialog .v-field--focused .v-label--floating,
 .add-user-dialog .v-field--focused .v-field__label--floating {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 800 !important;
-  font-size: 0.875rem !important;
+  font-size: var(--font-size-sm) !important;
   opacity: 1 !important;
   background: white !important;
   padding: 0 8px !important;
@@ -1502,7 +1501,7 @@
 .add-user-dialog .v-select .v-field__label,
 .add-user-dialog .v-textarea .v-label,
 .add-user-dialog .v-textarea .v-field__label {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 800 !important;
   opacity: 1 !important;
   background: white !important;
@@ -1514,7 +1513,7 @@
 .add-user-dialog .v-select .v-field--focused .v-field__label,
 .add-user-dialog .v-textarea .v-field--focused .v-label,
 .add-user-dialog .v-textarea .v-field--focused .v-field__label {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 800 !important;
   opacity: 1 !important;
   background: white !important;
@@ -1522,43 +1521,43 @@
 
 /* تنسيق الحدود - رمادي فاتح */
 .add-user-dialog .v-field__outline {
-  border-color: #d1d5db !important;
+  border-color: var(--color-gray-300) !important;
   border-width: 2px !important;
 }
 
 .add-user-dialog .v-field--focused .v-field__outline {
-  border-color: #6b7280 !important;
+  border-color: var(--color-gray-500) !important;
   border-width: 3px !important;
-  box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.1) !important;
+  box-shadow: var(--ring-gray) !important;
 }
 
 .add-user-dialog .v-field:hover .v-field__outline {
-  border-color: #9ca3af !important;
+  border-color: var(--color-gray-400) !important;
 }
 
 /* تنسيق القوائم المنسدلة - ألوان سوداء */
 .add-user-dialog .black-dropdown-select :deep(.v-menu__content),
 .add-user-dialog .black-dropdown-select :deep(.v-overlay__content) {
   background: white !important;
-  border: 2px solid #1a1a1a !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  border: 2px solid var(--color-neutral-850) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-card-lg) !important;
 }
 
 .add-user-dialog .black-dropdown-select :deep(.v-menu__content .v-list-item),
 .add-user-dialog .black-dropdown-select :deep(.v-overlay__content .v-list-item) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
-  padding: 12px 16px !important;
+  font-size: var(--font-size-base) !important;
+  padding: var(--space-3) 16px !important;
   min-height: 48px !important;
   background: white !important;
 }
 
 .add-user-dialog .black-dropdown-select :deep(.v-menu__content .v-list-item:hover),
 .add-user-dialog .black-dropdown-select :deep(.v-overlay__content .v-list-item:hover) {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
 }
 
@@ -1566,7 +1565,7 @@
 .add-user-dialog .black-dropdown-select :deep(.v-overlay__content .v-list-item--active),
 .add-user-dialog .black-dropdown-select :deep(.v-menu__content .v-list-item[aria-selected="true"]),
 .add-user-dialog .black-dropdown-select :deep(.v-overlay__content .v-list-item[aria-selected="true"]) {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
   font-weight: 700 !important;
 }
@@ -1582,45 +1581,45 @@
 /* تنسيق شامل لجميع القوائم المنسدلة في الحوار */
 .add-user-dialog .v-menu__content .v-list-item,
 .add-user-dialog .v-overlay__content .v-list-item {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   background: white !important;
 }
 
 .add-user-dialog .v-menu__content .v-list-item:hover,
 .add-user-dialog .v-overlay__content .v-list-item:hover {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
 }
 
 .add-user-dialog .v-menu__content .v-list-item--active,
 .add-user-dialog .v-overlay__content .v-list-item--active {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
 }
 /* تنسيقات شاملة للقوائم المنسدلة في حوار إضافة المستخدم */
 .add-user-dialog .v-menu__content,
 .add-user-dialog .v-overlay__content {
   background: white !important;
-  border: 2px solid #1a1a1a !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  border: 2px solid var(--color-neutral-850) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-card-lg) !important;
 }
 
 .add-user-dialog .v-menu__content .v-list-item,
 .add-user-dialog .v-overlay__content .v-list-item {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   background: white !important;
 }
 
 .add-user-dialog .v-menu__content .v-list-item:hover,
 .add-user-dialog .v-overlay__content .v-list-item:hover {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
 }
 
 .add-user-dialog .v-menu__content .v-list-item--active,
 .add-user-dialog .v-overlay__content .v-list-item--active {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
 }
 /* تنسيقات إضافية قوية للتسميات - ضمان الوضوح */
@@ -1630,9 +1629,9 @@
 .add-user-dialog .v-field__label--active,
 .add-user-dialog .v-label--floating,
 .add-user-dialog .v-field__label--floating {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 800 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   opacity: 1 !important;
   background: white !important;
   padding: 0 8px !important;
@@ -1642,7 +1641,7 @@
 
 .add-user-dialog .v-field--focused .v-label,
 .add-user-dialog .v-field--focused .v-field__label {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 800 !important;
   opacity: 1 !important;
   background: white !important;
@@ -1651,7 +1650,7 @@
 .add-user-dialog .v-text-field .v-label,
 .add-user-dialog .v-select .v-label,
 .add-user-dialog .v-textarea .v-label {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 800 !important;
   opacity: 1 !important;
 }

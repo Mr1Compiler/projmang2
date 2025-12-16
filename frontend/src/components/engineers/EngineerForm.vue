@@ -25,7 +25,7 @@
                 density="comfortable"
                 prepend-inner-icon="mdi-account"
                 class="form-field-enhanced"
-                style="font-size: 1.1rem !important; color: #000000 !important;"
+                style="font-size: var(--font-size-base-plus) !important; color: #000000 !important;"
               />
             </v-col>
             <v-col cols="12">
@@ -41,7 +41,7 @@
                 :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append-inner="showPassword = !showPassword"
                 class="form-field-enhanced"
-                style="font-size: 1.1rem !important; color: #000000 !important;"
+                style="font-size: var(--font-size-base-plus) !important; color: #000000 !important;"
                 :hint="isEditing ? 'اتركه فارغاً إذا لم ترد تغيير كلمة المرور' : ''"
                 persistent-hint
               />

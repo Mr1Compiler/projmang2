@@ -27,7 +27,7 @@
 }
 
 .hover-lift {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 .hover-lift:hover {
@@ -107,7 +107,7 @@
 
 /* Smooth Transitions */
 .smooth-transition {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 /* Card Glow Effect */
@@ -138,7 +138,7 @@
     rgba(255, 255, 255, 0.2),
     transparent
   );
-  transition: left 0.5s ease;
+  transition: left var(--transition-slow);
 }
 
 .light-sweep:hover::after {

@@ -27,7 +27,7 @@
 }
 
 .hover-lift {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 .hover-lift:hover {
@@ -46,7 +46,7 @@
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: var(--font-size-3xl-plus);
 }
 
 /* Average Salary Specific Styles */
@@ -171,7 +171,7 @@
 
 .fingerprint-title {
   background: #f8fafc;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
 
 .fingerprint-chip {
@@ -208,7 +208,7 @@
 
 .info-card-title {
   background: #f8fafc;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   font-weight: 600;
 }
 
@@ -235,7 +235,7 @@
 
 /* Section Titles */
 .section-title {
-  font-size: 1.1rem;
+  font-size: var(--font-size-base-plus);
   font-weight: 600;
   color: #1e293b;
 }
@@ -261,7 +261,7 @@
 
 /* Smooth Transitions */
 .smooth-transition {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 /* Card Glow Effect */

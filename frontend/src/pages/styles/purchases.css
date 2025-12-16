@@ -7,15 +7,15 @@
    ======================================== */
 
 .image-style-dialog {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-  border-radius: 20px;
+  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-500) 100%);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(5, 150, 105, 0.3);
 }
 
 .dialog-header {
-  background: linear-gradient(135deg, #059669, #10b981);
-  padding: 20px;
+  background: linear-gradient(135deg, var(--color-emerald-600), var(--color-emerald-500));
+  padding: var(--space-5);
   color: white;
 }
 
@@ -28,11 +28,11 @@
 .header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .header-title {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
 }
 
@@ -41,45 +41,45 @@
 }
 
 .dialog-body {
-  padding: 30px;
+  padding: var(--space-8);
   background: white !important;
 }
 
 .form-fields {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
 }
 
 .form-field {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 /* تحسين ألوان الحقول في القائمة المنبثقة */
 .form-field .v-field__input {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 600 !important;
   background: white !important;
-  border-radius: 8px !important;
-  font-size: 1rem !important;
-  padding: 12px 16px !important;
+  border-radius: var(--radius-lg) !important;
+  font-size: var(--font-size-base) !important;
+  padding: var(--space-3) 16px !important;
 }
 
 /* إصلاح لون النص في جميع الحقول */
 .form-field .v-field__input input,
 .form-field .v-field__input textarea,
 .form-field .v-field__input .v-field__input {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
 .form-field .v-field__outline {
-  border-color: #059669 !important;
+  border-color: var(--color-emerald-600) !important;
   border-width: 2px !important;
 }
 
 .form-field .v-label {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
   font-weight: 700 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   background: white !important;
   padding: 0 8px !important;
 }
@@ -87,24 +87,24 @@
 /* إصلاح لون النص في التسميات */
 .form-field .v-field__field .v-label,
 .form-field .v-field--focused .v-label {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
   background: white !important;
 }
 
 .form-field .v-field--focused .v-field__outline {
-  border-color: #059669 !important;
+  border-color: var(--color-emerald-600) !important;
   border-width: 3px !important;
   box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1) !important;
 }
 
 .form-field .v-field--focused .v-label {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
   font-weight: 700 !important;
-  font-size: 0.875rem !important;
+  font-size: var(--font-size-sm) !important;
   background: white !important;
   padding: 0 8px !important;
   margin: 0 !important;
-  border-radius: 4px !important;
+  border-radius: var(--radius-base) !important;
   text-shadow: none !important;
   letter-spacing: normal !important;
   box-shadow: none !important;
@@ -118,25 +118,25 @@
 
 /* تحسين ألوان القوائم المنسدلة */
 .form-field .v-select .v-field__input {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
-  padding: 12px 16px !important;
+  font-size: var(--font-size-base) !important;
+  padding: var(--space-3) 16px !important;
 }
 
 .form-field .v-select .v-field__outline {
-  border-color: #059669 !important;
+  border-color: var(--color-emerald-600) !important;
   border-width: 2px !important;
 }
 
 .form-field .v-select .v-label {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
   font-weight: 700 !important;
-  font-size: 0.875rem !important;
+  font-size: var(--font-size-sm) !important;
   background: white !important;
   padding: 0 8px !important;
   margin: 0 !important;
-  border-radius: 4px !important;
+  border-radius: var(--radius-base) !important;
   text-shadow: none !important;
   letter-spacing: normal !important;
   box-shadow: none !important;
@@ -149,23 +149,23 @@
 
 /* تحسين ألوان رسائل الخطأ */
 .form-field .v-messages__message {
-  color: #dc2626 !important;
+  color: var(--color-red-600) !important;
   font-weight: 500 !important;
-  font-size: 0.8rem !important;
+  font-size: var(--font-size-xs-plus) !important;
 }
 
 /* تحسين ألوان النصوص في الحقول */
 .form-field .v-field__input::placeholder {
-  color: #6b7280 !important;
+  color: var(--color-gray-500) !important;
   font-weight: 500 !important;
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
 }
 
 /* تحسين ألوان النصوص المكتوبة */
 .form-field .v-field__input input {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
 }
 
 /* إصلاح شامل للنصوص في الحقول */
@@ -174,29 +174,29 @@
 .form-field .v-field__input,
 .form-field .v-field__input *,
 .form-field .v-input__control,
-.form-field .v-input__control * {
-  color: #1a1a1a !important;
+.form-field .v-input__control {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
 /* تحسين ألوان النصوص في textarea */
 .form-field .v-textarea .v-field__input {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   line-height: 1.5 !important;
 }
 
 /* تحسين ألوان الأيقونات */
 .form-field .v-icon {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
 }
 
 /* تحسين ألوان القوائم المنسدلة المفتوحة */
 .form-field .v-list {
   background: white !important;
-  border: 2px solid #059669 !important;
-  border-radius: 8px !important;
+  border: 2px solid var(--color-emerald-600) !important;
+  border-radius: var(--radius-lg) !important;
   box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2) !important;
 }
 
@@ -204,26 +204,26 @@
 .form-field .v-list *,
 .form-field .v-menu *,
 .form-field .v-overlay *,
-.form-field .v-list-item * {
-  color: #1a1a1a !important;
+.form-field .v-list-item {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
 .form-field .v-list-item {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
-  padding: 12px 16px !important;
+  font-size: var(--font-size-base) !important;
+  padding: var(--space-3) 16px !important;
 }
 
 .form-field .v-list-item:hover {
-  background: #f1f5f9 !important;
-  color: #059669 !important;
+  background: var(--color-slate-100) !important;
+  color: var(--color-emerald-600) !important;
   font-weight: 700 !important;
 }
 
 .form-field .v-list-item--active {
-  background: #059669 !important;
+  background: var(--color-emerald-600) !important;
   color: white !important;
   font-weight: 700 !important;
 }
@@ -234,28 +234,28 @@
 .image-style-dialog .v-field *,
 .image-style-dialog .v-input *,
 .image-style-dialog .v-select *,
-.image-style-dialog .v-textarea * {
-  color: #1a1a1a !important;
+.image-style-dialog .v-textarea {
+  color: var(--color-neutral-850) !important;
 }
 
 /* استثناء للتسميات */
 .image-style-dialog .form-field .v-label {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
 }
 
 /* إصلاح النصوص في الحقول المحددة */
 .image-style-dialog .form-field .v-field--focused input,
 .image-style-dialog .form-field .v-field--focused textarea,
 .image-style-dialog .form-field .v-field--focused .v-field__input,
-.image-style-dialog .form-field .v-field--focused .v-field__input * {
-  color: #1a1a1a !important;
+.image-style-dialog .form-field .v-field--focused .v-field__input {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
 /* إصلاح النصوص في القوائم المنسدلة المحددة */
 .image-style-dialog .form-field .v-field--focused .v-select__selection,
 .image-style-dialog .form-field .v-field--focused .v-field__input {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -281,8 +281,8 @@
 .dialog-body .v-field__input,
 .dialog-body .v-field__input *,
 .dialog-body .v-field__field,
-.dialog-body .v-field__field * {
-  color: #1a1a1a !important;
+.dialog-body .v-field__field {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -290,8 +290,8 @@
 .v-overlay__content .v-list,
 .v-overlay__content .v-list *,
 .v-menu__content .v-list,
-.v-menu__content .v-list * {
-  color: #1a1a1a !important;
+.v-menu__content .v-list {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -301,8 +301,8 @@
 .v-list-item .v-list-item-title,
 .v-list-item .v-list-item-subtitle,
 .v-list-item .v-list-item-content,
-.v-list-item .v-list-item-content * {
-  color: #1a1a1a !important;
+.v-list-item .v-list-item-content {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -310,8 +310,8 @@
 .v-menu .v-list,
 .v-menu .v-list *,
 .v-menu .v-list-item,
-.v-menu .v-list-item * {
-  color: #1a1a1a !important;
+.v-menu .v-list-item {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -322,7 +322,7 @@
 .v-list .v-list-item *,
 .v-list .v-list-item-title,
 .v-list .v-list-item-subtitle {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -333,7 +333,7 @@
 .v-select .v-list-item *,
 .v-select .v-list-item-title,
 .v-select .v-list-item-subtitle {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -344,7 +344,7 @@
 .data-page .v-list-item *,
 .data-page .v-list-item-title,
 .data-page .v-list-item-subtitle {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -353,8 +353,8 @@
 .v-list-item-title,
 .v-list-item-subtitle,
 .v-list-item-content,
-.v-list-item-content * {
-  color: #1a1a1a !important;
+.v-list-item-content {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -362,8 +362,8 @@
 .v-menu__content,
 .v-menu__content *,
 .v-overlay__content,
-.v-overlay__content * {
-  color: #1a1a1a !important;
+.v-overlay__content {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -371,8 +371,8 @@
 .v-menu__content .v-list-item,
 .v-menu__content .v-list-item *,
 .v-overlay__content .v-list-item,
-.v-overlay__content .v-list-item * {
-  color: #1a1a1a !important;
+.v-overlay__content .v-list-item {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -380,8 +380,8 @@
 .v-select__menu,
 .v-select__menu *,
 .v-select__menu .v-list-item,
-.v-select__menu .v-list-item * {
-  color: #1a1a1a !important;
+.v-select__menu .v-list-item {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -390,16 +390,16 @@
 .v-list-item__content *,
 .v-list-item__title,
 .v-list-item__subtitle {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
 .dialog-actions {
-  padding: 20px 30px;
-  background: #f1f5f9;
+  padding: var(--space-5) 30px;
+  background: var(--color-slate-100);
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 /* ========================================
@@ -408,18 +408,18 @@
 
 /* Page Styles */
 .data-page {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 100%);
   min-height: 100vh;
-  padding: 20px;
+  padding: var(--space-5);
   overflow-x: hidden;
   width: 100%;
   box-sizing: border-box;
 }
 
 .purchases-page {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 100%);
   min-height: 100vh;
-  padding: 20px;
+  padding: var(--space-5);
   overflow-x: hidden;
   width: 100%;
   box-sizing: border-box;
@@ -443,9 +443,9 @@
 .page-header {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
-  border-radius: 12px;
-  padding: 16px 24px;
-  margin-bottom: 20px;
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) 24px;
+  margin-bottom: var(--space-5);
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
@@ -453,40 +453,40 @@
 }
 
 .page-icon {
-  font-size: 2rem;
+  font-size: var(--font-size-3xl-plus);
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
   animation: star-twinkle 2s ease-in-out infinite;
 }
 
 .page-title {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: 800;
   color: rgb(246, 246, 246);
-  margin-bottom: 6px;
+  margin-bottom: var(--space-1-5);
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .page-subtitle {
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm-plus);
   color: rgba(243, 240, 240, 0.9);
   margin: 0;
 }
 
 .stats-row {
-  margin-bottom: 30px;
+  margin-bottom: var(--space-8);
   width: 100%;
   overflow-x: hidden;
 }
 
 .stats-row .v-col {
-  padding: 12px;
+  padding: var(--space-3);
 }
 
 .stat-card {
   background: rgba(229, 226, 226, 0.95);
-  border-radius: 16px;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-2xl);
+  transition: all var(--transition-normal);
   border: 1px solid rgba(252, 252, 252, 0.3);
 }
 
@@ -496,9 +496,9 @@
 }
 
 .search-card {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%) !important;
+  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 16px !important;
+  border-radius: var(--radius-2xl) !important;
   box-shadow: 
     0 8px 24px rgba(59, 130, 246, 0.3),
     0 4px 12px rgba(37, 99, 235, 0.2),
@@ -506,7 +506,7 @@
   width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
   position: relative;
   overflow: hidden;
 }
@@ -585,7 +585,7 @@
 }
 
 .hover-lift {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .hover-lift:hover {
@@ -595,7 +595,7 @@
 
 .card-glow {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .card-glow:hover {
@@ -603,12 +603,12 @@
 }
 
 .smooth-transition {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 .icon-glow {
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .icon-glow:hover {
@@ -626,11 +626,11 @@
 
 .data-table-card {
   background: rgba(255, 249, 249, 0.95);
-  border-radius: 20px;
+  border-radius: var(--radius-2xl);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  margin-top: 24px;
+  margin-top: var(--space-6);
 }
 
 .data-table-card .v-card-title {
@@ -646,36 +646,36 @@
 }
 
 .table-title {
-  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
-  color: #ffffff !important;
-  padding: 20px 24px !important;
-  border-radius: 12px 12px 0 0 !important;
+  background: linear-gradient(135deg, var(--color-violet-600) 0%, var(--color-violet-500) 100%) !important;
+  color: var(--text-white) !important;
+  padding: var(--space-5) 24px !important;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0 !important;
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3) !important;
   margin: 0 !important;
   font-weight: 700 !important;
-  font-size: 1.5rem !important;
-  text-align: right !important;
+  font-size: var(--font-size-2xl) !important;
+  text-align: end !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
 }
 
 .indigo-title {
-  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-violet-600) 0%, var(--color-violet-500) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 700 !important;
 }
 
 .title-text {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 700 !important;
-  font-size: 1.5rem !important;
+  font-size: var(--font-size-2xl) !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
 }
 
 .project-table {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-200) 100%);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 100% !important;
@@ -685,13 +685,13 @@
 }
 
 .project-table .v-data-table__th {
-  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-violet-600) 0%, var(--color-violet-500) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 700 !important;
-  font-size: 0.85rem !important;
+  font-size: var(--font-size-sm-minus) !important;
   text-align: center !important;
-  padding: 12px 10px !important;
-  border-bottom: 3px solid #6d28d9 !important;
+  padding: var(--space-3) 10px !important;
+  border-bottom: var(--space-3) solid var(--color-violet-700) !important;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5) !important;
   letter-spacing: 0.5px !important;
   border-radius: 0 !important;
@@ -708,18 +708,18 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.3) 50%, #ffffff 100%);
+  background: linear-gradient(90deg, var(--text-white) 0%, rgba(255, 255, 255, 0.3) 50%, var(--text-white) 100%);
   opacity: 0.3;
 }
 
 .project-table .v-data-table__wrapper table thead tr th {
-  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-violet-600) 0%, var(--color-violet-500) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 700 !important;
-  font-size: 0.85rem !important;
+  font-size: var(--font-size-sm-minus) !important;
   text-align: center !important;
-  padding: 12px 10px !important;
-  border-bottom: 3px solid #6d28d9 !important;
+  padding: var(--space-3) 10px !important;
+  border-bottom: var(--space-3) solid var(--color-violet-700) !important;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5) !important;
   letter-spacing: 0.5px !important;
   position: relative !important;
@@ -729,20 +729,20 @@
 }
 
 .project-table .v-data-table-header {
-  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  background: linear-gradient(135deg, var(--color-violet-600) 0%, var(--color-violet-500) 100%) !important;
   display: table-header-group !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
 
 .project-table .v-data-table-header th {
-  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-violet-600) 0%, var(--color-violet-500) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 700 !important;
-  font-size: 0.85rem !important;
+  font-size: var(--font-size-sm-minus) !important;
   text-align: center !important;
-  padding: 12px 10px !important;
-  border-bottom: 3px solid #6d28d9 !important;
+  padding: var(--space-3) 10px !important;
+  border-bottom: var(--space-3) solid var(--color-violet-700) !important;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.5) !important;
   letter-spacing: 0.5px !important;
   display: table-cell !important;
@@ -751,13 +751,13 @@
 }
 
 .project-table .v-data-table__td {
-  padding: 10px 8px !important;
-  border-bottom: 1px solid #e5e7eb !important;
+  padding: var(--space-2-5) 8px !important;
+  border-bottom: var(--space-px) solid var(--color-gray-200) !important;
   text-align: center !important;
-  background: #ffffff !important;
-  color: #000000 !important;
+  background: var(--text-white) !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
-  font-size: 0.85rem !important;
+  font-size: var(--font-size-sm-minus) !important;
   vertical-align: middle !important;
   display: table-cell !important;
   visibility: visible !important;
@@ -768,7 +768,7 @@
 .project-table .v-data-table__td span,
 .project-table .v-data-table__td div,
 .project-table .v-data-table__td p {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
@@ -804,13 +804,13 @@
   display: table-cell !important;
   visibility: visible !important;
   opacity: 1 !important;
-  padding: 10px 8px !important;
-  border-bottom: 1px solid #e5e7eb !important;
+  padding: var(--space-2-5) 8px !important;
+  border-bottom: var(--space-px) solid var(--color-gray-200) !important;
   text-align: center !important;
-  background: #ffffff !important;
-  color: #000000 !important;
+  background: var(--text-white) !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
-  font-size: 0.85rem !important;
+  font-size: var(--font-size-sm-minus) !important;
   vertical-align: middle !important;
 }
 
@@ -821,7 +821,7 @@
   display: inline-block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  color: #000000 !important;
+  color: var(--text-primary) !important;
 }
 
 /* إصلاح عرض الأعمدة */
@@ -866,42 +866,42 @@
 }
 
 .project-table .v-data-table__wrapper tbody tr:nth-child(even) {
-  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+  background: linear-gradient(135deg, var(--color-violet-50) 0%, var(--color-violet-100) 100%) !important;
 }
 
 .project-table .v-data-table__wrapper tbody tr:nth-child(odd) {
-  background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%) !important;
+  background: linear-gradient(135deg, var(--text-white) 0%, var(--color-violet-50) 100%) !important;
 }
 
 .project-table .v-data-table__wrapper tbody tr:nth-child(even) td {
-  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+  background: linear-gradient(135deg, var(--color-violet-50) 0%, var(--color-violet-100) 100%) !important;
 }
 
 .project-table .v-data-table__wrapper tbody tr:nth-child(odd) td {
-  background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%) !important;
+  background: linear-gradient(135deg, var(--text-white) 0%, var(--color-violet-50) 100%) !important;
 }
 
 .project-table .v-data-table__wrapper tbody tr:hover {
-  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%) !important;
+  background: linear-gradient(135deg, var(--color-violet-100) 0%, var(--color-violet-200) 100%) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15) !important;
-  transition: all 0.3s ease !important;
+  transition: all var(--transition-normal) !important;
 }
 
 .project-table .v-data-table__wrapper tbody tr:hover td {
-  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%) !important;
-  color: #000000 !important;
+  background: linear-gradient(135deg, var(--color-violet-100) 0%, var(--color-violet-200) 100%) !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
 }
 
 /* تنسيق النصوص داخل الخلايا - جميعها أسود */
 .project-table .serial-number {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
-  font-size: 0.8rem !important;
-  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%) !important;
-  padding: 4px 10px !important;
-  border-radius: 8px !important;
+  font-size: var(--font-size-xs-plus) !important;
+  background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-gray-200) 100%) !important;
+  padding: var(--space-1) 10px !important;
+  border-radius: var(--radius-lg) !important;
   display: inline-block !important;
   min-width: 35px !important;
   text-align: center !important;
@@ -909,12 +909,12 @@
 }
 
 .project-table .project-name {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
-  font-size: 0.85rem !important;
-  text-align: right !important;
-  padding: 4px 8px !important;
-  border-radius: 6px !important;
+  font-size: var(--font-size-sm-minus) !important;
+  text-align: end !important;
+  padding: var(--space-1) 8px !important;
+  border-radius: var(--radius-md) !important;
   display: inline-block !important;
   max-width: 200px !important;
   overflow: hidden !important;
@@ -923,51 +923,51 @@
 }
 
 .project-table .date-text {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
-  font-size: 0.75rem !important;
-  font-family: 'Arial', 'Helvetica', sans-serif !important;
+  font-size: var(--font-size-xs) !important;
+  font-family: var(--font-primary) !important;
 }
 
 .project-table .cost-text {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
-  font-size: 0.8rem !important;
-  font-family: 'Arial', 'Helvetica', sans-serif !important;
+  font-size: var(--font-size-xs-plus) !important;
+  font-family: var(--font-primary) !important;
   direction: ltr !important;
-  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%) !important;
-  padding: 6px 12px !important;
-  border-radius: 8px !important;
+  background: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-gray-200) 100%) !important;
+  padding: var(--space-1-5) 12px !important;
+  border-radius: var(--radius-lg) !important;
   display: inline-block !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-  border: 1px solid #d1d5db !important;
+  border: 1px solid var(--color-gray-300) !important;
   white-space: nowrap !important;
   min-width: 90px !important;
   text-align: center !important;
 }
 
 .project-table .quantity-text {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
-  font-size: 0.95rem !important;
-  font-family: 'Arial', 'Helvetica', sans-serif !important;
+  font-size: var(--font-size-base-minus) !important;
+  font-family: var(--font-primary) !important;
   direction: ltr !important;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
-  padding: 8px 14px !important;
-  border-radius: 8px !important;
+  background: linear-gradient(135deg, var(--color-amber-100) 0%, var(--color-amber-200) 100%) !important;
+  padding: var(--space-2) 14px !important;
+  border-radius: var(--radius-lg) !important;
   display: inline-block !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-  border: 1px solid #fbbf24 !important;
+  border: 1px solid var(--color-amber-400) !important;
   white-space: nowrap !important;
   min-width: 80px !important;
   text-align: center !important;
 }
 
 .project-table .total-amount {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
-  border: 1px solid #3b82f6 !important;
+  background: linear-gradient(135deg, var(--color-blue-100) 0%, var(--color-blue-200) 100%) !important;
+  border: 1px solid var(--color-blue-500) !important;
   font-weight: 800 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   min-width: 120px !important;
   text-align: center !important;
 }
@@ -975,53 +975,53 @@
 /* تنسيق الشريحات - Chips - نص أسود */
 .project-table .v-chip {
   font-weight: 600 !important;
-  font-size: 0.75rem !important;
-  padding: 4px 10px !important;
-  border-radius: 8px !important;
-  color: #000000 !important;
-  background: #f3f4f6 !important;
-  border: 1px solid #e5e7eb !important;
+  font-size: var(--font-size-xs) !important;
+  padding: var(--space-1) 10px !important;
+  border-radius: var(--radius-lg) !important;
+  color: var(--text-primary) !important;
+  background: var(--color-gray-100) !important;
+  border: 1px solid var(--color-gray-200) !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-  transition: all 0.3s ease !important;
+  transition: all var(--transition-normal) !important;
 }
 
 .project-table .v-chip:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
-  background: #e5e7eb !important;
+  background: var(--color-gray-200) !important;
 }
 
 .project-table .category-chip {
-  color: #000000 !important;
-  background: #f3f4f6 !important;
-  border: 1px solid #d1d5db !important;
+  color: var(--text-primary) !important;
+  background: var(--color-gray-100) !important;
+  border: 1px solid var(--color-gray-300) !important;
   font-weight: 600 !important;
-  font-size: 0.9rem !important;
+  font-size: var(--font-size-sm-plus) !important;
 }
 
 .project-table .category-chip:hover {
-  background: #e5e7eb !important;
-  border-color: #9ca3af !important;
-  color: #000000 !important;
+  background: var(--color-gray-200) !important;
+  border-color: var(--color-gray-400) !important;
+  color: var(--text-primary) !important;
 }
 
 .project-table .status-chip {
-  color: #000000 !important;
-  background: #f3f4f6 !important;
-  border: 1px solid #d1d5db !important;
+  color: var(--text-primary) !important;
+  background: var(--color-gray-100) !important;
+  border: 1px solid var(--color-gray-300) !important;
   font-weight: 600 !important;
-  font-size: 0.9rem !important;
+  font-size: var(--font-size-sm-plus) !important;
 }
 
 .project-table .status-chip:hover {
-  background: #e5e7eb !important;
-  border-color: #9ca3af !important;
-  color: #000000 !important;
+  background: var(--color-gray-200) !important;
+  border-color: var(--color-gray-400) !important;
+  color: var(--text-primary) !important;
 }
 
 .action-buttons {
   display: flex;
-  gap: 4px;
+  gap: var(--space-1);
   align-items: center;
   justify-content: center;
 }
@@ -1029,8 +1029,8 @@
 .action-btn {
   min-width: 36px !important;
   height: 36px !important;
-  border-radius: 8px !important;
-  transition: all 0.3s ease !important;
+  border-radius: var(--radius-lg) !important;
+  transition: all var(--transition-normal) !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
@@ -1040,33 +1040,33 @@
 }
 
 .details-btn {
-  color: #7c3aed !important;
+  color: var(--color-violet-600) !important;
   background: rgba(124, 58, 237, 0.1) !important;
 }
 
 .details-btn:hover {
   background: rgba(124, 58, 237, 0.2) !important;
-  color: #6d28d9 !important;
+  color: var(--color-violet-700) !important;
 }
 
 .action-btn[color="success"] {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
   background: rgba(5, 150, 105, 0.1) !important;
 }
 
 .action-btn[color="success"]:hover {
   background: rgba(5, 150, 105, 0.2) !important;
-  color: #047857 !important;
+  color: var(--color-emerald-700) !important;
 }
 
 .action-btn[color="error"] {
-  color: #dc2626 !important;
+  color: var(--color-red-600) !important;
   background: rgba(220, 38, 38, 0.1) !important;
 }
 
 .action-btn[color="error"]:hover {
   background: rgba(220, 38, 38, 0.2) !important;
-  color: #b91c1c !important;
+  color: var(--color-red-700) !important;
 }
 
 /* ========================================
@@ -1075,7 +1075,7 @@
 
 /* تنسيق الأرقام في البطاقات الإحصائية */
 .stat-number {
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   line-height: 1.2 !important;
   letter-spacing: -0.5px !important;
   word-break: break-word !important;
@@ -1086,7 +1086,7 @@
 }
 
 .stat-currency {
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   line-height: 1.3 !important;
   word-break: break-word !important;
   overflow-wrap: break-word !important;
@@ -1096,7 +1096,7 @@
 }
 
 .stat-card .text-h4 {
-  font-size: 1.75rem !important;
+  font-size: var(--font-size-2xl-plus) !important;
   line-height: 1.3 !important;
   word-break: break-word !important;
   overflow-wrap: break-word !important;
@@ -1104,7 +1104,7 @@
 }
 
 .stat-card .text-h5 {
-  font-size: 1.5rem !important;
+  font-size: var(--font-size-2xl) !important;
   line-height: 1.3 !important;
   word-break: break-word !important;
   overflow-wrap: break-word !important;
@@ -1118,7 +1118,7 @@
   justify-content: center !important;
   flex-wrap: wrap !important;
   text-align: center !important;
-  padding: 8px 4px !important;
+  padding: var(--space-2) 4px !important;
   width: 100% !important;
   margin: 0 auto !important;
 }
@@ -1168,7 +1168,7 @@
 }
 
 .search-card .v-card-text {
-  padding: 20px !important;
+  padding: var(--space-5) !important;
 }
 
 .search-card .v-row {
@@ -1177,29 +1177,29 @@
 }
 
 .search-card .v-col {
-  padding: 8px !important;
+  padding: var(--space-2) !important;
 }
 
 /* تنسيق حقول البحث والفلترة */
 .search-card .search-field :deep(.v-field) {
   background: rgba(255, 255, 255, 1) !important;
-  border-radius: 10px !important;
+  border-radius: var(--radius-xl) !important;
 }
 
 .search-card .search-field :deep(.v-field__input) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   background: rgba(255, 255, 255, 1) !important;
   font-weight: 600 !important;
-  padding: 12px 16px !important;
+  padding: var(--space-3) 16px !important;
 }
 
 .search-card .search-field :deep(.v-field__input input) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
 }
 
 .search-card .search-field :deep(.v-label) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
   background: rgba(255, 255, 255, 1) !important;
   padding: 0 8px !important;
@@ -1207,7 +1207,7 @@
 }
 
 .search-card .search-field :deep(.v-field--focused .v-label) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   background: rgba(255, 255, 255, 1) !important;
 }
 
@@ -1223,28 +1223,28 @@
 }
 
 .search-card .search-field :deep(.v-icon) {
-  color: #2563eb !important;
+  color: var(--color-blue-600) !important;
 }
 
 .search-card .v-select :deep(.v-field) {
   background: rgba(255, 255, 255, 1) !important;
-  border-radius: 10px !important;
+  border-radius: var(--radius-xl) !important;
 }
 
 .search-card .v-select :deep(.v-field__input) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   background: rgba(255, 255, 255, 1) !important;
   font-weight: 600 !important;
-  padding: 12px 16px !important;
+  padding: var(--space-3) 16px !important;
 }
 
 .search-card .v-select :deep(.v-field__input input) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
 }
 
 .search-card .v-select :deep(.v-label) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
   background: rgba(255, 255, 255, 1) !important;
   padding: 0 8px !important;
@@ -1252,7 +1252,7 @@
 }
 
 .search-card .v-select :deep(.v-field--focused .v-label) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   background: rgba(255, 255, 255, 1) !important;
 }
 
@@ -1268,26 +1268,26 @@
 }
 
 .search-card .v-select :deep(.v-icon) {
-  color: #2563eb !important;
+  color: var(--color-blue-600) !important;
 }
 
 /* تنسيق زر البحث */
 .search-card .search-btn,
 .search-card .search-btn.v-btn {
-  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-blue-800) 0%, var(--color-blue-600) 50%, var(--color-blue-500) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 600 !important;
   text-transform: none !important;
-  border-radius: 12px !important;
-  padding: 10px 20px !important;
-  font-size: 0.75rem !important;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  border-radius: var(--radius-xl) !important;
+  padding: var(--space-2-5) 20px !important;
+  font-size: var(--font-size-xs) !important;
+  font-family: var(--font-primary) !important;
   box-shadow: 
     0 4px 16px rgba(30, 64, 175, 0.4),
     0 2px 8px rgba(37, 99, 235, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: all var(--transition-normal) !important;
   letter-spacing: 0.3px !important;
   line-height: 1.4 !important;
   position: relative;
@@ -1295,9 +1295,9 @@
 }
 
 .search-card .search-btn :deep(.v-btn__content) {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 600 !important;
-  font-size: 0.75rem !important;
+  font-size: var(--font-size-xs) !important;
   letter-spacing: 0.3px !important;
 }
 
@@ -1309,8 +1309,8 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.6s ease;
-  z-index: 1;
+  transition: left var(--transition-slow);
+  z-index: var(--z-base);
 }
 
 .search-card .search-btn:hover::before {
@@ -1318,7 +1318,7 @@
 }
 
 .search-card .search-btn:hover {
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%) !important;
+  background: linear-gradient(135deg, var(--color-blue-900) 0%, var(--color-blue-800) 50%, var(--color-blue-600) 100%) !important;
   box-shadow: 
     0 8px 24px rgba(30, 64, 175, 0.5),
     0 4px 12px rgba(37, 99, 235, 0.4),
@@ -1330,20 +1330,20 @@
 /* تنسيق زر إضافة عملية شراء */
 .search-card .add-expense-btn,
 .search-card .add-expense-btn.v-btn {
-  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 50%, var(--color-emerald-700) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 600 !important;
   text-transform: none !important;
-  border-radius: 12px !important;
-  padding: 10px 20px !important;
-  font-size: 0.75rem !important;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  border-radius: var(--radius-xl) !important;
+  padding: var(--space-2-5) 20px !important;
+  font-size: var(--font-size-xs) !important;
+  font-family: var(--font-primary) !important;
   box-shadow: 
     0 4px 16px rgba(16, 185, 129, 0.4),
     0 2px 8px rgba(5, 150, 105, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: all var(--transition-normal) !important;
   letter-spacing: 0.3px !important;
   line-height: 1.4 !important;
   position: relative;
@@ -1351,20 +1351,20 @@
 }
 
 .search-card .add-expense-btn :deep(.v-btn__content) {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 600 !important;
-  font-size: 0.75rem !important;
+  font-size: var(--font-size-xs) !important;
   letter-spacing: 0.3px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 8px !important;
+  gap: var(--space-2) !important;
 }
 
 .search-card .add-expense-btn :deep(.v-icon) {
-  color: #ffffff !important;
-  font-size: 18px !important;
-  transition: transform 0.3s ease !important;
+  color: var(--text-white) !important;
+  font-size: var(--font-size-lg) !important;
+  transition: transform var(--transition-normal) !important;
 }
 
 .search-card .add-expense-btn::before {
@@ -1375,8 +1375,8 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.6s ease;
-  z-index: 1;
+  transition: left var(--transition-slow);
+  z-index: var(--z-base);
 }
 
 .search-card .add-expense-btn:hover::before {
@@ -1384,7 +1384,7 @@
 }
 
 .search-card .add-expense-btn:hover {
-  background: linear-gradient(135deg, #047857 0%, #059669 50%, #10b981 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 50%, var(--color-emerald-500) 100%) !important;
   box-shadow: 
     0 8px 24px rgba(16, 185, 129, 0.5),
     0 4px 12px rgba(5, 150, 105, 0.4),
@@ -1406,13 +1406,13 @@
   }
 
   .stats-row .v-col {
-    padding: 10px !important;
+    padding: var(--space-2-5) !important;
   }
 }
 
 @media (max-width: 768px) {
   .purchases-page {
-    padding: 10px !important;
+    padding: var(--space-2-5) !important;
   }
 
   .centered-content,
@@ -1422,11 +1422,11 @@
   }
 
   .stats-row {
-    gap: 12px !important;
+    gap: var(--space-3) !important;
   }
 
   .stats-row .v-col {
-    padding: 8px !important;
+    padding: var(--space-2) !important;
   }
 
   .project-table .v-data-table__wrapper {
@@ -1438,45 +1438,45 @@
   }
 
   .stat-number {
-    font-size: 1rem !important;
+    font-size: var(--font-size-base) !important;
   }
 
   .stat-currency {
-    font-size: 1rem !important;
+    font-size: var(--font-size-base) !important;
   }
 
   .stat-card .text-h4 {
-    font-size: 1.4rem !important;
+    font-size: var(--font-size-xl-plus) !important;
   }
 
   .stat-card .text-h5 {
-    font-size: 1.2rem !important;
+    font-size: var(--font-size-lg-plus) !important;
   }
 
   .stat-card h3 {
     min-height: 60px !important;
-    padding: 4px 2px !important;
+    padding: var(--space-1) 2px !important;
   }
 
   .stat-card {
     min-height: 160px !important;
-    padding: 16px !important;
+    padding: var(--space-4) !important;
   }
 
   .project-table .cost-text,
   .project-table .quantity-text,
   .project-table .total-amount {
-    font-size: 0.85rem !important;
-    padding: 6px 10px !important;
+    font-size: var(--font-size-sm-minus) !important;
+    padding: var(--space-1-5) 10px !important;
     min-width: auto !important;
   }
 
   .search-card .v-card-text {
-    padding: 12px !important;
+    padding: var(--space-3) !important;
   }
 
   .data-table-card {
-    margin-top: 16px !important;
+    margin-top: var(--space-4) !important;
   }
 }
 
@@ -1487,23 +1487,23 @@
   }
 
   .stat-number {
-    font-size: 1rem !important;
+    font-size: var(--font-size-base) !important;
   }
 
   .stat-currency {
-    font-size: 1rem !important;
+    font-size: var(--font-size-base) !important;
   }
 
   .stat-card {
     min-height: 140px !important;
-    padding: 12px !important;
+    padding: var(--space-3) !important;
   }
 
   .stat-card .stat-icon {
-    margin-bottom: 8px !important;
+    margin-bottom: var(--space-2) !important;
   }
 
   .stat-card .stat-icon .v-icon {
-    font-size: 48px !important;
+    font-size: var(--font-size-3xl-plus) !important;
   }
 }

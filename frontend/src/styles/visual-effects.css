@@ -9,20 +9,20 @@
 
 /* انتقالات سلسة للعناصر */
 .smooth-transition {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 .smooth-transition-fast {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-fast);
 }
 
 .smooth-transition-slow {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-slow);
 }
 
 /* تأثيرات hover متطورة */
 .hover-lift {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
 }
 
 .hover-lift:hover {
@@ -31,7 +31,7 @@
 }
 
 .hover-glow {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .hover-glow:hover {
@@ -41,7 +41,7 @@
 
 /* تأثيرات التكبير */
 .scale-on-hover {
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-normal);
 }
 
 .scale-on-hover:hover {
@@ -70,7 +70,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+  transition: left var(--transition-slow);
 }
 
 .light-sweep:hover::before {
@@ -79,7 +79,7 @@
 
 /* تأثير الظل المتحرك */
 .shadow-follow {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   box-shadow: var(--shadow-card);
 }
 
@@ -102,7 +102,7 @@
   background: radial-gradient(circle at center, rgba(30, 64, 175, 0.1) 0%, transparent 70%);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-normal);
 }
 
 .inner-glow:hover::before {
@@ -116,7 +116,7 @@
 /* تأثير النص المتوهج */
 .text-glow {
   text-shadow: 0 0 10px rgba(30, 64, 175, 0.5);
-  transition: text-shadow 0.3s ease;
+  transition: text-shadow var(--transition-normal);
 }
 
 .text-glow:hover {
@@ -155,7 +155,7 @@
 
 /* تأثير الأيقونة المتدورة */
 .icon-spin {
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-normal);
 }
 
 .icon-spin:hover {
@@ -185,7 +185,7 @@
 /* تأثير الأيقونة المتوهجة */
 .icon-glow {
   filter: drop-shadow(0 0 10px rgba(30, 64, 175, 0.5));
-  transition: filter 0.3s ease;
+  transition: filter var(--transition-normal);
 }
 
 .icon-glow:hover {
@@ -244,7 +244,7 @@
 .btn-glow {
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .btn-glow::before {
@@ -255,7 +255,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+  transition: left var(--transition-slow);
 }
 
 .btn-glow:hover::before {
@@ -269,7 +269,7 @@
 
 /* تأثير الزر المتذبذب */
 .btn-bounce {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .btn-bounce:hover {
@@ -278,7 +278,7 @@
 
 /* تأثير الزر المتدور */
 .btn-rotate {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .btn-rotate:hover {
@@ -291,7 +291,7 @@
 
 /* تأثير البطاقة المتوهجة */
 .card-glow {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   box-shadow: var(--shadow-card);
 }
 
@@ -324,7 +324,7 @@
 
 /* تأثير الحقل المضيء */
 .input-glow {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   border: 2px solid transparent;
 }
 
@@ -345,7 +345,7 @@
 
 /* تأثير الصف المتوهج */
 .table-row-glow {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .table-row-glow:hover {
@@ -366,7 +366,7 @@
 /* تأثير الرابط المتوهج */
 .link-glow {
   position: relative;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .link-glow::after {
@@ -377,7 +377,7 @@
   width: 0;
   height: 2px;
   background: var(--gradient-primary);
-  transition: width 0.3s ease;
+  transition: width var(--transition-normal);
 }
 
 .link-glow:hover::after {
@@ -399,7 +399,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s;
+  transition: left var(--transition-slow);
 }
 
 .menu-gradient:hover::before {

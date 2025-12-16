@@ -207,11 +207,11 @@ body .modern-sidebar * {
 }
 
 .menu-item .v-list-item-title {
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
 }
 
 .modern-sidebar .v-list-item-title {
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
   color: white !important;
   -webkit-text-fill-color: white !important;
 }
@@ -228,7 +228,7 @@ body .modern-sidebar * {
   -webkit-text-fill-color: white !important;
   text-shadow: none !important;
   font-weight: 500 !important;
-  font-size: 0.95rem !important;
+  font-size: var(--font-size-base-minus) !important;
   animation: none !important;
 }
 
@@ -238,21 +238,21 @@ body .modern-sidebar * {
 
 .modern-sidebar p,
 .modern-sidebar span {
-  font-size: 0.9rem !important;
+  font-size: var(--font-size-sm-plus) !important;
   color: white !important;
   -webkit-text-fill-color: white !important;
 }
 
 .modern-sidebar .text-h5 {
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
 }
 
 .modern-sidebar .text-body-2 {
-  font-size: 0.85rem !important;
+  font-size: var(--font-size-sm-minus) !important;
 }
 
 .modern-sidebar .text-caption {
-  font-size: 0.75rem !important;
+  font-size: var(--font-size-xs) !important;
 }
 
 .modern-sidebar .menu-item,
@@ -438,7 +438,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
   background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-align: center !important;
   vertical-align: middle !important;
   padding: 1.2rem 0.8rem !important;
@@ -451,7 +451,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 .v-data-table table thead tr th .v-data-table-header__content {
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -466,7 +466,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
   background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -474,7 +474,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 .v-data-table__wrapper table thead tr th .v-data-table-header__content {
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -484,7 +484,7 @@ table thead tr th {
   background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -494,7 +494,7 @@ table thead tr th {
   background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -502,7 +502,7 @@ table thead tr th {
 .team-data-table table thead tr th .v-data-table-header__content {
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -512,7 +512,7 @@ table thead tr th {
   background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -520,7 +520,7 @@ table thead tr th {
 .v-data-table.team-data-table .v-data-table__wrapper table thead tr th .v-data-table-header__content {
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -530,7 +530,7 @@ table thead tr th {
   background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -538,7 +538,7 @@ table thead tr th {
 .v-application .v-data-table table thead tr th .v-data-table-header__content {
   color: #ffffff !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }

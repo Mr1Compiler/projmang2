@@ -31,7 +31,7 @@
                 density="comfortable"
                 prepend-inner-icon="mdi-briefcase"
                 class="form-field-enhanced enhanced-select"
-                style="color: #000000 !important; font-size: 1.1rem !important; font-weight: 600 !important;"
+                style="color: #000000 !important; font-size: var(--font-size-base-plus) !important; font-weight: 600 !important;"
                 color="black"
                 :menu-props="{
                   maxHeight: 300,

@@ -8,8 +8,8 @@
 
 /* خلفية الصفحة */
 .data-page {
-  background: #ffffff;
-  color: #1e293b;
+  background: var(--text-white);
+  color: var(--color-slate-800);
   min-height: 100vh;
 }
 
@@ -18,11 +18,11 @@
    ======================================== */
 
 .page-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%) !important;
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 50%, var(--color-indigo-500) 100%) !important;
   backdrop-filter: blur(20px);
-  border-radius: 16px;
-  padding: 20px 30px;
-  margin-bottom: 20px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-5) 30px;
+  margin-bottom: var(--space-5);
   text-align: center !important;
   border: 2px solid rgba(255, 255, 255, 0.3);
   position: relative;
@@ -41,14 +41,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2-5);
   width: 100%;
   text-align: center;
 }
 
 .page-icon {
-  font-size: 2rem;
+  font-size: var(--font-size-3xl-plus);
   display: inline-block;
   animation: iconFloat 3s ease-in-out infinite;
 }
@@ -81,18 +81,18 @@
 
 
 .add-button {
-  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 50%, var(--color-emerald-700) 100%) !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
   font-weight: 700 !important;
-  font-size: 0.95rem !important;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  font-size: var(--font-size-base-minus) !important;
+  font-family: var(--font-primary) !important;
   letter-spacing: 0.5px !important;
   line-height: 1.5 !important;
-  padding: 10px 20px !important;
-  border-radius: 10px !important;
+  padding: var(--space-2-5) 20px !important;
+  border-radius: var(--radius-xl) !important;
   box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4), 0 2px 6px rgba(5, 150, 105, 0.3) !important;
-  transition: all 0.3s ease !important;
+  transition: all var(--transition-normal) !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
   position: relative;
@@ -102,31 +102,31 @@
 }
 
 .add-button :deep(.v-btn__content) {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
+  font-family: var(--font-primary) !important;
   font-weight: 700 !important;
   letter-spacing: 0.5px !important;
   line-height: 1.5 !important;
 }
 
 .add-button :deep(.v-icon) {
-  color: #ffffff !important;
-  fill: #ffffff !important;
-  font-size: 1.1rem !important;
-  margin-inline-end: 8px !important;
+  color: var(--text-white) !important;
+  fill: var(--text-white) !important;
+  font-size: var(--font-size-base-plus) !important;
+  margin-inline-end: var(--space-2) !important;
 }
 
 .add-button :deep(.v-btn__content) {
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
+  font-family: var(--font-primary) !important;
   font-weight: 700 !important;
   letter-spacing: 0.5px !important;
   line-height: 1.5 !important;
 }
 
 .add-button :deep(.v-icon) {
-  font-size: 1.2rem !important;
-  margin-inline-end: 8px !important;
+  font-size: var(--font-size-lg-plus) !important;
+  margin-inline-end: var(--space-2) !important;
 }
 
 .add-button::before {
@@ -137,7 +137,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s ease;
+  transition: left var(--transition-slow);
 }
 
 .add-button:hover::before {
@@ -147,7 +147,7 @@
 .add-button:hover {
   transform: translateY(-3px) scale(1.02) !important;
   box-shadow: 0 10px 30px rgba(16, 185, 129, 0.5), 0 4px 12px rgba(5, 150, 105, 0.4) !important;
-  background: linear-gradient(135deg, #059669 0%, #047857 50%, #065f46 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-700) 50%, var(--color-emerald-800) 100%) !important;
 }
 
 .add-button:active {
@@ -160,8 +160,8 @@
 
 .stat-card {
   background: var(--bg-white) !important;
-  border-radius: 16px !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius-2xl) !important;
+  transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
   min-height: 200px;
@@ -180,7 +180,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, var(--color-blue-600) 0%, var(--color-violet-600) 100%);
 }
 
 .stat-card:hover {
@@ -190,12 +190,12 @@
 
 .stat-icon {
   position: relative;
-  z-index: 2;
+  z-index: var(--z-base);
 }
 
 .stat-card .v-icon {
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .stat-card:hover .v-icon {
@@ -204,16 +204,16 @@
 }
 
 .stat-card h3 {
-  font-size: 2.5rem !important;
+  font-size: var(--font-size-4xl-plus) !important;
   font-weight: 700 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: var(--space-2) !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center !important;
   width: 100%;
 }
 
 .stat-card p {
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   font-weight: 500 !important;
   opacity: 0.8;
   text-align: center !important;
@@ -242,9 +242,9 @@
    ======================================== */
 
 .search-filter-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%) !important;
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 50%, var(--color-indigo-500) 100%) !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 16px !important;
+  border-radius: var(--radius-2xl) !important;
   box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3) !important;
 }
 
@@ -252,7 +252,7 @@
 .search-filter-card .v-card,
 .search-filter-card .v-card-title,
 .search-filter-card .v-card-text {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%) !important;
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 50%, var(--color-indigo-500) 100%) !important;
 }
 
 /* ========================================
@@ -264,13 +264,13 @@
 
 /* إصلاح عنوان شريط البحث والفلترة */
 .search-filter-card .v-card-title {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 700 !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.search-filter-card .v-card-title * {
-  color: #ffffff !important;
+.search-filter-card .v-card-title {
+  color: var(--text-white) !important;
 }
 
 /* إصلاح النصوص في شريط البحث والفلترة */
@@ -278,9 +278,8 @@
 .search-filter-card .v-card-text *,
 .search-filter-card .v-row,
 .search-filter-card .v-row *,
-.search-filter-card .v-col,
-.search-filter-card .v-col * {
-  color: #1a1a1a !important;
+.search-filter-card .v-col {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح التسميات في شريط البحث والفلترة */
@@ -289,7 +288,7 @@
 .search-filter-card :deep(.v-field__label),
 .search-filter-card :deep(.v-field__label *),
 .search-filter-card :deep(.v-field-label) {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
 }
 
 /* تسميات حالة الدفع ونطاق المبلغ - الحالة الافتراضية */
@@ -298,8 +297,8 @@
 .search-filter-card :deep(.filter-field .v-field-label),
 .search-filter-card :deep(.filter-field .v-field__label *),
 .search-filter-card :deep(.filter-field .v-label *) {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+  color: var(--text-primary) !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
   font-weight: 600 !important;
 }
 
@@ -307,16 +306,15 @@
 .search-filter-card :deep(.filter-field .v-field--active .v-field__label),
 .search-filter-card :deep(.filter-field .v-field--focused .v-field__label *),
 .search-filter-card :deep(.filter-field .v-field--active .v-field__label *) {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+  color: var(--text-primary) !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
 }
 
 /* إصلاح النصوص في الحقول */
 .search-filter-card .v-text-field .v-field__input,
 .search-filter-card .v-select .v-field__input,
-.search-filter-card .v-field__input,
-.search-filter-card .v-field__input * {
-  color: #1a1a1a !important;
+.search-filter-card .v-field__input {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح خلفية الحقول */
@@ -329,15 +327,13 @@
 .search-field,
 .filter-field {
   background: rgba(255, 255, 255, 0.9) !important;
-  border-radius: 12px !important;
+  border-radius: var(--radius-xl) !important;
 }
 
 /* إصلاح القوائم المنسدلة في شريط البحث والفلترة */
 .search-filter-card .v-menu__content,
-.search-filter-card .v-menu__content *,
-.search-filter-card .v-overlay__content,
-.search-filter-card .v-overlay__content * {
-  color: #1a1a1a !important;
+.search-filter-card .v-overlay__content {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -347,33 +343,27 @@
 .search-filter-card .v-list-item *,
 .search-filter-card .v-list-item-title,
 .search-filter-card .v-list-item-subtitle {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
 /* إصلاح خاص للقوائم المنسدلة */
 .search-filter-card .v-select__menu,
-.search-filter-card .v-select__menu *,
-.search-filter-card .v-select__menu .v-list-item,
-.search-filter-card .v-select__menu .v-list-item * {
-  color: #1a1a1a !important;
+.search-filter-card .v-select__menu .v-list-item {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
 /* إصلاح النصوص في جميع الحقول */
 .search-filter-card .v-input,
-.search-filter-card .v-input *,
 .search-filter-card .v-text-field,
-.search-filter-card .v-text-field *,
-.search-filter-card .v-select,
-.search-filter-card .v-select * {
-  color: #1a1a1a !important;
+.search-filter-card .v-select {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح شامل لجميع النصوص في شريط البحث */
-.search-filter-card *,
-.search-filter-card * * {
-  color: #1a1a1a !important;
+.search-filter-card {
+  color: var(--color-neutral-850) !important;
 }
 
 /* استثناء التسميات من القاعدة العامة */
@@ -382,7 +372,7 @@
 .search-filter-card :deep(.v-field-label),
 .search-filter-card :deep(.v-label *),
 .search-filter-card :deep(.v-field__label *) {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
 }
 
 /* استثناء تسميات حالة الدفع ونطاق المبلغ - لون أسود */
@@ -391,15 +381,15 @@
 .search-filter-card :deep(.filter-field .v-field-label),
 .search-filter-card :deep(.filter-field .v-label *),
 .search-filter-card :deep(.filter-field .v-field__label *) {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+  color: var(--text-primary) !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
 }
 
 .reset-button {
-  border-radius: 12px !important;
+  border-radius: var(--radius-xl) !important;
   font-weight: 600 !important;
   text-transform: none !important;
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   border-color: rgba(255, 255, 255, 0.5) !important;
   background: rgba(255, 255, 255, 0.1) !important;
 }
@@ -409,8 +399,8 @@
 .reset-button :deep(.v-btn__content *),
 .reset-button :deep(.v-icon),
 .reset-button :deep(.v-icon *) {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
 }
 
 .reset-button:hover {
@@ -420,7 +410,7 @@
 
 .reset-button:hover :deep(.v-btn__content),
 .reset-button:hover :deep(.v-icon) {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
 }
 
 /* ========================================
@@ -428,60 +418,60 @@
    ======================================== */
 
 .data-table-card {
-  background: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 16px !important;
+  background: var(--text-white) !important;
+  border: 1px solid var(--color-slate-200) !important;
+  border-radius: var(--radius-2xl) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
   overflow: hidden;
 }
 
 .data-table-card .v-card-title {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
+  border-bottom: var(--space-px) solid rgba(255, 255, 255, 0.3);
   padding: 1.5rem;
   position: relative;
 }
 
 .data-table-card .v-card-title .v-icon {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
 }
 
 .data-table-card .v-card-title span {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
 }
 
 .data-table-card .v-card-title .v-chip {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   background: rgba(255, 255, 255, 0.2) !important;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
 
 .action-button {
-  border-radius: 8px !important;
-  transition: all 0.3s ease !important;
+  border-radius: var(--radius-lg) !important;
+  transition: all var(--transition-normal) !important;
 }
 
 .action-button:hover {
-  background: #f1f5f9 !important;
+  background: var(--color-slate-100) !important;
   transform: scale(1.1) !important;
 }
 
 /* الجداول */
 .v-data-table {
-  background: #ffffff !important;
-  color: #1e293b !important;
-  border-radius: 0 0 16px 16px !important;
+  background: var(--text-white) !important;
+  color: var(--color-slate-800) !important;
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl) !important;
 }
 
 .v-data-table th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
   font-weight: 600 !important;
-  font-size: 0.75rem !important;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
-  padding: 16px !important;
+  font-size: var(--font-size-xs) !important;
+  border-bottom: var(--space-0-5) solid rgba(255, 255, 255, 0.2) !important;
+  padding: var(--space-4) !important;
   text-align: center !important;
   vertical-align: middle !important;
   font-style: normal !important;
@@ -497,19 +487,17 @@
 
 /* إصلاح شامل لعناوين الجدول */
 .v-data-table .v-data-table-header th,
-.v-data-table .v-data-table-header th *,
-.v-data-table thead th,
-.v-data-table thead th * {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+.v-data-table thead th {
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
   text-align: center !important;
   vertical-align: middle !important;
   font-style: normal !important;
   text-transform: none !important;
   font-weight: 600 !important;
-  font-size: 0.75rem !important;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+  font-size: var(--font-size-xs) !important;
+  border-bottom: var(--space-0-5) solid rgba(255, 255, 255, 0.2) !important;
 }
 
 /* قواعد إضافية لضمان اللون الأبيض على جميع عناصر عناوين الجدول */
@@ -527,11 +515,11 @@
 .v-data-table :deep(.v-data-table__th *),
 .v-data-table :deep(.v-data-table__th span),
 .v-data-table :deep(.v-data-table__th div) {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  fill: #ffffff !important;
-  font-size: 0.75rem !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
+  fill: var(--text-white) !important;
+  font-size: var(--font-size-xs) !important;
 }
 
 /* تطبيق اللون الأبيض على أيقونات في عناوين الجدول */
@@ -540,39 +528,33 @@
 .v-data-table :deep(.v-data-table-header th svg),
 .v-data-table :deep(.v-data-table-header th .v-data-table-header__sort-badge),
 .v-data-table :deep(.v-data-table-header th .v-data-table-header__sort-icon) {
-  color: #ffffff !important;
-  fill: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+  color: var(--text-white) !important;
+  fill: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
 }
 
 /* إصلاح خلايا الجدول */
 .v-data-table td {
-  color: #1a1a1a !important;
-  border-bottom: 1px solid #f1f5f9 !important;
-  padding: 16px !important;
-  font-size: 0.9rem !important;
+  color: var(--color-neutral-850) !important;
+  border-bottom: var(--space-px) solid var(--color-slate-100) !important;
+  padding: var(--space-4) !important;
+  font-size: var(--font-size-sm-plus) !important;
   text-align: center !important;
   vertical-align: middle !important;
 }
 
 /* إصلاح النصوص في خلايا الجدول */
 .v-data-table tbody td,
-.v-data-table tbody td *,
-.v-data-table tbody tr td,
-.v-data-table tbody tr td * {
-  color: #1a1a1a !important;
+.v-data-table tbody tr td {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح نهائي شامل لجميع عناصر الجدول */
 .v-data-table,
-.v-data-table *,
 .v-data-table tbody,
-.v-data-table tbody *,
 .v-data-table tbody tr,
-.v-data-table tbody tr *,
-.v-data-table tbody tr td,
-.v-data-table tbody tr td * {
-  color: #1a1a1a !important;
+.v-data-table tbody tr td {
+  color: var(--color-neutral-850) !important;
   text-align: center !important;
   vertical-align: middle !important;
   font-style: normal !important;
@@ -586,20 +568,20 @@
 .v-data-table span,
 .v-data-table div,
 .v-data-table p {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* استثناء للنصوص الملونة */
 .v-data-table .text-error {
-  color: #dc2626 !important;
+  color: var(--color-red-600) !important;
 }
 
 .v-data-table .text-success {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
 }
 
 .v-data-table .text-warning {
-  color: #d97706 !important;
+  color: var(--color-amber-600) !important;
 }
 
 /* ========================================
@@ -614,7 +596,7 @@
 .v-data-table .v-btn *,
 .v-data-table .v-btn .v-icon,
 .v-data-table .v-btn .v-btn__content {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح أزرار الإجراءات المحددة */
@@ -622,21 +604,21 @@
 .v-data-table .v-btn[color="success"] *,
 .v-data-table .v-btn[color="success"] .v-icon,
 .v-data-table .v-btn[color="success"] .v-btn__content {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
 }
 
 .v-data-table .v-btn[color="error"],
 .v-data-table .v-btn[color="error"] *,
 .v-data-table .v-btn[color="error"] .v-icon,
 .v-data-table .v-btn[color="error"] .v-btn__content {
-  color: #dc2626 !important;
+  color: var(--color-red-600) !important;
 }
 
 .v-data-table .v-btn[color="primary"],
 .v-data-table .v-btn[color="primary"] *,
 .v-data-table .v-btn[color="primary"] .v-icon,
 .v-data-table .v-btn[color="primary"] .v-btn__content {
-  color: #1976d2 !important;
+  color: var(--color-info-dark) !important;
 }
 
 /* إصلاح أزرار الإجراءات عند التمرير */
@@ -644,72 +626,62 @@
 .v-data-table .v-btn:hover *,
 .v-data-table .v-btn:hover .v-icon,
 .v-data-table .v-btn:hover .v-btn__content {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح أزرار الإجراءات الملونة عند التمرير */
 .v-data-table .v-btn[color="success"]:hover,
 .v-data-table .v-btn[color="success"]:hover *,
 .v-data-table .v-btn[color="success"]:hover .v-icon {
-  color: #047857 !important;
+  color: var(--color-emerald-700) !important;
 }
 
 .v-data-table .v-btn[color="error"]:hover,
 .v-data-table .v-btn[color="error"]:hover *,
 .v-data-table .v-btn[color="error"]:hover .v-icon {
-  color: #b91c1c !important;
+  color: var(--color-red-700) !important;
 }
 
 .v-data-table .v-btn[color="primary"]:hover,
 .v-data-table .v-btn[color="primary"]:hover *,
 .v-data-table .v-btn[color="primary"]:hover .v-icon {
-  color: #1565c0 !important;
+  color: var(--color-blue-700) !important;
 }
 
 /* إصلاح شامل لجميع أزرار الإجراءات */
 .v-data-table .d-flex,
-.v-data-table .d-flex *,
 .v-data-table .gap-1,
-.v-data-table .gap-1 *,
-.v-data-table .align-center,
-.v-data-table .align-center * {
-  color: #1a1a1a !important;
+.v-data-table .align-center {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح أزرار الإجراءات في جميع الحالات */
 .v-data-table .v-btn.v-btn--size-small,
-.v-data-table .v-btn.v-btn--size-small *,
-.v-data-table .v-btn.v-btn--variant-text,
-.v-data-table .v-btn.v-btn--variant-text * {
-  color: #1a1a1a !important;
+.v-data-table .v-btn.v-btn--variant-text {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح خاص للأزرار الملونة */
-.v-data-table .v-btn[color="success"].v-btn--variant-text,
-.v-data-table .v-btn[color="success"].v-btn--variant-text * {
-  color: #059669 !important;
+.v-data-table .v-btn[color="success"].v-btn--variant-text {
+  color: var(--color-emerald-600) !important;
 }
 
-.v-data-table .v-btn[color="error"].v-btn--variant-text,
-.v-data-table .v-btn[color="error"].v-btn--variant-text * {
-  color: #dc2626 !important;
+.v-data-table .v-btn[color="error"].v-btn--variant-text {
+  color: var(--color-red-600) !important;
 }
 
 /* إصلاح أزرار الإجراءات في جميع الجداول الفرعية */
-.v-data-table .v-data-table .v-btn,
-.v-data-table .v-data-table .v-btn * {
-  color: #1a1a1a !important;
+.v-data-table .v-data-table .v-btn {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح أزرار الإجراءات الملونة في الجداول الفرعية */
-.v-data-table .v-data-table .v-btn[color="success"],
-.v-data-table .v-data-table .v-btn[color="success"] * {
-  color: #059669 !important;
+.v-data-table .v-data-table .v-btn[color="success"] {
+  color: var(--color-emerald-600) !important;
 }
 
-.v-data-table .v-data-table .v-btn[color="error"],
-.v-data-table .v-data-table .v-btn[color="error"] * {
-  color: #dc2626 !important;
+.v-data-table .v-data-table .v-btn[color="error"] {
+  color: var(--color-red-600) !important;
 }
 
 /* إصلاح نهائي شامل لجميع أزرار الإجراءات */
@@ -727,56 +699,48 @@
 .v-data-table .v-btn[icon="mdi-pencil"],
 .v-data-table .v-btn[icon="mdi-credit-card"],
 .v-data-table .v-btn[icon="mdi-delete"] {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح أزرار الإجراءات الملونة */
 .v-data-table .v-btn[icon="mdi-credit-card"][color="success"] {
-  color: #059669 !important;
+  color: var(--color-emerald-600) !important;
 }
 
 .v-data-table .v-btn[icon="mdi-delete"][color="error"] {
-  color: #dc2626 !important;
+  color: var(--color-red-600) !important;
 }
 
 /* إصلاح أزرار الإجراءات عند التمرير */
-.v-data-table .v-btn:hover .mdi,
-.v-data-table .v-btn:hover .mdi * {
+.v-data-table .v-btn:hover .mdi {
   color: inherit !important;
 }
 
 /* إصلاح شامل لجميع النصوص في الصفحة */
-.debtors-page *,
-.debtors-page * * {
-  color: #1a1a1a !important;
+.debtors-page {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في جميع الكروت */
 .v-card,
-.v-card *,
 .v-card .v-card-title,
-.v-card .v-card-title *,
-.v-card .v-card-text,
-.v-card .v-card-text * {
-  color: #1a1a1a !important;
+.v-card .v-card-text {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في جميع الأزرار */
 .v-btn,
-.v-btn *,
-.v-btn .v-btn__content,
-.v-btn .v-btn__content * {
+.v-btn .v-btn__content {
   color: white !important;
 }
 
 /* استثناء للأزرار المحددة */
-.v-btn.v-btn--variant-outlined,
-.v-btn.v-btn--variant-outlined * {
-  color: #1976d2 !important;
+.v-btn.v-btn--variant-outlined {
+  color: var(--color-info-dark) !important;
 }
 
 .v-data-table tbody tr:hover {
-  background: #f8fafc !important;
+  background: var(--color-slate-50) !important;
 }
 
 /* ========================================
@@ -786,13 +750,13 @@
 .v-btn {
   font-weight: 500 !important;
   text-transform: none !important;
-  border-radius: 8px !important;
-  transition: all 0.3s ease !important;
+  border-radius: var(--radius-lg) !important;
+  transition: all var(--transition-normal) !important;
 }
 
 .v-btn--variant-elevated {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-blue-600) 0%, var(--color-blue-700) 100%) !important;
+  color: var(--text-white) !important;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
 }
 
@@ -802,14 +766,14 @@
 }
 
 .v-btn--variant-outlined {
-  border: 2px solid #2563eb !important;
-  color: #2563eb !important;
+  border: 2px solid var(--color-blue-600) !important;
+  color: var(--color-blue-600) !important;
   background: transparent !important;
 }
 
 .v-btn--variant-outlined:hover {
-  background: #2563eb !important;
-  color: #ffffff !important;
+  background: var(--color-blue-600) !important;
+  color: var(--text-white) !important;
   transform: translateY(-1px) !important;
 }
 
@@ -818,11 +782,11 @@
    ======================================== */
 
 .v-chip {
-  color: #1e293b !important;
-  background: #f1f5f9 !important;
-  border: 1px solid #e2e8f0 !important;
+  color: var(--color-slate-800) !important;
+  background: var(--color-slate-100) !important;
+  border: 1px solid var(--color-slate-200) !important;
   font-weight: 500 !important;
-  border-radius: 8px !important;
+  border-radius: var(--radius-lg) !important;
 }
 
 /* ========================================
@@ -832,15 +796,15 @@
 .v-text-field input,
 .v-select input,
 .v-textarea textarea {
-  color: #1e293b !important;
-  background: #ffffff !important;
-  font-size: 0.9rem !important;
+  color: var(--color-slate-800) !important;
+  background: var(--text-white) !important;
+  font-size: var(--font-size-sm-plus) !important;
 }
 
 .v-text-field label,
 .v-select label,
 .v-textarea label {
-  color: #64748b !important;
+  color: var(--color-slate-500) !important;
   font-weight: 500 !important;
 }
 
@@ -849,46 +813,46 @@
    ======================================== */
 
 .v-card {
-  background: #ffffff !important;
-  color: #1e293b !important;
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 16px !important;
+  background: var(--text-white) !important;
+  color: var(--color-slate-800) !important;
+  border: 1px solid var(--color-slate-200) !important;
+  border-radius: var(--radius-2xl) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
 .v-card-title {
-  color: #1e293b !important;
+  color: var(--color-slate-800) !important;
   font-weight: 600 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
 }
 
 .v-card-text {
-  color: #64748b !important;
-  font-size: 0.9rem !important;
+  color: var(--color-slate-500) !important;
+  font-size: var(--font-size-sm-plus) !important;
 }
 .sidebar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 100%);
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .rtl-sidebar {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .rtl-sidebar .v-list-item {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 .rtl-sidebar .v-list-item-title {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 .menu-item {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .menu-item:hover {
@@ -896,69 +860,69 @@
 }
 
 .logo-section {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: var(--space-px) solid rgba(255, 255, 255, 0.1);
 }
 
 .v-card {
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
 }
 
 .v-data-table {
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
 }
 
 .gap-1 {
-  gap: 4px;
+  gap: var(--space-1);
 }
 
 .gap-2 {
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 /* دعم RTL شامل */
 .v-main {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .v-container {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .v-card {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .v-card-title {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 .v-card-text {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 .v-data-table {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .v-data-table th,
 .v-data-table td {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 .v-text-field input {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 .v-select .v-field__input {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -971,19 +935,19 @@
 }
 
 h1, h2, h3, h4, h5, h6, p, span, div {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 .v-list {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .v-dialog .v-card {
   direction: rtl;
-  text-align: right;
-  border-radius: 16px !important;
+  text-align: end;
+  border-radius: var(--radius-2xl) !important;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2) !important;
   background: white !important;
 }
@@ -997,37 +961,32 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 /* إصلاح عنوان النافذة المنبثقة */
 .v-dialog .v-card-title {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  border-radius: 16px 16px 0 0;
-  border-bottom: 1px solid #e2e8f0;
+  background: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-200) 100%);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  border-bottom: var(--space-px) solid var(--color-slate-200);
   font-weight: 600 !important;
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   text-align: center !important;
 }
 
 /* إصلاح النصوص في النافذة المنبثقة */
 .v-dialog .v-card-text,
-.v-dialog .v-card-text *,
-.v-dialog .v-form,
-.v-dialog .v-form * {
-  color: #1a1a1a !important;
+.v-dialog .v-form {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح التسميات في النافذة المنبثقة */
 .v-dialog .v-label,
-.v-dialog .v-label *,
-.v-dialog .v-field__label,
-.v-dialog .v-field__label * {
-  color: #1a1a1a !important;
+.v-dialog .v-field__label {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في الحقول */
 .v-dialog .v-text-field .v-field__input,
 .v-dialog .v-textarea .v-field__input,
 .v-dialog .v-select .v-field__input,
-.v-dialog .v-field__input,
-.v-dialog .v-field__input * {
-  color: #1a1a1a !important;
+.v-dialog .v-field__input {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح خلفية الحقول */
@@ -1035,15 +994,13 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 .v-dialog .v-textarea .v-field,
 .v-dialog .v-select .v-field {
   background: white !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1px solid var(--color-slate-200) !important;
 }
 
 /* إصلاح القوائم المنسدلة في النافذة المنبثقة */
 .v-dialog .v-menu__content,
-.v-dialog .v-menu__content *,
-.v-dialog .v-overlay__content,
-.v-dialog .v-overlay__content * {
-  color: #1a1a1a !important;
+.v-dialog .v-overlay__content {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -1053,7 +1010,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 .v-dialog .v-list-item *,
 .v-dialog .v-list-item-title,
 .v-dialog .v-list-item-subtitle {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
@@ -1062,43 +1019,35 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 .v-dialog .v-card-text div,
 .v-dialog .v-card-text p,
 .v-dialog .v-card-text label {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح رسائل التحقق */
 .v-dialog .v-messages,
 .v-dialog .v-messages *,
 .v-dialog .v-message {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح شامل لجميع النصوص في النافذة المنبثقة */
-.v-dialog *,
-.v-dialog * *,
-.v-dialog .v-card *,
-.v-dialog .v-card * * {
-  color: #1a1a1a !important;
+.v-dialog,
+.v-dialog .v-card {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح خاص للقوائم المنسدلة */
 .v-dialog .v-select__menu,
-.v-dialog .v-select__menu *,
-.v-dialog .v-select__menu .v-list-item,
-.v-dialog .v-select__menu .v-list-item * {
-  color: #1a1a1a !important;
+.v-dialog .v-select__menu .v-list-item {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
 /* إصلاح النصوص في جميع الحقول */
 .v-dialog .v-input,
-.v-dialog .v-input *,
 .v-dialog .v-text-field,
-.v-dialog .v-text-field *,
 .v-dialog .v-textarea,
-.v-dialog .v-textarea *,
-.v-dialog .v-select,
-.v-dialog .v-select * {
-  color: #1a1a1a !important;
+.v-dialog .v-select {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح خلفية النافذة المنبثقة */
@@ -1108,18 +1057,14 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 /* إصلاح نهائي شامل لجميع النصوص في النافذة المنبثقة */
 .v-dialog .v-application,
-.v-dialog .v-application *,
-.v-dialog .v-application .v-card,
-.v-dialog .v-application .v-card * {
-  color: #1a1a1a !important;
+.v-dialog .v-application .v-card {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في جميع العناصر */
 .v-dialog .v-card-title span,
-.v-dialog .v-card-title *,
-.v-dialog .v-card-actions,
-.v-dialog .v-card-actions * {
-  color: #1a1a1a !important;
+.v-dialog .v-card-actions {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في الأزرار (استثناء) */
@@ -1133,7 +1078,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 /* إصلاح أزرار النافذة */
 .v-dialog .v-card-actions .v-btn {
-  border-radius: 8px !important;
+  border-radius: var(--radius-lg) !important;
   text-transform: none !important;
   font-weight: 500 !important;
 }
@@ -1144,29 +1089,25 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 /* إصلاح شامل لجميع النصوص في النافذة المنبثقة */
 .v-dialog .v-card-text .v-row,
-.v-dialog .v-card-text .v-row *,
-.v-dialog .v-card-text .v-col,
-.v-dialog .v-card-text .v-col * {
-  color: #1a1a1a !important;
+.v-dialog .v-card-text .v-col {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في جميع الحقول المحددة */
-.v-dialog .v-text-field[data-field="name"] *,
-.v-dialog .v-text-field[data-field="email"] *,
-.v-dialog .v-text-field[data-field="phone"] *,
-.v-dialog .v-text-field[data-field="amount"] *,
-.v-dialog .v-select[data-field="currency"] *,
-.v-dialog .v-text-field[data-field="dueDate"] *,
-.v-dialog .v-textarea[data-field="notes"] * {
-  color: #1a1a1a !important;
+.v-dialog .v-text-field[data-field="name"],
+.v-dialog .v-text-field[data-field="email"],
+.v-dialog .v-text-field[data-field="phone"],
+.v-dialog .v-text-field[data-field="amount"],
+.v-dialog .v-select[data-field="currency"],
+.v-dialog .v-text-field[data-field="dueDate"],
+.v-dialog .v-textarea[data-field="notes"] {
+  color: var(--color-neutral-850) !important;
 }
 
 /* إصلاح النصوص في جميع العناصر */
 .v-dialog .v-card-text .v-input,
-.v-dialog .v-card-text .v-input *,
-.v-dialog .v-card-text .v-field,
-.v-dialog .v-card-text .v-field * {
-  color: #1a1a1a !important;
+.v-dialog .v-card-text .v-field {
+  color: var(--color-neutral-850) !important;
 }
 
 .v-tabs {
@@ -1175,5 +1116,5 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 .v-tab {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }

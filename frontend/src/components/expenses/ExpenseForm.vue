@@ -279,7 +279,7 @@ const saveExpense = () => {
 }
 
 .header-title {
-  font-size: 1.25rem;
+  font-size: var(--font-size-xl);
   font-weight: 700;
   color: white;
 }

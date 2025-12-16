@@ -56,7 +56,7 @@ body {
   padding: 0;
   font-family: var(--font-primary);
   direction: rtl;
-  text-align: right;
+  text-align: end;
   background-color: var(--background-primary);
   color: var(--text-primary);
   line-height: var(--line-height-normal);
@@ -95,7 +95,7 @@ body {
 .v-card {
   border-radius: var(--radius-xl) !important;
   box-shadow: var(--shadow-md) !important;
-  transition: all 0.3s ease !important;
+  transition: all var(--transition-normal) !important;
 }
 
 .v-card:hover {
@@ -153,7 +153,7 @@ body {
 .arabic-text {
   font-family: var(--font-primary) !important;
   direction: rtl !important;
-  text-align: right !important;
+  text-align: end !important;
   font-feature-settings: 'liga', 'kern', 'calt' !important;
   text-rendering: optimizeLegibility !important;
 }
@@ -164,7 +164,7 @@ body {
   border: 1px solid var(--card-border) !important;
   border-radius: var(--radius-2xl) !important;
   box-shadow: var(--card-shadow) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: all var(--transition-normal) !important;
 }
 
 .enhanced-card:hover {
@@ -177,7 +177,7 @@ body {
   border-radius: var(--radius-lg) !important;
   font-weight: var(--font-weight-medium) !important;
   text-transform: none !important;
-  transition: all 0.3s ease !important;
+  transition: all var(--transition-normal) !important;
   box-shadow: var(--shadow-sm) !important;
 }
 
@@ -192,7 +192,7 @@ body {
   border: 1px solid var(--border-light) !important;
   border-radius: var(--radius-2xl) !important;
   box-shadow: var(--shadow-md) !important;
-  transition: all 0.3s ease !important;
+  transition: all var(--transition-normal) !important;
   position: relative !important;
   overflow: hidden !important;
 }
@@ -282,7 +282,7 @@ body {
 /* تحسين الذاكرة */
 .v-fade-transition-enter-active,
 .v-fade-transition-leave-active {
-  transition: opacity 0.3s ease !important;
+  transition: opacity var(--transition-normal) !important;
 }
 
 /* ========================================

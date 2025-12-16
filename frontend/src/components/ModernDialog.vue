@@ -130,7 +130,7 @@ const saveAction = () => {
 }
 
 .dialog-header-small h3 {
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   font-weight: 700 !important;
   line-height: 1.4 !important;
 }
@@ -163,7 +163,7 @@ const saveAction = () => {
   padding: 14px 32px !important;
   background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%) !important;
   color: #ffffff !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
   min-width: 140px !important;
   box-shadow: 
@@ -226,7 +226,7 @@ const saveAction = () => {
   color: #374151 !important;
   background: rgba(255, 255, 255, 1) !important;
   backdrop-filter: blur(10px) !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
   min-width: 140px !important;
   box-shadow: 

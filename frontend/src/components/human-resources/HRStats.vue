@@ -41,7 +41,7 @@
         <div class="stat-icon mb-2 icon-glow">
           <v-icon size="48" color="error">mdi-currency-usd</v-icon>
         </div>
-        <h3 class="text-h3 font-weight-bold text-error mb-2 stat-number" style="font-family: 'Arial', 'Helvetica', sans-serif; direction: ltr; font-size: 1.1rem !important;">{{ formatCurrency(totalSalaries) }}</h3>
+        <h3 class="text-h3 font-weight-bold text-error mb-2 stat-number" style="font-family: 'Arial', 'Helvetica', sans-serif; direction: ltr; font-size: var(--font-size-base-plus) !important;">{{ formatCurrency(totalSalaries) }}</h3>
         <p class="text-subtitle-1 text-error mb-0">إجمالي الرواتب</p>
       </v-card>
     </v-col>
@@ -50,7 +50,7 @@
         <div class="stat-icon mb-2 icon-glow average-salary-icon">
           <v-icon size="48" color="#7c3aed">mdi-chart-line</v-icon>
         </div>
-        <h3 class="text-h3 font-weight-bold mb-2 stat-number average-salary-value" style="font-family: 'Arial', 'Helvetica', sans-serif; direction: ltr; font-size: 1.1rem !important;">{{ formatCurrency(averageSalary) }}</h3>
+        <h3 class="text-h3 font-weight-bold mb-2 stat-number average-salary-value" style="font-family: 'Arial', 'Helvetica', sans-serif; direction: ltr; font-size: var(--font-size-base-plus) !important;">{{ formatCurrency(averageSalary) }}</h3>
         <p class="text-subtitle-1 mb-0 average-salary-label">متوسط الراتب</p>
       </v-card>
     </v-col>

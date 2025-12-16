@@ -614,7 +614,7 @@ const formatCurrency = (amount) => {
 .header-title {
   color: white;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: var(--font-size-base-plus);
 }
 
 .dialog-body {
@@ -637,7 +637,7 @@ const formatCurrency = (amount) => {
 
 .info-card-title {
   background: #f8fafc;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
 
 .info-item {
@@ -662,7 +662,7 @@ const formatCurrency = (amount) => {
 }
 
 .section-title {
-  font-size: 1.1rem;
+  font-size: var(--font-size-base-plus);
   font-weight: 600;
   color: #1e293b;
 }

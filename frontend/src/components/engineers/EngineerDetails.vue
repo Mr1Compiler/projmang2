@@ -24,7 +24,7 @@
             <v-card variant="outlined" class="pa-4 info-card">
               <v-card-title class="text-h6 pa-0 mb-3">
                 <v-icon class="me-2" color="info" style="filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3));">mdi-information</v-icon>
-                <span style="color: #1e40af !important; font-weight: 700 !important; font-size: 1.1rem !important;">المعلومات الأساسية</span>
+                <span style="color: #1e40af !important; font-weight: 700 !important; font-size: var(--font-size-base-plus) !important;">المعلومات الأساسية</span>
               </v-card-title>
               <div class="info-list">
                 <div class="info-item">
@@ -56,7 +56,7 @@
             <v-card variant="outlined" class="pa-4 info-card">
               <v-card-title class="text-h6 pa-0 mb-3">
                 <v-icon class="me-2" color="warning" style="filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.3));">mdi-star</v-icon>
-                <span style="color: #b45309 !important; font-weight: 700 !important; font-size: 1.1rem !important;">التقييم والحالة</span>
+                <span style="color: #b45309 !important; font-weight: 700 !important; font-size: var(--font-size-base-plus) !important;">التقييم والحالة</span>
               </v-card-title>
               <div class="info-list">
                 <div class="info-item d-flex align-center">
@@ -89,7 +89,7 @@
             <v-card variant="outlined" class="pa-4 info-card">
               <v-card-title class="text-h6 pa-0 mb-3">
                 <v-icon class="me-2" color="success" style="filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.3));">mdi-cog</v-icon>
-                <span style="color: #047857 !important; font-weight: 700 !important; font-size: 1.1rem !important;">المهارات</span>
+                <span style="color: #047857 !important; font-weight: 700 !important; font-size: var(--font-size-base-plus) !important;">المهارات</span>
               </v-card-title>
               <div v-if="engineer.skills && engineer.skills.length > 0" class="d-flex flex-wrap gap-2">
                 <v-chip
@@ -190,12 +190,12 @@ const closeDialog = () => {
 .info-label {
   font-weight: 700;
   color: #1e293b;
-  font-size: 0.95rem;
+  font-size: var(--font-size-base-minus);
 }
 
 .info-value {
   color: #334155;
-  font-size: 0.95rem;
+  font-size: var(--font-size-base-minus);
 }
 
 .info-value.text-primary {

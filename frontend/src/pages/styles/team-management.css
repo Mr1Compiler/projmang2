@@ -4,38 +4,38 @@
  */
 /* CSS قوي للتأكد من تطبيق التغييرات على عناوين الجدول */
 .v-data-table.team-data-table .v-data-table__wrapper table thead tr th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .v-data-table.team-data-table .v-data-table__wrapper table thead tr th .v-data-table-header__content {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .v-data-table.team-data-table .v-data-table__wrapper table thead tr th .v-data-table-header__content .v-data-table-header__sort-icon {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3)) !important;
 }
 
 /* Main Page Styles */
 .team-management-page {
-  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 50%, #a5b4fc 100%);
+  background: linear-gradient(135deg, var(--color-indigo-100) 0%, var(--color-indigo-200) 50%, var(--color-indigo-300) 100%);
   min-height: 100vh;
   padding: 2rem 1rem;
 }
 
 /* Header Styles */
 .page-header {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #e0e7ff 100%);
-  border-radius: 20px;
+  background: linear-gradient(135deg, var(--text-white) 0%, var(--color-slate-50) 50%, var(--color-indigo-100) 100%);
+  border-radius: var(--radius-2xl);
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 8px 32px rgba(67, 56, 202, 0.1);
@@ -57,20 +57,20 @@
 }
 
 .main-title {
-  font-size: 2.5rem;
+  font-size: var(--font-size-4xl-plus);
   font-weight: 900;
-  color: #1e293b;
+  color: var(--color-slate-800);
   margin: 0;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .main-subtitle {
-  font-size: 1.2rem;
-  color: #64748b;
+  font-size: var(--font-size-lg-plus);
+  color: var(--color-slate-500);
   margin: 0.5rem 0 0 0;
   font-weight: 500;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 /* Statistics Cards */
@@ -79,9 +79,9 @@
 }
 
 .stat-card {
-  border-radius: 16px;
+  border-radius: var(--radius-2xl);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
 }
@@ -102,24 +102,24 @@
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: var(--font-size-3xl-plus);
   font-weight: 900;
-  color: #1e293b;
+  color: var(--color-slate-800);
   margin: 0;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .stat-label {
-  font-size: 1rem;
-  color: #64748b;
+  font-size: var(--font-size-base);
+  color: var(--color-slate-500);
   margin: 0;
   font-weight: 600;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 /* Search and Filter */
 .search-filter-card {
-  border-radius: 16px;
+  border-radius: var(--radius-2xl);
   margin-bottom: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -132,40 +132,40 @@
 
 .search-field .v-field__input,
 .filter-field .v-field__input {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
   font-weight: 600;
-  font-size: 1rem;
-  padding: 12px 16px;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
+  font-size: var(--font-size-base);
+  padding: var(--space-3) 16px;
+  border: 2px solid var(--color-slate-200);
+  border-radius: var(--radius-xl);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .search-field .v-field__input:focus,
 .filter-field .v-field__input:focus {
-  border-color: #4338ca;
+  border-color: var(--color-indigo-700);
   box-shadow: 0 0 0 4px rgba(67, 56, 202, 0.1);
 }
 
 .search-field .v-label,
 .filter-field .v-label {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .reset-btn {
   height: 56px;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   font-weight: 600;
   text-transform: none;
 }
 
 /* Team Table */
 .team-table-card {
-  border-radius: 16px;
+  border-radius: var(--radius-2xl);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
@@ -173,7 +173,7 @@
 
 .table-title {
   background: linear-gradient(135deg, rgba(5, 150, 105, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
-  border-bottom: 2px solid rgba(5, 150, 105, 0.2);
+  border-bottom: var(--space-0-5) solid rgba(5, 150, 105, 0.2);
   padding: 1.5rem;
 }
 
@@ -183,10 +183,10 @@
 
 .team-data-table th,
 .team-data-table .v-data-table__wrapper table thead tr th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-align: center !important;
   vertical-align: middle !important;
   padding: 1.2rem 0.8rem !important;
@@ -197,23 +197,23 @@
 }
 
 .team-data-table .v-data-table__wrapper table thead tr th .v-data-table-header__content {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 /* CSS إضافي لضمان تطبيق التغييرات على Vuetify */
 .team-data-table .v-data-table__wrapper table thead tr th {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-500) 100%) !important;
   color: white !important;
 }
 
 .team-data-table .v-data-table__wrapper table thead tr th .v-data-table-header__content {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -224,45 +224,45 @@
 
 /* التأكد من أن جميع عناوين الجدول تستخدم اللون الجديد */
 .team-data-table table thead tr th {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-500) 100%) !important;
   color: white !important;
   font-weight: 700 !important;
 }
 
 .team-data-table td {
   background: rgba(248, 250, 252, 0.9);
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 500;
   text-align: center;
   vertical-align: middle;
   padding: 1rem 0.5rem;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+  border-bottom: var(--space-px) solid rgba(226, 232, 240, 0.5);
 }
 
 .team-data-table tbody tr:hover td {
   background: rgba(5, 150, 105, 0.05);
   transform: scale(1.01);
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 /* Member Info */
 .member-info {
-  text-align: right;
+  text-align: end;
 }
 
 .member-name {
-  font-size: 1.1rem;
+  font-size: var(--font-size-base-plus);
   font-weight: 700;
-  color: #1e293b;
+  color: var(--color-slate-800);
   margin: 0 0 0.25rem 0;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .member-email {
-  font-size: 0.9rem;
-  color: #64748b;
+  font-size: var(--font-size-sm-plus);
+  color: var(--color-slate-500);
   margin: 0;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .member-avatar {
@@ -279,17 +279,17 @@
 }
 
 .task-count {
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg-plus);
   font-weight: 700;
-  color: #1e293b;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  color: var(--color-slate-800);
+  font-family: var(--font-primary);
 }
 
 .task-label {
-  font-size: 0.8rem;
-  color: #64748b;
+  font-size: var(--font-size-xs-plus);
+  color: var(--color-slate-500);
   font-weight: 500;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 /* Action Buttons */
@@ -301,7 +301,7 @@
 }
 
 .action-btn {
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   font-weight: 600;
   text-transform: none;
   min-width: 36px;
@@ -309,25 +309,25 @@
 }
 
 .view-btn {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-700) 100%) !important;
   color: white !important;
   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
 .edit-btn {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%) !important;
   color: white !important;
   box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
 }
 
 .reset-btn {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+  background: linear-gradient(135deg, var(--color-violet-500) 0%, var(--color-violet-600) 100%) !important;
   color: white !important;
   box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
 }
 
 .delete-btn {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  background: linear-gradient(135deg, var(--color-red-500) 0%, var(--color-red-600) 100%) !important;
   color: white !important;
   box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
 }
@@ -339,15 +339,15 @@
 
 /* Dialog Styles - تنسيق مشابه لصفحات أخرى */
 .add-member-dialog.image-style-dialog {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-  border-radius: 20px;
+  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-500) 100%);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(5, 150, 105, 0.3);
 }
 
 .add-member-dialog .dialog-header {
-  background: linear-gradient(135deg, #059669, #10b981);
-  padding: 20px;
+  background: linear-gradient(135deg, var(--color-emerald-600), var(--color-emerald-500));
+  padding: var(--space-5);
   color: white;
 }
 
@@ -360,100 +360,100 @@
 .add-member-dialog .header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .add-member-dialog .dialog-title {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
   color: white;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .add-member-dialog .dialog-body {
-  padding: 30px;
+  padding: var(--space-8);
   background: white !important;
 }
 
 .add-member-dialog .form-fields {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
 }
 
 .add-member-dialog .form-field {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 /* تحسين ألوان الحقول */
 .add-member-dialog .form-field .v-field__input {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 600 !important;
   background: white !important;
-  border-radius: 8px !important;
-  font-size: 1rem !important;
-  padding: 12px 16px !important;
+  border-radius: var(--radius-lg) !important;
+  font-size: var(--font-size-base) !important;
+  padding: var(--space-3) 16px !important;
 }
 
 .add-member-dialog .form-field .v-field__input input,
 .add-member-dialog .form-field .v-field__input textarea {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
 .add-member-dialog .form-field .v-field__outline {
-  border-color: #d1d5db !important;
+  border-color: var(--color-gray-300) !important;
   border-width: 2px !important;
 }
 
 .add-member-dialog .form-field .v-label {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   background: white !important;
   padding: 0 8px !important;
   opacity: 1 !important;
 }
 
 .add-member-dialog .form-field .v-field--focused .v-field__outline {
-  border-color: #6b7280 !important;
+  border-color: var(--color-gray-500) !important;
   border-width: 3px !important;
   box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.1) !important;
 }
 
 .add-member-dialog .form-field .v-field:hover .v-field__outline {
-  border-color: #9ca3af !important;
+  border-color: var(--color-gray-400) !important;
 }
 
 .add-member-dialog .form-field .v-field--focused .v-label {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
   opacity: 1 !important;
 }
 
 /* تحسين القوائم المنسدلة */
 .add-member-dialog .form-field .v-select .v-field__input {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
-  padding: 12px 16px !important;
+  font-size: var(--font-size-base) !important;
+  padding: var(--space-3) 16px !important;
 }
 
 .add-member-dialog .form-field .v-select .v-field__outline {
-  border-color: #d1d5db !important;
+  border-color: var(--color-gray-300) !important;
   border-width: 2px !important;
 }
 
 .add-member-dialog .form-field .v-select .v-field--focused .v-field__outline {
-  border-color: #6b7280 !important;
+  border-color: var(--color-gray-500) !important;
   border-width: 3px !important;
   box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.1) !important;
 }
 
 .add-member-dialog .form-field .v-select .v-field:hover .v-field__outline {
-  border-color: #9ca3af !important;
+  border-color: var(--color-gray-400) !important;
 }
 
 .add-member-dialog .form-field .v-select .v-label {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
   background: white !important;
   opacity: 1 !important;
@@ -461,43 +461,43 @@
 
 /* تحسين ألوان رسائل الخطأ */
 .add-member-dialog .form-field .v-messages__message {
-  color: #dc2626 !important;
+  color: var(--color-red-600) !important;
   font-weight: 500 !important;
-  font-size: 0.8rem !important;
+  font-size: var(--font-size-xs-plus) !important;
 }
 
 .add-member-dialog .dialog-actions {
-  padding: 20px 30px;
-  background: #f1f5f9;
+  padding: var(--space-5) 30px;
+  background: var(--color-slate-100);
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 /* تنسيق القوائم المنسدلة المفتوحة - ألوان سوداء */
 .add-member-dialog .form-field .v-list {
   background: white !important;
-  border: 2px solid #1a1a1a !important;
-  border-radius: 8px !important;
+  border: 2px solid var(--color-neutral-850) !important;
+  border-radius: var(--radius-lg) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
 .add-member-dialog .form-field .v-list-item {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
-  padding: 12px 16px !important;
+  font-size: var(--font-size-base) !important;
+  padding: var(--space-3) 16px !important;
   background: white !important;
 }
 
 .add-member-dialog .form-field .v-list-item:hover {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
 }
 
 .add-member-dialog .form-field .v-list-item--active {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
   font-weight: 700 !important;
 }
@@ -508,48 +508,48 @@
 .add-member-dialog .v-menu__content .v-list-item *,
 .add-member-dialog .v-overlay__content .v-list,
 .add-member-dialog .v-overlay__content .v-list-item,
-.add-member-dialog .v-overlay__content .v-list-item * {
-  color: #1a1a1a !important;
+.add-member-dialog .v-overlay__content .v-list-item {
+  color: var(--color-neutral-850) !important;
   background: white !important;
 }
 
 .add-member-dialog .v-menu__content .v-list-item:hover,
 .add-member-dialog .v-overlay__content .v-list-item:hover {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
 }
 
 .add-member-dialog .v-menu__content .v-list-item--active,
 .add-member-dialog .v-overlay__content .v-list-item--active {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
 }
 
 /* إصلاح نص القوائم المنسدلة */
 .add-member-dialog .v-list-item-title,
 .add-member-dialog .v-list-item-content,
-.add-member-dialog .v-list-item-content * {
+.add-member-dialog .v-list-item-content {
   color: inherit !important;
   background: inherit !important;
 }
 
 /* View Member Dialog - يحتفظ بتصميمه الأصلي */
 .view-member-dialog {
-  border-radius: 20px;
+  border-radius: var(--radius-2xl);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .view-member-dialog .dialog-header {
-  background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
+  background: linear-gradient(135deg, var(--color-indigo-700) 0%, var(--color-indigo-500) 100%);
   color: white;
   padding: 1.5rem;
-  border-radius: 20px 20px 0 0;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
 }
 
 .view-member-dialog .dialog-title {
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .view-member-dialog .dialog-actions {
@@ -574,18 +574,18 @@
 }
 
 .member-name-large {
-  font-size: 1.8rem;
+  font-size: var(--font-size-3xl);
   font-weight: 800;
-  color: #1e293b;
+  color: var(--color-slate-800);
   margin: 0 0 0.5rem 0;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .member-email-large {
-  font-size: 1.1rem;
-  color: #64748b;
+  font-size: var(--font-size-base-plus);
+  color: var(--color-slate-500);
   margin: 0 0 1.5rem 0;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .member-stats {
@@ -601,36 +601,36 @@
   gap: 0.5rem;
   padding: 0.75rem;
   background: rgba(248, 250, 252, 0.8);
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   border: 1px solid rgba(226, 232, 240, 0.5);
 }
 
 .stat-item span {
   font-weight: 600;
-  color: #1e293b;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  color: var(--color-slate-800);
+  font-family: var(--font-primary);
 }
 
 .member-notes {
-  text-align: right;
+  text-align: end;
   padding: 1rem;
   background: rgba(248, 250, 252, 0.8);
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   border: 1px solid rgba(226, 232, 240, 0.5);
 }
 
 .member-notes h4 {
-  color: #1e293b;
+  color: var(--color-slate-800);
   font-weight: 700;
   margin: 0 0 0.5rem 0;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .member-notes p {
-  color: #64748b;
+  color: var(--color-slate-500);
   margin: 0;
   line-height: 1.6;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 /* Responsive Design */
@@ -649,11 +649,11 @@
   }
   
   .main-title {
-    font-size: 2rem;
+    font-size: var(--font-size-3xl-plus);
   }
   
   .main-subtitle {
-    font-size: 1rem;
+    font-size: var(--font-size-base);
   }
   
   .stats-section .v-col {
@@ -677,24 +677,24 @@
 
 /* CSS إضافي للتأكد من تطبيق التغييرات */
 .v-data-table.team-data-table .v-data-table__wrapper table thead tr th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .v-data-table.team-data-table .v-data-table__wrapper table thead tr th .v-data-table-header__content {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .v-data-table.team-data-table .v-data-table__wrapper table thead tr th .v-data-table-header__content .v-data-table-header__sort-icon {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3)) !important;
 }
 </style>
@@ -702,59 +702,59 @@
 <style>
 /* CSS غير محدود النطاق للتأكد من تطبيق التغييرات */
 .v-data-table.team-data-table .v-data-table__wrapper table thead tr th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .v-data-table.team-data-table .v-data-table__wrapper table thead tr th .v-data-table-header__content {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .v-data-table.team-data-table .v-data-table__wrapper table thead tr th .v-data-table-header__content .v-data-table-header__sort-icon {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3)) !important;
 }
 
 /* CSS إضافي لجميع عناوين الجداول */
 .v-data-table table thead tr th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .v-data-table table thead tr th .v-data-table-header__content {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 /* CSS لضمان التطبيق على جميع عناصر Vuetify */
 .v-data-table__wrapper table thead tr th {
-  background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
-  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
 
 .v-data-table__wrapper table thead tr th .v-data-table-header__content {
-  color: #ffffff !important;
+  color: var(--text-white) !important;
   font-weight: 800 !important;
-  font-size: 1.1rem !important;
+  font-size: var(--font-size-base-plus) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
 }
@@ -765,32 +765,32 @@
 .add-member-dialog .v-menu__content,
 .add-member-dialog .v-overlay__content {
   background: white !important;
-  border: 2px solid #1a1a1a !important;
-  border-radius: 8px !important;
+  border: 2px solid var(--color-neutral-850) !important;
+  border-radius: var(--radius-lg) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
 .add-member-dialog .v-menu__content .v-list,
 .add-member-dialog .v-overlay__content .v-list {
   background: white !important;
-  padding: 4px 0 !important;
+  padding: var(--space-1) 0 !important;
 }
 
 .add-member-dialog .v-menu__content .v-list-item,
 .add-member-dialog .v-overlay__content .v-list-item {
-  color: #1a1a1a !important;
+  color: var(--color-neutral-850) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
-  padding: 12px 16px !important;
+  font-size: var(--font-size-base) !important;
+  padding: var(--space-3) 16px !important;
   min-height: 48px !important;
   background: white !important;
-  transition: all 0.2s ease !important;
+  transition: all var(--transition-fast) !important;
 }
 
 .add-member-dialog .v-menu__content .v-list-item:hover,
 .add-member-dialog .v-overlay__content .v-list-item:hover {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
 }
 
@@ -798,7 +798,7 @@
 .add-member-dialog .v-overlay__content .v-list-item--active,
 .add-member-dialog .v-menu__content .v-list-item[aria-selected="true"],
 .add-member-dialog .v-overlay__content .v-list-item[aria-selected="true"] {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
   font-weight: 700 !important;
 }
@@ -812,7 +812,7 @@
 
 .add-member-dialog .v-list-item-title *,
 .add-member-dialog .v-list-item-content *,
-.add-member-dialog .v-list-item__content * {
+.add-member-dialog .v-list-item__content {
   color: inherit !important;
   background: inherit !important;
 }
@@ -831,22 +831,22 @@
 .v-dialog:has(.add-member-dialog) .v-overlay__content .v-list,
 .v-dialog:has(.add-member-dialog) .v-menu__content .v-list {
   background: white !important;
-  border: 2px solid #1a1a1a !important;
-  border-radius: 8px !important;
+  border: 2px solid var(--color-neutral-850) !important;
+  border-radius: var(--radius-lg) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
 .v-dialog:has(.add-member-dialog) .v-overlay__content .v-list-item,
 .v-dialog:has(.add-member-dialog) .v-menu__content .v-list-item {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
   background: white !important;
 }
 
 .v-dialog:has(.add-member-dialog) .v-overlay__content .v-list-item:hover,
 .v-dialog:has(.add-member-dialog) .v-menu__content .v-list-item:hover {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
 }
 
@@ -854,7 +854,7 @@
 .v-dialog:has(.add-member-dialog) .v-menu__content .v-list-item--active,
 .v-dialog:has(.add-member-dialog) .v-overlay__content .v-list-item[aria-selected="true"],
 .v-dialog:has(.add-member-dialog) .v-menu__content .v-list-item[aria-selected="true"] {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
   font-weight: 700 !important;
 }
@@ -862,21 +862,21 @@
 /* تنسيق شامل لجميع القوائم المنسدلة */
 body .v-overlay__content .v-list-item,
 body .v-menu__content .v-list-item {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   background: white !important;
 }
 
 body .v-overlay__content .v-list-item:hover,
 body .v-menu__content .v-list-item:hover {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
 }
 
 body .v-overlay__content .v-list-item--active,
 body .v-menu__content .v-list-item--active,
 body .v-overlay__content .v-list-item[aria-selected="true"],
 body .v-menu__content .v-list-item[aria-selected="true"] {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
 }
 
@@ -884,24 +884,24 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 .v-dialog__content .v-overlay__content .v-list,
 .v-dialog__content .v-menu__content .v-list {
   background: white !important;
-  border: 2px solid #1a1a1a !important;
+  border: 2px solid var(--color-neutral-850) !important;
 }
 
 .v-dialog__content .v-overlay__content .v-list-item,
 .v-dialog__content .v-menu__content .v-list-item {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   background: white !important;
 }
 
 .v-dialog__content .v-overlay__content .v-list-item:hover,
 .v-dialog__content .v-menu__content .v-list-item:hover {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
 }
 
 .v-dialog__content .v-overlay__content .v-list-item--active,
 .v-dialog__content .v-menu__content .v-list-item--active {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
 }
 </style>
@@ -911,31 +911,31 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 .add-member-dialog :deep(.v-menu__content),
 .add-member-dialog :deep(.v-overlay__content) {
   background: white !important;
-  border: 2px solid #1a1a1a !important;
-  border-radius: 8px !important;
+  border: 2px solid var(--color-neutral-850) !important;
+  border-radius: var(--radius-lg) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
 .add-member-dialog :deep(.v-menu__content .v-list),
 .add-member-dialog :deep(.v-overlay__content .v-list) {
   background: white !important;
-  padding: 4px 0 !important;
+  padding: var(--space-1) 0 !important;
 }
 
 .add-member-dialog :deep(.v-menu__content .v-list-item),
 .add-member-dialog :deep(.v-overlay__content .v-list-item) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
-  padding: 12px 16px !important;
+  font-size: var(--font-size-base) !important;
+  padding: var(--space-3) 16px !important;
   min-height: 48px !important;
   background: white !important;
 }
 
 .add-member-dialog :deep(.v-menu__content .v-list-item:hover),
 .add-member-dialog :deep(.v-overlay__content .v-list-item:hover) {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
 }
 
@@ -943,7 +943,7 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 .add-member-dialog :deep(.v-overlay__content .v-list-item--active),
 .add-member-dialog :deep(.v-menu__content .v-list-item[aria-selected="true"]),
 .add-member-dialog :deep(.v-overlay__content .v-list-item[aria-selected="true"]) {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
   font-weight: 700 !important;
 }
@@ -969,21 +969,21 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 /* تنسيقات شاملة لكل القوائم المنسدلة في الصفحة - ألوان سوداء */
 .v-dialog .v-overlay__content .v-list-item,
 .v-dialog .v-menu__content .v-list-item {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   background: white !important;
 }
 
 .v-dialog .v-overlay__content .v-list-item:hover,
 .v-dialog .v-menu__content .v-list-item:hover {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
 }
 
 .v-dialog .v-overlay__content .v-list-item--active,
 .v-dialog .v-menu__content .v-list-item--active,
 .v-dialog .v-overlay__content .v-list-item[aria-selected="true"],
 .v-dialog .v-menu__content .v-list-item[aria-selected="true"] {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
 }
 
@@ -993,38 +993,38 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 .v-list-item__content,
 .v-list-item-title,
 .v-list-item-content {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
 }
 
 .v-list-item:hover {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
 }
 
 .v-list-item--active,
 .v-list-item[aria-selected="true"] {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
 }
 
 /* تنسيق خاص لحقول v-select في الحوار */
 .black-dropdown-select :deep(.v-menu__content .v-list-item),
 .black-dropdown-select :deep(.v-overlay__content .v-list-item) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   background: white !important;
 }
 
 .black-dropdown-select :deep(.v-menu__content .v-list-item:hover),
 .black-dropdown-select :deep(.v-overlay__content .v-list-item:hover) {
-  background: #f5f5f5 !important;
-  color: #000000 !important;
+  background: var(--color-neutral-100) !important;
+  color: var(--text-primary) !important;
 }
 
 .black-dropdown-select :deep(.v-menu__content .v-list-item--active),
 .black-dropdown-select :deep(.v-overlay__content .v-list-item--active),
 .black-dropdown-select :deep(.v-menu__content .v-list-item[aria-selected="true"]),
 .black-dropdown-select :deep(.v-overlay__content .v-list-item[aria-selected="true"]) {
-  background: #1a1a1a !important;
+  background: var(--color-neutral-850) !important;
   color: white !important;
 }
 
@@ -1035,7 +1035,7 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 .add-member-dialog .v-label--active,
 .add-member-dialog .v-label--floating,
 .add-member-dialog .v-field__label--floating {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
   opacity: 1 !important;
 }
@@ -1044,7 +1044,7 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 .add-member-dialog .v-field--focused .v-field__label,
 .add-member-dialog .v-field--focused .v-label--active,
 .add-member-dialog .v-field--focused .v-field__label--active {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
   opacity: 1 !important;
 }
@@ -1052,7 +1052,7 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 .add-member-dialog .v-text-field .v-label,
 .add-member-dialog .v-select .v-label,
 .add-member-dialog .v-textarea .v-label {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
   opacity: 1 !important;
 }
@@ -1060,7 +1060,7 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 .add-member-dialog .v-text-field .v-field--focused .v-label,
 .add-member-dialog .v-select .v-field--focused .v-label,
 .add-member-dialog .v-textarea .v-field--focused .v-label {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
   opacity: 1 !important;
 }
@@ -1070,7 +1070,7 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 /* تنسيقات إضافية للتسميات */
 .add-member-dialog :deep(.v-label),
 .add-member-dialog :deep(.v-field__label) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
   opacity: 1 !important;
 }
@@ -1079,53 +1079,53 @@ body .v-menu__content .v-list-item[aria-selected="true"] {
 .add-member-dialog :deep(.v-field__label--active),
 .add-member-dialog :deep(.v-label--floating),
 .add-member-dialog :deep(.v-field__label--floating) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
   opacity: 1 !important;
 }
 
 .add-member-dialog :deep(.v-field--focused .v-label),
 .add-member-dialog :deep(.v-field--focused .v-field__label) {
-  color: #000000 !important;
+  color: var(--text-primary) !important;
   font-weight: 700 !important;
   opacity: 1 !important;
 }
 
 /* تنسيق شامل لجميع حدود الحقول - رمادي فاتح */
 .add-member-dialog :deep(.v-field__outline) {
-  border-color: #d1d5db !important;
+  border-color: var(--color-gray-300) !important;
 }
 
 .add-member-dialog :deep(.v-field__outline__start),
 .add-member-dialog :deep(.v-field__outline__notch),
 .add-member-dialog :deep(.v-field__outline__end) {
-  border-color: #d1d5db !important;
+  border-color: var(--color-gray-300) !important;
 }
 
 .add-member-dialog :deep(.v-field--focused .v-field__outline) {
-  border-color: #6b7280 !important;
+  border-color: var(--color-gray-500) !important;
   border-width: 3px !important;
 }
 
 .add-member-dialog :deep(.v-field--focused .v-field__outline__start),
 .add-member-dialog :deep(.v-field--focused .v-field__outline__notch),
 .add-member-dialog :deep(.v-field--focused .v-field__outline__end) {
-  border-color: #6b7280 !important;
+  border-color: var(--color-gray-500) !important;
 }
 
 .add-member-dialog :deep(.v-field:hover .v-field__outline) {
-  border-color: #9ca3af !important;
+  border-color: var(--color-gray-400) !important;
 }
 
 .add-member-dialog :deep(.v-text-field .v-field__outline),
 .add-member-dialog :deep(.v-select .v-field__outline),
 .add-member-dialog :deep(.v-textarea .v-field__outline) {
-  border-color: #d1d5db !important;
+  border-color: var(--color-gray-300) !important;
 }
 
 .add-member-dialog :deep(.v-text-field .v-field--focused .v-field__outline),
 .add-member-dialog :deep(.v-select .v-field--focused .v-field__outline),
 .add-member-dialog :deep(.v-textarea .v-field--focused .v-field__outline) {
-  border-color: #6b7280 !important;
+  border-color: var(--color-gray-500) !important;
   border-width: 3px !important;
 }

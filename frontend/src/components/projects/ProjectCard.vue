@@ -63,8 +63,8 @@
       <!-- Progress Bar -->
       <div class="progress-section" style="margin-top: 1rem;">
         <div class="progress-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-          <span class="progress-label" style="font-family: 'Arial', 'Helvetica', sans-serif; color: #424242; font-size: 0.9rem; font-weight: 600;">نسبة الإنجاز</span>
-          <span class="progress-percentage" style="font-family: 'Arial', 'Helvetica', sans-serif; color: #1976d2; font-size: 0.9rem; font-weight: 700;">{{ project.progress || 0 }}%</span>
+          <span class="progress-label" style="font-family: 'Arial', 'Helvetica', sans-serif; color: #424242; font-size: var(--font-size-sm-plus); font-weight: 600;">نسبة الإنجاز</span>
+          <span class="progress-percentage" style="font-family: 'Arial', 'Helvetica', sans-serif; color: #1976d2; font-size: var(--font-size-sm-plus); font-weight: 700;">{{ project.progress || 0 }}%</span>
         </div>
         <v-progress-linear
           :model-value="project.progress || 0"
@@ -187,7 +187,7 @@ const statusIcon = computed(() => {
 /* Status chip styling */
 .status-chip-main {
   font-weight: 600 !important;
-  font-size: 0.85rem !important;
+  font-size: var(--font-size-sm-minus) !important;
 }
 
 /* Advanced hover effects for cards */
@@ -214,7 +214,7 @@ const statusIcon = computed(() => {
   }
 
   .project-name {
-    font-size: 1rem !important;
+    font-size: var(--font-size-base) !important;
   }
 
   .detail-item {
@@ -222,7 +222,7 @@ const statusIcon = computed(() => {
   }
 
   .detail-text {
-    font-size: 0.8rem !important;
+    font-size: var(--font-size-xs-plus) !important;
   }
 }
 </style>

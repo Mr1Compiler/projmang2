@@ -24,7 +24,7 @@
             <div class="stat-icon mb-3 icon-glow">
               <v-icon size="64" color="error">mdi-currency-usd</v-icon>
             </div>
-            <h3 class="text-h3 font-weight-bold text-error mb-2 stat-number" style="font-family: 'Arial', 'Helvetica', sans-serif; direction: ltr; font-size: 1.1rem !important;">{{ formatCurrency(totalExpenses) || '0 د.ع' }}</h3>
+            <h3 class="text-h3 font-weight-bold text-error mb-2 stat-number" style="font-family: 'Arial', 'Helvetica', sans-serif; direction: ltr; font-size: var(--font-size-base-plus) !important;">{{ formatCurrency(totalExpenses) || '0 د.ع' }}</h3>
             <p class="text-subtitle-1 text-error mb-0">إجمالي المصروفات</p>
           </v-card>
         </v-col>

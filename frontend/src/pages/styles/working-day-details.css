@@ -4,6 +4,6 @@
  */
 .working-day-details-page {
   min-height: 100vh;
-  background: #f5f5f5;
-  padding: 20px 0;
+  background: var(--color-gray-100);
+  padding: var(--space-5) 0;
 }

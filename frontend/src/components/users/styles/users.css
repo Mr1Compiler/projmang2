@@ -69,7 +69,7 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
   background: #ffffff !important;
   position: relative;
-  transition: all 0.4s ease;
+  transition: all var(--transition-normal);
 }
 
 .users-table .v-card-title {
@@ -165,7 +165,7 @@
   display: flex;
   align-items: center;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
 }
 
 .dialog-title h2 {
@@ -201,7 +201,7 @@
 .user-avatar-upload {
   border: 3px solid rgba(219, 15, 172, 0.5);
   box-shadow: 0 8px 25px rgba(219, 15, 172, 0.3);
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .user-avatar-upload:hover {
@@ -233,7 +233,7 @@
   background: rgba(124, 93, 196, 0.9);
   border-radius: 12px;
   border: 1px solid rgba(219, 15, 172, 0.2);
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .add-user-dialog .v-text-field .v-field:hover,
@@ -248,7 +248,7 @@
 .add-user-dialog .v-field__label {
   color: #000000 !important;
   font-weight: 800 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   opacity: 1 !important;
   background: white !important;
   padding: 0 8px !important;

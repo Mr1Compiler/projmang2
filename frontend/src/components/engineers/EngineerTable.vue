@@ -31,7 +31,7 @@
         clearable
         hide-details
         class="mb-4 search-field-enhanced"
-        style="font-size: 1.1rem !important; font-weight: 500 !important;"
+        style="font-size: var(--font-size-base-plus) !important; font-weight: 500 !important;"
         placeholder="ابحث بالاسم أو البريد الإلكتروني أو التخصص..."
         color="primary"
         bg-color="white"
@@ -60,8 +60,8 @@
       <!-- Name Column -->
       <template v-slot:item.name="{ item }">
         <div>
-          <div class="font-weight-bold text-primary" style="font-size: 1rem !important; color: #1976d2 !important;">{{ item.name }}</div>
-          <div class="text-caption text-medium-emphasis" style="font-size: 0.875rem !important; color: #666 !important;">{{ item.email }}</div>
+          <div class="font-weight-bold text-primary" style="font-size: var(--font-size-base) !important; color: #1976d2 !important;">{{ item.name }}</div>
+          <div class="text-caption text-medium-emphasis" style="font-size: var(--font-size-sm) !important; color: #666 !important;">{{ item.email }}</div>
         </div>
       </template>
 

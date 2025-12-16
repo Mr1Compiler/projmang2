@@ -9,11 +9,11 @@
 
 /* رأس الصفحة المحسن - متناسق مع الصفحات الأخرى */
 .page-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%) !important;
+  background: linear-gradient(135deg, var(--color-indigo-400) 0%, var(--color-violet-600) 50%, var(--color-indigo-400) 100%) !important;
   backdrop-filter: blur(20px);
-  border-radius: 16px;
-  padding: 20px 30px;
-  margin-bottom: 20px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-5) 30px;
+  margin-bottom: var(--space-5);
   text-align: center !important;
   border: 2px solid rgba(255, 255, 255, 0.3);
   position: relative;
@@ -32,14 +32,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2-5);
   width: 100%;
   text-align: center;
 }
 
 .page-icon {
-  font-size: 2rem;
+  font-size: var(--font-size-3xl-plus);
   display: inline-block;
   animation: iconFloat 3s ease-in-out infinite;
 }
@@ -65,7 +65,7 @@
 }
 
 .page-title {
-  font-size: 2rem;
+  font-size: var(--font-size-3xl-plus);
   font-weight: 800;
   color: rgb(246, 246, 246);
   margin: 0;
@@ -75,11 +75,11 @@
   width: auto;
   line-height: 1.2;
   letter-spacing: 0.5px;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
 }
 
 .page-subtitle {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   color: rgba(243, 240, 240, 0.9);
   margin: 0;
   padding: 0;
@@ -87,7 +87,7 @@
   width: 100%;
   line-height: 1.4;
   letter-spacing: 0.3px;
-  font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif;
+  font-family: var(--font-primary);
   font-weight: 500;
 }
 
@@ -214,7 +214,7 @@
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: var(--z-base);
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
@@ -222,9 +222,9 @@
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: var(--font-size-6xl);
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-white);
   text-shadow: 0 4px 12px rgba(0,0,0,0.4);
   margin-bottom: 1rem;
   line-height: 1.2;
@@ -270,12 +270,12 @@
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
+  font-size: var(--font-size-xl);
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 3rem;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
   text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
@@ -283,14 +283,14 @@
 .quick-actions-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: var(--space-6);
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .quick-action-card {
-  border-radius: 24px;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius-3xl);
+  transition: all var(--transition-slow);
   cursor: pointer;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(25px);
@@ -327,7 +327,7 @@
   );
   animation: rotateGlow 4s linear infinite;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-normal);
 }
 
 @keyframes rotateGlow {
@@ -345,7 +345,7 @@
   bottom: 0;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-normal);
 }
 
 /* تأثير الحدود المتحركة */
@@ -356,13 +356,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 20px;
-  padding: 2px;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-0-5);
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(147, 51, 234, 0.3), rgba(59, 130, 246, 0.3));
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(var(--text-white) 0 0) content-box, linear-gradient(var(--text-white) 0 0);
   mask-composite: exclude;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-normal);
 }
 
 .quick-action-card:hover {
@@ -388,7 +388,7 @@
 /* تأثير النبض للبطاقات */
 .quick-action-card:active {
   transform: translateY(-8px) scale(0.98);
-  transition: all 0.1s ease;
+  transition: all var(--transition-fast);
 }
 
 /* تأثير الحدود المتوهجة */
@@ -403,12 +403,12 @@
 
 /* قسم الإحصائيات */
 .stats-section {
-  background: #f8f9fa;
+  background: var(--color-gray-50);
 }
 
 .stat-card {
-  border-radius: 16px;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-2xl);
+  transition: all var(--transition-normal);
   height: 100%;
 }
 
@@ -419,8 +419,8 @@
 
 /* تأثيرات عامة */
 .v-card {
-  border-radius: 16px;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-2xl);
+  transition: all var(--transition-normal);
 }
 
 .v-card:hover {
@@ -428,22 +428,22 @@
 }
 
 .text-primary {
-  color: #1976d2 !important;
+  color: var(--color-blue-600) !important;
 }
 
 /* تصميم متجاوب */
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2.5rem;
+    font-size: var(--font-size-4xl-plus);
   }
   
   .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: var(--font-size-base-plus);
   }
   
   .quick-actions-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: var(--space-4);
   }
 }
 
@@ -451,7 +451,7 @@
 @media (max-width: 600px) {
   .quick-actions-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: var(--space-3);
   }
   
   .feature-grid {
@@ -471,7 +471,7 @@
   }
 }
 
-.hero-content > * {
+.hero-content > {
   animation: fadeInUp 0.6s ease-out;
 }
 
@@ -486,16 +486,16 @@
 /* دعم RTL شامل */
 .hero-section {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .hero-title {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 .hero-subtitle {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -505,21 +505,21 @@
 
 .quick-action-card {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .quick-action-card .v-card-text {
   text-align: center;
   position: relative;
-  z-index: 2;
+  z-index: var(--z-base);
 }
 
 /* تأثيرات الأيقونات المحسنة */
 .quick-action-card .v-icon {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-slow);
   filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15));
   position: relative;
-  font-size: 72px !important;
+  font-size: var(--font-size-6xl) !important;
   width: 72px !important;
   height: 72px !important;
 }
@@ -569,76 +569,76 @@
 
 /* تأثيرات النصوص */
 .quick-action-card h3 {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   font-weight: 700;
   letter-spacing: 0.5px;
-  font-size: 1.1rem;
-  margin-bottom: 8px;
+  font-size: var(--font-size-base-plus);
+  margin-bottom: var(--space-2);
   text-align: center !important;
   width: 100%;
-  color: #1976d2 !important;
+  color: var(--color-blue-600) !important;
 }
 
 .quick-action-card:hover h3 {
-  color: #1565c0 !important;
+  color: var(--color-blue-700) !important;
   transform: translateY(-2px);
-  font-size: 1.15rem;
+  font-size: var(--font-size-lg);
 }
 
 .quick-action-card p {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   opacity: 0.8;
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm-plus);
   line-height: 1.4;
   text-align: center !important;
   width: 100%;
-  color: #757575 !important;
+  color: var(--color-gray-500) !important;
 }
 
 .quick-action-card:hover p {
   opacity: 1;
   transform: translateY(-1px);
-  font-size: 0.95rem;
-  color: #616161 !important;
+  font-size: var(--font-size-base-minus);
+  color: var(--color-gray-600) !important;
 }
 
 .stats-section {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 /* تنسيق خاص للأرقام الإنجليزية في الإحصائيات */
 .stat-card h3 {
-  font-family: 'Arial', 'Helvetica', sans-serif !important;
+  font-family: var(--font-primary) !important;
   font-variant-numeric: tabular-nums;
   direction: ltr !important;
   text-align: center !important;
 }
 
 .stat-card p {
-  font-family: 'Arial', 'Helvetica', sans-serif !important;
+  font-family: var(--font-primary) !important;
   direction: rtl !important;
   text-align: center !important;
 }
 
 /* تنسيق خاص لبطاقة السعر بالدينار العراقي */
 .currency-amount {
-  font-family: 'Arial', 'Helvetica', sans-serif !important;
+  font-family: var(--font-primary) !important;
   font-variant-numeric: tabular-nums !important;
   direction: ltr !important;
   text-align: center !important;
-  font-size: 3.5rem !important;
+  font-size: var(--font-size-6xl) !important;
   font-weight: 900 !important;
   letter-spacing: 2px !important;
-  color: #d32f2f !important;
+  color: var(--color-red-700) !important;
   line-height: 1 !important;
   margin-bottom: 0.5rem !important;
   text-shadow: 0 4px 8px rgba(211, 47, 47, 0.5) !important;
-  border: 3px solid #d32f2f !important;
-  padding: 10px !important;
-  border-radius: 10px !important;
-  background: linear-gradient(135deg, #fff3e0 0%, #ffebee 100%) !important;
-  transition: all 0.3s ease !important;
+  border: 3px solid var(--color-red-700) !important;
+  padding: var(--space-2-5) !important;
+  border-radius: var(--radius-xl) !important;
+  background: linear-gradient(135deg, var(--color-orange-50) 0%, var(--color-red-50) 100%) !important;
+  transition: all var(--transition-normal) !important;
   box-shadow: 0 8px 16px rgba(211, 47, 47, 0.3) !important;
 }
 
@@ -649,21 +649,21 @@
 }
 
 .currency-label {
-  font-family: 'Arial', 'Helvetica', sans-serif !important;
+  font-family: var(--font-primary) !important;
   direction: rtl !important;
   text-align: center !important;
-  font-size: 1.5rem !important;
+  font-size: var(--font-size-2xl) !important;
   font-weight: 700 !important;
-  color: #d32f2f !important;
+  color: var(--color-red-700) !important;
   margin-bottom: 0 !important;
   line-height: 1.4 !important;
   letter-spacing: 1px !important;
   text-shadow: 0 2px 4px rgba(211, 47, 47, 0.4) !important;
-  border: 2px solid #d32f2f !important;
-  padding: 8px !important;
-  border-radius: 8px !important;
-  background: linear-gradient(135deg, #fff3e0 0%, #ffebee 100%) !important;
-  transition: all 0.3s ease !important;
+  border: 2px solid var(--color-red-700) !important;
+  padding: var(--space-2) !important;
+  border-radius: var(--radius-lg) !important;
+  background: linear-gradient(135deg, var(--color-orange-50) 0%, var(--color-red-50) 100%) !important;
+  transition: all var(--transition-normal) !important;
   box-shadow: 0 4px 8px rgba(211, 47, 47, 0.2) !important;
 }
 
@@ -675,34 +675,34 @@
 
 /* تنسيق أقوى للتأكد من التطبيق */
 .stat-card .currency-amount {
-  font-family: 'Arial', 'Helvetica', sans-serif !important;
-  font-size: 3.5rem !important;
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-6xl) !important;
   font-weight: 900 !important;
-  color: #d32f2f !important;
+  color: var(--color-red-700) !important;
   direction: ltr !important;
   text-align: center !important;
   letter-spacing: 2px !important;
   text-shadow: 0 4px 8px rgba(211, 47, 47, 0.5) !important;
-  border: 3px solid #d32f2f !important;
-  padding: 10px !important;
-  border-radius: 10px !important;
-  background: linear-gradient(135deg, #fff3e0 0%, #ffebee 100%) !important;
+  border: 3px solid var(--color-red-700) !important;
+  padding: var(--space-2-5) !important;
+  border-radius: var(--radius-xl) !important;
+  background: linear-gradient(135deg, var(--color-orange-50) 0%, var(--color-red-50) 100%) !important;
   box-shadow: 0 8px 16px rgba(211, 47, 47, 0.3) !important;
 }
 
 .stat-card .currency-label {
-  font-family: 'Arial', 'Helvetica', sans-serif !important;
-  font-size: 1.5rem !important;
+  font-family: var(--font-primary) !important;
+  font-size: var(--font-size-2xl) !important;
   font-weight: 700 !important;
-  color: #d32f2f !important;
+  color: var(--color-red-700) !important;
   direction: rtl !important;
   text-align: center !important;
   letter-spacing: 1px !important;
   text-shadow: 0 2px 4px rgba(211, 47, 47, 0.4) !important;
-  border: 2px solid #d32f2f !important;
-  padding: 8px !important;
-  border-radius: 8px !important;
-  background: linear-gradient(135deg, #fff3e0 0%, #ffebee 100%) !important;
+  border: 2px solid var(--color-red-700) !important;
+  padding: var(--space-2) !important;
+  border-radius: var(--radius-lg) !important;
+  background: linear-gradient(135deg, var(--color-orange-50) 0%, var(--color-red-50) 100%) !important;
   box-shadow: 0 4px 8px rgba(211, 47, 47, 0.2) !important;
 }
 
@@ -713,7 +713,7 @@
 
 /* إصلاح اتجاه النصوص */
 h1, h2, h3, h4, h5, h6, p, span, div {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -730,30 +730,30 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 /* إصلاح اتجاه القوائم */
 .v-list {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 /* إصلاح اتجاه الكروت */
 .v-card {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .v-card-title {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 .v-card-text {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 /* بطاقات الإحصائيات المحسنة */
 .stat-card {
   background: var(--bg-white) !important;
-  border-radius: 16px !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius-2xl) !important;
+  transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
   min-height: 200px;
@@ -777,20 +777,20 @@ h1, h2, h3, h4, h5, h6, p, span, div {
   right: 0;
   height: 4px;
   background: var(--gradient-primary);
-  border-radius: 16px 16px 0 0;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
 }
 
 .stat-icon {
   position: relative;
-  z-index: 2;
+  z-index: var(--z-base);
 }
 
 .stat-card .v-icon {
-  font-size: 84px !important;
+  font-size: var(--font-size-6xl) !important;
   width: 84px !important;
   height: 84px !important;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .stat-card:hover .v-icon {
@@ -799,16 +799,16 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 }
 
 .stat-card h3 {
-  font-size: 2.5rem !important;
+  font-size: var(--font-size-4xl-plus) !important;
   font-weight: 700 !important;
-  margin-bottom: 8px !important;
+  margin-bottom: var(--space-2) !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center !important;
   width: 100%;
 }
 
 .stat-card p {
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   font-weight: 500 !important;
   opacity: 0.8;
   text-align: center !important;
@@ -839,11 +839,11 @@ h1, h2, h3, h4, h5, h6, p, span, div {
   }
   
   .stat-card h3 {
-    font-size: 2.2rem !important;
+    font-size: var(--font-size-4xl) !important;
   }
   
   .stat-card .v-icon {
-    font-size: 76px !important;
+    font-size: var(--font-size-6xl) !important;
     width: 76px !important;
     height: 76px !important;
   }
@@ -852,15 +852,15 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 @media (max-width: 600px) {
   .stat-card {
     min-height: 180px;
-    padding: 20px !important;
+    padding: var(--space-5) !important;
   }
   
   .stat-card h3 {
-    font-size: 2rem !important;
+    font-size: var(--font-size-3xl-plus) !important;
   }
   
   .stat-card .v-icon {
-    font-size: 68px !important;
+    font-size: var(--font-size-6xl) !important;
     width: 68px !important;
     height: 68px !important;
   }

@@ -3,7 +3,7 @@
  * Extracted from project-details.vue
  */
 .project-details-page {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-200) 100%);
   min-height: 100vh;
   padding: 1rem;
 }
@@ -13,14 +13,14 @@
   align-items: center;
   margin-bottom: 2rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  border-radius: 16px;
+  background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-700) 100%);
+  border-radius: var(--radius-2xl);
   color: white;
   box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
 }
 
 .back-btn {
-  margin-left: 1rem;
+  margin-inline-start: 1rem;
   color: white !important;
 }
 
@@ -29,14 +29,14 @@
 }
 
 .page-title {
-  font-size: 2.5rem;
+  font-size: var(--font-size-4xl-plus);
   font-weight: 700;
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .page-subtitle {
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg-plus);
   opacity: 0.9;
   margin: 0;
 }
@@ -46,8 +46,8 @@
 }
 
 .detail-card {
-  border-radius: 16px !important;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-2xl) !important;
+  transition: all var(--transition-normal);
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -59,30 +59,30 @@
 
 .card-header {
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: var(--font-size-base-plus);
   padding: 1rem 1.5rem !important;
-  border-radius: 16px 16px 0 0 !important;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0 !important;
   margin: 0 !important;
 }
 
 .info-header {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-700) 100%);
   color: white;
 }
 
 .status-header {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, var(--color-violet-500) 0%, var(--color-violet-600) 100%);
   color: white;
 }
 
 .work-days-header {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%);
   color: white;
 }
 
 .edit-days-btn {
   opacity: 0.8;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .edit-days-btn:hover {
@@ -91,12 +91,12 @@
 }
 
 .financial-header {
-  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  background: linear-gradient(135deg, var(--color-cyan-500) 0%, var(--color-cyan-600) 100%);
   color: white;
 }
 
 .description-header {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%);
   color: white;
 }
 
@@ -110,45 +110,45 @@
   align-items: center;
   margin-bottom: 1rem;
   padding: 0.75rem;
-  background: #f8fafc;
-  border-radius: 12px;
-  border-left: 4px solid #3b82f6;
-  transition: all 0.3s ease;
+  background: var(--color-slate-50);
+  border-radius: var(--radius-xl);
+  border-inline-start: 4px solid var(--color-blue-500);
+  transition: all var(--transition-normal);
 }
 
 .detail-item:hover {
-  background: #e2e8f0;
+  background: var(--color-slate-200);
   transform: translateX(4px);
 }
 
 .detail-item strong {
-  color: #374151;
+  color: var(--color-gray-700);
   font-weight: 600;
 }
 
 .detail-item span {
-  color: #1f2937;
+  color: var(--color-gray-800);
   font-weight: 500;
 }
 
 .financial-item .initial-cost {
-  color: #10b981 !important;
+  color: var(--color-emerald-500) !important;
   font-weight: 700 !important;
-  font-family: 'Arial', sans-serif;
+  font-family: var(--font-primary);
   direction: ltr;
 }
 
 .financial-item .critical-cost {
-  color: #f59e0b !important;
+  color: var(--color-amber-500) !important;
   font-weight: 700 !important;
-  font-family: 'Arial', sans-serif;
+  font-family: var(--font-primary);
   direction: ltr;
 }
 
 .financial-item .difference {
-  color: #ef4444 !important;
+  color: var(--color-red-500) !important;
   font-weight: 700 !important;
-  font-family: 'Arial', sans-serif;
+  font-family: var(--font-primary);
   direction: ltr;
 }
 
@@ -158,15 +158,15 @@
   justify-content: space-between;
   margin-bottom: 0.75rem;
   padding: 1rem;
-  background: #f0fdf4;
-  border-radius: 12px;
-  border-left: 4px solid #10b981;
-  transition: all 0.3s ease;
+  background: var(--color-green-50);
+  border-radius: var(--radius-xl);
+  border-inline-start: 4px solid var(--color-emerald-500);
+  transition: all var(--transition-normal);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .work-day-item:hover {
-  background: #dcfce7;
+  background: var(--color-green-100);
   transform: translateX(4px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -178,35 +178,35 @@
 
 .work-day-item .day-name {
   font-weight: 600;
-  color: #166534;
-  font-size: 1rem;
+  color: var(--color-green-800);
+  font-size: var(--font-size-base);
 }
 
 .work-day-item .day-hours {
   font-weight: 700;
-  color: #15803d;
-  font-family: 'Arial', sans-serif;
+  color: var(--color-green-700);
+  font-family: var(--font-primary);
   direction: ltr;
   background: rgba(34, 197, 94, 0.1);
   padding: 0.25rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm-plus);
 }
 
 .description-text {
-  font-size: 1.1rem;
+  font-size: var(--font-size-base-plus);
   line-height: 1.6;
-  color: #374151;
+  color: var(--color-gray-700);
   margin: 0;
   padding: 1rem;
-  background: #f8fafc;
-  border-radius: 12px;
-  border-left: 4px solid #f59e0b;
+  background: var(--color-slate-50);
+  border-radius: var(--radius-xl);
+  border-inline-start: 4px solid var(--color-amber-500);
 }
 
 @media (max-width: 768px) {
   .page-title {
-    font-size: 2rem;
+    font-size: var(--font-size-3xl-plus);
   }
   
   .page-header {
@@ -215,7 +215,7 @@
   }
   
   .back-btn {
-    margin-left: 0;
+    margin-inline-start: 0;
     margin-bottom: 1rem;
   }
   

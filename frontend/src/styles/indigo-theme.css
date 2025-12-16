@@ -25,7 +25,7 @@
   border: 1px solid rgba(199, 210, 254, 0.3);
   border-radius: 16px;
   box-shadow: 0 4px 6px -1px rgba(67, 56, 202, 0.1), 0 2px 4px -1px rgba(67, 56, 202, 0.06);
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .indigo-card:hover {
@@ -51,7 +51,7 @@
   padding: 12px 24px;
   font-weight: 600;
   box-shadow: 0 4px 6px -1px rgba(67, 56, 202, 0.1), 0 2px 4px -1px rgba(67, 56, 202, 0.06);
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .indigo-btn:hover {
@@ -67,7 +67,7 @@
   border-radius: 12px;
   padding: 10px 22px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .indigo-btn-outlined:hover {
@@ -197,7 +197,7 @@
 @media (max-width: 768px) {
   .indigo-btn {
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
   }
   
   .indigo-card {

@@ -73,14 +73,14 @@
 
 /* إعدادات HTML العامة */
 * {
-  font-family: 'Cairo', 'Tajawal', 'Noto Sans Arabic', 'Arial', sans-serif;
+  font-family: var(--font-primary);
   box-sizing: border-box;
 }
 
 body {
   direction: rtl;
-  text-align: right;
-  font-family: 'Cairo', 'Tajawal', 'Noto Sans Arabic', 'Arial', sans-serif;
+  text-align: end;
+  font-family: var(--font-primary);
   margin: 0;
   padding: 0;
   line-height: 1.6;
@@ -95,13 +95,13 @@ body {
 .v-row,
 .v-col {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 /* إصلاح اتجاه النصوص */
 h1, h2, h3, h4, h5, h6, 
 p, span, div, a, button, label {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -114,9 +114,9 @@ p, span, div, a, button, label {
 /* الأزرار - تأثيرات عصرية */
 .v-btn {
   direction: rtl;
-  text-align: right;
+  text-align: end;
   font-weight: 500;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--transition-normal);
   border-radius: 12px;
   text-transform: none;
   position: relative;
@@ -150,10 +150,10 @@ p, span, div, a, button, label {
 /* البطاقات */
 .v-card {
   direction: rtl;
-  text-align: right;
+  text-align: end;
   border-radius: 12px;
   box-shadow: 0 2px 8px var(--shadow-light);
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
   background: var(--bg-card);
   color: var(--text-dark);
 }
@@ -169,7 +169,7 @@ p, span, div, a, button, label {
 .v-list-item,
 .v-list-item-title {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 /* حقول النماذج */
@@ -177,11 +177,11 @@ p, span, div, a, button, label {
 .v-select,
 .v-textarea {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .v-text-field .v-field__input {
-  text-align: right;
+  text-align: end;
   color: var(--text-dark);
 }
 
@@ -196,7 +196,7 @@ p, span, div, a, button, label {
 .v-data-table-header,
 .v-data-table tbody tr td {
   direction: rtl;
-  text-align: right;
+  text-align: end;
   background: var(--bg-card);
   color: var(--text-dark);
 }
@@ -218,7 +218,7 @@ p, span, div, a, button, label {
 .v-menu,
 .v-menu .v-list {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .v-chip {
@@ -233,8 +233,19 @@ p, span, div, a, button, label {
 
 /* إصلاح اتجاه الشريط الجانبي */
 .v-navigation-drawer {
-  direction: rtl;
-  text-align: right;
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.v-navigation-drawer * {
+  text-align: right !important;
+}
+
+.v-navigation-drawer .v-list-item-title,
+.v-navigation-drawer .v-list-item-subtitle,
+.v-navigation-drawer .v-list-item__content {
+  text-align: right !important;
+  direction: rtl !important;
 }
 
 /* توحيد ألوان الشريط الجانبي - متناسق */
@@ -319,7 +330,7 @@ p, span, div, a, button, label {
 .sidebar-header h1 {
   color: var(--text-primary) !important;
   font-weight: 700 !important;
-  font-size: 1.6rem !important;
+  font-size: var(--font-size-2xl-plus) !important;
   text-shadow: 0 3px 6px var(--shadow-dark) !important;
   margin-bottom: 12px;
   letter-spacing: 0.5px;
@@ -327,7 +338,7 @@ p, span, div, a, button, label {
 
 .sidebar-header p {
   color: var(--text-secondary) !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   text-shadow: 0 2px 4px var(--shadow-medium) !important;
   margin: 0;
   font-weight: 500;
@@ -352,7 +363,7 @@ p, span, div, a, button, label {
   box-shadow: 0 6px 16px var(--shadow-dark) !important;
   backdrop-filter: blur(15px) !important;
   border: 2px solid var(--border-dark) !important;
-  transition: all 0.3s ease !important;
+  transition: all var(--transition-normal) !important;
   margin-bottom: 16px;
 }
 
@@ -368,7 +379,7 @@ p, span, div, a, button, label {
 
 /* عناصر القائمة - تأثيرات عصرية */
 .menu-item {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: all var(--transition-normal) !important;
   border-radius: 12px !important;
   margin-bottom: 4px;
   padding: 8px 16px;
@@ -412,7 +423,7 @@ p, span, div, a, button, label {
     transparent 100%
   );
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--transition-normal);
 }
 
 .menu-item:hover::after {
@@ -451,7 +462,7 @@ p, span, div, a, button, label {
 .menu-item .v-list-item-title {
   color: var(--text-primary) !important;
   font-weight: 600 !important;
-  font-size: 1rem !important;
+  font-size: var(--font-size-base) !important;
   text-shadow: 0 2px 4px var(--shadow-dark) !important;
   letter-spacing: 0.3px;
 }
@@ -460,8 +471,8 @@ p, span, div, a, button, label {
 .menu-item .v-icon {
   color: var(--text-primary) !important;
   filter: drop-shadow(0 2px 4px var(--shadow-dark)) !important;
-  font-size: 22px !important;
-  margin-left: 12px;
+  font-size: var(--font-size-xl-plus) !important;
+  margin-inline-start: 12px;
   font-weight: bold;
 }
 
@@ -473,7 +484,7 @@ p, span, div, a, button, label {
 /* شارات القائمة */
 .menu-item .v-chip {
   font-weight: bold !important;
-  font-size: 0.75rem !important;
+  font-size: var(--font-size-xs) !important;
   box-shadow: 0 2px 4px var(--shadow-medium) !important;
   border: 1px solid var(--border-dark) !important;
   min-width: 20px;
@@ -542,7 +553,7 @@ p, span, div, a, button, label {
 
 /* تحسين البطاقات */
 .v-card {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .v-card:hover {
@@ -562,12 +573,12 @@ p, span, div, a, button, label {
 
 /* إصلاح اتجاه عناصر الشريط الجانبي */
 .rtl-sidebar .v-list-item {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
 .rtl-sidebar .v-list-item-title {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -583,19 +594,19 @@ p, span, div, a, button, label {
   }
   
   .sidebar-header h1 {
-    font-size: 1.2rem !important;
+    font-size: var(--font-size-lg-plus) !important;
   }
   
   .sidebar-header p {
-    font-size: 0.8rem !important;
+    font-size: var(--font-size-xs-plus) !important;
   }
   
   .menu-item .v-list-item-title {
-    font-size: 0.9rem !important;
+    font-size: var(--font-size-sm-plus) !important;
   }
   
   .menu-item .v-icon {
-    font-size: 18px !important;
+    font-size: var(--font-size-lg) !important;
   }
 }
 
@@ -607,7 +618,7 @@ p, span, div, a, button, label {
   }
   
   .sidebar-header h1 {
-    font-size: 1.3rem !important;
+    font-size: var(--font-size-xl-plus) !important;
   }
 }
 
@@ -619,11 +630,11 @@ p, span, div, a, button, label {
   }
   
   .sidebar-header h1 {
-    font-size: 1.5rem !important;
+    font-size: var(--font-size-2xl) !important;
   }
   
   .sidebar-header p {
-    font-size: 1rem !important;
+    font-size: var(--font-size-base) !important;
   }
 }
 
@@ -660,7 +671,7 @@ p, span, div, a, button, label {
 /* تحسين وضوح الأيقونات */
 .icon-enhanced {
   filter: drop-shadow(0 1px 2px var(--shadow-dark));
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .icon-enhanced:hover {

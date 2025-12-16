@@ -415,13 +415,13 @@ const saveTeamMember = () => {
 
 .member-name {
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: var(--font-size-base-minus);
   color: #1f2937;
   margin: 0;
 }
 
 .member-email {
-  font-size: 0.8rem;
+  font-size: var(--font-size-xs-plus);
   color: #6b7280;
   margin: 0;
 }
@@ -439,12 +439,12 @@ const saveTeamMember = () => {
 
 .task-count {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   color: #1976d2;
 }
 
 .task-label {
-  font-size: 0.8rem;
+  font-size: var(--font-size-xs-plus);
   color: #6b7280;
 }
 

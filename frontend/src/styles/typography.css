@@ -13,15 +13,26 @@
   --font-secondary: 'Tajawal', 'Cairo', 'Noto Sans Arabic', 'Arial', sans-serif;
   --font-display: 'Cairo', 'Tajawal', 'Noto Sans Arabic', 'Arial', sans-serif;
   
-  /* أحجام الخطوط */
+  /* أحجام الخطوط - Font Sizes */
+  --font-size-2xs: 0.7rem;    /* 11px */
   --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-xs-plus: 0.8rem;   /* 13px */
+  --font-size-sm-minus: 0.85rem; /* 13.6px */
   --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-sm-plus: 0.9rem;   /* 14.4px */
+  --font-size-base-minus: 0.95rem; /* 15px */
   --font-size-base: 1rem;     /* 16px */
+  --font-size-base-plus: 1.1rem; /* 17.6px */
   --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-lg-plus: 1.2rem;   /* 19px */
   --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-xl-plus: 1.4rem;   /* 22px */
   --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-2xl-plus: 1.75rem; /* 28px */
   --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-3xl-plus: 2rem;    /* 32px */
   --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-4xl-plus: 2.5rem;  /* 40px */
   --font-size-5xl: 3rem;      /* 48px */
   --font-size-6xl: 3.75rem;   /* 60px */
   
@@ -59,7 +70,7 @@
 .v-application {
   font-family: var(--font-primary) !important;
   direction: rtl !important;
-  text-align: right !important;
+  text-align: end !important;
   font-feature-settings: 'liga', 'kern';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -453,11 +464,11 @@ h6,
    ======================================== */
 
 .text-right {
-  text-align: right !important;
+  text-align: end !important;
 }
 
 .text-left {
-  text-align: left !important;
+  text-align: start !important;
 }
 
 .text-center {

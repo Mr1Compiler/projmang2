@@ -4,17 +4,17 @@
  */
 .work-details-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: var(--color-gray-100);
   padding: 2rem;
   direction: rtl;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-primary);
 }
 
 .page-header {
-  background: #1e3a8a;
+  background: var(--color-blue-900);
   color: white;
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
@@ -23,7 +23,7 @@
 
 .page-header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: var(--font-size-3xl-plus);
 }
 
 .back-btn {
@@ -31,9 +31,9 @@
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
 
 .back-btn:hover {
@@ -43,9 +43,9 @@
 .debug-info {
   background: white;
   padding: 1.5rem;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   margin-bottom: 2rem;
-  border-left: 4px solid #10b981;
+  border-inline-start: 4px solid var(--color-emerald-500);
 }
 
 .debug-info h2 {
@@ -55,14 +55,14 @@
 .info-section {
   background: white;
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   margin-bottom: 2rem;
 }
 
 .info-section h3 {
   margin: 0 0 1.5rem 0;
-  color: #1e3a8a;
-  font-size: 1.5rem;
+  color: var(--color-blue-900);
+  font-size: var(--font-size-2xl);
 }
 
 .info-grid {
@@ -75,30 +75,30 @@
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
+  background: var(--color-gray-50);
+  border-radius: var(--radius-lg);
 }
 
 .info-item label {
   font-weight: bold;
-  color: #333;
+  color: var(--color-gray-800);
 }
 
 .info-item span {
-  color: #666;
+  color: var(--color-gray-500);
 }
 
 .categories-section {
   background: white;
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   margin-bottom: 2rem;
 }
 
 .categories-section h3 {
   margin: 0 0 1.5rem 0;
-  color: #1e3a8a;
-  font-size: 1.5rem;
+  color: var(--color-blue-900);
+  font-size: var(--font-size-2xl);
 }
 
 .categories-grid {
@@ -109,11 +109,11 @@
 
 .category-card {
   padding: 2rem;
-  border-radius: 16px;
+  border-radius: var(--radius-2xl);
   text-align: center;
   color: white;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-normal);
 }
 
 .category-card:hover {
@@ -121,13 +121,13 @@
 }
 
 .category-icon {
-  font-size: 3rem;
+  font-size: var(--font-size-5xl);
   margin-bottom: 1rem;
 }
 
 .category-card h4 {
   margin: 0 0 0.5rem 0;
-  font-size: 1.4rem;
+  font-size: var(--font-size-xl-plus);
 }
 
 .category-card p {
@@ -138,50 +138,50 @@
 .count {
   background: rgba(255, 255, 255, 0.2);
   padding: 0.5rem 1rem;
-  border-radius: 20px;
+  border-radius: var(--radius-2xl);
   font-weight: bold;
 }
 
 .materials {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%);
 }
 
 .expenses {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  background: linear-gradient(135deg, var(--color-red-500) 0%, var(--color-red-600) 100%);
 }
 
 .labor {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%);
 }
 
 .equipment {
-  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, var(--color-violet-500) 0%, var(--color-violet-600) 100%);
 }
 
 .actions-section {
   background: white;
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   text-align: center;
 }
 
 .action-btn {
   padding: 0.75rem 2rem;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   font-weight: bold;
   margin: 0 0.5rem;
 }
 
 .edit-btn {
-  background: #3b82f6;
+  background: var(--color-blue-500);
   color: white;
 }
 
 .delete-btn {
-  background: #ef4444;
+  background: var(--color-red-500);
   color: white;
 }
 
