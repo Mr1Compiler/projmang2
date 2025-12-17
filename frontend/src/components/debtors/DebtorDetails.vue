@@ -1,11 +1,26 @@
 <template>
-  <v-dialog v-model="dialogModel" max-width="500px">
-    <v-card class="debtor-details-card">
-      <v-card-title class="details-header">
-        <v-icon class="me-2" color="white">mdi-account-details</v-icon>
-        تفاصيل المديون
-      </v-card-title>
-      <v-card-text v-if="debtor" class="pa-6">
+  <v-dialog v-model="dialogModel" max-width="500px" persistent>
+    <v-card class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header" style="background: var(--gradient-info) !important;">
+        <div class="header-content">
+          <div class="header-left">
+            <v-icon size="24" color="white" class="header-icon">mdi-account-details</v-icon>
+            <span class="header-title">تفاصيل المديون</span>
+          </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="closeDialog"
+            class="close-btn"
+          />
+        </div>
+      </div>
+
+      <!-- Dialog Body -->
+      <div v-if="debtor" class="dialog-body">
         <v-row>
           <v-col cols="12">
             <div class="text-center mb-4">
@@ -53,17 +68,19 @@
             <p>{{ debtor.notes }}</p>
           </v-col>
         </v-row>
-      </v-card-text>
-      <v-card-actions class="pa-4">
-        <v-spacer />
+      </div>
+
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
         <v-btn
           color="primary"
           variant="elevated"
           @click="closeDialog"
+          class="save-btn"
         >
           إغلاق
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -115,15 +132,5 @@ const getStatusText = (status) => {
 </script>
 
 <style scoped>
-.debtor-details-card {
-  border-radius: var(--radius-2xl) !important;
-  overflow: hidden !important;
-}
-
-.details-header {
-  background: var(--gradient-info-deep) !important;
-  color: var(--text-white) !important;
-  font-weight: 700 !important;
-  padding: var(--space-5) 24px !important;
-}
+/* Component-specific overrides - base styles in form-dialog.css */
 </style>

@@ -1,95 +1,97 @@
 <template>
-  <v-dialog v-model="dialogModel" max-width="700" class="edit-engineer-dialog">
-    <v-card class="edit-dialog-card">
-      <v-card-title class="edit-dialog-title">
-        <div class="d-flex align-center">
-          <v-avatar size="32" color="primary" variant="tonal" class="me-3">
-            <v-icon>{{ isEditing ? 'mdi-pencil' : 'mdi-plus' }}</v-icon>
-          </v-avatar>
-          <h2 class="text-h5 font-weight-bold mb-0">
-            {{ isEditing ? 'تعديل المهندس' : 'إضافة حساب جديد' }}
-          </h2>
+  <v-dialog v-model="dialogModel" max-width="700" persistent>
+    <v-card class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header">
+        <div class="header-content">
+          <div class="header-left">
+            <v-icon size="24" color="white" class="header-icon">{{ isEditing ? 'mdi-pencil' : 'mdi-account-plus' }}</v-icon>
+            <span class="header-title">{{ isEditing ? 'تعديل المهندس' : 'إضافة حساب جديد' }}</span>
+          </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="closeDialog"
+            class="close-btn"
+          />
         </div>
-      </v-card-title>
+      </div>
 
-      <v-card-text>
+      <!-- Form Content -->
+      <div class="dialog-body">
         <v-form ref="formRef" v-model="formValid">
-          <v-row>
-            <v-col cols="12">
-              <v-text-field
-                v-model="form.name"
-                label="اسم المهندس"
-                :rules="[v => !!v || 'اسم المهندس مطلوب']"
-                required
-                variant="outlined"
-                density="comfortable"
-                prepend-inner-icon="mdi-account"
-                class="form-field-enhanced text-base-plus input-text-dark"
-              />
-            </v-col>
-            <v-col cols="12">
-              <v-text-field
-                v-model="form.password"
-                label="كلمة المرور"
-                :type="showPassword ? 'text' : 'password'"
-                :rules="isEditing ? [] : [v => !!v || 'كلمة المرور مطلوبة']"
-                :required="!isEditing"
-                variant="outlined"
-                density="comfortable"
-                prepend-inner-icon="mdi-lock"
-                :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append-inner="showPassword = !showPassword"
-                class="form-field-enhanced input-text-dark"
-                :hint="isEditing ? 'اتركه فارغاً إذا لم ترد تغيير كلمة المرور' : ''"
-                persistent-hint
-              />
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="form.email"
-                label="البريد الإلكتروني"
-                type="email"
-                variant="outlined"
-                density="comfortable"
-                prepend-inner-icon="mdi-email"
-                class="form-field-enhanced"
-              />
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="form.phone"
-                label="رقم الهاتف"
-                variant="outlined"
-                density="comfortable"
-                prepend-inner-icon="mdi-phone"
-                class="form-field-enhanced"
-              />
-            </v-col>
-            <v-col cols="12">
-              <v-text-field
-                v-model="form.specialization"
-                label="التخصص"
-                variant="outlined"
-                density="comfortable"
-                prepend-inner-icon="mdi-briefcase"
-                class="form-field-enhanced"
-              />
-            </v-col>
-          </v-row>
+          <div class="form-fields">
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="form.name"
+                  label="اسم المهندس"
+                  :rules="[v => !!v || 'اسم المهندس مطلوب']"
+                  required
+                  variant="outlined"
+                  prepend-inner-icon="mdi-account"
+                  class="form-field"
+                />
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="form.password"
+                  label="كلمة المرور"
+                  :type="showPassword ? 'text' : 'password'"
+                  :rules="isEditing ? [] : [v => !!v || 'كلمة المرور مطلوبة']"
+                  :required="!isEditing"
+                  variant="outlined"
+                  prepend-inner-icon="mdi-lock"
+                  :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append-inner="showPassword = !showPassword"
+                  class="form-field"
+                  :hint="isEditing ? 'اتركه فارغاً إذا لم ترد تغيير كلمة المرور' : ''"
+                  persistent-hint
+                />
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="form.email"
+                  label="البريد الإلكتروني"
+                  type="email"
+                  variant="outlined"
+                  prepend-inner-icon="mdi-email"
+                  class="form-field"
+                />
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="form.phone"
+                  label="رقم الهاتف"
+                  variant="outlined"
+                  prepend-inner-icon="mdi-phone"
+                  class="form-field"
+                />
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="form.specialization"
+                  label="التخصص"
+                  variant="outlined"
+                  prepend-inner-icon="mdi-briefcase"
+                  class="form-field"
+                />
+              </v-col>
+            </v-row>
+          </div>
         </v-form>
-      </v-card-text>
+      </div>
 
-      <v-divider />
-      <v-card-actions class="dialog-actions pa-4">
-        <v-spacer />
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
         <v-btn
           color="grey"
           variant="text"
           @click="closeDialog"
-          size="large"
           class="cancel-btn"
         >
-          <v-icon class="me-2">mdi-close</v-icon>
           إلغاء
         </v-btn>
         <v-btn
@@ -97,13 +99,12 @@
           variant="elevated"
           @click="saveEngineer"
           :disabled="!formValid"
-          size="large"
           class="save-btn"
         >
-          <v-icon class="me-2">{{ isEditing ? 'mdi-content-save' : 'mdi-plus' }}</v-icon>
+          <v-icon class="me-2">mdi-content-save</v-icon>
           {{ isEditing ? 'تحديث' : 'إضافة' }}
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -190,35 +191,5 @@ const saveEngineer = () => {
 </script>
 
 <style scoped>
-.edit-dialog-card {
-  border-radius: var(--radius-2xl) !important;
-  overflow: hidden !important;
-}
-
-.edit-dialog-title {
-  background: var(--gradient-info-deep) !important;
-  color: var(--text-white) !important;
-  padding: var(--space-5) 24px !important;
-}
-
-.edit-dialog-title h2 {
-  color: var(--text-white) !important;
-}
-
-.form-field-enhanced {
-  margin-bottom: var(--space-2);
-}
-
-.dialog-actions {
-  background: var(--color-slate-50);
-}
-
-.cancel-btn {
-  border-radius: var(--radius-xl) !important;
-}
-
-.save-btn {
-  border-radius: var(--radius-xl) !important;
-  background: var(--gradient-info) !important;
-}
+/* Component-specific overrides - base styles in form-dialog.css */
 </style>

@@ -1,47 +1,61 @@
 <template>
   <v-dialog v-model="dialogModel" max-width="450" persistent>
-    <v-card class="delete-dialog">
-      <!-- Header -->
-      <div class="dialog-header">
-        <v-icon size="48" color="white">mdi-alert-circle</v-icon>
+    <v-card class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header" style="background: var(--gradient-error) !important;">
+        <div class="header-content">
+          <div class="header-left">
+            <v-icon size="24" color="white" class="header-icon">mdi-alert-circle</v-icon>
+            <span class="header-title">{{ title }}</span>
+          </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="cancel"
+            class="close-btn"
+          />
+        </div>
       </div>
 
-      <!-- Content -->
-      <v-card-text class="text-center pa-6">
-        <h3 class="text-h5 font-weight-bold mb-4">{{ title }}</h3>
+      <!-- Dialog Body -->
+      <div class="dialog-body text-center">
         <p class="text-body-1 text-grey-darken-1 mb-2">{{ message }}</p>
         <p v-if="itemName" class="text-body-1 font-weight-bold text-primary">
           "{{ itemName }}"
         </p>
-        <p class="text-caption text-error mt-4">
+        <v-alert
+          type="error"
+          variant="tonal"
+          class="mt-4"
+        >
           <v-icon size="small" class="me-1">mdi-information</v-icon>
           هذا الإجراء لا يمكن التراجع عنه
-        </p>
-      </v-card-text>
+        </v-alert>
+      </div>
 
-      <!-- Actions -->
-      <v-card-actions class="justify-center pa-4 pt-0">
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
         <v-btn
-          variant="outlined"
           color="grey"
+          variant="text"
           @click="cancel"
-          class="cancel-btn me-3"
-          min-width="120"
+          class="cancel-btn"
         >
           إلغاء
         </v-btn>
         <v-btn
-          variant="elevated"
           color="error"
+          variant="elevated"
           @click="confirm"
           :loading="loading"
-          class="delete-btn"
-          min-width="120"
+          class="save-btn"
         >
           <v-icon class="me-2">mdi-delete</v-icon>
           حذف
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -89,13 +103,6 @@ const cancel = () => {
 }
 </script>
 
-<style>
-/* Import shared project styles */
-@import './styles/projects.css';
-</style>
-
 <style scoped>
-/* Component-specific styles for DeleteConfirmDialog */
-/* All shared styles (.delete-dialog, .dialog-header, .cancel-btn, .delete-btn)
-   are now in projects.css */
+/* Component-specific overrides - base styles in form-dialog.css */
 </style>

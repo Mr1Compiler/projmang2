@@ -9,14 +9,21 @@
       class="modern-sidebar rtl-sidebar"
     >
       <!-- الشعار والعنوان -->
-      <div class="sidebar-header">
-        <v-img
-          class="sidebar-logo"
-          height="56"
-          width="56"
-          src="@/assets/logo.png"
-        />
-        <h1 class="header-title">نظام إدارة المشاريع</h1>
+      <!-- الشعار والعنوان -->
+      <div class="sidebar-header pa-6">
+        <div class="d-flex align-center" style="gap: 16px;">
+          <div class="logo-wrapper">
+            <v-img
+              class="logo-enhanced"
+              height="44"
+              width="44"
+              src="@/assets/logo.png"
+            />
+          </div>
+          <div class="d-flex flex-column text-right">
+            <h1 class="text-h6 font-weight-bold mb-0" style="color: #1e293b; line-height: 1.2;">نظام إدارة المشاريع</h1>
+          </div>
+        </div>
       </div>
 
       <!-- قائمة التنقل الرئيسية -->
@@ -77,7 +84,7 @@
       <template v-slot:append>
         <div class="pa-4 text-center">
                  <p class="text-caption text-white text-opacity-60">
-                
+
                  </p>
                  <p class="text-caption text-white text-opacity-60">
                  </p>
@@ -153,7 +160,7 @@ watch(() => route.path, updateActiveMenuItem, { immediate: true })
 }
 
 /* ========================================
-   السايد بار العصري - Enhanced White Theme
+   السايد بار العصري - Clean White Theme
    ======================================== */
 .modern-sidebar,
 .v-navigation-drawer.modern-sidebar,
@@ -161,9 +168,9 @@ watch(() => route.path, updateActiveMenuItem, { immediate: true })
 .v-application .v-navigation-drawer.modern-sidebar,
 body .modern-sidebar,
 body .v-navigation-drawer.modern-sidebar {
-  background: #ffffff !important;
-  border-left: 1px solid #e2e8f0 !important;
-  box-shadow: -6px 0 24px rgba(15, 23, 42, 0.06) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%) !important;
+  border-left: 1px solid #e5e7eb !important;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.04) !important;
   color: var(--text-primary) !important;
 }
 
@@ -209,86 +216,83 @@ body .v-navigation-drawer.modern-sidebar {
   width: 24px;
 }
 
-/* Menu item text styling */
+/* Explicitly force dark colors for TEXT elements only */
 .modern-sidebar .v-list-item-title,
-.modern-sidebar .v-list-item__content {
-  color: #475569 !important; /* Slate 600 */
-  -webkit-text-fill-color: #475569 !important;
-  font-family: 'Tajawal', sans-serif !important;
-  font-size: 0.95rem !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.01em;
-  transition: all 0.2s ease;
-}
-
-/* Header text */
+.modern-sidebar .v-list-item__content,
 .modern-sidebar h1,
 .modern-sidebar h2,
-.modern-sidebar h3 {
-  color: #1e293b !important; /* Slate 800 */
-  -webkit-text-fill-color: #1e293b !important;
+.modern-sidebar h3,
+.modern-sidebar p,
+.modern-sidebar span {
+  color: #334155 !important; /* Slate 700 - Softer Dark Grey */
+  -webkit-text-fill-color: #334155 !important;
   font-family: 'Tajawal', sans-serif !important;
+  letter-spacing: 0.01em;
 }
 
 /* Subtitles and smaller text */
 .modern-sidebar .text-caption,
 .modern-sidebar .text-body-2,
 .modern-sidebar .v-list-item-subtitle {
-  color: #94a3b8 !important; /* Slate 400 */
-  font-weight: 500 !important;
+  color: #64748b !important; /* Slate 500 */
 }
 
-/* Icons - Elegant muted style */
+/* Icons - Subtle Blue-Grey by default */
 .modern-sidebar .v-icon,
 .v-navigation-drawer.modern-sidebar .v-icon {
   color: #94a3b8 !important; /* Slate 400 */
   opacity: 1 !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
 }
 
-/* Active Menu Item - Clean accent style */
-.modern-sidebar .active-menu-item .v-list-item-title {
-  color: #4338ca !important; /* Indigo 700 */
-  -webkit-text-fill-color: #4338ca !important;
-  font-weight: 600 !important;
-}
-
+/* Active Menu Item Text & Icon */
+.modern-sidebar .active-menu-item .v-list-item-title,
 .modern-sidebar .active-menu-item .v-icon {
-  color: #4338ca !important; /* Indigo 700 */
+  color: #4f46e5 !important; /* Indigo 600 */
+  font-weight: 700 !important;
 }
 
 .modern-sidebar .active-menu-item {
-  background: linear-gradient(90deg, #eef2ff 0%, #f8fafc 100%) !important;
-  border: none !important;
-  border-right: 3px solid #4338ca !important;
-  box-shadow: 0 2px 8px rgba(67, 56, 202, 0.08);
-  position: relative;
+  background: linear-gradient(90deg, #eef2ff 0%, #ffffff 100%) !important; /* Indigo 50 to White */
+  border: 1px solid #e0e7ff !important; /* Indigo 100 */
+  border-right: 4px solid #4f46e5 !important; /* Accent border on right for RTL */
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.05);
 }
 
-/* Hover State - Smooth and subtle */
+/* Hover State */
 .modern-sidebar .menu-item:hover .v-list-item-title {
-  color: #334155 !important; /* Slate 700 */
-  -webkit-text-fill-color: #334155 !important;
+  color: #1e293b !important; /* Darker on hover */
 }
 
 .modern-sidebar .menu-item:hover .v-icon {
-  color: #6366f1 !important; /* Indigo 500 */
-  transform: scale(1.08);
+  color: #6366f1 !important; /* Indigo 500 on hover */
+  transform: translateX(-3px);
 }
 
 .modern-sidebar .menu-item:hover {
-  background: #f8fafc !important;
+  background: #f8fafc !important; /* Slate 50 */
 }
 
+/* Sidebar Header specific */
+.sidebar-header .text-h5 {
+  color: #1e293b !important; /* Slate 800 */
+  font-size: 1.1rem !important;
+  letter-spacing: -0.02em;
+}
 
-/* Features section title */
-.modern-sidebar .px-4 h3 {
-  color: #64748b !important;
-  -webkit-text-fill-color: #64748b !important;
-  font-size: 0.85rem !important;
-  font-weight: 600 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.sidebar-header .text-body-2 {
+  color: #64748b !important; /* Slate 500 */
+}
+
+/* Feature grid items text */
+.feature-item .text-caption {
+  color: #475569 !important;
+  font-weight: 600;
+}
+
+/* Feature item icons */
+.feature-item .v-icon {
+  color: #6366f1 !important; /* Indigo 500 */
 }
 
 .rtl-sidebar {
@@ -297,80 +301,68 @@ body .v-navigation-drawer.modern-sidebar {
 }
 
 .sidebar-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 20px;
+  background: transparent !important;
   border-bottom: 1px solid #f1f5f9;
-  background: #ffffff !important;
+  /* Margins/Padding controlled by utility classes now */
 }
 
-.sidebar-logo {
-  flex-shrink: 0;
-  border-radius: 10px;
-}
-
-.header-title {
-  font-size: 1.15rem !important;
-  font-weight: 700 !important;
-  color: #1e293b !important;
-  -webkit-text-fill-color: #1e293b !important;
-  margin: 0;
-  line-height: 1.4;
-  font-family: 'Tajawal', sans-serif !important;
-}
-
-/* Badge/Chip styling in sidebar */
-.modern-sidebar .v-chip {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-
-.modern-sidebar .v-chip .v-chip__content {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+.logo-enhanced {
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+  border-radius: var(--radius-full);
+  background: #fff;
+  padding: 4px;
 }
 
 /* عناصر القائمة */
 .menu-item {
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 12px !important;
-  margin-bottom: 2px;
-  border: none;
-  min-height: 46px !important;
+  transition: all 0.2s ease-in-out;
+  border-radius: var(--radius-lg) !important;
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+}
+
+/* Active Menu Item */
+.modern-sidebar .active-menu-item,
+.modern-sidebar .v-list-item.active-menu-item,
+body .modern-sidebar .active-menu-item {
+  background: var(--color-indigo-50) !important; /* Light indigo bg */
+  border-radius: var(--radius-lg);
+  color: var(--color-primary) !important;
+  font-weight: 600;
+  border: 1px solid var(--color-indigo-100);
+}
+
+.modern-sidebar .active-menu-item .v-icon {
+  color: var(--color-primary) !important;
+}
+
+/* Hover Menu Item */
+.modern-sidebar .menu-item:hover {
+  background: var(--color-slate-50) !important;
+  color: var(--color-primary);
 }
 
 /* Features Grid */
 .feature-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: var(--space-3);
 }
 
 .feature-item {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 14px 10px;
+  background: var(--background-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) 8px;
   text-align: center;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
 }
 
 .feature-item:hover {
-  background: #f1f5f9;
-  border-color: #c7d2fe;
+  background: var(--color-slate-50);
+  border-color: var(--color-primary-light);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(67, 56, 202, 0.08);
-}
-
-.feature-item .v-icon {
-  color: #6366f1 !important;
-}
-
-.feature-item .text-caption {
-  color: #64748b !important;
-  font-weight: 600 !important;
-  font-size: 0.75rem !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 /* Feature Link */
@@ -379,17 +371,13 @@ body .v-navigation-drawer.modern-sidebar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(135deg, #faf5ff 0%, #f8fafc 100%) !important;
-  border: 1px dashed #c4b5fd !important;
+  background: var(--background-surface) !important;
+  border: 1px dashed var(--color-primary-light);
 }
 
 .feature-link:hover {
-  background: linear-gradient(135deg, #ede9fe 0%, #eef2ff 100%) !important;
-  border-color: #a78bfa !important;
-}
-
-.feature-link .v-icon {
-  color: #22c55e !important;
+  background: var(--color-indigo-50) !important;
+  border-color: var(--color-primary);
 }
 
 /* Common Fixes */

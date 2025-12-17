@@ -289,6 +289,14 @@
 }
 
 /* ============================================
+   Income Dialog - Override header color
+   ============================================ */
+/* Dialog base styles in form-dialog.css */
+.income-dialog-header {
+  background: var(--gradient-success) !important;
+}
+
+/* ============================================
    Responsive Design
    ============================================ */
 @media (max-width: 600px) {

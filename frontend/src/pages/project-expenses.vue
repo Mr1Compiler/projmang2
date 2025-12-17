@@ -259,73 +259,80 @@
 
     <!-- Add New Expense Dialog -->
     <v-dialog v-model="addExpenseDialog" max-width="600" persistent>
-      <v-card class="add-expense-dialog">
-        <v-card-title class="dialog-header">
-          <v-icon left color="primary">mdi-plus-circle</v-icon>
-          إضافة صنف جديد
-          <v-spacer></v-spacer>
-          <v-btn
-            icon
-            variant="text"
-            @click="closeAddExpenseDialog"
-            class="close-btn"
-          >
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-card-title>
+      <v-card class="image-style-dialog">
+        <!-- Header Section -->
+        <div class="dialog-header expense-dialog-header">
+          <div class="header-content">
+            <div class="header-left">
+              <v-icon size="24" color="white" class="header-icon">mdi-plus-circle</v-icon>
+              <span class="header-title">إضافة صنف جديد</span>
+            </div>
+            <v-btn
+              icon="mdi-close"
+              variant="text"
+              size="small"
+              color="white"
+              @click="closeAddExpenseDialog"
+              class="close-btn"
+            />
+          </div>
+        </div>
 
-        <v-card-text class="dialog-content">
+        <!-- Form Content -->
+        <div class="dialog-body">
           <v-form ref="addExpenseForm" v-model="addExpenseFormValid">
-            <v-row>
-              <!-- نوع الصرف -->
-              <v-col cols="12">
-                <v-select
-                  v-model="newExpense.type"
-                  :items="expenseTypes"
-                  item-title="label"
-                  item-value="value"
-                  label="نوع الصرف"
-                  variant="outlined"
-                  :rules="[v => !!v || 'نوع الصرف مطلوب']"
-                  required
-                  class="form-field"
-                ></v-select>
-              </v-col>
+            <div class="form-fields">
+              <v-row>
+                <!-- نوع الصرف -->
+                <v-col cols="12">
+                  <v-select
+                    v-model="newExpense.type"
+                    :items="expenseTypes"
+                    item-title="label"
+                    item-value="value"
+                    label="نوع الصرف"
+                    variant="outlined"
+                    :rules="[v => !!v || 'نوع الصرف مطلوب']"
+                    required
+                    class="form-field"
+                  ></v-select>
+                </v-col>
 
-              <!-- التكلفة -->
-              <v-col cols="12">
-                <v-text-field
-                  v-model="newExpense.amount"
-                  label="التكلفة (د.ع)"
-                  variant="outlined"
-                  type="number"
-                  :rules="[
-                    v => !!v || 'التكلفة مطلوبة',
-                    v => v > 0 || 'التكلفة يجب أن تكون أكبر من صفر'
-                  ]"
-                  required
-                  class="form-field"
-                ></v-text-field>
-              </v-col>
+                <!-- التكلفة -->
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="newExpense.amount"
+                    label="التكلفة (د.ع)"
+                    variant="outlined"
+                    type="number"
+                    :rules="[
+                      v => !!v || 'التكلفة مطلوبة',
+                      v => v > 0 || 'التكلفة يجب أن تكون أكبر من صفر'
+                    ]"
+                    required
+                    class="form-field"
+                  ></v-text-field>
+                </v-col>
 
-              <!-- الملاحظات -->
-              <v-col cols="12">
-                <v-textarea
-                  v-model="newExpense.notes"
-                  label="الملاحظات"
-                  variant="outlined"
-                  rows="3"
-                  :rules="[v => !!v || 'الملاحظات مطلوبة']"
-                  required
-                  class="form-field"
-                ></v-textarea>
-              </v-col>
-            </v-row>
+                <!-- الملاحظات -->
+                <v-col cols="12">
+                  <v-textarea
+                    v-model="newExpense.notes"
+                    label="الملاحظات"
+                    variant="outlined"
+                    rows="3"
+                    :rules="[v => !!v || 'الملاحظات مطلوبة']"
+                    required
+                    class="form-field"
+                  ></v-textarea>
+                </v-col>
+              </v-row>
+            </div>
           </v-form>
-        </v-card-text>
+        </div>
 
-        <v-card-actions class="dialog-actions">
-          <v-spacer></v-spacer>
+        <!-- Dialog Actions -->
+        <div class="dialog-actions">
           <v-btn
             color="grey"
             variant="text"
@@ -335,16 +342,16 @@
             إلغاء
           </v-btn>
           <v-btn
-            color="primary"
+            color="success"
             variant="elevated"
             @click="saveNewExpense"
             :disabled="!addExpenseFormValid"
             class="save-btn"
           >
-            <v-icon left>mdi-content-save</v-icon>
+            <v-icon class="me-2">mdi-content-save</v-icon>
             حفظ
           </v-btn>
-        </v-card-actions>
+        </div>
       </v-card>
     </v-dialog>
   </v-container>

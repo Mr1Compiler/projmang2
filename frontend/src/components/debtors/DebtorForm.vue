@@ -1,94 +1,121 @@
 <template>
-  <v-dialog v-model="dialogModel" max-width="600px">
-    <v-card class="debtor-form-card">
-      <v-card-title class="form-header">
-        <v-icon class="me-2" color="white">{{ isEdit ? 'mdi-pencil' : 'mdi-plus' }}</v-icon>
-        {{ isEdit ? 'تعديل بيانات المديون' : 'إضافة مديون جديد' }}
-      </v-card-title>
-      <v-card-text class="pa-6">
+  <v-dialog v-model="dialogModel" max-width="600px" persistent>
+    <v-card class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header">
+        <div class="header-content">
+          <div class="header-left">
+            <v-icon size="24" color="white" class="header-icon">{{ isEdit ? 'mdi-pencil' : 'mdi-account-plus' }}</v-icon>
+            <span class="header-title">{{ isEdit ? 'تعديل بيانات المديون' : 'إضافة مديون جديد' }}</span>
+          </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="closeDialog"
+            class="close-btn"
+          />
+        </div>
+      </div>
+
+      <!-- Form Content -->
+      <div class="dialog-body">
         <v-form ref="formRef" v-model="formValid">
-          <v-row>
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="form.name"
-                label="الاسم الكامل"
-                variant="outlined"
-                :rules="[v => !!v || 'الاسم مطلوب']"
-                required
-              />
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="form.email"
-                label="البريد الإلكتروني"
-                type="email"
-                variant="outlined"
-                :rules="[v => !!v || 'البريد الإلكتروني مطلوب']"
-                required
-              />
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="form.phone"
-                label="رقم الهاتف"
-                variant="outlined"
-              />
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="form.amount"
-                label="المبلغ المطلوب"
-                type="number"
-                variant="outlined"
-                :rules="[v => !!v || 'المبلغ مطلوب']"
-                required
-              />
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-select
-                v-model="form.currency"
-                label="العملة"
-                :items="currencyOptions"
-                variant="outlined"
-                required
-              />
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="form.dueDate"
-                label="تاريخ الاستحقاق"
-                type="date"
-                variant="outlined"
-                :rules="[v => !!v || 'تاريخ الاستحقاق مطلوب']"
-                required
-              />
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-select
-                v-model="form.status"
-                label="الحالة"
-                :items="statusOptions"
-                variant="outlined"
-                required
-              />
-            </v-col>
-            <v-col cols="12">
-              <v-textarea
-                v-model="form.notes"
-                label="ملاحظات"
-                variant="outlined"
-                rows="3"
-              />
-            </v-col>
-          </v-row>
+          <div class="form-fields">
+            <v-row>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="form.name"
+                  label="الاسم الكامل"
+                  variant="outlined"
+                  :rules="[v => !!v || 'الاسم مطلوب']"
+                  required
+                  class="form-field"
+                />
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="form.email"
+                  label="البريد الإلكتروني"
+                  type="email"
+                  variant="outlined"
+                  :rules="[v => !!v || 'البريد الإلكتروني مطلوب']"
+                  required
+                  class="form-field"
+                />
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="form.phone"
+                  label="رقم الهاتف"
+                  variant="outlined"
+                  class="form-field"
+                />
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="form.amount"
+                  label="المبلغ المطلوب"
+                  type="number"
+                  variant="outlined"
+                  :rules="[v => !!v || 'المبلغ مطلوب']"
+                  required
+                  class="form-field"
+                />
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-select
+                  v-model="form.currency"
+                  label="العملة"
+                  :items="currencyOptions"
+                  variant="outlined"
+                  required
+                  class="form-field"
+                />
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="form.dueDate"
+                  label="تاريخ الاستحقاق"
+                  type="date"
+                  variant="outlined"
+                  :rules="[v => !!v || 'تاريخ الاستحقاق مطلوب']"
+                  required
+                  class="form-field"
+                />
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-select
+                  v-model="form.status"
+                  label="الحالة"
+                  :items="statusOptions"
+                  variant="outlined"
+                  required
+                  class="form-field"
+                />
+              </v-col>
+              <v-col cols="12">
+                <v-textarea
+                  v-model="form.notes"
+                  label="ملاحظات"
+                  variant="outlined"
+                  rows="3"
+                  class="form-field"
+                />
+              </v-col>
+            </v-row>
+          </div>
         </v-form>
-      </v-card-text>
-      <v-card-actions class="pa-4">
-        <v-spacer />
+      </div>
+
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
         <v-btn
           color="grey"
           variant="text"
           @click="closeDialog"
+          class="cancel-btn"
         >
           إلغاء
         </v-btn>
@@ -97,10 +124,12 @@
           variant="elevated"
           :disabled="!formValid"
           @click="saveDebtor"
+          class="save-btn"
         >
+          <v-icon class="me-2">mdi-content-save</v-icon>
           {{ isEdit ? 'تحديث' : 'حفظ' }}
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -186,15 +215,5 @@ const saveDebtor = () => {
 </script>
 
 <style scoped>
-.debtor-form-card {
-  border-radius: var(--radius-2xl) !important;
-  overflow: hidden !important;
-}
-
-.form-header {
-  background: var(--gradient-info-deep) !important;
-  color: var(--text-white) !important;
-  font-weight: 700 !important;
-  padding: var(--space-5) 24px !important;
-}
+/* Component-specific overrides - base styles in form-dialog.css */
 </style>

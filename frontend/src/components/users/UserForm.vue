@@ -1,200 +1,211 @@
 <template>
   <v-dialog :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" max-width="800px" persistent>
-    <v-card class="add-user-dialog">
-      <v-card-title class="dialog-header">
-        <div class="dialog-title">
-          <v-icon size="32" :color="isEdit ? 'success' : 'primary'" class="me-3">
-            {{ isEdit ? 'mdi-account-edit' : 'mdi-account-plus' }}
-          </v-icon>
-          <h2>{{ isEdit ? 'تعديل المستخدم' : 'إضافة مستخدم جديد' }}</h2>
+    <v-card class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header">
+        <div class="header-content">
+          <div class="header-left">
+            <v-icon size="24" color="white" class="header-icon">{{ isEdit ? 'mdi-account-edit' : 'mdi-account-plus' }}</v-icon>
+            <span class="header-title">{{ isEdit ? 'تعديل المستخدم' : 'إضافة مستخدم جديد' }}</span>
+          </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="closeDialog"
+            class="close-btn"
+          />
         </div>
-        <v-btn
-          icon="mdi-close"
-          variant="text"
-          @click="closeDialog"
-          class="close-btn"
-        />
-      </v-card-title>
+      </div>
 
-      <v-divider />
-
-      <v-card-text class="dialog-content">
+      <!-- Form Content -->
+      <div class="dialog-body">
         <v-form ref="formRef" v-model="formValid" lazy-validation>
-          <v-row>
-            <!-- Avatar -->
-            <v-col cols="12" class="text-center mb-4">
-              <v-avatar size="100" class="user-avatar-upload">
-                <v-img
-                  :src="localUser.avatar || defaultAvatar"
-                  alt="صورة المستخدم"
-                />
-              </v-avatar>
-              <div class="mt-2">
-                <v-btn
-                  size="small"
-                  color="primary"
+          <div class="form-fields">
+            <v-row>
+              <!-- Avatar -->
+              <v-col cols="12" class="text-center mb-4">
+                <v-avatar size="100" class="user-avatar-upload">
+                  <v-img
+                    :src="localUser.avatar || defaultAvatar"
+                    alt="صورة المستخدم"
+                  />
+                </v-avatar>
+                <div class="mt-2">
+                  <v-btn
+                    size="small"
+                    color="primary"
+                    variant="outlined"
+                    prepend-icon="mdi-camera"
+                  >
+                    تحديد صورة
+                  </v-btn>
+                </div>
+              </v-col>
+
+              <!-- First Name (Add mode) -->
+              <v-col v-if="!isEdit" cols="12" md="6">
+                <v-text-field
+                  v-model="localUser.firstName"
+                  label="الاسم الأول *"
+                  :rules="nameRules"
+                  required
                   variant="outlined"
-                  prepend-icon="mdi-camera"
-                >
-                  تحديد صورة
-                </v-btn>
-              </div>
-            </v-col>
+                  prepend-inner-icon="mdi-account"
+                  class="form-field"
+                />
+              </v-col>
 
-            <!-- First Name (Add mode) -->
-            <v-col v-if="!isEdit" cols="12" md="6">
-              <v-text-field
-                v-model="localUser.firstName"
-                label="الاسم الأول *"
-                :rules="nameRules"
-                required
-                variant="outlined"
-                prepend-inner-icon="mdi-account"
-              />
-            </v-col>
+              <!-- Last Name (Add mode) -->
+              <v-col v-if="!isEdit" cols="12" md="6">
+                <v-text-field
+                  v-model="localUser.lastName"
+                  label="الاسم الأخير *"
+                  :rules="nameRules"
+                  required
+                  variant="outlined"
+                  prepend-inner-icon="mdi-account"
+                  class="form-field"
+                />
+              </v-col>
 
-            <!-- Last Name (Add mode) -->
-            <v-col v-if="!isEdit" cols="12" md="6">
-              <v-text-field
-                v-model="localUser.lastName"
-                label="الاسم الأخير *"
-                :rules="nameRules"
-                required
-                variant="outlined"
-                prepend-inner-icon="mdi-account"
-              />
-            </v-col>
+              <!-- Full Name (Edit mode) -->
+              <v-col v-if="isEdit" cols="12" md="6">
+                <v-text-field
+                  v-model="localUser.name"
+                  label="الاسم *"
+                  :rules="nameRules"
+                  required
+                  variant="outlined"
+                  prepend-inner-icon="mdi-account"
+                  class="form-field"
+                />
+              </v-col>
 
-            <!-- Full Name (Edit mode) -->
-            <v-col v-if="isEdit" cols="12" md="6">
-              <v-text-field
-                v-model="localUser.name"
-                label="الاسم *"
-                :rules="nameRules"
-                required
-                variant="outlined"
-                prepend-inner-icon="mdi-account"
-              />
-            </v-col>
+              <!-- Email -->
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="localUser.email"
+                  label="البريد الإلكتروني *"
+                  :rules="emailRules"
+                  required
+                  variant="outlined"
+                  prepend-inner-icon="mdi-email"
+                  type="email"
+                  class="form-field"
+                />
+              </v-col>
 
-            <!-- Email -->
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="localUser.email"
-                label="البريد الإلكتروني *"
-                :rules="emailRules"
-                required
-                variant="outlined"
-                prepend-inner-icon="mdi-email"
-                type="email"
-              />
-            </v-col>
+              <!-- Phone -->
+              <v-col cols="12" md="6">
+                <v-text-field
+                  v-model="localUser.phone"
+                  label="رقم الهاتف"
+                  variant="outlined"
+                  prepend-inner-icon="mdi-phone"
+                  type="tel"
+                  class="form-field"
+                />
+              </v-col>
 
-            <!-- Phone -->
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="localUser.phone"
-                label="رقم الهاتف"
-                variant="outlined"
-                prepend-inner-icon="mdi-phone"
-                type="tel"
-              />
-            </v-col>
+              <!-- Role -->
+              <v-col cols="12" md="6">
+                <v-select
+                  v-model="localUser.role"
+                  :items="roleOptions"
+                  label="الدور *"
+                  :rules="requiredRules"
+                  required
+                  variant="outlined"
+                  prepend-inner-icon="mdi-account-tie"
+                  class="form-field"
+                />
+              </v-col>
 
-            <!-- Role -->
-            <v-col cols="12" md="6">
-              <v-select
-                v-model="localUser.role"
-                :items="roleOptions"
-                label="الدور *"
-                :rules="requiredRules"
-                required
-                variant="outlined"
-                prepend-inner-icon="mdi-account-tie"
-                class="black-dropdown-select"
-              />
-            </v-col>
+              <!-- Department -->
+              <v-col cols="12" md="6">
+                <v-select
+                  v-model="localUser.department"
+                  :items="departmentOptions"
+                  label="القسم *"
+                  :rules="requiredRules"
+                  required
+                  variant="outlined"
+                  prepend-inner-icon="mdi-office-building"
+                  class="form-field"
+                />
+              </v-col>
 
-            <!-- Department -->
-            <v-col cols="12" md="6">
-              <v-select
-                v-model="localUser.department"
-                :items="departmentOptions"
-                label="القسم *"
-                :rules="requiredRules"
-                required
-                variant="outlined"
-                prepend-inner-icon="mdi-office-building"
-                class="black-dropdown-select"
-              />
-            </v-col>
+              <!-- Status -->
+              <v-col cols="12" md="6">
+                <v-select
+                  v-model="localUser.status"
+                  :items="statusOptions"
+                  label="الحالة *"
+                  :rules="requiredRules"
+                  required
+                  variant="outlined"
+                  prepend-inner-icon="mdi-account-check"
+                  class="form-field"
+                />
+              </v-col>
 
-            <!-- Status -->
-            <v-col cols="12" md="6">
-              <v-select
-                v-model="localUser.status"
-                :items="statusOptions"
-                label="الحالة *"
-                :rules="requiredRules"
-                required
-                variant="outlined"
-                prepend-inner-icon="mdi-account-check"
-                class="black-dropdown-select"
-              />
-            </v-col>
+              <!-- Password (Add mode only) -->
+              <v-col v-if="!isEdit" cols="12" md="6">
+                <v-text-field
+                  v-model="localUser.password"
+                  label="كلمة المرور *"
+                  :rules="passwordRules"
+                  required
+                  variant="outlined"
+                  prepend-inner-icon="mdi-lock"
+                  :type="showPassword ? 'text' : 'password'"
+                  :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append-inner="showPassword = !showPassword"
+                  class="form-field"
+                />
+              </v-col>
 
-            <!-- Password (Add mode only) -->
-            <v-col v-if="!isEdit" cols="12" md="6">
-              <v-text-field
-                v-model="localUser.password"
-                label="كلمة المرور *"
-                :rules="passwordRules"
-                required
-                variant="outlined"
-                prepend-inner-icon="mdi-lock"
-                :type="showPassword ? 'text' : 'password'"
-                :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append-inner="showPassword = !showPassword"
-              />
-            </v-col>
-
-            <!-- Notes -->
-            <v-col cols="12">
-              <v-textarea
-                v-model="localUser.notes"
-                label="ملاحظات"
-                variant="outlined"
-                prepend-inner-icon="mdi-note-text"
-                rows="3"
-                auto-grow
-              />
-            </v-col>
-          </v-row>
+              <!-- Notes -->
+              <v-col cols="12">
+                <v-textarea
+                  v-model="localUser.notes"
+                  label="ملاحظات"
+                  variant="outlined"
+                  prepend-inner-icon="mdi-note-text"
+                  rows="3"
+                  auto-grow
+                  class="form-field"
+                />
+              </v-col>
+            </v-row>
+          </div>
         </v-form>
-      </v-card-text>
+      </div>
 
-      <v-divider />
-
-      <v-card-actions class="dialog-actions">
-        <v-spacer />
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
         <v-btn
           color="grey"
-          variant="outlined"
+          variant="text"
           @click="closeDialog"
-          class="me-2"
+          class="cancel-btn"
         >
           إلغاء
         </v-btn>
         <v-btn
-          :color="isEdit ? 'success' : 'primary'"
+          color="primary"
           variant="elevated"
           @click="saveUser"
           :loading="loading"
           :disabled="!formValid"
+          class="save-btn"
         >
+          <v-icon class="me-2">mdi-content-save</v-icon>
           {{ isEdit ? 'حفظ التعديلات' : 'حفظ المستخدم' }}
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -346,5 +357,5 @@ const saveUser = async () => {
 </script>
 
 <style scoped>
-@import './styles/users.css';
+/* Component-specific overrides - base styles in form-dialog.css */
 </style>

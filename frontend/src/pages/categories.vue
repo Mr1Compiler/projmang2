@@ -170,84 +170,92 @@
       </v-card>
 
       <!-- Add/Edit Category Dialog -->
-      <v-dialog v-model="dialog" max-width="500" class="simple-category-dialog">
-        <v-card class="simple-dialog-card">
-          <!-- Header -->
-          <v-card-title class="simple-dialog-header">
-            <div class="d-flex align-center justify-space-between w-100">
-              <h3 class="text-h6 font-weight-bold text-white mb-0">
-                إضافة صنف جديد
-              </h3>
+      <v-dialog v-model="dialog" max-width="500" persistent>
+        <v-card class="image-style-dialog">
+          <!-- Header Section -->
+          <div class="dialog-header">
+            <div class="header-content">
+              <div class="header-left">
+                <v-icon size="24" color="white" class="header-icon">mdi-tag-plus</v-icon>
+                <span class="header-title">{{ isEditing ? 'تعديل صنف' : 'إضافة صنف جديد' }}</span>
+              </div>
               <v-btn
-                icon
-                color="white"
+                icon="mdi-close"
                 variant="text"
                 size="small"
+                color="white"
                 @click="closeDialog"
                 class="close-btn"
-              >
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
+              />
             </div>
-          </v-card-title>
+          </div>
 
-          <!-- Body -->
-          <v-card-text class="simple-dialog-body pa-6">
+          <!-- Form Content -->
+          <div class="dialog-body">
             <v-form ref="form" v-model="formValid">
-              <div class="form-field-simple">
-                <label class="field-label">اسم القسم :</label>
-                <div class="custom-input-container">
-                  <input
-                    v-model="categoryForm.name"
-                    type="text"
-                    class="custom-input-field"
-                    placeholder="أدخل اسم القسم"
-                  />
-                </div>
+              <div class="form-fields">
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="categoryForm.name"
+                      label="اسم القسم"
+                      variant="outlined"
+                      placeholder="أدخل اسم القسم"
+                      class="form-field"
+                    />
+                  </v-col>
+                </v-row>
               </div>
             </v-form>
-          </v-card-text>
+          </div>
 
-          <!-- Actions -->
-          <v-card-actions class="simple-dialog-actions pa-6 pt-0">
-            <v-spacer />
+          <!-- Dialog Actions -->
+          <div class="dialog-actions">
             <v-btn
-              color="grey-darken-1"
+              color="grey"
               variant="text"
+              @click="closeDialog"
+              class="cancel-btn"
+            >
+              إلغاء
+            </v-btn>
+            <v-btn
+              color="primary"
+              variant="elevated"
               @click="saveCategory"
               :disabled="!categoryForm.name"
-              class="save-btn-simple"
+              class="save-btn"
             >
+              <v-icon class="me-2">mdi-content-save</v-icon>
               حفظ
             </v-btn>
-          </v-card-actions>
+          </div>
         </v-card>
       </v-dialog>
 
       <!-- Sub Categories Dialog -->
-      <v-dialog v-model="subCategoriesDialog" max-width="600" class="sub-categories-dialog">
-        <v-card class="sub-categories-card">
-          <!-- Header -->
-          <v-card-title class="sub-categories-header">
-            <div class="d-flex align-center justify-space-between w-100">
-              <h3 class="text-h6 font-weight-bold text-white mb-0">
-                الأصناف الثانوية - {{ selectedCategory?.name }}
-              </h3>
+      <v-dialog v-model="subCategoriesDialog" max-width="600" persistent>
+        <v-card class="image-style-dialog">
+          <!-- Header Section -->
+          <div class="dialog-header">
+            <div class="header-content">
+              <div class="header-left">
+                <v-icon size="24" color="white" class="header-icon">mdi-view-list</v-icon>
+                <span class="header-title">الأصناف الثانوية - {{ selectedCategory?.name }}</span>
+              </div>
               <v-btn
-                icon
-                color="white"
+                icon="mdi-close"
                 variant="text"
                 size="small"
+                color="white"
                 @click="subCategoriesDialog = false"
                 class="close-btn"
-              >
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
+              />
             </div>
-          </v-card-title>
+          </div>
 
           <!-- Body -->
-          <v-card-text class="sub-categories-body pa-6">
+          <div class="dialog-body sub-categories-body">
             <div class="sub-categories-list">
               <div 
                 v-for="(subCategory, index) in getSubCategories(selectedCategory?.id)" 
@@ -296,65 +304,64 @@
                 إضافة صنف ثانوي جديد
               </v-btn>
             </div>
-          </v-card-text>
+          </div>
         </v-card>
       </v-dialog>
 
       <!-- Add Sub Category Dialog -->
       <v-dialog v-model="addSubCategoryDialog" max-width="500" persistent>
-        <v-card class="simple-dialog-card">
-          <!-- Header -->
-          <v-card-title class="simple-dialog-header">
-            <div class="d-flex align-center justify-space-between w-100">
-              <h3 class="text-h6 font-weight-bold text-white mb-0">
-                {{ isEditingSubCategory ? 'تعديل صنف ثانوي' : 'إضافة صنف ثانوي جديد' }}
-              </h3>
+        <v-card class="image-style-dialog">
+          <!-- Header Section -->
+          <div class="dialog-header">
+            <div class="header-content">
+              <div class="header-left">
+                <v-icon size="24" color="white" class="header-icon">mdi-tag-plus</v-icon>
+                <span class="header-title">{{ isEditingSubCategory ? 'تعديل صنف ثانوي' : 'إضافة صنف ثانوي جديد' }}</span>
+              </div>
               <v-btn
-                icon
-                color="white"
+                icon="mdi-close"
                 variant="text"
                 size="small"
+                color="white"
                 @click="closeAddSubCategoryDialog"
                 class="close-btn"
-              >
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
+              />
             </div>
-          </v-card-title>
+          </div>
 
-          <!-- Body -->
-          <v-card-text class="simple-dialog-body pa-6">
+          <!-- Form Content -->
+          <div class="dialog-body">
             <v-form ref="subCategoryForm" v-model="subCategoryFormValid">
-              <div class="form-field-simple mb-4">
-                <label class="field-label">اسم الصنف :</label>
-                <div class="custom-input-container">
-                  <input
-                    v-model="subCategoryForm.name"
-                    type="text"
-                    class="custom-input-field"
-                    placeholder="أدخل اسم الصنف الثانوي"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="form-field-simple">
-                <label class="field-label">نسبة الإنجاز (%) :</label>
-                <div class="custom-input-container">
-                  <input
-                    v-model="subCategoryForm.progress"
-                    type="number"
-                    class="custom-input-field"
-                    placeholder="0"
-                    min="0"
-                    max="100"
-                    required
-                  />
-                </div>
+              <div class="form-fields">
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="subCategoryForm.name"
+                      label="اسم الصنف"
+                      variant="outlined"
+                      placeholder="أدخل اسم الصنف الثانوي"
+                      class="form-field"
+                    />
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="subCategoryForm.progress"
+                      label="نسبة الإنجاز (%)"
+                      variant="outlined"
+                      type="number"
+                      min="0"
+                      max="100"
+                      class="form-field"
+                    />
+                  </v-col>
+                </v-row>
                 <!-- Progress Bar Display -->
                 <div class="progress-display-container mt-3">
                   <div class="progress-bar-wrapper">
-                    <div 
-                      class="progress-bar-fill" 
+                    <div
+                      class="progress-bar-fill"
                       :style="{ width: (subCategoryForm.progress || 0) + '%' }"
                     ></div>
                   </div>
@@ -364,16 +371,15 @@
                 </div>
               </div>
             </v-form>
-          </v-card-text>
+          </div>
 
-          <!-- Actions -->
-          <v-card-actions class="simple-dialog-actions pa-6 pt-0">
-            <v-spacer />
+          <!-- Dialog Actions -->
+          <div class="dialog-actions">
             <v-btn
-              color="grey-darken-1"
+              color="grey"
               variant="text"
               @click="closeAddSubCategoryDialog"
-              class="save-btn-simple me-2"
+              class="cancel-btn"
             >
               إلغاء
             </v-btn>
@@ -382,11 +388,12 @@
               variant="elevated"
               @click="saveSubCategory"
               :disabled="!subCategoryFormValid || !subCategoryForm.name"
-              class="save-btn-simple"
+              class="save-btn"
             >
+              <v-icon class="me-2">mdi-content-save</v-icon>
               {{ isEditingSubCategory ? 'تحديث' : 'حفظ' }}
             </v-btn>
-          </v-card-actions>
+          </div>
         </v-card>
       </v-dialog>
 
@@ -536,19 +543,52 @@
       </v-dialog>
 
       <!-- Delete Confirmation Dialog -->
-      <v-dialog v-model="deleteDialog" max-width="400">
-        <v-card>
-          <v-card-title class="text-h6">تأكيد الحذف</v-card-title>
-          <v-card-text>
-            هل أنت متأكد من حذف التصنيف "{{ selectedCategory?.name }}"؟
-            <br>
-            <small class="text-warning">سيتم حذف جميع المشاريع المرتبطة بهذا التصنيف!</small>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn color="grey" @click="deleteDialog = false">إلغاء</v-btn>
-            <v-btn color="error" @click="confirmDelete">حذف</v-btn>
-          </v-card-actions>
+      <v-dialog v-model="deleteDialog" max-width="400" persistent>
+        <v-card class="image-style-dialog">
+          <!-- Header Section -->
+          <div class="dialog-header" style="background: var(--gradient-error) !important;">
+            <div class="header-content">
+              <div class="header-left">
+                <v-icon size="24" color="white" class="header-icon">mdi-delete-alert</v-icon>
+                <span class="header-title">تأكيد الحذف</span>
+              </div>
+              <v-btn
+                icon="mdi-close"
+                variant="text"
+                size="small"
+                color="white"
+                @click="deleteDialog = false"
+                class="close-btn"
+              />
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="dialog-body">
+            <p class="mb-2">هل أنت متأكد من حذف التصنيف "{{ selectedCategory?.name }}"؟</p>
+            <p class="text-warning text-caption">سيتم حذف جميع المشاريع المرتبطة بهذا التصنيف!</p>
+          </div>
+
+          <!-- Dialog Actions -->
+          <div class="dialog-actions">
+            <v-btn
+              color="grey"
+              variant="text"
+              @click="deleteDialog = false"
+              class="cancel-btn"
+            >
+              إلغاء
+            </v-btn>
+            <v-btn
+              color="error"
+              variant="elevated"
+              @click="confirmDelete"
+              class="save-btn"
+            >
+              <v-icon class="me-2">mdi-delete</v-icon>
+              حذف
+            </v-btn>
+          </div>
         </v-card>
       </v-dialog>
     </v-container>

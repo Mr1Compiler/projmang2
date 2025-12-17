@@ -1,20 +1,19 @@
 <template>
-  <div class="project-details-page">
-    <v-container fluid class="fill-height">
-      <!-- Header Section -->
-      <div class="d-flex align-center mb-4">
-        <v-btn
-          icon="mdi-arrow-right"
-          @click="goBack"
-          class="back-btn me-3"
-          size="large"
-          variant="text"
-          color="primary"
-        >
-          <v-icon>mdi-arrow-right</v-icon>
-        </v-btn>
-      </div>
-      <PageHeader
+  <div class="project-details-page" dir="rtl">
+    <!-- Header Section -->
+    <div class="d-flex align-center mb-4">
+      <v-btn
+        icon="mdi-arrow-right"
+        @click="goBack"
+        class="back-btn me-3"
+        size="large"
+        variant="text"
+        color="primary"
+      >
+        <v-icon>mdi-arrow-right</v-icon>
+      </v-btn>
+    </div>
+    <PageHeader
         title="تفاصيل المشروع"
         :subtitle="project?.name || 'تفاصيل المشروع'"
         mdi-icon="mdi-folder-open"
@@ -22,8 +21,8 @@
 
       <!-- Project Details Cards -->
       <v-row v-if="project" class="details-cards">
-        <!-- Basic Information Card -->
-        <v-col cols="12" md="6">
+        <!-- First Row: Basic Info + Status -->
+        <v-col cols="12" lg="6">
           <v-card class="detail-card info-card" elevation="3">
             <v-card-title class="card-header info-header">
               <v-icon class="me-2">mdi-information</v-icon>
@@ -50,11 +49,10 @@
           </v-card>
         </v-col>
 
-        <!-- Status and Priority Card -->
-        <v-col cols="12" md="6">
+        <v-col cols="12" lg="6">
           <v-card class="detail-card status-card" elevation="3">
             <v-card-title class="card-header status-header">
-              <v-icon class="me-2">mdi-account</v-icon>
+              <v-icon class="me-2">mdi-flag</v-icon>
               الحالة والأولوية
             </v-card-title>
             <v-card-text class="card-content">
@@ -78,8 +76,8 @@
           </v-card>
         </v-col>
 
-        <!-- Work Days Card -->
-        <v-col cols="12" md="6">
+        <!-- Second Row: Work Days + Financial -->
+        <v-col cols="12" lg="6">
           <v-card class="detail-card work-days-card" elevation="3">
             <v-card-title class="card-header work-days-header">
               <v-icon class="me-2">mdi-calendar</v-icon>
@@ -97,14 +95,16 @@
               </v-btn>
             </v-card-title>
             <v-card-text class="card-content">
-              <div v-for="day in workDays" :key="day.name" class="work-day-item">
-                <div class="day-info">
-                  <v-icon :color="getDayIconColor(day)" class="me-2">
-                    {{ getDayIcon(day) }}
-                  </v-icon>
-                  <span class="day-name">{{ day.name }}</span>
+              <div class="work-days-grid">
+                <div v-for="day in workDays" :key="day.name" class="work-day-item">
+                  <div class="day-info">
+                    <v-icon :color="getDayIconColor(day)" class="me-2">
+                      {{ getDayIcon(day) }}
+                    </v-icon>
+                    <span class="day-name">{{ day.name }}</span>
+                  </div>
+                  <span class="day-hours">{{ day.hours }} ساعات</span>
                 </div>
-                <span class="day-hours">{{ day.hours }} ساعات</span>
               </div>
               <v-btn
                 block
@@ -120,8 +120,7 @@
           </v-card>
         </v-col>
 
-        <!-- Financial Information Card -->
-        <v-col cols="12" md="6">
+        <v-col cols="12" lg="6">
           <v-card class="detail-card financial-card" elevation="3">
             <v-card-title class="card-header financial-header">
               <v-icon class="me-2">mdi-chart-line</v-icon>
@@ -296,7 +295,6 @@
           </v-btn>
         </v-col>
       </v-row>
-    </v-container>
   </div>
 </template>
 

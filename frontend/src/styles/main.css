@@ -296,77 +296,173 @@ body {
 
 /* Vuetify Icon Sizes - Using Design System */
 .v-icon.icon-2xs,
-.icon-2xs { font-size: var(--font-size-2xs) !important; width: var(--font-size-2xs) !important; height: var(--font-size-2xs) !important; }
+.icon-2xs {
+  font-size: var(--font-size-2xs) !important;
+  width: var(--font-size-2xs) !important;
+  height: var(--font-size-2xs) !important;
+}
 
 .v-icon.icon-xs,
-.icon-xs { font-size: var(--font-size-xs) !important; width: var(--font-size-xs) !important; height: var(--font-size-xs) !important; }
+.icon-xs {
+  font-size: var(--font-size-xs) !important;
+  width: var(--font-size-xs) !important;
+  height: var(--font-size-xs) !important;
+}
 
 .v-icon.icon-sm,
-.icon-sm { font-size: var(--font-size-sm) !important; width: var(--font-size-sm) !important; height: var(--font-size-sm) !important; }
+.icon-sm {
+  font-size: var(--font-size-sm) !important;
+  width: var(--font-size-sm) !important;
+  height: var(--font-size-sm) !important;
+}
 
 .v-icon.icon-base,
-.icon-base { font-size: var(--font-size-base) !important; width: var(--font-size-base) !important; height: var(--font-size-base) !important; }
+.icon-base {
+  font-size: var(--font-size-base) !important;
+  width: var(--font-size-base) !important;
+  height: var(--font-size-base) !important;
+}
 
 .v-icon.icon-lg,
-.icon-lg { font-size: var(--font-size-lg) !important; width: var(--font-size-lg) !important; height: var(--font-size-lg) !important; }
+.icon-lg {
+  font-size: var(--font-size-lg) !important;
+  width: var(--font-size-lg) !important;
+  height: var(--font-size-lg) !important;
+}
 
 .v-icon.icon-xl,
-.icon-xl { font-size: var(--font-size-xl) !important; width: var(--font-size-xl) !important; height: var(--font-size-xl) !important; }
+.icon-xl {
+  font-size: var(--font-size-xl) !important;
+  width: var(--font-size-xl) !important;
+  height: var(--font-size-xl) !important;
+}
 
 .v-icon.icon-2xl,
-.icon-2xl { font-size: var(--font-size-2xl) !important; width: var(--font-size-2xl) !important; height: var(--font-size-2xl) !important; }
+.icon-2xl {
+  font-size: var(--font-size-2xl) !important;
+  width: var(--font-size-2xl) !important;
+  height: var(--font-size-2xl) !important;
+}
 
 .v-icon.icon-3xl,
-.icon-3xl { font-size: var(--font-size-3xl) !important; width: var(--font-size-3xl) !important; height: var(--font-size-3xl) !important; }
+.icon-3xl {
+  font-size: var(--font-size-3xl) !important;
+  width: var(--font-size-3xl) !important;
+  height: var(--font-size-3xl) !important;
+}
 
 .v-icon.icon-4xl,
-.icon-4xl { font-size: var(--font-size-4xl) !important; width: var(--font-size-4xl) !important; height: var(--font-size-4xl) !important; }
+.icon-4xl {
+  font-size: var(--font-size-4xl) !important;
+  width: var(--font-size-4xl) !important;
+  height: var(--font-size-4xl) !important;
+}
 
 .v-icon.icon-5xl,
-.icon-5xl { font-size: var(--font-size-5xl) !important; width: var(--font-size-5xl) !important; height: var(--font-size-5xl) !important; }
+.icon-5xl {
+  font-size: var(--font-size-5xl) !important;
+  width: var(--font-size-5xl) !important;
+  height: var(--font-size-5xl) !important;
+}
 
 .v-icon.icon-6xl,
-.icon-6xl { font-size: var(--font-size-6xl) !important; width: var(--font-size-6xl) !important; height: var(--font-size-6xl) !important; }
+.icon-6xl {
+  font-size: var(--font-size-6xl) !important;
+  width: var(--font-size-6xl) !important;
+  height: var(--font-size-6xl) !important;
+}
 
 .v-icon.icon-7xl,
-.icon-7xl { font-size: var(--font-size-7xl) !important; width: var(--font-size-7xl) !important; height: var(--font-size-7xl) !important; }
+.icon-7xl {
+  font-size: var(--font-size-7xl) !important;
+  width: var(--font-size-7xl) !important;
+  height: var(--font-size-7xl) !important;
+}
 
 /* Pixel-based icon sizes for specific use cases */
 .v-icon.icon-16,
-.icon-16 { font-size: 16px !important; width: 16px !important; height: 16px !important; }
+.icon-16 {
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+}
 
 .v-icon.icon-20,
-.icon-20 { font-size: 20px !important; width: 20px !important; height: 20px !important; }
+.icon-20 {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+}
 
 .v-icon.icon-24,
-.icon-24 { font-size: 24px !important; width: 24px !important; height: 24px !important; }
+.icon-24 {
+  font-size: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+}
 
 .v-icon.icon-28,
-.icon-28 { font-size: 28px !important; width: 28px !important; height: 28px !important; }
+.icon-28 {
+  font-size: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+}
 
 .v-icon.icon-32,
-.icon-32 { font-size: 32px !important; width: 32px !important; height: 32px !important; }
+.icon-32 {
+  font-size: 32px !important;
+  width: 32px !important;
+  height: 32px !important;
+}
 
 .v-icon.icon-36,
-.icon-36 { font-size: 36px !important; width: 36px !important; height: 36px !important; }
+.icon-36 {
+  font-size: 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+}
 
 .v-icon.icon-40,
-.icon-40 { font-size: 40px !important; width: 40px !important; height: 40px !important; }
+.icon-40 {
+  font-size: 40px !important;
+  width: 40px !important;
+  height: 40px !important;
+}
 
 .v-icon.icon-48,
-.icon-48 { font-size: 48px !important; width: 48px !important; height: 48px !important; }
+.icon-48 {
+  font-size: 48px !important;
+  width: 48px !important;
+  height: 48px !important;
+}
 
 .v-icon.icon-56,
-.icon-56 { font-size: 56px !important; width: 56px !important; height: 56px !important; }
+.icon-56 {
+  font-size: 56px !important;
+  width: 56px !important;
+  height: 56px !important;
+}
 
 .v-icon.icon-64,
-.icon-64 { font-size: 64px !important; width: 64px !important; height: 64px !important; }
+.icon-64 {
+  font-size: 64px !important;
+  width: 64px !important;
+  height: 64px !important;
+}
 
 .v-icon.icon-72,
-.icon-72 { font-size: 72px !important; width: 72px !important; height: 72px !important; }
+.icon-72 {
+  font-size: 72px !important;
+  width: 72px !important;
+  height: 72px !important;
+}
 
 .v-icon.icon-80,
-.icon-80 { font-size: 80px !important; width: 80px !important; height: 80px !important; }
+.icon-80 {
+  font-size: 80px !important;
+  width: 80px !important;
+  height: 80px !important;
+}
 
 /* Responsive icon sizes */
 @media (max-width: 959px) {
@@ -375,6 +471,7 @@ body {
     width: var(--font-size-3xl) !important;
     height: var(--font-size-3xl) !important;
   }
+
   .v-icon.icon-responsive-xl {
     font-size: var(--font-size-4xl) !important;
     width: var(--font-size-4xl) !important;
@@ -388,6 +485,7 @@ body {
     width: var(--font-size-2xl) !important;
     height: var(--font-size-2xl) !important;
   }
+
   .v-icon.icon-responsive-xl {
     font-size: var(--font-size-3xl) !important;
     width: var(--font-size-3xl) !important;
@@ -420,20 +518,28 @@ body {
 
 /* تحسين التمرير */
 ::-webkit-scrollbar {
-  width: var(--space-2);
-  height: var(--space-2);
+  width: 8px;
+  /* Thinner for modern look */
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background-secondary);
-  border-radius: var(--radius-full);
+  background: transparent;
+  /* Cleaner transparent track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: var(--radius-full);
+  background: #cbd5e1;
+  /* Slate 300 - Subtle Grey */
+  border-radius: 10px;
+  border: 2px solid transparent;
+  /* Padding effect */
+  background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-dark);
+  background: #94a3b8;
+  /* Slate 400 - Darker on hover */
+  border: 2px solid transparent;
+  background-clip: content-box;
 }

@@ -1,22 +1,26 @@
 <template>
-  <v-dialog :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" max-width="600px">
-    <v-card class="view-user-dialog">
-      <v-card-title class="dialog-header">
-        <div class="dialog-title">
-          <v-icon size="32" color="primary" class="me-3">mdi-account-details</v-icon>
-          <h2>تفاصيل المستخدم</h2>
+  <v-dialog :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" max-width="600px" persistent>
+    <v-card class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header">
+        <div class="header-content">
+          <div class="header-left">
+            <v-icon size="24" color="white" class="header-icon">mdi-account-details</v-icon>
+            <span class="header-title">تفاصيل المستخدم</span>
+          </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="$emit('update:modelValue', false)"
+            class="close-btn"
+          />
         </div>
-        <v-btn
-          icon="mdi-close"
-          variant="text"
-          @click="$emit('update:modelValue', false)"
-          class="close-btn"
-        />
-      </v-card-title>
+      </div>
 
-      <v-divider />
-
-      <v-card-text v-if="user" class="pa-6">
+      <!-- Dialog Body -->
+      <div v-if="user" class="dialog-body">
         <v-row>
           <v-col cols="12" class="text-center mb-4">
             <v-avatar size="100">
@@ -88,20 +92,19 @@
             </v-list>
           </v-col>
         </v-row>
-      </v-card-text>
+      </div>
 
-      <v-divider />
-
-      <v-card-actions class="dialog-actions">
-        <v-spacer />
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
         <v-btn
           color="primary"
           variant="elevated"
           @click="$emit('update:modelValue', false)"
+          class="save-btn"
         >
           إغلاق
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -165,5 +168,5 @@ const getStatusText = (status) => {
 </script>
 
 <style scoped>
-@import './styles/users.css';
+/* Component-specific overrides - base styles in form-dialog.css */
 </style>

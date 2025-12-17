@@ -130,45 +130,102 @@
       </div>
 
       <!-- Add/Edit Income Dialog -->
-      <v-dialog v-model="showAddDialog" max-width="600">
-        <v-card>
-          <v-card-title>
-            <span class="text-h5">{{ editingIncome ? 'تعديل الإيراد' : 'إضافة إيراد جديد' }}</span>
-          </v-card-title>
-          <v-card-text>
+      <v-dialog v-model="showAddDialog" max-width="600" persistent>
+        <v-card class="image-style-dialog">
+          <!-- Header Section -->
+          <div class="dialog-header income-dialog-header">
+            <div class="header-content">
+              <div class="header-left">
+                <v-icon size="24" color="white" class="header-icon">mdi-cash-plus</v-icon>
+                <span class="header-title">{{ editingIncome ? 'تعديل الإيراد' : 'إضافة إيراد جديد' }}</span>
+              </div>
+              <v-btn
+                icon="mdi-close"
+                variant="text"
+                size="small"
+                color="white"
+                @click="closeDialog"
+                class="close-btn"
+              />
+            </div>
+          </div>
+
+          <!-- Form Content -->
+          <div class="dialog-body">
             <v-form ref="form" v-model="valid">
-              <v-text-field
-                v-model="incomeForm.description"
-                label="وصف الإيراد"
-                :rules="[v => !!v || 'الوصف مطلوب']"
-                required
-              />
-              <v-text-field
-                v-model.number="incomeForm.amount"
-                label="المبلغ"
-                type="number"
-                :rules="[v => v > 0 || 'المبلغ يجب أن يكون أكبر من صفر']"
-                required
-              />
-              <v-select
-                v-model="incomeForm.category"
-                :items="incomeCategories"
-                label="الفئة"
-                :rules="[v => !!v || 'الفئة مطلوبة']"
-                required
-              />
-              <v-textarea
-                v-model="incomeForm.notes"
-                label="ملاحظات"
-                rows="3"
-              />
+              <div class="form-fields">
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      v-model="incomeForm.description"
+                      label="وصف الإيراد"
+                      variant="outlined"
+                      :rules="[v => !!v || 'الوصف مطلوب']"
+                      required
+                      class="form-field"
+                    />
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" md="6">
+                    <v-text-field
+                      v-model.number="incomeForm.amount"
+                      label="المبلغ"
+                      variant="outlined"
+                      type="number"
+                      :rules="[v => v > 0 || 'المبلغ يجب أن يكون أكبر من صفر']"
+                      required
+                      class="form-field"
+                    />
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-select
+                      v-model="incomeForm.category"
+                      :items="incomeCategories"
+                      label="الفئة"
+                      variant="outlined"
+                      :rules="[v => !!v || 'الفئة مطلوبة']"
+                      required
+                      class="form-field"
+                    />
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12">
+                    <v-textarea
+                      v-model="incomeForm.notes"
+                      label="ملاحظات"
+                      variant="outlined"
+                      rows="3"
+                      class="form-field"
+                    />
+                  </v-col>
+                </v-row>
+              </div>
             </v-form>
-          </v-card-text>
-          <v-card-actions class="dialog-actions">
-            <v-spacer />
-            <v-btn color="grey" @click="closeDialog">إلغاء</v-btn>
-            <v-btn color="success" @click="saveIncome" :disabled="!valid">حفظ</v-btn>
-          </v-card-actions>
+          </div>
+
+          <!-- Dialog Actions -->
+          <div class="dialog-actions">
+            <v-btn
+              color="grey"
+              variant="text"
+              @click="closeDialog"
+              class="cancel-btn"
+            >
+              إلغاء
+            </v-btn>
+            <v-btn
+              color="success"
+              variant="elevated"
+              @click="saveIncome"
+              :disabled="!valid"
+              class="save-btn"
+            >
+              <v-icon class="me-2">mdi-content-save</v-icon>
+              حفظ
+            </v-btn>
+          </div>
         </v-card>
       </v-dialog>
     </div>

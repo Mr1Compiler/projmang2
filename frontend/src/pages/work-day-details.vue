@@ -246,18 +246,33 @@
 
     <!-- Category Details Dialog -->
     <v-dialog v-model="showCategoryDialog" max-width="800" persistent scrollable>
-      <v-card class="dialog-card">
-        <v-card-title class="dialog-title">
-          <v-icon class="me-2" color="primary">{{ selectedCategory.icon }}</v-icon>
-          {{ selectedCategory.title }}
-        </v-card-title>
-        <v-card-text class="dialog-content">
-          <p class="dialog-description">{{ selectedCategory.description }}</p>
+      <v-card class="image-style-dialog">
+        <!-- Header Section -->
+        <div class="dialog-header">
+          <div class="header-content">
+            <div class="header-left">
+              <v-icon size="24" color="white" class="header-icon">{{ selectedCategory.icon }}</v-icon>
+              <span class="header-title">{{ selectedCategory.title }}</span>
+            </div>
+            <v-btn
+              icon="mdi-close"
+              variant="text"
+              size="small"
+              color="white"
+              @click="showCategoryDialog = false"
+              class="close-btn"
+            />
+          </div>
+        </div>
+
+        <!-- Dialog Body -->
+        <div class="dialog-body">
+          <p class="mb-4">{{ selectedCategory.description }}</p>
           <v-alert type="info" variant="tonal" class="mt-4">
             <v-icon class="me-2">mdi-information</v-icon>
             هنا ستظهر التفاصيل الكاملة لهذا القسم
           </v-alert>
-          
+
           <!-- تفاصيل إضافية حسب النوع -->
           <div v-if="selectedCategory.title === 'المواد والمصاريف اليومية'" class="mt-4">
             <h4>قائمة المواد:</h4>
@@ -269,7 +284,7 @@
               <v-list-item>طوب - 1000 قطعة</v-list-item>
             </v-list>
           </div>
-          
+
           <div v-else-if="selectedCategory.title === 'الأيدي العاملة'" class="mt-4">
             <h4>قائمة العمال:</h4>
             <v-list>
@@ -280,7 +295,7 @@
               <v-list-item>أحمد علي - عامل بناء</v-list-item>
             </v-list>
           </div>
-          
+
           <div v-else-if="selectedCategory.title === 'الآليات'" class="mt-4">
             <h4>قائمة الآليات:</h4>
             <v-list>
@@ -290,14 +305,20 @@
               <v-list-item>شاحنة - 1 آلة</v-list-item>
             </v-list>
           </div>
-        </v-card-text>
-        <v-card-actions class="dialog-actions">
-          <v-spacer></v-spacer>
-          <v-btn @click="showCategoryDialog = false" color="primary" variant="elevated">
-            <v-icon class="me-2">mdi-close</v-icon>
+        </div>
+
+        <!-- Dialog Actions -->
+        <div class="dialog-actions">
+          <v-btn
+            color="primary"
+            variant="elevated"
+            @click="showCategoryDialog = false"
+            class="save-btn"
+          >
+            <v-icon class="me-2">mdi-check</v-icon>
             إغلاق
           </v-btn>
-        </v-card-actions>
+        </div>
       </v-card>
     </v-dialog>
   </div>

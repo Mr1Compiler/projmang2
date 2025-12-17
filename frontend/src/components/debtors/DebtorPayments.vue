@@ -1,11 +1,26 @@
 <template>
-  <v-dialog v-model="dialogModel" max-width="800px">
-    <v-card class="payments-dialog-card">
-      <v-card-title class="payments-header">
-        <v-icon class="me-2" color="white">mdi-credit-card</v-icon>
-        الديون والتسديدات - {{ debtor?.name }}
-      </v-card-title>
-      <v-card-text v-if="debtor" class="pa-6">
+  <v-dialog v-model="dialogModel" max-width="800px" persistent>
+    <v-card class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header" style="background: var(--gradient-info) !important;">
+        <div class="header-content">
+          <div class="header-left">
+            <v-icon size="24" color="white" class="header-icon">mdi-credit-card</v-icon>
+            <span class="header-title">الديون والتسديدات - {{ debtor?.name }}</span>
+          </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="closeDialog"
+            class="close-btn"
+          />
+        </div>
+      </div>
+
+      <!-- Dialog Body -->
+      <div v-if="debtor" class="dialog-body">
         <!-- Quick Stats -->
         <v-row class="mb-4">
           <v-col cols="12" md="4">
@@ -215,17 +230,19 @@
             </v-card>
           </v-window-item>
         </v-window>
-      </v-card-text>
-      <v-card-actions class="pa-4">
-        <v-spacer />
+      </div>
+
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
         <v-btn
           color="primary"
           variant="elevated"
           @click="closeDialog"
+          class="save-btn"
         >
           إغلاق
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -329,15 +346,5 @@ const getPaymentMethodText = (method) => {
 </script>
 
 <style scoped>
-.payments-dialog-card {
-  border-radius: var(--radius-2xl) !important;
-  overflow: hidden !important;
-}
-
-.payments-header {
-  background: var(--gradient-info-deep) !important;
-  color: var(--text-white) !important;
-  font-weight: 700 !important;
-  padding: var(--space-5) 24px !important;
-}
+/* Component-specific overrides - base styles in form-dialog.css */
 </style>

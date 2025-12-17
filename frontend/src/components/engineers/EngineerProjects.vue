@@ -1,18 +1,26 @@
 <template>
-  <v-dialog v-model="dialogModel" max-width="800" class="projects-dialog">
-    <v-card v-if="engineer">
-      <v-card-title class="projects-dialog-title">
-        <div class="d-flex align-center">
-          <v-avatar size="32" color="success" variant="tonal" class="me-3">
-            <v-icon>mdi-briefcase</v-icon>
-          </v-avatar>
-          <h2 class="text-h5 font-weight-bold mb-0">
-            مشاريع المهندس - {{ engineer.name }}
-          </h2>
+  <v-dialog v-model="dialogModel" max-width="800" persistent>
+    <v-card v-if="engineer" class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header" style="background: var(--gradient-success) !important;">
+        <div class="header-content">
+          <div class="header-left">
+            <v-icon size="24" color="white" class="header-icon">mdi-briefcase</v-icon>
+            <span class="header-title">مشاريع المهندس - {{ engineer.name }}</span>
+          </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="closeDialog"
+            class="close-btn"
+          />
         </div>
-      </v-card-title>
+      </div>
 
-      <v-card-text>
+      <!-- Dialog Body -->
+      <div class="dialog-body">
         <!-- Add Project Section -->
         <v-card variant="outlined" class="mb-4 pa-4 add-project-section">
           <v-card-title class="text-subtitle-1 pa-0 mb-3">
@@ -103,15 +111,14 @@
             </div>
           </v-card-text>
         </v-card>
-      </v-card-text>
+      </div>
 
-      <v-divider />
-      <v-card-actions class="pa-4">
-        <v-spacer />
-        <v-btn color="grey" variant="text" @click="closeDialog">
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
+        <v-btn color="grey" variant="text" @click="closeDialog" class="cancel-btn">
           إغلاق
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -214,21 +221,7 @@ const closeDialog = () => {
 </script>
 
 <style scoped>
-.projects-dialog .v-card {
-  border-radius: var(--radius-2xl) !important;
-  overflow: hidden !important;
-}
-
-.projects-dialog-title {
-  background: var(--gradient-success-deep) !important;
-  color: var(--text-white) !important;
-  padding: var(--space-5) 24px !important;
-}
-
-.projects-dialog-title h2 {
-  color: var(--text-white) !important;
-}
-
+/* Component-specific overrides - base styles in form-dialog.css */
 .add-project-section {
   border-radius: var(--radius-2xl) !important;
   background: linear-gradient(145deg, var(--color-green-50) 0%, var(--color-green-100) 100%) !important;
@@ -251,9 +244,5 @@ const closeDialog = () => {
 
 .project-item:last-child {
   border-bottom: none;
-}
-
-.form-field-enhanced {
-  border-radius: var(--radius-xl) !important;
 }
 </style>

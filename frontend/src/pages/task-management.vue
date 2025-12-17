@@ -251,96 +251,113 @@
     </div>
 
     <!-- Add/Edit Task Dialog -->
-    <v-dialog v-model="showAddTaskDialog" max-width="800">
-      <v-card class="task-dialog-card">
-        <v-card-title class="task-dialog-header">
-          <v-icon size="28" color="white" class="mr-2">mdi-plus</v-icon>
-          <span class="text-h5">{{ isEditing ? 'تعديل المهمة' : 'إضافة مهمة جديدة' }}</span>
-        </v-card-title>
-        
-        <v-card-text>
+    <v-dialog v-model="showAddTaskDialog" max-width="800" persistent>
+      <v-card class="image-style-dialog">
+        <!-- Header Section -->
+        <div class="dialog-header">
+          <div class="header-content">
+            <div class="header-left">
+              <v-icon size="24" color="white" class="header-icon">{{ isEditing ? 'mdi-pencil' : 'mdi-plus' }}</v-icon>
+              <span class="header-title">{{ isEditing ? 'تعديل المهمة' : 'إضافة مهمة جديدة' }}</span>
+            </div>
+            <v-btn
+              icon="mdi-close"
+              variant="text"
+              size="small"
+              color="white"
+              @click="closeTaskDialog"
+              class="close-btn"
+            />
+          </div>
+        </div>
+
+        <!-- Form Content -->
+        <div class="dialog-body">
           <v-form ref="taskForm" v-model="taskFormValid">
-            <v-row>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="taskForm.title"
-                  label="عنوان المهمة"
-                  variant="outlined"
-                  :rules="[v => !!v || 'عنوان المهمة مطلوب']"
-                  required
-                  class="task-form-field input-field-dark-labels"
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-select
-                  v-model="taskForm.status"
-                  :items="statusOptions"
-                  label="حالة المهمة"
-                  variant="outlined"
-                  required
-                  class="task-form-field input-field-dark-labels"
-                />
-              </v-col>
-              <v-col cols="12">
-                <v-textarea
-                  v-model="taskForm.description"
-                  label="وصف المهمة"
-                  variant="outlined"
-                  rows="3"
-                  class="task-form-field input-field-dark-labels"
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-select
-                  v-model="taskForm.priority"
-                  :items="priorityOptions"
-                  label="أولوية المهمة"
-                  variant="outlined"
-                  required
-                  class="task-form-field input-field-dark-labels"
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-select
-                  v-model="taskForm.assignee"
-                  :items="assigneeOptions"
-                  label="المسؤول"
-                  variant="outlined"
-                  required
-                  class="task-form-field input-field-dark-labels"
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="taskForm.dueDate"
-                  label="تاريخ الاستحقاق"
-                  type="date"
-                  variant="outlined"
-                  required
-                  class="task-form-field input-field-dark-labels"
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-slider
-                  v-model="taskForm.progress"
-                  label="نسبة الإنجاز"
-                  min="0"
-                  max="100"
-                  step="5"
-                  thumb-label
-                  color="primary"
-                />
-              </v-col>
-            </v-row>
+            <div class="form-fields">
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    v-model="taskForm.title"
+                    label="عنوان المهمة"
+                    variant="outlined"
+                    :rules="[v => !!v || 'عنوان المهمة مطلوب']"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-select
+                    v-model="taskForm.status"
+                    :items="statusOptions"
+                    label="حالة المهمة"
+                    variant="outlined"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+                <v-col cols="12">
+                  <v-textarea
+                    v-model="taskForm.description"
+                    label="وصف المهمة"
+                    variant="outlined"
+                    rows="3"
+                    class="form-field"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-select
+                    v-model="taskForm.priority"
+                    :items="priorityOptions"
+                    label="أولوية المهمة"
+                    variant="outlined"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-select
+                    v-model="taskForm.assignee"
+                    :items="assigneeOptions"
+                    label="المسؤول"
+                    variant="outlined"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    v-model="taskForm.dueDate"
+                    label="تاريخ الاستحقاق"
+                    type="date"
+                    variant="outlined"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-slider
+                    v-model="taskForm.progress"
+                    label="نسبة الإنجاز"
+                    min="0"
+                    max="100"
+                    step="5"
+                    thumb-label
+                    color="primary"
+                  />
+                </v-col>
+              </v-row>
+            </div>
           </v-form>
-        </v-card-text>
-        
-        <v-card-actions class="dialog-actions">
-          <v-spacer />
+        </div>
+
+        <!-- Dialog Actions -->
+        <div class="dialog-actions">
           <v-btn
             color="grey"
-            variant="outlined"
+            variant="text"
             @click="closeTaskDialog"
+            class="cancel-btn"
           >
             إلغاء
           </v-btn>
@@ -349,22 +366,38 @@
             variant="elevated"
             :disabled="!taskFormValid"
             @click="saveTask"
+            class="save-btn"
           >
+            <v-icon class="me-2">mdi-content-save</v-icon>
             {{ isEditing ? 'تحديث' : 'إضافة' }}
           </v-btn>
-        </v-card-actions>
+        </div>
       </v-card>
     </v-dialog>
 
     <!-- Task Details Dialog -->
-    <v-dialog v-model="showTaskDetails" max-width="600">
-      <v-card>
-        <v-card-title class="dialog-header">
-          <v-icon size="24" color="primary" class="mr-2">mdi-eye</v-icon>
-          <span class="text-h6 font-weight-bold">تفاصيل المهمة</span>
-        </v-card-title>
-        
-        <v-card-text v-if="selectedTask">
+    <v-dialog v-model="showTaskDetails" max-width="600" persistent>
+      <v-card class="image-style-dialog">
+        <!-- Header Section -->
+        <div class="dialog-header">
+          <div class="header-content">
+            <div class="header-left">
+              <v-icon size="24" color="white" class="header-icon">mdi-eye</v-icon>
+              <span class="header-title">تفاصيل المهمة</span>
+            </div>
+            <v-btn
+              icon="mdi-close"
+              variant="text"
+              size="small"
+              color="white"
+              @click="showTaskDetails = false"
+              class="close-btn"
+            />
+          </div>
+        </div>
+
+        <!-- Dialog Body -->
+        <div class="dialog-body" v-if="selectedTask">
           <div class="task-details">
             <div class="detail-row">
               <strong>عنوان المهمة:</strong>
@@ -416,18 +449,20 @@
               </div>
             </div>
           </div>
-        </v-card-text>
-        
-        <v-card-actions class="dialog-actions">
-          <v-spacer />
+        </div>
+
+        <!-- Dialog Actions -->
+        <div class="dialog-actions">
           <v-btn
             color="primary"
             variant="elevated"
             @click="showTaskDetails = false"
+            class="save-btn"
           >
+            <v-icon class="me-2">mdi-check</v-icon>
             إغلاق
           </v-btn>
-        </v-card-actions>
+        </div>
       </v-card>
     </v-dialog>
   </div>

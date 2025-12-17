@@ -32,117 +32,137 @@
 
     <!-- Add Work Day Modal -->
     <v-dialog v-model="showAddForm" max-width="600" persistent>
-      <v-card class="modal-card">
-        <v-card-title class="modal-header">
-          <span class="modal-title">اضافة يوم عمل</span>
-          <v-btn icon="mdi-close" @click="closeAddForm" variant="text" class="close-btn">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-card-title>
+      <v-card class="image-style-dialog">
+        <!-- Header Section -->
+        <div class="dialog-header">
+          <div class="header-content">
+            <div class="header-left">
+              <v-icon size="24" color="white" class="header-icon">mdi-calendar-plus</v-icon>
+              <span class="header-title">{{ isEditing ? 'تعديل يوم عمل' : 'اضافة يوم عمل' }}</span>
+            </div>
+            <v-btn
+              icon="mdi-close"
+              variant="text"
+              size="small"
+              color="white"
+              @click="closeAddForm"
+              class="close-btn"
+            />
+          </div>
+        </div>
 
-        <v-card-text class="modal-content">
+        <!-- Form Content -->
+        <div class="dialog-body">
           <v-form ref="form" v-model="formValid">
-            <v-row>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="workDayForm.workLocation"
-                  label="مكان العمل"
-                  variant="outlined"
-                  :rules="[v => !!v || 'مكان العمل مطلوب']"
-                  required
-                />
-              </v-col>
-              
-              <v-col cols="12">
-                <v-text-field
-                  v-model="workDayForm.formNumber"
-                  label="رقم الاستمارة"
-                  variant="outlined"
-                  :rules="[v => !!v || 'رقم الاستمارة مطلوب']"
-                  required
-                />
-              </v-col>
-              
-              <v-col cols="12">
-                <div class="work-period-section">
-                  <label class="section-label">فتره العمل</label>
-                  <div class="period-inputs">
-                    <v-text-field
-                      v-model="workDayForm.workPeriodFrom"
-                      label="من"
-                      variant="outlined"
-                      type="time"
-                      class="period-input"
-                    />
-                    <span class="period-separator">-</span>
-                    <v-text-field
-                      v-model="workDayForm.workPeriodTo"
-                      label="الى"
-                      variant="outlined"
-                      type="time"
-                      class="period-input"
-                    />
-                  </div>
-                </div>
-              </v-col>
-              
-              <v-col cols="12">
-                <v-select
-                  v-model="workDayForm.day"
-                  label="اليوم"
-                  :items="dayOptions"
-                  variant="outlined"
-                  :rules="[v => !!v || 'اليوم مطلوب']"
-                  required
-                  class="day-select"
-                />
-              </v-col>
-              
-              <v-col cols="12">
-                <v-select
-                  v-model="workDayForm.workType"
-                  label="نوع العمل"
-                  :items="workTypeOptions"
-                  variant="outlined"
-                  :rules="[v => !!v || 'نوع العمل مطلوب']"
-                  required
-                  class="work-type-select"
-                />
-              </v-col>
-              
-              <v-col cols="12">
-                <v-text-field
-                  v-model="workDayForm.about"
-                  label="عن"
-                  variant="outlined"
-                  placeholder="وصف العمل"
-                  :rules="[v => !!v || 'الوصف مطلوب']"
-                  required
-                />
-              </v-col>
-              
-              <v-col cols="12">
-                <v-text-field
-                  v-model="workDayForm.date"
-                  label="التاريخ"
-                  variant="outlined"
-                  type="date"
-                  :rules="[v => !!v || 'التاريخ مطلوب']"
-                  required
-                  class="date-field"
-                />
-              </v-col>
-            </v-row>
-          </v-form>
-        </v-card-text>
+            <div class="form-fields">
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    v-model="workDayForm.workLocation"
+                    label="مكان العمل"
+                    variant="outlined"
+                    :rules="[v => !!v || 'مكان العمل مطلوب']"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    v-model="workDayForm.formNumber"
+                    label="رقم الاستمارة"
+                    variant="outlined"
+                    :rules="[v => !!v || 'رقم الاستمارة مطلوب']"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+              </v-row>
 
-        <v-card-actions class="modal-footer">
-          <v-spacer />
+              <v-row>
+                <v-col cols="12">
+                  <div class="work-period-section">
+                    <label class="field-label">فتره العمل</label>
+                    <div class="period-inputs">
+                      <v-text-field
+                        v-model="workDayForm.workPeriodFrom"
+                        label="من"
+                        variant="outlined"
+                        type="time"
+                        class="form-field period-input"
+                      />
+                      <span class="period-separator">-</span>
+                      <v-text-field
+                        v-model="workDayForm.workPeriodTo"
+                        label="الى"
+                        variant="outlined"
+                        type="time"
+                        class="form-field period-input"
+                      />
+                    </div>
+                  </div>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-select
+                    v-model="workDayForm.day"
+                    label="اليوم"
+                    :items="dayOptions"
+                    variant="outlined"
+                    :rules="[v => !!v || 'اليوم مطلوب']"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-select
+                    v-model="workDayForm.workType"
+                    label="نوع العمل"
+                    :items="workTypeOptions"
+                    variant="outlined"
+                    :rules="[v => !!v || 'نوع العمل مطلوب']"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    v-model="workDayForm.about"
+                    label="عن"
+                    variant="outlined"
+                    placeholder="وصف العمل"
+                    :rules="[v => !!v || 'الوصف مطلوب']"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    v-model="workDayForm.date"
+                    label="التاريخ"
+                    variant="outlined"
+                    type="date"
+                    :rules="[v => !!v || 'التاريخ مطلوب']"
+                    required
+                    class="form-field"
+                  />
+                </v-col>
+              </v-row>
+            </div>
+          </v-form>
+        </div>
+
+        <!-- Dialog Actions -->
+        <div class="dialog-actions">
           <v-btn
-            variant="outlined"
+            color="grey"
+            variant="text"
             @click="closeAddForm"
             class="cancel-btn"
-            size="large"
           >
             إلغاء
           </v-btn>
@@ -153,11 +173,11 @@
             :disabled="!formValid"
             :loading="saving"
             class="save-btn"
-            size="large"
           >
+            <v-icon class="me-2">mdi-content-save</v-icon>
             حفظ
           </v-btn>
-        </v-card-actions>
+        </div>
       </v-card>
     </v-dialog>
 

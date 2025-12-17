@@ -1,23 +1,27 @@
 <template>
   <!-- Reset Password Dialog -->
-  <v-dialog :model-value="resetPasswordDialog" @update:model-value="$emit('update:resetPasswordDialog', $event)" max-width="500px">
-    <v-card class="reset-password-dialog">
-      <v-card-title class="dialog-header">
-        <div class="dialog-title">
-          <v-icon size="32" color="warning" class="me-3">mdi-key-change</v-icon>
-          <h2>إعادة تعيين كلمة المرور</h2>
+  <v-dialog :model-value="resetPasswordDialog" @update:model-value="$emit('update:resetPasswordDialog', $event)" max-width="500px" persistent>
+    <v-card class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header" style="background: var(--gradient-warning) !important;">
+        <div class="header-content">
+          <div class="header-left">
+            <v-icon size="24" color="white" class="header-icon">mdi-key-change</v-icon>
+            <span class="header-title">إعادة تعيين كلمة المرور</span>
+          </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="$emit('update:resetPasswordDialog', false)"
+            class="close-btn"
+          />
         </div>
-        <v-btn
-          icon="mdi-close"
-          variant="text"
-          @click="$emit('update:resetPasswordDialog', false)"
-          class="close-btn"
-        />
-      </v-card-title>
+      </div>
 
-      <v-divider />
-
-      <v-card-text v-if="user" class="pa-6">
+      <!-- Dialog Body -->
+      <div class="dialog-body" v-if="user">
         <div class="text-center mb-4">
           <v-avatar size="60">
             <v-img :src="user.avatar || defaultAvatar" />
@@ -37,17 +41,15 @@
         <p class="text-body-2 text-center">
           هل أنت متأكد من إعادة تعيين كلمة المرور لهذا المستخدم؟
         </p>
-      </v-card-text>
+      </div>
 
-      <v-divider />
-
-      <v-card-actions class="dialog-actions">
-        <v-spacer />
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
         <v-btn
           color="grey"
-          variant="outlined"
+          variant="text"
           @click="$emit('update:resetPasswordDialog', false)"
-          class="me-2"
+          class="cancel-btn"
         >
           إلغاء
         </v-btn>
@@ -56,32 +58,38 @@
           variant="elevated"
           @click="$emit('confirm-reset')"
           :loading="resetLoading"
+          class="save-btn"
         >
+          <v-icon class="me-2">mdi-key-change</v-icon>
           إعادة تعيين
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 
   <!-- Delete Confirmation Dialog -->
-  <v-dialog :model-value="deleteDialog" @update:model-value="$emit('update:deleteDialog', $event)" max-width="500px">
-    <v-card class="delete-confirm-dialog">
-      <v-card-title class="dialog-header">
-        <div class="dialog-title">
-          <v-icon size="32" color="error" class="me-3">mdi-delete-alert</v-icon>
-          <h2>تأكيد الحذف</h2>
+  <v-dialog :model-value="deleteDialog" @update:model-value="$emit('update:deleteDialog', $event)" max-width="500px" persistent>
+    <v-card class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header" style="background: var(--gradient-error) !important;">
+        <div class="header-content">
+          <div class="header-left">
+            <v-icon size="24" color="white" class="header-icon">mdi-delete-alert</v-icon>
+            <span class="header-title">تأكيد الحذف</span>
+          </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="$emit('update:deleteDialog', false)"
+            class="close-btn"
+          />
         </div>
-        <v-btn
-          icon="mdi-close"
-          variant="text"
-          @click="$emit('update:deleteDialog', false)"
-          class="close-btn"
-        />
-      </v-card-title>
+      </div>
 
-      <v-divider />
-
-      <v-card-text v-if="user" class="pa-6">
+      <!-- Dialog Body -->
+      <div class="dialog-body" v-if="user">
         <div class="text-center mb-4">
           <v-avatar size="60">
             <v-img :src="user.avatar || defaultAvatar" />
@@ -101,17 +109,15 @@
         <p class="text-body-2 text-center">
           هل أنت متأكد من حذف هذا المستخدم نهائياً؟
         </p>
-      </v-card-text>
+      </div>
 
-      <v-divider />
-
-      <v-card-actions class="dialog-actions">
-        <v-spacer />
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
         <v-btn
           color="grey"
-          variant="outlined"
+          variant="text"
           @click="$emit('update:deleteDialog', false)"
-          class="me-2"
+          class="cancel-btn"
         >
           إلغاء
         </v-btn>
@@ -120,10 +126,12 @@
           variant="elevated"
           @click="$emit('confirm-delete')"
           :loading="deleteLoading"
+          class="save-btn"
         >
+          <v-icon class="me-2">mdi-delete</v-icon>
           حذف نهائي
         </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -163,5 +171,5 @@ const defaultAvatar = 'https://ui-avatars.com/api/?name=User&background=667eea&c
 </script>
 
 <style scoped>
-@import './styles/users.css';
+/* Component-specific overrides - base styles in form-dialog.css */
 </style>

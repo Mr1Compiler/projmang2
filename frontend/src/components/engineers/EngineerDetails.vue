@@ -1,23 +1,32 @@
 <template>
-  <v-dialog v-model="dialogModel" max-width="700" class="engineer-details-dialog">
-    <v-card v-if="engineer">
-      <v-card-title class="d-flex align-center justify-space-between details-header">
-        <div class="d-flex align-center">
-          <v-avatar size="40" color="primary" variant="tonal" class="me-3">
-            <v-img v-if="engineer.avatar" :src="engineer.avatar" />
-            <v-icon v-else>mdi-account</v-icon>
-          </v-avatar>
-          <div>
-            <h2 class="text-h5 font-weight-bold detail-header-title">{{ engineer.name }}</h2>
-            <p class="text-subtitle-2 mb-0 detail-header-subtitle">{{ engineer.email }}</p>
+  <v-dialog v-model="dialogModel" max-width="700" persistent>
+    <v-card v-if="engineer" class="image-style-dialog">
+      <!-- Header Section -->
+      <div class="dialog-header" style="background: var(--gradient-info) !important;">
+        <div class="header-content">
+          <div class="header-left">
+            <v-avatar size="40" color="white" variant="tonal" class="me-3">
+              <v-img v-if="engineer.avatar" :src="engineer.avatar" />
+              <v-icon v-else color="info">mdi-account</v-icon>
+            </v-avatar>
+            <div>
+              <span class="header-title">{{ engineer.name }}</span>
+              <p class="text-subtitle-2 mb-0" style="color: rgba(255,255,255,0.8);">{{ engineer.email }}</p>
+            </div>
           </div>
+          <v-btn
+            icon="mdi-close"
+            variant="text"
+            size="small"
+            color="white"
+            @click="closeDialog"
+            class="close-btn"
+          />
         </div>
-        <v-btn icon="mdi-close" variant="text" @click="closeDialog" class="icon-btn-white-transparent" />
-      </v-card-title>
+      </div>
 
-      <v-divider />
-
-      <v-card-text class="pa-6">
+      <!-- Dialog Body -->
+      <div class="dialog-body">
         <v-row>
           <!-- معلومات أساسية -->
           <v-col cols="12" md="6">
@@ -108,20 +117,18 @@
             </v-card>
           </v-col>
         </v-row>
-      </v-card-text>
+      </div>
 
-      <v-divider />
-
-      <v-card-actions class="pa-4">
-        <v-spacer />
-        <v-btn v-if="canEdit" color="primary" variant="elevated" @click="$emit('edit', engineer)">
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
+        <v-btn color="grey" variant="text" @click="closeDialog" class="cancel-btn">
+          إغلاق
+        </v-btn>
+        <v-btn v-if="canEdit" color="primary" variant="elevated" @click="$emit('edit', engineer)" class="save-btn">
           <v-icon class="me-2">mdi-pencil</v-icon>
           تعديل
         </v-btn>
-        <v-btn color="grey" variant="text" @click="closeDialog">
-          إغلاق
-        </v-btn>
-      </v-card-actions>
+      </div>
     </v-card>
   </v-dialog>
 </template>
@@ -160,16 +167,7 @@ const closeDialog = () => {
 </script>
 
 <style scoped>
-.engineer-details-dialog .v-card {
-  border-radius: var(--radius-2xl) !important;
-  overflow: hidden !important;
-}
-
-.details-header {
-  background: var(--gradient-info-deep) !important;
-  padding: var(--space-5) 24px !important;
-}
-
+/* Component-specific overrides - base styles in form-dialog.css */
 .info-card {
   border-radius: var(--radius-2xl) !important;
   height: 100%;

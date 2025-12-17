@@ -642,3 +642,312 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/* ========================================
+   17. تحسينات RTL الشاملة
+   Comprehensive RTL Improvements
+   ======================================== */
+
+/* تطبيق RTL على جميع النوافذ */
+.image-style-dialog {
+  direction: rtl !important;
+  text-align: start !important;
+}
+
+.image-style-dialog * {
+  font-family: 'Cairo', 'Tajawal', 'Noto Sans Arabic', sans-serif !important;
+}
+
+/* Header RTL */
+.image-style-dialog .dialog-header {
+  direction: rtl !important;
+}
+
+.image-style-dialog .dialog-header .header-content {
+  width: 100%;
+  flex-direction: row-reverse;
+}
+
+.image-style-dialog .dialog-header .header-left {
+  flex-direction: row;
+}
+
+.image-style-dialog .dialog-header .close-btn {
+  margin-inline-start: 0 !important;
+}
+
+/* Body RTL */
+.image-style-dialog .dialog-body {
+  direction: rtl !important;
+  text-align: start !important;
+}
+
+/* Form Fields RTL */
+.image-style-dialog .form-field,
+.image-style-dialog .v-text-field,
+.image-style-dialog .v-select,
+.image-style-dialog .v-textarea {
+  direction: rtl !important;
+}
+
+.image-style-dialog .v-field__input {
+  text-align: start !important;
+  direction: rtl !important;
+}
+
+/* Labels positioning for RTL */
+.image-style-dialog .v-label {
+  right: 12px !important;
+  left: auto !important;
+}
+
+.image-style-dialog .v-field--active .v-label,
+.image-style-dialog .v-field--focused .v-label {
+  transform-origin: top right !important;
+}
+
+/* Prepend/Append icons RTL */
+.image-style-dialog .v-field__prepend-inner {
+  margin-inline-end: var(--space-2) !important;
+  margin-inline-start: 0 !important;
+}
+
+.image-style-dialog .v-field__append-inner {
+  margin-inline-start: var(--space-2) !important;
+  margin-inline-end: 0 !important;
+}
+
+/* Actions RTL */
+.image-style-dialog .dialog-actions {
+  direction: rtl !important;
+  flex-direction: row-reverse;
+  justify-content: flex-start !important;
+}
+
+/* Select dropdown RTL */
+.image-style-dialog .v-select__selection {
+  direction: rtl !important;
+  text-align: start !important;
+}
+
+/* Textarea RTL */
+.image-style-dialog textarea {
+  direction: rtl !important;
+  text-align: start !important;
+}
+
+/* Alerts RTL */
+.image-style-dialog .v-alert {
+  direction: rtl !important;
+  text-align: start !important;
+}
+
+.image-style-dialog .v-alert__prepend {
+  margin-inline-end: var(--space-3) !important;
+  margin-inline-start: 0 !important;
+}
+
+/* Checkbox and Radio RTL */
+.image-style-dialog .v-checkbox,
+.image-style-dialog .v-radio {
+  direction: rtl !important;
+}
+
+.image-style-dialog .v-checkbox .v-label,
+.image-style-dialog .v-radio .v-label {
+  margin-inline-start: var(--space-2) !important;
+  margin-inline-end: 0 !important;
+}
+
+/* Messages RTL */
+.image-style-dialog .v-messages {
+  direction: rtl !important;
+  text-align: start !important;
+}
+
+/* ========================================
+   18. إصلاح الأيقونات في الحقول
+   Icon Positioning in Fields
+   ======================================== */
+
+/* تحسين موقع الأيقونات */
+.image-style-dialog .v-field__prepend-inner .v-icon,
+.image-style-dialog .v-field__append-inner .v-icon {
+  color: var(--color-blue-500) !important;
+}
+
+/* Password toggle icon */
+.image-style-dialog .v-field__append-inner {
+  cursor: pointer;
+}
+
+/* ========================================
+   19. تحسينات للأزرار
+   Button Improvements
+   ======================================== */
+
+/* أيقونات الأزرار */
+.image-style-dialog .dialog-actions .v-btn .v-icon {
+  margin-inline-end: var(--space-2) !important;
+  margin-inline-start: 0 !important;
+}
+
+/* زر الحذف */
+.dialog-actions .v-btn[color="error"],
+.dialog-actions .v-btn.error-btn {
+  background: var(--gradient-error) !important;
+  color: var(--text-white) !important;
+}
+
+/* زر التحذير */
+.dialog-actions .v-btn[color="warning"],
+.dialog-actions .v-btn.warning-btn {
+  background: var(--gradient-warning) !important;
+  color: var(--text-white) !important;
+}
+
+/* ========================================
+   20. محتوى مركزي للنوافذ
+   Centered Content for Dialogs
+   ======================================== */
+
+.image-style-dialog .dialog-body.text-center {
+  text-align: center !important;
+}
+
+.image-style-dialog .dialog-body.text-center p {
+  text-align: center !important;
+}
+
+/* Avatar sections */
+.image-style-dialog .text-center .v-avatar {
+  margin: 0 auto var(--space-3);
+}
+
+/* ========================================
+   21. Vuetify Row/Col RTL
+   Grid System RTL Support
+   ======================================== */
+
+.image-style-dialog .v-row {
+  direction: rtl !important;
+}
+
+.image-style-dialog .v-col {
+  direction: rtl !important;
+}
+
+/* ========================================
+   22. تحسينات إضافية للقراءة
+   Additional Readability Improvements
+   ======================================== */
+
+/* Text color consistency */
+.image-style-dialog h1,
+.image-style-dialog h2,
+.image-style-dialog h3,
+.image-style-dialog h4,
+.image-style-dialog h5,
+.image-style-dialog h6 {
+  color: var(--text-primary) !important;
+}
+
+.image-style-dialog p {
+  color: var(--text-primary) !important;
+}
+
+.image-style-dialog .text-caption {
+  color: var(--text-secondary) !important;
+}
+
+/* Hint text */
+.image-style-dialog .v-messages__message {
+  direction: rtl !important;
+  text-align: start !important;
+}
+
+/* ========================================
+   23. تحسين التمرير
+   Scrollbar Improvements
+   ======================================== */
+
+.image-style-dialog .dialog-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.image-style-dialog .dialog-body::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+  border-radius: var(--radius-full);
+}
+
+.image-style-dialog .dialog-body::-webkit-scrollbar-thumb {
+  background: var(--color-blue-300);
+  border-radius: var(--radius-full);
+}
+
+.image-style-dialog .dialog-body::-webkit-scrollbar-thumb:hover {
+  background: var(--color-blue-400);
+}
+
+/* ========================================
+   24. إصلاح أزرار الإضافة داخل البطاقات
+   Fix Add Buttons Inside Cards
+   ======================================== */
+
+/* Fix v-card-title with flex and justify-space-between */
+.image-style-dialog .v-card-title.d-flex {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.image-style-dialog .v-card-title.d-flex.justify-space-between {
+  flex-direction: row-reverse !important;
+}
+
+/* Ensure buttons inside card titles are visible */
+.image-style-dialog .v-card-title .v-btn {
+  flex-shrink: 0 !important;
+}
+
+/* Fix v-card-title text alignment */
+.image-style-dialog .v-card-title > span {
+  flex-grow: 1 !important;
+  text-align: start !important;
+}
+
+/* Tabs RTL support */
+.image-style-dialog .v-tabs {
+  direction: rtl !important;
+}
+
+.image-style-dialog .v-tab {
+  direction: rtl !important;
+}
+
+/* Data table RTL */
+.image-style-dialog .v-data-table {
+  direction: rtl !important;
+}
+
+.image-style-dialog .v-data-table th,
+.image-style-dialog .v-data-table td {
+  text-align: start !important;
+}
+
+/* List items RTL */
+.image-style-dialog .v-list-item {
+  direction: rtl !important;
+}
+
+.image-style-dialog .v-list-item-title,
+.image-style-dialog .v-list-item-subtitle {
+  text-align: start !important;
+}
+
+/* Window/Tab content RTL */
+.image-style-dialog .v-window-item {
+  direction: rtl !important;
+}

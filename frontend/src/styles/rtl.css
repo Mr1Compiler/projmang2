@@ -8,8 +8,30 @@
    ======================================== */
 
 /* Force RTL on everything except icons */
+/* Force RTL on everything except icons */
+/* Force RTL on everything except icons */
 html {
   direction: rtl !important;
+  /* overflow-y: auto; - Standard behavior restored */
+}
+
+/* Fix: Hide the visual scrollbar for the sidebar to prevent double/reversed scrollbars look
+   while maintaining scroll functionality */
+.v-navigation-drawer__content::-webkit-scrollbar {
+  width: 0 !important;
+  display: none !important;
+}
+
+.v-navigation-drawer__content {
+  scrollbar-width: none !important;
+  /* Firefox */
+  -ms-overflow-style: none !important;
+  /* IE */
+}
+
+/* Ensure v-main scrolls naturally with the page */
+.v-main {
+  /* Default behavior */
 }
 
 /* All elements RTL by default */
@@ -28,8 +50,25 @@ html {
 }
 
 /* All text elements */
-p, span, div, a, button, label, h1, h2, h3, h4, h5, h6,
-td, th, li, input, textarea, select, option {
+p,
+span,
+div,
+a,
+button,
+label,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+td,
+th,
+li,
+input,
+textarea,
+select,
+option {
   direction: rtl !important;
   text-align: right !important;
   font-family: var(--font-primary) !important;
@@ -191,8 +230,18 @@ body {
 }
 
 /* إصلاح اتجاه النصوص */
-h1, h2, h3, h4, h5, h6, 
-p, span, div, a, button, label {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+a,
+button,
+label {
   text-align: end;
   direction: rtl;
 }
@@ -379,21 +428,33 @@ p, span, div, a, button, label {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(255, 255, 255, 0.1) 25%, 
-    rgba(59, 130, 246, 0.2) 50%, 
-    rgba(255, 255, 255, 0.1) 75%, 
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 25%,
+      rgba(59, 130, 246, 0.2) 50%,
+      rgba(255, 255, 255, 0.1) 75%,
+      transparent 100%);
   animation: lightSweep 4s ease-in-out infinite;
 }
 
 @keyframes lightSweep {
-  0% { left: -100%; opacity: 0; }
-  25% { opacity: 1; }
-  75% { opacity: 1; }
-  100% { left: 100%; opacity: 0; }
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
 }
 
 /* تأثير الجسيمات للشريط الجانبي */
@@ -404,7 +465,7 @@ p, span, div, a, button, label {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
+  background-image:
     radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
     radial-gradient(1px 1px at 40px 70px, rgba(59, 130, 246, 0.2), transparent),
     radial-gradient(1px 1px at 60px 20px, rgba(255, 255, 255, 0.2), transparent);
@@ -415,8 +476,13 @@ p, span, div, a, button, label {
 }
 
 @keyframes sidebarParticles {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-40px); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-40px);
+  }
 }
 
 .sidebar-header h1 {
@@ -487,13 +553,12 @@ p, span, div, a, button, label {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(255, 255, 255, 0.1) 25%, 
-    rgba(59, 130, 246, 0.2) 50%, 
-    rgba(255, 255, 255, 0.1) 75%, 
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 25%,
+      rgba(59, 130, 246, 0.2) 50%,
+      rgba(255, 255, 255, 0.1) 75%,
+      transparent 100%);
   transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -509,11 +574,10 @@ p, span, div, a, button, label {
   right: 0;
   width: var(--space-0-5);
   height: 100%;
-  background: linear-gradient(180deg, 
-    transparent 0%, 
-    rgba(59, 130, 246, 0.5) 50%, 
-    transparent 100%
-  );
+  background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(59, 130, 246, 0.5) 50%,
+      transparent 100%);
   opacity: 0;
   transition: opacity var(--transition-normal);
 }
@@ -524,19 +588,20 @@ p, span, div, a, button, label {
 }
 
 @keyframes menuGlow {
-  0%, 100% { 
-    background: linear-gradient(180deg, 
-      transparent 0%, 
-      rgba(59, 130, 246, 0.5) 50%, 
-      transparent 100%
-    );
+
+  0%,
+  100% {
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(59, 130, 246, 0.5) 50%,
+        transparent 100%);
   }
-  50% { 
-    background: linear-gradient(180deg, 
-      transparent 0%, 
-      rgba(59, 130, 246, 0.8) 50%, 
-      transparent 100%
-    );
+
+  50% {
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(59, 130, 246, 0.8) 50%,
+        transparent 100%);
   }
 }
 

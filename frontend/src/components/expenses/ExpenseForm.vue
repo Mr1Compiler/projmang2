@@ -250,75 +250,16 @@ const saveExpense = () => {
 </script>
 
 <style scoped>
-.image-style-dialog {
-  border-radius: var(--radius-2xl) !important;
-  overflow: hidden !important;
-}
+/* Component-specific overrides - base styles in form-dialog.css */
 
+/* Use red/error gradient for expenses header */
 .dialog-header {
-  background: var(--gradient-error-deep);
-  padding: 1.25rem 1.5rem;
+  background: var(--gradient-error-deep) !important;
 }
 
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.header-icon {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-full);
-  padding: 0.5rem;
-}
-
-.header-title {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  color: var(--text-white);
-}
-
-.close-btn {
-  opacity: 0.9;
-}
-
-.close-btn:hover {
-  opacity: 1;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.dialog-body {
-  padding: 1.5rem;
-  max-height: 60vh;
-  overflow-y: auto;
-}
-
-.form-field {
-  border-radius: var(--radius-xl) !important;
-}
-
-.dialog-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  background: var(--color-slate-50);
-  border-top: var(--space-px) solid var(--border-light);
-}
-
-.action-btn {
-  border-radius: var(--radius-xl) !important;
-}
-
+/* Primary button uses error color for expenses */
 .primary-btn {
   background: var(--gradient-error) !important;
   color: var(--text-white) !important;
-  font-weight: 600 !important;
 }
 </style>

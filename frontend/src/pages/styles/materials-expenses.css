@@ -38,6 +38,7 @@
 .section-card {
   border-radius: var(--radius-2xl);
   overflow: hidden;
+  width: 100%;
 }
 
 .section-title {
@@ -67,8 +68,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  max-width: var(--space-96);
-  margin: 0 auto;
+  width: 100%;
 }
 
 .search-field {
@@ -122,6 +122,11 @@
    ============================================ */
 .data-table {
   margin-top: 1rem;
+  width: 100% !important;
+}
+
+.data-table :deep(.v-data-table__wrapper) {
+  width: 100% !important;
 }
 
 .data-table :deep(.v-data-table__td) {

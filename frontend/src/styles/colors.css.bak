@@ -274,7 +274,7 @@
   --shadow-info-glow: rgba(59, 130, 246, 0.25);
 
   /* تدرجات أجزاء النظام */
-  --sidebar-bg-gradient: #ffffff;
+  --sidebar-bg-gradient: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-darker, #312e81) 100%);
   --table-header-gradient: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%);
 
 
