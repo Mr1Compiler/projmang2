@@ -8,10 +8,10 @@
  */
 
 /* ============================================
-   Page Container
+   Page Container - White Based Theme
    ============================================ */
 .data-page {
-  background: linear-gradient(135deg, var(--color-slate-200) 0%, var(--color-indigo-200) 50%, var(--color-indigo-300) 100%);
+  background: var(--page-background) !important;
   color: var(--text-dark);
   min-height: 100vh;
   padding: 1rem;
@@ -29,118 +29,7 @@
   text-align: center;
 }
 
-/* ============================================
-   Page Header Section
-   ============================================ */
-.page-header {
-  text-align: center;
-  padding: 1.5rem 1rem;
-  background: linear-gradient(135deg, var(--color-red-700) 0%, var(--color-slate-50) 50%, var(--color-indigo-100) 100%);
-  border-radius: var(--radius-2xl);
-  width: 100%;
-  box-shadow: var(--shadow-navy-md);
-  color: var(--color-navy-800);
-  border: 2px solid rgba(26, 35, 126, 0.1);
-  position: relative;
-  overflow: hidden;
-  margin: 0;
-  max-height: var(--space-44);
-}
-
-.page-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--space-1);
-  background: var(--gradient-primary);
-}
-
-/* Page Icon */
-.page-icon {
-  font-size: var(--font-size-6xl);
-  margin-bottom: 0.8rem;
-  display: block;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
-}
-
-/* Page Title */
-.page-title {
-  color: var(--color-navy-800) !important;
-  font-weight: 700 !important;
-  font-size: var(--font-size-4xl-plus) !important;
-  margin-bottom: 0.8rem;
-  text-shadow: 0 4px 12px rgba(26, 35, 126, 0.4);
-  letter-spacing: 0.01em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  position: relative;
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, rgba(26, 35, 126, 0.05) 0%, rgba(57, 73, 171, 0.08) 50%, rgba(92, 107, 192, 0.05) 100%);
-  border-radius: var(--radius-3xl);
-  border: 2px solid rgba(26, 35, 126, 0.15);
-  backdrop-filter: blur(20px);
-  box-shadow: var(--shadow-navy-lg);
-  transition: all var(--transition-slow);
-  overflow: hidden;
-}
-
-.page-title:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: var(--shadow-navy-xl);
-  border-color: rgba(26, 35, 126, 0.25);
-}
-
-/* Title Icon */
-.title-icon {
-  font-size: var(--font-size-5xl);
-  animation: bounce 2s infinite;
-  filter: drop-shadow(0 4px 8px rgba(26, 35, 126, 0.3));
-  transition: all var(--transition-normal);
-}
-
-.title-icon:hover {
-  transform: scale(1.2) rotate(10deg);
-  filter: drop-shadow(0 6px 12px rgba(26, 35, 126, 0.5));
-}
-
-/* Title Text */
-.title-text {
-  background: linear-gradient(135deg, var(--color-navy-800) 0%, var(--color-navy-600) 30%, var(--color-navy-500) 60%, var(--color-navy-400) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 800;
-  position: relative;
-  z-index: var(--z-base);
-}
-
-/* Title Decoration */
-.title-decoration {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, transparent 30%, rgba(26, 35, 126, 0.1) 50%, transparent 70%);
-  animation: shimmer 4s infinite;
-  z-index: var(--z-base);
-}
-
-/* Page Subtitle */
-.page-subtitle {
-  color: var(--color-navy-700) !important;
-  font-size: var(--font-size-base) !important;
-  margin-bottom: 1rem;
-  text-shadow: 0 1px 4px rgba(40, 53, 147, 0.2);
-  opacity: 0.9;
-  font-weight: 500;
-  line-height: 1.4;
-}
+/* Page Header styles moved to shared/styles/shared.css */
 
 /* Page Badge */
 .page-badge {
@@ -301,29 +190,6 @@
    Responsive Design
    ============================================ */
 @media (max-width: 960px) {
-  .page-header {
-    padding: 1rem;
-    max-height: none;
-  }
-
-  .page-title {
-    font-size: var(--font-size-2xl) !important;
-    padding: 0.75rem 1rem;
-    flex-wrap: wrap;
-  }
-
-  .title-icon {
-    font-size: var(--font-size-3xl);
-  }
-
-  .page-icon {
-    font-size: var(--font-size-4xl);
-  }
-
-  .page-subtitle {
-    font-size: var(--font-size-sm) !important;
-  }
-
   .data-table-card .v-card-title {
     flex-direction: column;
     gap: 1rem;
@@ -346,24 +212,6 @@
 
   .fullscreen-content {
     gap: 1rem;
-  }
-
-  .page-header {
-    padding: 0.75rem;
-  }
-
-  .page-title {
-    font-size: var(--font-size-xl) !important;
-    gap: 0.5rem;
-  }
-
-  .title-icon {
-    font-size: var(--font-size-2xl);
-  }
-
-  .page-icon {
-    font-size: var(--font-size-3xl);
-    margin-bottom: 0.5rem;
   }
 
   .page-badge .v-chip {

@@ -15,6 +15,7 @@
   
   /* أحجام الخطوط - Font Sizes */
   --font-size-2xs: 0.7rem;    /* 11px */
+  --font-size-xs-minus: 0.7rem;  /* 11px - alias */
   --font-size-xs: 0.75rem;    /* 12px */
   --font-size-xs-plus: 0.8rem;   /* 13px */
   --font-size-sm-minus: 0.85rem; /* 13.6px */
@@ -618,10 +619,10 @@ h6,
 
 /* حقول الإدخال بألوان داكنة */
 .input-field-dark-labels {
-  --v-theme-primary: #000000 !important;
-  --v-field-label-color: #000000 !important;
-  --v-field-label-active-color: #000000 !important;
-  --v-field-label-floating-color: #000000 !important;
+  --v-theme-primary: var(--text-dark, #1e293b) !important;
+  --v-field-label-color: var(--text-dark, #1e293b) !important;
+  --v-field-label-active-color: var(--text-dark, #1e293b) !important;
+  --v-field-label-floating-color: var(--text-dark, #1e293b) !important;
   text-align: center !important;
   direction: rtl !important;
 }
@@ -629,7 +630,7 @@ h6,
 /* حقول الإدخال مع لون نص محدد */
 .input-text-dark {
   font-size: var(--font-size-base-plus) !important;
-  color: #000000 !important;
+  color: var(--text-dark, #1e293b) !important;
 }
 
 

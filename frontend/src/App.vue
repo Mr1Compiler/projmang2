@@ -31,6 +31,7 @@
           class="menu-item mb-2"
           rounded="xl"
           :class="{ 'active-menu-item': item.active }"
+          :ripple="false"
         >
           <template v-slot:prepend>
             <v-icon :color="item.active ? 'primary' : 'white'" class="me-3">
@@ -155,29 +156,38 @@ watch(() => route.path, updateActiveMenuItem, { immediate: true })
 /* ========================================
    السايد بار العصري - Protected from page CSS leaks
    ======================================== */
+/* ========================================
+   السايد بار العصري - Protected from page CSS leaks
+   ======================================== */
 .modern-sidebar,
 .v-navigation-drawer.modern-sidebar,
 .v-application .modern-sidebar,
 .v-application .v-navigation-drawer.modern-sidebar,
 body .modern-sidebar,
 body .v-navigation-drawer.modern-sidebar {
-  background: var(--sidebar-bg-gradient, linear-gradient(135deg, var(--color-primary-dark, #2563eb) 0%, var(--color-primary-darker, #7c3aed) 100%)) !important;
+  background: var(--sidebar-bg-gradient) !important;
   border-left: none !important;
   box-shadow: -4px 0 20px rgba(37, 99, 235, 0.3) !important;
-  color: white !important;
+  color: var(--text-white) !important;
+}
+
+/* Make inner list transparent to show gradient */
+.modern-sidebar .v-list,
+.v-navigation-drawer.modern-sidebar .v-list {
+  background: transparent !important;
 }
 
 /* Protect sidebar from page-level color overrides */
 .modern-sidebar *,
 .v-navigation-drawer.modern-sidebar *,
 body .modern-sidebar * {
-  color: white !important;
-  -webkit-text-fill-color: white !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
 }
 
 .modern-sidebar .v-icon,
 .v-navigation-drawer.modern-sidebar .v-icon {
-  color: white !important;
+  color: var(--text-white) !important;
 }
 
 .rtl-sidebar {
@@ -189,21 +199,21 @@ body .modern-sidebar * {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(10px);
   border-radius: 0 0 20px 20px;
-  margin: -16px -16px 16px -16px;
+  margin: -16px -16px 8px -16px; /* Reduced bottom margin */
 }
 
 .logo-enhanced {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 4px 8px var(--shadow-medium));
   border-radius: var(--radius-full);
   background: rgba(255, 255, 255, 0.1);
-  padding: var(--space-2);
+  padding: var(--space-1); /* Reduced padding */
 }
 
 /* عناصر القائمة */
 .menu-item {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: var(--radius-xl) !important;
-  margin-bottom: var(--space-2);
+  margin-bottom: 4px; /* Reduced spacing */
 }
 
 .menu-item .v-list-item-title {
@@ -212,35 +222,118 @@ body .modern-sidebar * {
 
 .modern-sidebar .v-list-item-title {
   font-size: var(--font-size-base-minus) !important;
-  color: white !important;
-  -webkit-text-fill-color: white !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
 }
 
 /* Override page-level CSS that leaks into sidebar */
-.modern-sidebar .v-list .v-list-item,
-.modern-sidebar .v-list .v-list-item *,
-.modern-sidebar .v-list .v-list-item .v-list-item__content,
-.modern-sidebar .v-list .v-list-item .v-list-item__title,
-.modern-sidebar .v-list-item,
-.modern-sidebar .v-list-item *,
-.modern-sidebar .v-list-item .v-list-item-title {
-  color: white !important;
-  -webkit-text-fill-color: white !important;
-  text-shadow: none !important;
-  font-weight: 500 !important;
-  font-size: var(--font-size-base-minus) !important;
+/* Limit global impact by checking parent classes */
+/* Limit global impact by checking parent classes */
+.modern-sidebar .v-list-item, 
+.v-navigation-drawer.modern-sidebar .v-list-item {
+  background-color: transparent !important;
+  color: var(--text-white) !important;
+}
+
+/* Force specific internal elements to be transparent */
+.modern-sidebar .v-list-item .v-list-item__overlay,
+.modern-sidebar .v-list-item .v-list-item__content,
+.modern-sidebar .v-list-item .v-list-item__prepend,
+.modern-sidebar .v-list-item .v-list-item__append,
+.modern-sidebar .v-list-item .v-list-item-title,
+.v-navigation-drawer.modern-sidebar .v-list-item .v-list-item__overlay,
+.v-navigation-drawer.modern-sidebar .v-list-item .v-list-item__content,
+.v-navigation-drawer.modern-sidebar .v-list-item .v-list-item__prepend,
+.v-navigation-drawer.modern-sidebar .v-list-item .v-list-item__append {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+.modern-sidebar .v-list-item__content,
+.modern-sidebar .v-list-item__title {
+  color: var(--text-white) !important;
+}
+
+.modern-sidebar .v-list-item:hover,
+.v-navigation-drawer.modern-sidebar .v-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
   animation: none !important;
 }
 
-.modern-sidebar .v-list-item:hover {
-  animation: none !important;
+/* Icon specific fix */
+.modern-sidebar .v-icon,
+.v-navigation-drawer.modern-sidebar .v-icon {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+/* Alignment Fix */
+.modern-sidebar .v-list-item,
+.v-navigation-drawer.modern-sidebar .v-list-item {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 48px; /* Ensure consistent height */
+}
+
+/* Ensure prepend container alignment and transparency */
+.modern-sidebar .v-list-item__prepend,
+.v-navigation-drawer.modern-sidebar .v-list-item__prepend {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-inline-end: 12px;
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* Kill all Vuetify overlay effects (ripples, focus, etc) */
+.modern-sidebar .v-list-item::before,
+.modern-sidebar .v-list-item::after,
+.modern-sidebar .v-list-item__overlay,
+.v-navigation-drawer.modern-sidebar .v-list-item::before,
+.v-navigation-drawer.modern-sidebar .v-list-item::after,
+.v-navigation-drawer.modern-sidebar .v-list-item__overlay {
+  display: none !important;
+  opacity: 0 !important;
+  background-color: transparent !important;
+}
+
+/* Ensure no background change on focus/active unless it's our custom class */
+.modern-sidebar .v-list-item:focus,
+.modern-sidebar .v-list-item:active,
+.modern-sidebar .v-list-item--active,
+.v-navigation-drawer.modern-sidebar .v-list-item:focus,
+.v-navigation-drawer.modern-sidebar .v-list-item:active,
+.v-navigation-drawer.modern-sidebar .v-list-item--active {
+  background-color: transparent !important;
+}
+
+/* Strictly remove background from icons in sidebar */
+.modern-sidebar .v-list-item__prepend > .v-icon,
+.modern-sidebar .v-icon,
+.v-navigation-drawer.modern-sidebar .v-icon {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  display: inline-flex !important;
+}
+
+/* Ensure proper coloring for active state icons */
+.modern-sidebar .active-menu-item .v-icon,
+.v-navigation-drawer.modern-sidebar .active-menu-item .v-icon {
+  color: var(--text-white) !important;
+  opacity: 1 !important;
 }
 
 .modern-sidebar p,
 .modern-sidebar span {
   font-size: var(--font-size-sm-plus) !important;
-  color: white !important;
-  -webkit-text-fill-color: white !important;
+  color: var(--text-white) !important;
+  -webkit-text-fill-color: var(--text-white) !important;
 }
 
 .modern-sidebar .text-h5 {
@@ -286,13 +379,35 @@ body .modern-sidebar .active-menu-item .v-list-item-title {
 
 /* Protect chips/badges in sidebar */
 .modern-sidebar .v-chip,
-body .modern-sidebar .v-chip {
-  color: white !important;
+.v-navigation-drawer.modern-sidebar .v-chip {
+  color: var(--text-white) !important;
+  font-weight: bold !important;
+  border-radius: var(--radius-lg);
+  /* Allow background color from prop to work, but reset if needed */
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
+/* Ensure chip content doesn't inherit transparent background */
 .modern-sidebar .v-chip .v-chip__content,
-body .modern-sidebar .v-chip .v-chip__content {
-  color: white !important;
+.v-navigation-drawer.modern-sidebar .v-chip .v-chip__content {
+  color: var(--text-white) !important;
+  background-color: transparent !important;
+}
+
+/* Fix specific colors for badges if they look washed out */
+.modern-sidebar .v-chip.bg-error,
+.modern-sidebar .v-chip.text-error {
+  background-color: var(--color-error) !important;
+}
+
+.modern-sidebar .v-chip.bg-success,
+.modern-sidebar .v-chip.text-success {
+  background-color: var(--color-success) !important;
+}
+
+.modern-sidebar .v-chip.bg-primary,
+.modern-sidebar .v-chip.text-primary {
+  background-color: var(--color-primary) !important;
 }
 
 /* شبكة المميزات */

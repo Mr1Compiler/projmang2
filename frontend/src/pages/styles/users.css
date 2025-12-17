@@ -19,46 +19,14 @@
 }
 
 /* ============================================
-   Main Content
+   Main Content - White Based Theme
    ============================================ */
 .main-content {
-  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 100%);
+  background: var(--page-background) !important;
   min-height: calc(100vh - 70px);
 }
 
-/* ============================================
-   Page Header
-   ============================================ */
-.page-header {
-  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
-  backdrop-filter: blur(20px);
-  border-radius: var(--radius-2xl);
-  padding: var(--space-5) 30px;
-  margin-bottom: var(--space-5);
-  text-align: center !important;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-blue-xl);
-  animation: gradient-animation 8s ease infinite;
-  background-size: 200% 200%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-white);
-}
-
-.page-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  animation: shimmer 3s infinite;
-}
+/* Page Header styles moved to shared/styles/shared.css */
 
 .header-top-content {
   display: flex;
@@ -68,34 +36,6 @@
   margin-bottom: var(--space-2-5);
   width: 100%;
   text-align: center;
-}
-
-.page-title {
-  font-size: var(--font-size-3xl-plus);
-  font-weight: 800;
-  color: var(--text-white);
-  margin: 0;
-  padding: 0;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  text-align: center !important;
-}
-
-.page-icon {
-  font-size: var(--font-size-4xl-plus);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  animation: iconFloat 3s ease-in-out infinite;
-}
-
-.page-subtitle {
-  font-size: var(--font-size-base);
-  color: rgba(255, 255, 255, 0.9);
-  margin: 0;
-  padding: 0;
-  text-align: center !important;
-  font-weight: 500;
 }
 
 /* ============================================
@@ -156,23 +96,6 @@
   .main-content {
     padding: var(--space-4);
   }
-
-  .page-header {
-    padding: var(--space-4) 20px;
-    margin-bottom: var(--space-4);
-  }
-
-  .page-title {
-    font-size: var(--font-size-2xl);
-  }
-
-  .page-subtitle {
-    font-size: var(--font-size-sm);
-  }
-
-  .page-icon {
-    font-size: var(--font-size-3xl);
-  }
 }
 
 @media (max-width: 600px) {
@@ -180,26 +103,8 @@
     padding: var(--space-3);
   }
 
-  .page-header {
-    padding: var(--space-3) 15px;
-    margin-bottom: var(--space-3);
-    border-radius: var(--radius-xl);
-  }
-
   .header-top-content {
     flex-direction: column;
     gap: var(--space-2);
-  }
-
-  .page-title {
-    font-size: var(--font-size-xl);
-  }
-
-  .page-subtitle {
-    font-size: var(--font-size-xs);
-  }
-
-  .page-icon {
-    font-size: var(--font-size-2xl);
   }
 }

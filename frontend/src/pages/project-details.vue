@@ -2,22 +2,23 @@
   <div class="project-details-page">
     <v-container fluid class="fill-height">
       <!-- Header Section -->
-      <div class="page-header">
-        <v-btn 
-          icon="mdi-arrow-right" 
-          @click="goBack" 
-          class="back-btn"
+      <div class="d-flex align-center mb-4">
+        <v-btn
+          icon="mdi-arrow-right"
+          @click="goBack"
+          class="back-btn me-3"
           size="large"
           variant="text"
           color="primary"
         >
           <v-icon>mdi-arrow-right</v-icon>
         </v-btn>
-        <div class="header-content">
-          <h1 class="page-title">تفاصيل المشروع</h1>
-          <p class="page-subtitle">{{ project?.name || 'تفاصيل المشروع' }}</p>
-        </div>
       </div>
+      <PageHeader
+        title="تفاصيل المشروع"
+        :subtitle="project?.name || 'تفاصيل المشروع'"
+        mdi-icon="mdi-folder-open"
+      />
 
       <!-- Project Details Cards -->
       <v-row v-if="project" class="details-cards">
@@ -155,6 +156,113 @@
             </v-card-text>
           </v-card>
         </v-col>
+
+        <!-- Resources Management Section -->
+        <v-col cols="12">
+          <v-card class="detail-card resources-card" elevation="3">
+            <v-card-title class="card-header resources-header">
+              <v-icon class="me-2">mdi-view-grid</v-icon>
+              إدارة موارد المشروع
+            </v-card-title>
+            <v-card-text class="card-content">
+              <v-row>
+                <!-- Materials & Expenses -->
+                <v-col cols="12" md="4">
+                  <v-card
+                    class="resource-card materials-expenses-card"
+                    elevation="2"
+                    @click="goToMaterialsExpenses"
+                    hover
+                  >
+                    <v-card-text class="text-center pa-4">
+                      <div class="resource-icon">
+                        <v-icon size="48" color="orange">mdi-package-variant</v-icon>
+                      </div>
+                      <h4 class="resource-title">المواد والمصاريف</h4>
+                      <p class="resource-description">مواد البناء والنفقات اليومية</p>
+                      <v-btn
+                        color="orange"
+                        variant="tonal"
+                        class="mt-2"
+                        @click.stop="goToMaterialsExpenses"
+                      >
+                        <v-icon class="me-1">mdi-arrow-left</v-icon>
+                        عرض التفاصيل
+                      </v-btn>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+
+                <!-- Labor -->
+                <v-col cols="12" md="4">
+                  <v-card
+                    class="resource-card labor-card"
+                    elevation="2"
+                    @click="goToLabor"
+                    hover
+                  >
+                    <v-card-text class="text-center pa-4">
+                      <div class="resource-icon">
+                        <v-icon size="48" color="success">mdi-account-group</v-icon>
+                      </div>
+                      <h4 class="resource-title">الأيدي العاملة</h4>
+                      <p class="resource-description">العمال والموظفين</p>
+                      <v-btn
+                        color="success"
+                        variant="tonal"
+                        class="mt-2"
+                        @click.stop="goToLabor"
+                      >
+                        <v-icon class="me-1">mdi-arrow-left</v-icon>
+                        عرض التفاصيل
+                      </v-btn>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+
+                <!-- Equipment -->
+                <v-col cols="12" md="4">
+                  <v-card
+                    class="resource-card equipment-card"
+                    elevation="2"
+                    @click="goToEquipment"
+                    hover
+                  >
+                    <v-card-text class="text-center pa-4">
+                      <div class="resource-icon">
+                        <v-icon size="48" color="indigo">mdi-truck</v-icon>
+                      </div>
+                      <h4 class="resource-title">الآليات والمعدات</h4>
+                      <p class="resource-description">المعدات والآلات المستخدمة</p>
+                      <v-btn
+                        color="indigo"
+                        variant="tonal"
+                        class="mt-2"
+                        @click.stop="goToEquipment"
+                      >
+                        <v-icon class="me-1">mdi-arrow-left</v-icon>
+                        عرض التفاصيل
+                      </v-btn>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+              </v-row>
+
+              <!-- Work Day Details Button -->
+              <v-btn
+                block
+                color="primary"
+                size="large"
+                variant="elevated"
+                class="mt-4"
+                @click="goToWorkDayDetails"
+              >
+                <v-icon class="me-2">mdi-calendar-clock</v-icon>
+                تفاصيل يوم العمل الكاملة
+              </v-btn>
+            </v-card-text>
+          </v-card>
+        </v-col>
       </v-row>
 
       <!-- Loading State -->
@@ -196,12 +304,13 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { formatCurrency } from '@/utils/formatters'
+import { PageHeader } from '@/components/shared'
 
 const route = useRoute()
 const router = useRouter()
 
 const project = ref(null)
-const projectId = computed(() => route.params.id)
+const projectId = computed(() => route.query.id || route.params.id)
 
 // Work days data
 const workDays = ref([
@@ -311,6 +420,22 @@ const editProject = () => {
 const editWorkDays = () => {
   // Navigate to work days management page
   router.push('/work-days')
+}
+
+const goToWorkDayDetails = () => {
+  router.push('/work-day-details')
+}
+
+const goToMaterialsExpenses = () => {
+  router.push('/materials-expenses-details')
+}
+
+const goToLabor = () => {
+  router.push('/labor-details')
+}
+
+const goToEquipment = () => {
+  router.push('/equipment-details')
 }
 
 const deleteProject = () => {

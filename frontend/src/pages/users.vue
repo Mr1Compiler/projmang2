@@ -41,13 +41,11 @@
     <!-- المحتوى -->
     <div class="main-content pa-6">
       <!-- شريط العنوان الرئيسي -->
-      <div class="page-header glass-effect gradient-animation">
-        <div class="header-top-content">
-          <h1 class="page-title">إدارة المستخدمين</h1>
-          <span class="page-icon">👥</span>
-        </div>
-        <p class="page-subtitle">نظام شامل لإدارة حسابات المستخدمين والصلاحيات</p>
-      </div>
+      <PageHeader
+        title="إدارة المستخدمين"
+        subtitle="نظام شامل لإدارة حسابات المستخدمين والصلاحيات"
+        icon="👥"
+      />
 
       <!-- الإحصائيات -->
       <UserStats
@@ -137,6 +135,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { toast } from 'vue3-toastify'
 import { useUsers } from '@/composables'
+import { PageHeader } from '@/components/shared'
 import {
   UserStats,
   UserFilters,

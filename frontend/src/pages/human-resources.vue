@@ -2,11 +2,11 @@
   <v-container class="fill-height data-page human-resources-page" fluid>
     <div class="fullscreen-content centered-content">
       <!-- Header Section -->
-      <div class="page-header glass-effect gradient-animation">
-        <span class="page-icon star-twinkle">👥</span>
-        <h1 class="page-title text-glow fade-in">الموارد البشرية</h1>
-        <p class="page-subtitle fade-in">إدارة وتتبع جميع الموظفين والموارد البشرية</p>
-      </div>
+      <PageHeader
+        title="الموارد البشرية"
+        subtitle="إدارة وتتبع جميع الموظفين والموارد البشرية"
+        icon="👥"
+      />
 
       <!-- Statistics Cards -->
       <HRStats
@@ -103,6 +103,7 @@ import { useRoute } from 'vue-router'
 import { toast } from 'vue3-toastify'
 import { useHumanResources } from '@/composables/useHumanResources'
 import { usePermissions } from '@/composables/usePermissions'
+import { PageHeader } from '@/components/shared'
 import {
   HRStats,
   HRFilters,

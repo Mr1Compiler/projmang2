@@ -4,29 +4,15 @@
  */
 
 /* ============================================
-   Page Layout
+   Page Layout - White Based Theme
    ============================================ */
 .equipment-details-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-300) 100%);
+  background: var(--page-background) !important;
   padding: 2rem;
 }
 
-/* ============================================
-   Page Header
-   ============================================ */
-.page-header {
-  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
-  color: var(--text-white);
-  padding: 2.5rem;
-  border-radius: var(--radius-2xl);
-  margin-bottom: 2rem;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-blue-intense);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-}
+/* Page Header styles moved to shared/styles/shared.css */
 
 .header-content {
   display: flex;
@@ -52,22 +38,6 @@
 .back-btn:hover {
   background: rgba(255, 255, 255, 0.3) !important;
   transform: translateX(-2px);
-}
-
-.page-title {
-  font-size: var(--font-size-5xl);
-  font-weight: 800;
-  margin: 0;
-  color: var(--text-white);
-  text-shadow: 0 4px 20px rgba(255, 255, 255, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.page-subtitle {
-  font-size: var(--font-size-xl);
-  opacity: 0.98;
-  margin: 0.8rem 0 0 0;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.95);
 }
 
 /* ============================================
@@ -201,14 +171,7 @@
   font-size: var(--font-size-xl);
 }
 
-.dialog-content {
-  padding: 2rem;
-}
-
-.dialog-actions {
-  padding: 1rem 2rem;
-  background: var(--color-gray-50);
-}
+/* .dialog-content, .dialog-actions moved to form-dialog.css */
 
 /* ============================================
    Visual Effects
@@ -261,10 +224,6 @@
 @media (max-width: 600px) {
   .equipment-details-page {
     padding: 1rem;
-  }
-
-  .page-title {
-    font-size: var(--font-size-3xl-plus);
   }
 
   .header-content {

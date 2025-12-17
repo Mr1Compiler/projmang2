@@ -1,25 +1,23 @@
 <template>
   <v-container fluid class="team-management-page">
     <!-- Header Section -->
-    <div class="page-header">
-      <div class="header-content">
-        <div class="header-title">
-          <v-icon size="48" color="primary" class="title-icon">mdi-account-group</v-icon>
-          <h1 class="main-title">إدارة الفريق</h1>
-          <p class="main-subtitle">إدارة شاملة لأعضاء الفريق وتوزيع المهام</p>
-        </div>
-        <div class="header-actions">
-          <v-btn
-            color="primary"
-            variant="elevated"
-            size="large"
-            prepend-icon="mdi-plus"
-            @click="showAddMemberDialog = true"
-          >
-            إضافة عضو جديد
-          </v-btn>
-        </div>
-      </div>
+    <PageHeader
+      title="إدارة الفريق"
+      subtitle="إدارة شاملة لأعضاء الفريق وتوزيع المهام"
+      mdi-icon="mdi-account-group"
+    />
+
+    <!-- Add Button -->
+    <div class="d-flex justify-end mb-4">
+      <v-btn
+        color="primary"
+        variant="elevated"
+        size="large"
+        prepend-icon="mdi-plus"
+        @click="showAddMemberDialog = true"
+      >
+        إضافة عضو جديد
+      </v-btn>
     </div>
 
     <!-- Statistics Cards -->
@@ -443,6 +441,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { PageHeader } from '@/components/shared'
 
 // Reactive data
 const loading = ref(false)

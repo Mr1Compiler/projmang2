@@ -1,23 +1,23 @@
 <template>
   <div class="equipment-details-page">
     <!-- Header Section -->
-    <div class="page-header glass-effect gradient-animation">
-      <div class="header-content">
-        <v-btn 
-          icon="mdi-arrow-left" 
-          @click="goBack" 
-          class="back-btn"
-          size="large"
-          color="white"
-        >
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <div class="header-text">
-          <h1 class="page-title text-glow fade-in">تفاصيل الآليات</h1>
-          <p class="page-subtitle fade-in">إدارة المعدات والآلات المستخدمة في المشروع</p>
-        </div>
-      </div>
+    <div class="d-flex align-center mb-4">
+      <v-btn
+        icon="mdi-arrow-left"
+        @click="goBack"
+        class="back-btn me-3"
+        size="large"
+        variant="text"
+        color="primary"
+      >
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
     </div>
+    <PageHeader
+      title="تفاصيل الآليات"
+      subtitle="إدارة المعدات والآلات المستخدمة في المشروع"
+      mdi-icon="mdi-truck"
+    />
 
     <!-- Equipment Section -->
     <v-card class="section-card mb-4" elevation="2">
@@ -89,86 +89,6 @@
       </v-data-table>
     </v-card>
 
-    <!-- Add New Equipment Dialog -->
-    <v-dialog v-model="showAddDialog" max-width="600" persistent>
-      <v-card class="dialog-card">
-        <v-card-title class="dialog-title">
-          <v-icon class="me-2">mdi-truck-plus</v-icon>
-          إضافة آلة جديدة
-        </v-card-title>
-        <v-card-text class="dialog-content">
-          <v-form ref="form" v-model="formValid">
-            <v-row>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newEquipment.name"
-                  label="اسم الآلة"
-                  variant="outlined"
-                  :rules="[v => !!v || 'اسم الآلة مطلوب']"
-                  required
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newEquipment.type"
-                  label="نوع الآلة"
-                  variant="outlined"
-                  :rules="[v => !!v || 'نوع الآلة مطلوب']"
-                  required
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newEquipment.model"
-                  label="الموديل"
-                  variant="outlined"
-                  :rules="[v => !!v || 'الموديل مطلوب']"
-                  required
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newEquipment.rentalCost"
-                  label="تكلفة الإيجار اليومية"
-                  variant="outlined"
-                  type="number"
-                  :rules="[v => !!v || 'تكلفة الإيجار مطلوبة']"
-                  required
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newEquipment.operator"
-                  label="اسم السائق/المشغل"
-                  variant="outlined"
-                  :rules="[v => !!v || 'اسم المشغل مطلوب']"
-                  required
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newEquipment.status"
-                  label="الحالة"
-                  variant="outlined"
-                  :rules="[v => !!v || 'الحالة مطلوبة']"
-                  required
-                />
-              </v-col>
-            </v-row>
-          </v-form>
-        </v-card-text>
-        <v-card-actions class="dialog-actions">
-          <v-spacer></v-spacer>
-          <v-btn @click="closeAddDialog" color="grey">
-            إلغاء
-          </v-btn>
-          <v-btn @click="saveEquipment" color="primary" :disabled="!formValid">
-            حفظ
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
     <!-- Simple Dialog for Add Equipment -->
     <SimpleDialog
       :open="showAddDialog"
@@ -190,6 +110,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { PageHeader } from '@/components/shared'
 import SimpleDialog from '@/components/SimpleDialog.vue'
 import EquipmentForm from '@/components/EquipmentForm.vue'
 

@@ -5,55 +5,15 @@
  */
 
 /* ============================================
-   Page Container
+   Page Container - White Based Theme
    ============================================ */
 .work-days-page {
-  background: var(--color-neutral-100);
+  background: var(--page-background) !important;
   min-height: 100vh;
   direction: rtl;
 }
 
-/* ============================================
-   Page Title Header
-   ============================================ */
-.page-title-header {
-  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
-  padding: 0.6rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: var(--text-white) !important;
-  box-shadow:
-    0 4px 16px rgba(59, 130, 246, 0.3),
-    0 2px 8px rgba(37, 99, 235, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-  border-bottom: var(--space-0-5) solid rgba(255, 255, 255, 0.3) !important;
-  position: relative;
-  overflow: hidden;
-  min-height: auto;
-}
-
-.page-title-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  animation: shimmer 3s infinite;
-  pointer-events: none;
-}
-
-/* Header text colors */
-.page-title-header h1,
-.page-title-header h2,
-.page-title-header h3,
-.page-title-header span:not(.v-btn span),
-.page-title-header p,
-.page-title-header label {
-  color: var(--text-white) !important;
-}
+/* Page Header styles moved to shared/styles/shared.css */
 
 /* ============================================
    Header Sections
@@ -98,26 +58,6 @@
   transform: rotate(90deg) !important;
 }
 
-/* ============================================
-   Title Icon & Text
-   ============================================ */
-.title-icon {
-  font-size: var(--font-size-xl-plus) !important;
-  color: var(--text-white) !important;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
-  animation: iconPulse 2s ease-in-out infinite;
-}
-
-.page-title-text {
-  font-size: var(--font-size-lg-plus);
-  font-weight: 700;
-  color: var(--text-white) !important;
-  margin: 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.2) !important;
-  letter-spacing: 0.5px;
-  font-family: var(--font-primary) !important;
-  line-height: 1.3;
-}
 
 /* ============================================
    Search Section
@@ -294,20 +234,7 @@
   font-weight: 700;
 }
 
-.close-btn {
-  color: var(--text-white) !important;
-}
-
-.modal-content {
-  padding: 1.5rem !important;
-  background: var(--color-slate-50);
-}
-
-.modal-footer {
-  padding: 1rem 1.5rem !important;
-  background: var(--text-white);
-  border-top: 1px solid var(--color-slate-200);
-}
+/* .close-btn, .modal-content, .modal-footer moved to form-dialog.css */
 
 /* ============================================
    Form Styles
@@ -373,11 +300,6 @@
    Responsive Design
    ============================================ */
 @media (max-width: 960px) {
-  .page-title-header {
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 0.75rem;
-  }
 
   .header-left-section,
   .header-right-section {
@@ -400,13 +322,6 @@
 }
 
 @media (max-width: 600px) {
-  .page-title-text {
-    font-size: var(--font-size-base);
-  }
-
-  .title-icon {
-    font-size: var(--font-size-lg) !important;
-  }
 
   .nav-btn {
     width: var(--space-7) !important;

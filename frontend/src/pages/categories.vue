@@ -2,15 +2,11 @@
   <div class="data-page">
     <v-container fluid class="fullscreen-content">
       <!-- Page Header -->
-      <div class="page-header">
-        <div class="header-content">
-          <div class="title-row">
-            <v-icon size="2rem" class="title-icon">mdi-tag-multiple</v-icon>
-            <div class="page-title">إدارة التصنيفات</div>
-          </div>
-          <div class="page-subtitle">تنظيم وإدارة تصنيفات المشاريع والمهام</div>
-        </div>
-      </div>
+      <PageHeader
+        title="إدارة التصنيفات"
+        subtitle="تنظيم وإدارة تصنيفات المشاريع والمهام"
+        mdi-icon="mdi-tag-multiple"
+      />
 
       <!-- Statistics Cards -->
       <v-row class="stats-row">
@@ -561,6 +557,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { PageHeader } from '@/components/shared'
 
 // State variables
 const dialog = ref(false)

@@ -1,23 +1,12 @@
 <template>
-  <v-container class="fill-height engineers-page" max-width="1200">
+  <v-container class="fill-height engineers-page" fluid>
     <div class="centered-content">
-      <!-- Header Section - Card Style -->
-      <div class="engineers-header-card">
-        <div class="header-gradient-line"></div>
-        <div class="header-content">
-          <div class="header-right">
-            <div class="header-text">
-              <h1 class="main-title">المهندسين</h1>
-              <p class="subtitle">إدارة وتتبع جميع المهندسين والمشاريع</p>
-            </div>
-            <div class="engineer-emoji">
-              <v-icon size="60" color="white">mdi-account-hard-hat</v-icon>
-              <v-icon size="45" color="white" class="secondary-icon">mdi-account-tie</v-icon>
-              <v-icon size="35" color="white" class="tertiary-icon">mdi-account-cog</v-icon>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Header Section -->
+      <PageHeader
+        title="المهندسين"
+        subtitle="إدارة وتتبع جميع المهندسين والمشاريع"
+        mdi-icon="mdi-account-hard-hat"
+      />
 
       <!-- Summary Cards -->
       <EngineerStats
@@ -86,6 +75,7 @@ import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useEngineersStore } from '@/stores/engineers'
 import { usePermissions } from '@/composables/usePermissions'
+import { PageHeader } from '@/components/shared'
 import {
   EngineerStats,
   EngineerTable,

@@ -4,6 +4,94 @@
    ======================================== */
 
 /* ========================================
+   0. إصلاح RTL الشامل - GLOBAL RTL FIX
+   ======================================== */
+
+/* Force RTL on everything except icons */
+html {
+  direction: rtl !important;
+}
+
+/* All elements RTL by default */
+*:not(.mdi):not(.v-icon):not([class*="mdi-"]):not(i) {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Vuetify application RTL */
+.v-application,
+.v-application--wrap,
+.v-main,
+.v-main__wrap {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* All text elements */
+p, span, div, a, button, label, h1, h2, h3, h4, h5, h6,
+td, th, li, input, textarea, select, option {
+  direction: rtl !important;
+  text-align: right !important;
+  font-family: var(--font-primary) !important;
+}
+
+/* Vuetify specific text elements */
+.v-list-item-title,
+.v-list-item-subtitle,
+.v-card-title,
+.v-card-subtitle,
+.v-card-text,
+.v-btn__content,
+.v-field__input,
+.v-select__selection-text,
+.v-label,
+.v-messages__message,
+.v-data-table__td,
+.v-data-table-header__content,
+.v-chip__content,
+.v-tab__slider,
+.v-toolbar-title,
+.v-breadcrumbs-item,
+.v-menu__content,
+.v-dialog .v-card-text,
+.v-alert__content {
+  direction: rtl !important;
+  text-align: right !important;
+  font-family: var(--font-primary) !important;
+}
+
+/* Input fields - text should align right */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="search"],
+textarea {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* Exception: Numbers can stay LTR for readability */
+.ltr,
+.ltr-number,
+.number-ltr,
+[dir="ltr"] {
+  direction: ltr !important;
+  text-align: left !important;
+  display: inline-block;
+}
+
+/* Keep icons from being affected */
+.v-icon,
+.mdi,
+i[class*="mdi-"] {
+  direction: ltr !important;
+  text-align: center !important;
+  font-family: "Material Design Icons" !important;
+}
+
+/* ========================================
    1. نظام الألوان المحسن
    ======================================== */
 
@@ -12,21 +100,23 @@
   --primary-color: #2563eb;
   --secondary-color: #7c3aed;
   --accent-color: #0ea5e9;
-  
+
   /* تدرجات الألوان - محسنة للوضوح */
-  --gradient-primary: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  --gradient-light: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  --gradient-dark: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  
-  /* ألوان النصوص - محسنة للوضوح */
-  --text-primary: #ffffff;
-  --text-secondary: #f1f5f9;
-  --text-muted: #cbd5e1;
-  --text-light: #94a3b8;
+  --gradient-rtl-primary: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --gradient-rtl-light: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --gradient-rtl-dark: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+
+  /* ألوان النصوص للشريط الجانبي فقط - لا تتداخل مع colors.css */
+  --sidebar-text-primary: #ffffff;
+  --sidebar-text-secondary: #f1f5f9;
+  --sidebar-text-muted: #cbd5e1;
+  --sidebar-text-light: #94a3b8;
+
+  /* ألوان النصوص للصفحات البيضاء */
   --text-dark: #1e293b;
   --text-dark-secondary: #475569;
   --text-dark-muted: #64748b;
-  
+
   /* ألوان الخلفيات - محسنة للوضوح */
   --bg-primary: #2563eb;
   --bg-secondary: #7c3aed;
@@ -35,33 +125,35 @@
   --bg-dark: #1e293b;
   --bg-card: #ffffff;
   --bg-card-hover: #f8fafc;
-  
-  /* خلفيات شفافة - محسنة للوضوح */
+
+  /* خلفيات شفافة للشريط الجانبي */
   --bg-overlay: rgba(255, 255, 255, 0.1);
   --bg-overlay-light: rgba(255, 255, 255, 0.15);
   --bg-overlay-medium: rgba(255, 255, 255, 0.2);
   --bg-overlay-dark: rgba(255, 255, 255, 0.25);
-  
-  /* ألوان الحدود - محسنة للوضوح */
-  --border-light: rgba(255, 255, 255, 0.2);
-  --border-medium: rgba(255, 255, 255, 0.3);
-  --border-dark: rgba(255, 255, 255, 0.4);
+
+  /* ألوان حدود الشريط الجانبي */
+  --sidebar-border-light: rgba(255, 255, 255, 0.2);
+  --sidebar-border-medium: rgba(255, 255, 255, 0.3);
+  --sidebar-border-dark: rgba(255, 255, 255, 0.4);
+
+  /* ألوان حدود البطاقات والمحتوى */
   --border-card: #e2e8f0;
   --border-card-hover: #cbd5e1;
-  
+
   /* ألوان الظلال - محسنة للوضوح */
-  --shadow-light: rgba(0, 0, 0, 0.1);
-  --shadow-medium: rgba(0, 0, 0, 0.2);
-  --shadow-dark: rgba(0, 0, 0, 0.3);
-  --shadow-darker: rgba(0, 0, 0, 0.4);
-  
+  --shadow-rtl-light: rgba(0, 0, 0, 0.1);
+  --shadow-rtl-medium: rgba(0, 0, 0, 0.2);
+  --shadow-rtl-dark: rgba(0, 0, 0, 0.3);
+  --shadow-rtl-darker: rgba(0, 0, 0, 0.4);
+
   /* ألوان الحالات - محسنة للوضوح */
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --error-color: #ef4444;
   --info-color: #3b82f6;
-  
-  /* ألوان التفاعل - محسنة للوضوح */
+
+  /* ألوان التفاعل للشريط الجانبي */
   --hover-overlay: rgba(255, 255, 255, 0.1);
   --active-overlay: rgba(255, 255, 255, 0.2);
   --focus-overlay: rgba(255, 255, 255, 0.15);
@@ -84,8 +176,8 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  background: var(--gradient-primary);
-  color: var(--text-primary);
+  background: var(--page-background);
+  color: var(--text-dark);
 }
 
 /* إعدادات Vuetify RTL */
@@ -144,7 +236,7 @@ p, span, div, a, button, label {
 
 .v-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px var(--shadow-medium);
+  box-shadow: 0 4px 12px var(--shadow-rtl-medium);
 }
 
 /* البطاقات */
@@ -152,7 +244,7 @@ p, span, div, a, button, label {
   direction: rtl;
   text-align: end;
   border-radius: var(--radius-xl);
-  box-shadow: 0 2px 8px var(--shadow-light);
+  box-shadow: 0 2px 8px var(--shadow-rtl-light);
   transition: all var(--transition-normal);
   background: var(--bg-card);
   color: var(--text-dark);
@@ -160,7 +252,7 @@ p, span, div, a, button, label {
 
 .v-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px var(--shadow-medium);
+  box-shadow: 0 8px 25px var(--shadow-rtl-medium);
   background: var(--bg-card-hover);
 }
 
@@ -252,7 +344,7 @@ p, span, div, a, button, label {
 /* Note: Sidebar background colors are now set in App.vue */
 .sidebar,
 .rtl-sidebar {
-  box-shadow: 0 0 20px var(--shadow-light) !important;
+  box-shadow: 0 0 20px var(--shadow-rtl-light) !important;
 }
 
 /* ضمان بقاء الشريط الجانبي على الجانب الأيمن */
@@ -273,7 +365,7 @@ p, span, div, a, button, label {
 /* رأس الشريط الجانبي - تأثيرات عصرية */
 /* Note: Sidebar header background is set in App.vue */
 .sidebar-header {
-  border-bottom: var(--space-px) solid var(--border-light) !important;
+  border-bottom: var(--space-px) solid var(--sidebar-border-light) !important;
   padding: var(--space-6);
   position: relative;
   overflow: hidden;
@@ -328,18 +420,18 @@ p, span, div, a, button, label {
 }
 
 .sidebar-header h1 {
-  color: var(--text-primary) !important;
+  color: var(--sidebar-text-primary) !important;
   font-weight: 700 !important;
   font-size: var(--font-size-2xl-plus) !important;
-  text-shadow: 0 3px 6px var(--shadow-dark) !important;
+  text-shadow: 0 3px 6px var(--shadow-rtl-dark) !important;
   margin-bottom: var(--space-3);
   letter-spacing: 0.5px;
 }
 
 .sidebar-header p {
-  color: var(--text-secondary) !important;
+  color: var(--sidebar-text-secondary) !important;
   font-size: var(--font-size-base) !important;
-  text-shadow: 0 2px 4px var(--shadow-medium) !important;
+  text-shadow: 0 2px 4px var(--shadow-rtl-medium) !important;
   margin: 0;
   font-weight: 500;
 }
@@ -349,9 +441,9 @@ p, span, div, a, button, label {
   background: var(--bg-overlay) !important;
   border-radius: var(--radius-2xl) !important;
   padding: var(--space-3) !important;
-  box-shadow: 0 4px 12px var(--shadow-medium) !important;
+  box-shadow: 0 4px 12px var(--shadow-rtl-medium) !important;
   backdrop-filter: blur(10px) !important;
-  border: 1px solid var(--border-medium) !important;
+  border: 1px solid var(--sidebar-border-medium) !important;
   margin-bottom: var(--space-4);
 }
 
@@ -360,16 +452,16 @@ p, span, div, a, button, label {
   background: var(--bg-overlay-light) !important;
   border-radius: var(--radius-2xl) !important;
   padding: var(--space-4) !important;
-  box-shadow: 0 6px 16px var(--shadow-dark) !important;
+  box-shadow: 0 6px 16px var(--shadow-rtl-dark) !important;
   backdrop-filter: blur(15px) !important;
-  border: 2px solid var(--border-dark) !important;
+  border: 2px solid var(--sidebar-border-dark) !important;
   transition: all var(--transition-normal) !important;
   margin-bottom: var(--space-4);
 }
 
 .logo-enhanced:hover {
   transform: scale(1.05) !important;
-  box-shadow: 0 8px 20px var(--shadow-darker) !important;
+  box-shadow: 0 8px 20px var(--shadow-rtl-darker) !important;
   background: var(--bg-overlay-medium) !important;
 }
 
@@ -455,22 +547,22 @@ p, span, div, a, button, label {
 
 .active-menu-item {
   background-color: var(--active-overlay) !important;
-  box-shadow: 0 2px 8px var(--shadow-medium);
+  box-shadow: 0 2px 8px var(--shadow-rtl-medium);
 }
 
 /* نصوص القائمة */
 .menu-item .v-list-item-title {
-  color: var(--text-primary) !important;
+  color: var(--sidebar-text-primary) !important;
   font-weight: 600 !important;
   font-size: var(--font-size-base) !important;
-  text-shadow: 0 2px 4px var(--shadow-dark) !important;
+  text-shadow: 0 2px 4px var(--shadow-rtl-dark) !important;
   letter-spacing: 0.3px;
 }
 
 /* أيقونات القائمة */
 .menu-item .v-icon {
-  color: var(--text-primary) !important;
-  filter: drop-shadow(0 2px 4px var(--shadow-dark)) !important;
+  color: var(--sidebar-text-primary) !important;
+  filter: drop-shadow(0 2px 4px var(--shadow-rtl-dark)) !important;
   font-size: var(--font-size-xl-plus) !important;
   margin-inline-start: var(--space-3);
   font-weight: bold;
@@ -478,19 +570,19 @@ p, span, div, a, button, label {
 
 .active-menu-item .v-icon {
   color: var(--accent-color) !important;
-  filter: drop-shadow(0 1px 2px var(--shadow-medium)) !important;
+  filter: drop-shadow(0 1px 2px var(--shadow-rtl-medium)) !important;
 }
 
 /* شارات القائمة */
 .menu-item .v-chip {
   font-weight: bold !important;
   font-size: var(--font-size-xs) !important;
-  box-shadow: 0 2px 4px var(--shadow-medium) !important;
-  border: 1px solid var(--border-dark) !important;
+  box-shadow: 0 2px 4px var(--shadow-rtl-medium) !important;
+  border: 1px solid var(--sidebar-border-dark) !important;
   min-width: var(--space-5);
   height: var(--space-5);
   background: var(--bg-overlay) !important;
-  color: var(--text-primary) !important;
+  color: var(--sidebar-text-primary) !important;
 }
 
 /* ========================================
@@ -514,13 +606,13 @@ p, span, div, a, button, label {
 
 /* توحيد ألوان أقسام Hero - متناسق */
 .hero-section {
-  background: var(--gradient-primary) !important;
+  background: var(--gradient-rtl-primary) !important;
   min-height: 60vh;
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
-  color: var(--text-primary);
+  color: var(--sidebar-text-primary);
 }
 
 /* ========================================
@@ -529,14 +621,14 @@ p, span, div, a, button, label {
 
 /* تحسين وضوح النصوص العامة */
 .v-list-item-title {
-  text-shadow: 0 2px 4px var(--shadow-dark) !important;
+  text-shadow: 0 2px 4px var(--shadow-rtl-dark) !important;
   font-weight: 600 !important;
 }
 
 /* تحسين التباين العام */
 /* Note: Navigation drawer background is set in App.vue */
 .v-navigation-drawer {
-  box-shadow: 0 0 20px var(--shadow-light) !important;
+  box-shadow: 0 0 20px var(--shadow-rtl-light) !important;
 }
 
 /* تحسين الأزرار */
@@ -548,7 +640,7 @@ p, span, div, a, button, label {
 
 .v-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px var(--shadow-medium);
+  box-shadow: 0 4px 12px var(--shadow-rtl-medium);
 }
 
 /* تحسين البطاقات */
@@ -558,7 +650,7 @@ p, span, div, a, button, label {
 
 .v-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px var(--shadow-medium);
+  box-shadow: 0 8px 25px var(--shadow-rtl-medium);
 }
 
 /* ========================================
@@ -664,25 +756,25 @@ p, span, div, a, button, label {
 
 /* تحسين وضوح النصوص على الخلفيات الملونة */
 .text-on-gradient {
-  text-shadow: 0 2px 4px var(--shadow-dark);
+  text-shadow: 0 2px 4px var(--shadow-rtl-dark);
   font-weight: 600;
 }
 
 /* تحسين وضوح الأيقونات */
 .icon-enhanced {
-  filter: drop-shadow(0 1px 2px var(--shadow-dark));
+  filter: drop-shadow(0 1px 2px var(--shadow-rtl-dark));
   transition: all var(--transition-normal);
 }
 
 .icon-enhanced:hover {
-  filter: drop-shadow(0 2px 4px var(--shadow-darker));
+  filter: drop-shadow(0 2px 4px var(--shadow-rtl-darker));
   transform: scale(1.1);
 }
 
 /* تحسين وضوح الشارات */
 .chip-enhanced {
-  box-shadow: 0 2px 4px var(--shadow-medium);
-  border: 1px solid var(--border-dark);
+  box-shadow: 0 2px 4px var(--shadow-rtl-medium);
+  border: 1px solid var(--sidebar-border-dark);
   font-weight: bold;
 }
 

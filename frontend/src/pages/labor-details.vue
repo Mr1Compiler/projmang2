@@ -1,23 +1,23 @@
 <template>
   <div class="labor-details-page">
     <!-- Header Section -->
-    <div class="page-header glass-effect gradient-animation">
-      <div class="header-content">
-        <v-btn 
-          icon="mdi-arrow-left" 
-          @click="goBack" 
-          class="back-btn"
-          size="large"
-          color="white"
-        >
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <div class="header-text">
-          <h1 class="page-title text-glow fade-in">تفاصيل الأيدي العاملة</h1>
-          <p class="page-subtitle fade-in">إدارة العمال والموظفين المشاركين في المشروع</p>
-        </div>
-      </div>
+    <div class="d-flex align-center mb-4">
+      <v-btn
+        icon="mdi-arrow-left"
+        @click="goBack"
+        class="back-btn me-3"
+        size="large"
+        variant="text"
+        color="primary"
+      >
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
     </div>
+    <PageHeader
+      title="تفاصيل الأيدي العاملة"
+      subtitle="إدارة العمال والموظفين المشاركين في المشروع"
+      mdi-icon="mdi-account-group"
+    />
 
     <!-- Labor Section -->
     <v-card class="section-card mb-4" elevation="2">
@@ -136,89 +136,6 @@
       </v-data-table>
     </v-card>
 
-    <!-- Add New Labor Dialog -->
-    <v-dialog v-model="showAddDialog" max-width="600" persistent>
-      <v-card class="modal-card">
-        <v-card-title class="modal-header">
-          <span class="modal-title">إضافة عامل جديد</span>
-          <v-btn icon="mdi-close" @click="closeAddDialog" variant="text" class="close-btn">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-card-title>
-        <v-card-text class="modal-content">
-          <v-form ref="form" v-model="formValid">
-            <v-row>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newLabor.name"
-                  label="اسم العامل"
-                  variant="outlined"
-                  :rules="[v => !!v || 'اسم العامل مطلوب']"
-                  required
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newLabor.position"
-                  label="المنصب/الوظيفة"
-                  variant="outlined"
-                  :rules="[v => !!v || 'المنصب مطلوب']"
-                  required
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newLabor.experience"
-                  label="سنوات الخبرة"
-                  variant="outlined"
-                  type="number"
-                  :rules="[v => !!v || 'سنوات الخبرة مطلوبة']"
-                  required
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newLabor.salary"
-                  label="الراتب اليومي"
-                  variant="outlined"
-                  type="number"
-                  :rules="[v => !!v || 'الراتب مطلوب']"
-                  required
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newLabor.phone"
-                  label="رقم الهاتف"
-                  variant="outlined"
-                  :rules="[v => !!v || 'رقم الهاتف مطلوب']"
-                  required
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  v-model="newLabor.specialty"
-                  label="التخصص"
-                  variant="outlined"
-                  :rules="[v => !!v || 'التخصص مطلوب']"
-                  required
-                />
-              </v-col>
-            </v-row>
-          </v-form>
-        </v-card-text>
-        <v-card-actions class="modal-footer">
-          <v-spacer />
-          <v-btn @click="closeAddDialog" color="grey" variant="text">
-            إلغاء
-          </v-btn>
-          <v-btn @click="saveLabor" color="primary" variant="elevated" :disabled="!formValid" class="save-btn">
-            حفظ
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
     <!-- Simple Dialog for Add Worker -->
     <SimpleDialog
       :open="showAddDialog"
@@ -241,6 +158,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { formatCurrency } from '@/utils/formatters'
+import { PageHeader } from '@/components/shared'
 import SimpleDialog from '@/components/SimpleDialog.vue'
 import LaborForm from '@/components/LaborForm.vue'
 

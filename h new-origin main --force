@@ -1,0 +1,29 @@
+[33ma7f660f[m[33m ([m[1;31mnew-origin/main[m[33m)[m Remove duplicates from frontend files
+[33m96f3ce7[m Centralize the frontend
+[33md2e40e1[m Fix broken ui components
+[33m00e61bd[m FE ready for receving real backend data
+[33m3db4a35[m Extract Components and extract css to sperate files
+[33m8711525[m Complete phase 0 and phase 1
+[33m63cecf3[m Add refactor plan for frontend
+[33mc6dbd9a[m Frontend init
+[33maa08369[m Add query timeout middleware and database connection retry logic
+[33m033cdf4[m Add transaction support for atomic operations and configurable DB SSL mode
+[33mfb4ece3[m Fix audit logs context
+[33m914b471[m Add team members to projects
+[33mcc9f483[m Update module path and imports to new repository (prjalgo)
+[33ma885df0[m[33m ([m[1;31morigin/main[m[33m)[m Fix date and new password bugs, Add workday complete endpoint with auto project progress update
+[33m2b724cd[m Add audit logs
+[33m7e91088[m Add validation error helper and seed data for testing
+[33maf10464[m Add refresh token auth, password update, and user status management
+[33m31ce24b[m Add pagination support to all GetAll endpoints
+[33m56f4e6f[m  add JWT authentication, RBAC authorization, and user pages endpoint
+[33mbcfcf10[m Add routing layer with DI container and Gin integration
+[33mf5d8d2f[m Add handlers layer and env config with pgxpool connection
+[33m406cf19[m Add repository interfaces for DI and testability
+[33m9e50b69[m Add DTO layer with optimized repos and services
+[33m3253d27[m Add repository layer with CRUD operations for all models
+[33m1a434af[m Add models and update the schema
+[33me2113f1[m Add initial schema
+[33mcc288ad[m Add backend folder structure
+[33m1a34947[m Add BE & FE folders
+[33m5408503[m first commit

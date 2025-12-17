@@ -1,22 +1,12 @@
 <template>
   <v-container class="fill-height data-page" fluid>
     <div class="fullscreen-content">
-      <!-- Header Section - Compact rectangle with animation -->
-      <div class="page-header glass-effect gradient-animation">
-        <span class="page-icon star-twinkle">🏗️</span>
-        <h1 class="page-title text-glow fade-in">
-          <span class="title-icon">🏗️</span>
-          <span class="title-text">إدارة المشاريع الهندسية</span>
-          <span class="title-decoration"></span>
-        </h1>
-        <p class="page-subtitle fade-in">نظام متكامل لإدارة وتتبع جميع المشاريع والمهام الهندسية</p>
-        <div class="page-badge">
-          <v-chip color="primary" variant="elevated" size="small">
-            <v-icon start>mdi-star</v-icon>
-            نظام إدارة متقدم
-          </v-chip>
-        </div>
-      </div>
+      <!-- Header Section -->
+      <PageHeader
+        title="إدارة المشاريع الهندسية"
+        subtitle="نظام متكامل لإدارة وتتبع جميع المشاريع والمهام الهندسية"
+        icon="🏗️"
+      />
 
 
       <!-- Statistics Cards Component -->
@@ -108,6 +98,7 @@ import { storeToRefs } from 'pinia'
 import { useProjectsStore } from '@/stores/projects'
 
 // Import components
+import { PageHeader } from '@/components/shared'
 import {
   ProjectStats,
   ProjectCard,

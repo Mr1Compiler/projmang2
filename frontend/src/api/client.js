@@ -1,5 +1,6 @@
 import { toast } from 'vue3-toastify'
 import { config } from '@/config/env'
+import { mockRequest, isMockEnabled } from '@/mocks/mockApi'
 
 const TOKEN_KEY = 'accessToken'
 const REFRESH_TOKEN_KEY = 'refreshToken'
@@ -8,6 +9,13 @@ class ApiClient {
   constructor() {
     this.baseURL = config.apiBaseUrl
     this.timeout = config.apiTimeout
+  }
+
+  /**
+   * Check if mock mode is enabled
+   */
+  useMock() {
+    return isMockEnabled()
   }
 
   getToken() {
@@ -31,6 +39,13 @@ class ApiClient {
   }
 
   async request(endpoint, options = {}) {
+    // Use mock data if enabled
+    if (this.useMock()) {
+      const method = options.method || 'GET'
+      const body = options.body ? JSON.parse(options.body) : null
+      return mockRequest(method, endpoint, body)
+    }
+
     const url = `${this.baseURL}${endpoint}`
     const token = this.getToken()
 

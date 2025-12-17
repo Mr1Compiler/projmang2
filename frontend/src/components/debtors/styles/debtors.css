@@ -144,3 +144,197 @@
 .light-sweep:hover::after {
   left: 100%;
 }
+
+/* ============================================
+   Enhanced Add Button with Shimmer
+   ============================================ */
+.add-debtor-btn {
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 50%, var(--color-emerald-700) 100%) !important;
+  color: var(--text-white) !important;
+  font-weight: 700 !important;
+  font-size: var(--font-size-sm-plus) !important;
+  font-family: var(--font-primary) !important;
+  letter-spacing: 0.5px !important;
+  line-height: 1.5 !important;
+  padding: 10px 20px !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4), 0 2px 6px rgba(5, 150, 105, 0.3) !important;
+  transition: all var(--transition-normal) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  position: relative;
+  overflow: hidden;
+  text-transform: none !important;
+  height: auto !important;
+}
+
+.add-debtor-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.add-debtor-btn:hover::before {
+  left: 100%;
+}
+
+.add-debtor-btn:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.5), 0 4px 12px rgba(5, 150, 105, 0.4) !important;
+  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-700) 50%, var(--color-emerald-800) 100%) !important;
+}
+
+.add-debtor-btn:active {
+  transform: translateY(-1px) scale(0.98) !important;
+}
+
+/* ============================================
+   Modern Stat Cards
+   ============================================ */
+.debtor-stat-card {
+  position: relative !important;
+  border-radius: var(--radius-2xl) !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  height: 100% !important;
+  min-height: 140px !important;
+  background: var(--text-white) !important;
+}
+
+.debtor-stat-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.debtor-stat-card.primary {
+  border: 2px solid var(--color-blue-500) !important;
+  box-shadow: var(--shadow-blue-sm) !important;
+}
+
+.debtor-stat-card.success {
+  border: 2px solid var(--color-emerald-500) !important;
+  box-shadow: var(--shadow-emerald-sm) !important;
+}
+
+.debtor-stat-card.warning {
+  border: 2px solid var(--color-amber-500) !important;
+  box-shadow: var(--shadow-amber-sm) !important;
+}
+
+.debtor-stat-card.danger {
+  border: 2px solid var(--color-red-500) !important;
+  box-shadow: var(--shadow-red-sm) !important;
+}
+
+/* Stat Card Content */
+.debtor-stat-content {
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: center;
+}
+
+.debtor-stat-value {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+  direction: ltr !important;
+  text-align: center;
+  color: var(--color-gray-900) !important;
+}
+
+.debtor-stat-label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-align: center;
+  color: var(--color-gray-500);
+}
+
+/* ============================================
+   Payment Status Chips
+   ============================================ */
+.payment-status-chip {
+  font-weight: 600 !important;
+  font-size: var(--font-size-xs) !important;
+  padding: 4px 12px !important;
+  border-radius: var(--radius-full) !important;
+  color: var(--text-white) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.payment-status-chip.pending {
+  background: linear-gradient(135deg, var(--color-amber-400) 0%, var(--color-amber-500) 100%) !important;
+}
+
+.payment-status-chip.partial {
+  background: linear-gradient(135deg, var(--color-orange-400) 0%, var(--color-orange-500) 100%) !important;
+}
+
+.payment-status-chip.paid {
+  background: linear-gradient(135deg, var(--color-emerald-400) 0%, var(--color-emerald-500) 100%) !important;
+}
+
+.payment-status-chip.overdue {
+  background: linear-gradient(135deg, var(--color-red-400) 0%, var(--color-red-500) 100%) !important;
+}
+
+/* ============================================
+   Action Buttons
+   ============================================ */
+.action-btn {
+  border-radius: var(--radius-lg) !important;
+  transition: all var(--transition-normal) !important;
+  min-width: 36px !important;
+  height: 36px !important;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.action-btn.view {
+  background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-600) 100%) !important;
+  box-shadow: var(--shadow-blue-sm) !important;
+}
+
+.action-btn.view:hover {
+  box-shadow: var(--shadow-blue-md) !important;
+}
+
+.action-btn.edit {
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%) !important;
+  box-shadow: var(--shadow-amber-sm) !important;
+}
+
+.action-btn.edit:hover {
+  box-shadow: var(--shadow-amber-md) !important;
+}
+
+.action-btn.delete {
+  background: linear-gradient(135deg, var(--color-red-500) 0%, var(--color-red-600) 100%) !important;
+  box-shadow: var(--shadow-red-sm) !important;
+}
+
+.action-btn.delete:hover {
+  box-shadow: var(--shadow-red-md) !important;
+}
+
+.action-btn.payment {
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%) !important;
+  box-shadow: var(--shadow-emerald-sm) !important;
+}
+
+.action-btn.payment:hover {
+  box-shadow: var(--shadow-emerald-md) !important;
+}

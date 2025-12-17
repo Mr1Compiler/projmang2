@@ -5,10 +5,10 @@
  */
 
 /* ============================================
-   Page Container
+   Page Container - White Based Theme
    ============================================ */
 .data-page {
-  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 100%);
+  background: var(--page-background) !important;
   min-height: 100vh;
   padding: var(--space-5);
 }
@@ -19,19 +19,7 @@
   margin: 0 auto;
 }
 
-/* ============================================
-   Page Header
-   ============================================ */
-.page-header {
-  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
-  backdrop-filter: blur(20px);
-  border-radius: var(--radius-2xl);
-  padding: var(--space-6);
-  margin-bottom: var(--space-6);
-  text-align: center;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.25);
-}
+/* Page Header styles moved to shared/styles/shared.css */
 
 .header-content {
   display: flex;
@@ -49,19 +37,6 @@
 .title-icon {
   color: var(--text-white) !important;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-}
-
-.page-title {
-  font-size: var(--font-size-2xl);
-  font-weight: 800;
-  color: var(--text-white);
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.page-subtitle {
-  font-size: var(--font-size-base);
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 500;
 }
 
 /* ============================================
@@ -238,59 +213,9 @@
 }
 
 /* ============================================
-   Simple Dialog Styles
+   Simple Dialog Styles - Now centralized in form-dialog.css
    ============================================ */
-.simple-dialog-card {
-  border-radius: var(--radius-2xl) !important;
-  overflow: hidden;
-}
-
-.simple-dialog-header {
-  background: linear-gradient(135deg, var(--color-blue-600) 0%, var(--color-blue-500) 100%) !important;
-  padding: var(--space-4) var(--space-6) !important;
-}
-
-.simple-dialog-body {
-  background: var(--text-white);
-}
-
-.simple-dialog-actions {
-  background: var(--color-slate-50);
-}
-
-/* Form field simple */
-.form-field-simple {
-  margin-bottom: var(--space-4);
-}
-
-.field-label {
-  display: block;
-  font-weight: 600;
-  color: var(--color-slate-700);
-  margin-bottom: var(--space-2);
-}
-
-.custom-input-container {
-  width: 100%;
-}
-
-.custom-input-field {
-  width: 100%;
-  padding: var(--space-3) var(--space-4);
-  border: 2px solid var(--color-slate-300);
-  border-radius: var(--radius-lg);
-  font-size: var(--font-size-base);
-  font-weight: 500;
-  color: var(--color-slate-800);
-  background: var(--text-white);
-  transition: all var(--transition-normal);
-}
-
-.custom-input-field:focus {
-  outline: none;
-  border-color: var(--color-blue-500);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
+/* Dialog and form field styles moved to src/styles/form-dialog.css */
 
 .save-btn-simple {
   font-weight: 600 !important;
@@ -299,15 +224,7 @@
 /* ============================================
    Sub Categories Dialog
    ============================================ */
-.sub-categories-card {
-  border-radius: var(--radius-2xl) !important;
-  overflow: hidden;
-}
-
-.sub-categories-header {
-  background: linear-gradient(135deg, var(--color-indigo-600) 0%, var(--color-indigo-500) 100%) !important;
-  padding: var(--space-4) var(--space-6) !important;
-}
+/* Base dialog styles in form-dialog.css */
 
 .sub-categories-body {
   background: var(--text-white);
@@ -420,14 +337,9 @@
 /* ============================================
    Category Details Dialog
    ============================================ */
-.details-dialog-card {
-  border-radius: var(--radius-2xl) !important;
-  overflow: hidden;
-}
+/* Base dialog styles in form-dialog.css */
 
 .details-header-enhanced {
-  background: linear-gradient(135deg, var(--color-blue-600) 0%, var(--color-blue-500) 100%) !important;
-  padding: var(--space-5) var(--space-6) !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -456,9 +368,7 @@
   color: rgba(255, 255, 255, 0.8) !important;
 }
 
-.close-btn {
-  color: var(--text-white) !important;
-}
+/* .close-btn moved to form-dialog.css */
 
 .details-content-enhanced {
   padding: var(--space-6);
@@ -509,14 +419,6 @@
     padding: var(--space-3);
   }
 
-  .page-header {
-    padding: var(--space-4);
-  }
-
-  .page-title {
-    font-size: var(--font-size-xl);
-  }
-
   .table-header-enhanced {
     flex-direction: column;
     gap: var(--space-3);
@@ -530,10 +432,6 @@
 @media (max-width: 600px) {
   .data-page {
     padding: var(--space-2);
-  }
-
-  .page-title {
-    font-size: var(--font-size-lg);
   }
 
   .title-row {

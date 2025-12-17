@@ -5,20 +5,18 @@
  */
 
 /* ============================================
-   Page Container
+   Page Container - White Based Theme
    ============================================ */
 .task-management-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--color-indigo-400) 0%, var(--color-violet-600) 100%);
+  background: var(--page-background) !important;
   padding: var(--space-5);
 }
 
 /* ============================================
    Page Header
    ============================================ */
-.page-header {
-  margin-bottom: var(--space-8);
-}
+/* Page Header styles moved to shared/styles/shared.css */
 
 .header-content {
   display: flex;
@@ -34,19 +32,6 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
-}
-
-.page-title {
-  font-size: var(--font-size-2xl);
-  font-weight: 800;
-  color: var(--color-slate-800);
-  margin: 0;
-}
-
-.page-subtitle {
-  font-size: var(--font-size-sm);
-  color: var(--color-slate-500);
-  margin: 0;
 }
 
 .header-actions {
@@ -228,16 +213,7 @@
   font-weight: 600 !important;
 }
 
-.dialog-header {
-  background: linear-gradient(135deg, var(--color-blue-600) 0%, var(--color-blue-500) 100%);
-  padding: var(--space-4) var(--space-6);
-  color: var(--text-white);
-}
-
-.dialog-actions {
-  padding: var(--space-4) var(--space-6);
-  background: var(--color-slate-50);
-}
+/* Dialog styles moved to src/styles/form-dialog.css */
 
 /* ============================================
    Task Details Dialog
@@ -287,10 +263,6 @@
   .header-left {
     flex-direction: column;
   }
-
-  .page-title {
-    font-size: var(--font-size-xl);
-  }
 }
 
 @media (max-width: 600px) {
@@ -300,10 +272,6 @@
 
   .header-content {
     padding: var(--space-4);
-  }
-
-  .page-title {
-    font-size: var(--font-size-lg);
   }
 
   .action-buttons {

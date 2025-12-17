@@ -1,37 +1,23 @@
 <template>
   <div class="materials-expenses-page">
-    <!-- Modern Dialog for Add Material -->
-    <ModernDialog
-      :open="showAddDialog"
-      title="إضافة مادة"
-      save-text="حفظ"
-      icon="mdi-hammer-screwdriver"
-      @close="closeAddDialog"
-      @save="saveMaterial"
-    >
-      <MaterialForm
-        v-model="newMaterial"
-        ref="materialFormRef"
-      />
-    </ModernDialog>
     <!-- Header Section -->
-    <div class="page-header glass-effect gradient-animation">
-      <div class="header-content">
-        <v-btn 
-          icon="mdi-arrow-left" 
-          @click="goBack" 
-          class="back-btn"
-          size="large"
-          color="white"
-        >
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <div class="header-text">
-          <h1 class="page-title text-glow fade-in">المواد والمصاريف اليومية</h1>
-          <p class="page-subtitle fade-in">إدارة المواد والمصاريف اليومية للمشروع</p>
-        </div>
-      </div>
+    <div class="d-flex align-center mb-4">
+      <v-btn
+        icon="mdi-arrow-left"
+        @click="goBack"
+        class="back-btn me-3"
+        size="large"
+        variant="text"
+        color="primary"
+      >
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
     </div>
+    <PageHeader
+      title="المواد والمصاريف اليومية"
+      subtitle="إدارة المواد والمصاريف اليومية للمشروع"
+      mdi-icon="mdi-hammer-screwdriver"
+    />
 
     <!-- Materials Section -->
     <v-card class="section-card mb-4" elevation="2">
@@ -209,6 +195,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { PageHeader } from '@/components/shared'
 import SimpleDialog from '@/components/SimpleDialog.vue'
 import MaterialForm from '@/components/MaterialForm.vue'
 import ExpenseForm from '@/components/WorkdayExpenseForm.vue'

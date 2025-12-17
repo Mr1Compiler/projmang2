@@ -1,0 +1,1239 @@
+/* ========================================
+   الأنماط المشتركة للمكونات
+   Common Component Styles
+   ======================================== */
+
+/* ========================================
+   1. بطاقات الجداول (Data Table Cards)
+   ======================================== */
+
+.data-table-card {
+  background: var(--bg-white) !important;
+  border: var(--space-px) solid var(--color-slate-200) !important;
+  border-radius: var(--radius-2xl) !important;
+  box-shadow: var(--shadow-card) !important;
+  overflow: hidden;
+}
+
+.data-table-card .v-card-title {
+  background: linear-gradient(135deg, var(--color-blue-600) 0%, var(--color-blue-700) 100%) !important;
+  border-bottom: var(--space-px) solid rgba(255, 255, 255, 0.3);
+  padding: var(--space-6);
+  position: relative;
+}
+
+.data-table-card .v-card-title::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--space-0-5);
+  background: var(--gradient-primary);
+}
+
+.data-table-card .v-card-title .v-icon {
+  color: var(--text-white) !important;
+}
+
+.data-table-card .v-card-title span {
+  color: var(--text-white) !important;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+.data-table-card .v-card-title .v-chip {
+  color: var(--text-white) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: var(--space-px) solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ========================================
+   2. رؤوس الصفحات (Page Headers)
+   ======================================== */
+
+.page-header {
+  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  margin-bottom: var(--space-8);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--space-0-5);
+  background: var(--gradient-primary);
+}
+
+.page-header .page-title {
+  color: var(--text-white) !important;
+  font-size: var(--font-size-xl-plus) !important;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.page-header .page-subtitle {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: var(--font-size-sm) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   3. حالة المشروع (Project Status)
+   ======================================== */
+
+.status-chip-main {
+  font-weight: 500 !important;
+  font-size: var(--font-size-xs) !important;
+  color: var(--text-white) !important;
+}
+
+.status-chip-main .v-chip__content {
+  color: var(--text-white) !important;
+  font-size: var(--font-size-xs) !important;
+}
+
+.status-chip-main .v-icon {
+  color: var(--text-white) !important;
+  font-size: var(--font-size-sm) !important;
+}
+
+/* ========================================
+   4. عناوين الجداول الموحدة
+   ======================================== */
+
+.v-data-table table thead tr th,
+.v-data-table__wrapper table thead tr th,
+table thead tr th {
+  background: linear-gradient(135deg, var(--color-emerald-700) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  font-weight: 800 !important;
+  font-size: var(--font-size-base-plus) !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: var(--space-5) var(--space-3) !important;
+  border: none !important;
+  box-shadow: var(--shadow-emerald-glow) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  letter-spacing: 0.5px !important;
+}
+
+.v-data-table table thead tr th .v-data-table-header__content,
+.v-data-table__wrapper table thead tr th .v-data-table-header__content {
+  color: var(--text-white) !important;
+  font-weight: 800 !important;
+  font-size: var(--font-size-base-plus) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  letter-spacing: 0.5px !important;
+}
+
+.v-data-table table thead tr th .v-data-table-header__content .v-data-table-header__sort-icon {
+  color: var(--text-white) !important;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3)) !important;
+}
+
+/* ========================================
+   5. الأزرار الموحدة - Unified Buttons
+   ======================================== */
+
+/* تأثير التوهج للزر */
+@keyframes buttonGlow {
+  0%, 100% {
+    box-shadow:
+      0 4px 16px rgba(30, 64, 175, 0.3),
+      0 2px 8px rgba(37, 99, 235, 0.2),
+      0 0 20px rgba(59, 130, 246, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  }
+  50% {
+    box-shadow:
+      0 4px 20px rgba(30, 64, 175, 0.5),
+      0 2px 12px rgba(37, 99, 235, 0.4),
+      0 0 30px rgba(59, 130, 246, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  }
+}
+
+@keyframes buttonGlowHover {
+  0%, 100% {
+    box-shadow:
+      0 12px 32px rgba(30, 64, 175, 0.5),
+      0 6px 16px rgba(37, 99, 235, 0.5),
+      0 0 40px rgba(59, 130, 246, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  }
+  50% {
+    box-shadow:
+      0 12px 36px rgba(30, 64, 175, 0.6),
+      0 6px 20px rgba(37, 99, 235, 0.6),
+      0 0 50px rgba(59, 130, 246, 0.8),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  }
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes buttonClick {
+  0% {
+    transform: translateY(-1px) scale(1.02);
+  }
+  50% {
+    transform: translateY(-1px) scale(0.98);
+  }
+  100% {
+    transform: translateY(-1px) scale(1.02);
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* زر الإضافة الموحد - Unified Add Button */
+.add-button,
+.add-button.v-btn,
+.v-btn.add-button,
+.add-expense-btn,
+.add-item-btn,
+.add-engineer-btn,
+.add-task-btn,
+.add-category-btn,
+.add-user-btn,
+.add-purchase-btn,
+.add-sale-btn {
+  background: linear-gradient(135deg, var(--color-blue-800) 0%, var(--color-blue-600) 50%, var(--color-blue-500) 100%) !important;
+  backdrop-filter: blur(10px) !important;
+  color: var(--text-white) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: var(--space-3) var(--space-6) !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  box-shadow: var(--shadow-blue-900-md), var(--ring-blue-600) !important;
+  transition: all var(--transition-normal) !important;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  min-width: auto !important;
+  animation: buttonGlow 2s ease-in-out infinite, buttonPulse 3s ease-in-out infinite !important;
+}
+
+.add-button :deep(.v-btn__content),
+.add-expense-btn :deep(.v-btn__content),
+.add-item-btn :deep(.v-btn__content),
+.add-engineer-btn :deep(.v-btn__content),
+.add-task-btn :deep(.v-btn__content),
+.add-category-btn :deep(.v-btn__content),
+.add-user-btn :deep(.v-btn__content),
+.add-purchase-btn :deep(.v-btn__content),
+.add-sale-btn :deep(.v-btn__content) {
+  color: var(--text-white) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  text-align: center !important;
+  gap: var(--space-2) !important;
+}
+
+.add-button :deep(.v-btn__prepend),
+.add-button :deep(.v-btn__append),
+.add-expense-btn :deep(.v-btn__prepend),
+.add-item-btn :deep(.v-btn__prepend),
+.add-engineer-btn :deep(.v-btn__prepend),
+.add-task-btn :deep(.v-btn__prepend),
+.add-category-btn :deep(.v-btn__prepend),
+.add-user-btn :deep(.v-btn__prepend),
+.add-purchase-btn :deep(.v-btn__prepend),
+.add-sale-btn :deep(.v-btn__prepend) {
+  color: var(--text-white) !important;
+  margin: 0 !important;
+}
+
+.add-button :deep(.v-icon),
+.add-expense-btn :deep(.v-icon),
+.add-item-btn :deep(.v-icon),
+.add-engineer-btn :deep(.v-icon),
+.add-task-btn :deep(.v-icon),
+.add-category-btn :deep(.v-icon),
+.add-user-btn :deep(.v-icon),
+.add-purchase-btn :deep(.v-icon),
+.add-sale-btn :deep(.v-icon) {
+  color: var(--text-white) !important;
+  margin: 0 !important;
+  transition: transform var(--transition-normal) !important;
+  font-size: var(--font-size-xl) !important;
+}
+
+.add-button::before,
+.add-expense-btn::before,
+.add-item-btn::before,
+.add-engineer-btn::before,
+.add-task-btn::before,
+.add-category-btn::before,
+.add-user-btn::before,
+.add-purchase-btn::before,
+.add-sale-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left var(--transition-slow);
+  z-index: var(--z-base);
+}
+
+.add-button:hover::before,
+.add-expense-btn:hover::before,
+.add-item-btn:hover::before,
+.add-engineer-btn:hover::before,
+.add-task-btn:hover::before,
+.add-category-btn:hover::before,
+.add-user-btn:hover::before,
+.add-purchase-btn:hover::before,
+.add-sale-btn:hover::before {
+  left: 100%;
+  animation: shimmer var(--transition-slow);
+}
+
+.add-button::after,
+.add-expense-btn::after,
+.add-item-btn::after,
+.add-engineer-btn::after,
+.add-task-btn::after,
+.add-category-btn::after,
+.add-user-btn::after,
+.add-purchase-btn::after,
+.add-sale-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width var(--transition-slow), height var(--transition-slow), opacity var(--transition-slow);
+  z-index: var(--z-0);
+  opacity: 0;
+}
+
+.add-button:active::after,
+.add-expense-btn:active::after,
+.add-item-btn:active::after,
+.add-engineer-btn:active::after,
+.add-task-btn:active::after,
+.add-category-btn:active::after,
+.add-user-btn:active::after,
+.add-purchase-btn:active::after,
+.add-sale-btn:active::after {
+  width: var(--space-80);
+  height: var(--space-80);
+  opacity: 0;
+  transition: width var(--transition-normal), height var(--transition-normal), opacity var(--transition-normal);
+}
+
+.add-button:hover,
+.add-button.v-btn:hover,
+.v-btn.add-button:hover,
+.add-expense-btn:hover,
+.add-item-btn:hover,
+.add-engineer-btn:hover,
+.add-task-btn:hover,
+.add-category-btn:hover,
+.add-user-btn:hover,
+.add-purchase-btn:hover,
+.add-sale-btn:hover {
+  transform: translateY(-4px) scale(1.05) !important;
+  box-shadow: var(--shadow-blue-900-lg), var(--shadow-blue-glow), var(--shadow-white-inset) !important;
+  background: linear-gradient(135deg, var(--color-blue-900) 0%, var(--color-blue-800) 50%, var(--color-blue-600) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  animation: buttonGlowHover 1.5s ease-in-out infinite !important;
+}
+
+.add-button:active,
+.add-expense-btn:active,
+.add-item-btn:active,
+.add-engineer-btn:active,
+.add-task-btn:active,
+.add-category-btn:active,
+.add-user-btn:active,
+.add-purchase-btn:active,
+.add-sale-btn:active {
+  transform: translateY(-1px) scale(1.02) !important;
+  box-shadow: var(--shadow-blue-900-sm), var(--shadow-white-inset) !important;
+  animation: buttonClick var(--transition-normal) !important;
+}
+
+.add-button:hover :deep(.v-icon),
+.add-expense-btn:hover :deep(.v-icon),
+.add-item-btn:hover :deep(.v-icon),
+.add-engineer-btn:hover :deep(.v-icon),
+.add-task-btn:hover :deep(.v-icon),
+.add-category-btn:hover :deep(.v-icon),
+.add-user-btn:hover :deep(.v-icon),
+.add-purchase-btn:hover :deep(.v-icon),
+.add-sale-btn:hover :deep(.v-icon) {
+  transform: rotate(90deg) scale(1.1) !important;
+}
+
+.export-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ========================================
+   6. صفحة البيانات العامة - Data Page Layout
+   من التصميم القديم - Old Theme Styles
+   ======================================== */
+
+/* خلفية الصفحة الرئيسية */
+.data-page {
+  background: var(--page-background);
+  color: var(--text-dark);
+  min-height: 100vh;
+  padding: var(--space-4);
+  width: 100%;
+}
+
+/* المحتوى بحجم الشاشة الكامل */
+.fullscreen-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  text-align: center;
+}
+
+/* ========================================
+   7. بطاقات الإحصائيات - Stat Cards
+   ======================================== */
+
+/* صف الإحصائيات */
+.stats-row {
+  width: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  padding: 0;
+}
+
+.stats-row .v-col {
+  margin: 0 !important;
+  padding: var(--space-2) !important;
+  box-sizing: border-box !important;
+}
+
+.stats-row .stat-card {
+  width: 100% !important;
+  min-height: var(--space-36) !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* بطاقات الإحصائيات المحسنة */
+.stat-card {
+  background: linear-gradient(145deg, var(--bg-white) 0%, var(--color-slate-50) 100%) !important;
+  border-radius: var(--radius-2xl) !important;
+  transition: all var(--transition-material);
+  position: relative;
+  overflow: hidden;
+  height: 100% !important;
+  min-height: var(--space-36) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center !important;
+  box-shadow: var(--shadow-card) !important;
+  border: var(--space-px) solid rgba(0, 0, 0, 0.05);
+  margin: 0 !important;
+  width: 100% !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-sizing: border-box !important;
+}
+
+.stat-card:hover {
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: var(--shadow-xl) !important;
+  border-color: var(--color-slate-200);
+  background: linear-gradient(145deg, var(--bg-white) 0%, var(--color-slate-100) 100%) !important;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--space-1-5);
+  background: var(--gradient-primary);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  z-index: var(--z-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: var(--radius-2xl);
+  z-index: var(--z-base);
+  pointer-events: none;
+}
+
+.stat-icon {
+  position: relative;
+  z-index: var(--z-base);
+  margin-bottom: var(--space-5);
+  padding: var(--space-3);
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-100) 100%);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+}
+
+.stat-card .v-icon {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+  transition: all var(--transition-material);
+  font-size: var(--font-size-6xl) !important;
+  width: var(--space-16) !important;
+  height: var(--space-16) !important;
+}
+
+.stat-card:hover .v-icon {
+  transform: scale(1.15) rotate(8deg);
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--color-slate-100) 0%, var(--color-slate-200) 100%);
+}
+
+.stat-card h3 {
+  font-size: var(--font-size-4xl) !important;
+  font-weight: 800 !important;
+  margin-bottom: var(--space-2-5) !important;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  text-align: center !important;
+  width: 100%;
+  line-height: 1.1;
+  position: relative;
+  z-index: var(--z-base);
+  color: var(--color-blue-600) !important;
+}
+
+.stat-card p {
+  font-size: var(--font-size-base) !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+  text-align: center !important;
+  width: 100%;
+  margin: 0;
+  color: var(--color-gray-700) !important;
+  position: relative;
+  z-index: var(--z-base);
+  letter-spacing: 0.5px;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* تأثيرات خاصة لكل لون */
+.stat-card:nth-child(1)::before {
+  background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-700) 50%, var(--color-violet-600) 100%);
+}
+
+.stat-card:nth-child(1):hover {
+  box-shadow: var(--shadow-blue-xl) !important;
+}
+
+.stat-card:nth-child(1) h3 {
+  color: var(--color-blue-500) !important;
+}
+
+.stat-card:nth-child(2)::before {
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 50%, var(--color-emerald-700) 100%);
+}
+
+.stat-card:nth-child(2):hover {
+  box-shadow: var(--shadow-emerald-xl) !important;
+}
+
+.stat-card:nth-child(2) h3 {
+  color: var(--color-emerald-500) !important;
+}
+
+.stat-card:nth-child(3)::before {
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 50%, var(--color-amber-700) 100%);
+}
+
+.stat-card:nth-child(3):hover {
+  box-shadow: var(--shadow-amber-lg) !important;
+}
+
+.stat-card:nth-child(3) h3 {
+  color: var(--color-amber-500) !important;
+}
+
+.stat-card:nth-child(4)::before {
+  background: linear-gradient(135deg, var(--color-cyan-500) 0%, var(--color-cyan-600) 50%, var(--color-cyan-700) 100%);
+}
+
+.stat-card:nth-child(4):hover {
+  box-shadow: var(--shadow-sky-inner-lg) !important;
+}
+
+.stat-card:nth-child(4) h3 {
+  color: var(--color-cyan-500) !important;
+}
+
+/* ========================================
+   8. رأس الصفحة المحسن - Enhanced Page Header
+   ======================================== */
+
+.page-header-enhanced {
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+  background: var(--page-header-background);
+  border-radius: var(--radius-2xl);
+  width: 100%;
+  box-shadow: var(--shadow-navy-md);
+  color: var(--color-navy-800);
+  border: 2px solid rgba(26, 35, 126, 0.1);
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  max-height: var(--space-44);
+}
+
+.page-header-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--space-1);
+  background: var(--gradient-primary);
+}
+
+.page-title-enhanced {
+  color: var(--color-navy-800) !important;
+  font-weight: 700 !important;
+  font-size: var(--font-size-4xl-plus) !important;
+  margin-bottom: var(--space-3);
+  text-shadow: 0 4px 12px rgba(26, 35, 126, 0.4);
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  position: relative;
+  padding: var(--space-4) var(--space-8);
+  background: linear-gradient(135deg, rgba(26, 35, 126, 0.05) 0%, rgba(57, 73, 171, 0.08) 50%, rgba(92, 107, 192, 0.05) 100%);
+  border-radius: var(--radius-3xl);
+  border: 2px solid rgba(26, 35, 126, 0.15);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-navy-md);
+  transition: all var(--transition-slow);
+  overflow: hidden;
+}
+
+.page-title-enhanced:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: var(--shadow-navy-xl);
+  border-color: rgba(26, 35, 126, 0.25);
+}
+
+.title-icon-animated {
+  font-size: var(--font-size-5xl);
+  animation: bounce 2s infinite;
+  filter: drop-shadow(0 4px 8px rgba(26, 35, 126, 0.3));
+  transition: all var(--transition-normal);
+}
+
+.title-icon-animated:hover {
+  transform: scale(1.2) rotate(10deg);
+  filter: drop-shadow(0 6px 12px rgba(26, 35, 126, 0.5));
+}
+
+.title-text-gradient {
+  background: linear-gradient(135deg, var(--color-navy-800) 0%, var(--color-navy-600) 30%, var(--color-navy-500) 60%, var(--color-navy-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  position: relative;
+  z-index: var(--z-base);
+}
+
+.page-subtitle-enhanced {
+  color: var(--color-navy-700) !important;
+  font-size: var(--font-size-base) !important;
+  margin-bottom: var(--space-4);
+  text-shadow: 0 1px 4px rgba(40, 53, 147, 0.2);
+  opacity: 0.9;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ========================================
+   9. تنسيق بطاقة الجدول المحسن
+   ======================================== */
+
+.data-table-card-enhanced {
+  background: var(--bg-white) !important;
+  border-radius: var(--radius-2xl) !important;
+  box-shadow: var(--shadow-elevated) !important;
+  overflow: hidden;
+  border: var(--space-px) solid rgba(0, 0, 0, 0.05);
+  transition: all var(--transition-normal);
+}
+
+.data-table-card-enhanced:hover {
+  box-shadow: var(--shadow-xl) !important;
+}
+
+.data-table-card-enhanced .v-card-title {
+  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
+  border-bottom: var(--space-px) solid rgba(255, 255, 255, 0.3);
+  padding: var(--space-6);
+  position: relative;
+}
+
+.data-table-card-enhanced .v-card-title::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--space-0-5);
+  background: var(--gradient-primary);
+}
+
+/* ========================================
+   10. الحركات والتأثيرات - Animations
+   ======================================== */
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ========================================
+   11. التجاوب - Responsive Design
+   ======================================== */
+
+/* Large Screens (1400px+) */
+@media (min-width: 1400px) {
+  .data-page {
+    padding: var(--space-6);
+  }
+
+  .fullscreen-content {
+    gap: var(--space-8);
+  }
+
+  .stat-card {
+    min-height: var(--space-40) !important;
+    padding: var(--space-5) !important;
+  }
+
+  .stat-card h3 {
+    font-size: var(--font-size-5xl) !important;
+  }
+
+  .stat-card .v-icon {
+    font-size: var(--font-size-7xl) !important;
+    width: var(--space-20) !important;
+    height: var(--space-20) !important;
+  }
+
+  .page-title-enhanced {
+    font-size: var(--font-size-5xl) !important;
+    padding: var(--space-5) var(--space-10);
+  }
+
+  .page-header {
+    padding: var(--space-10);
+  }
+}
+
+/* Medium-Large Screens (1200px - 1399px) */
+@media (max-width: 1399px) and (min-width: 1200px) {
+  .data-page {
+    padding: var(--space-5);
+  }
+
+  .fullscreen-content {
+    gap: var(--space-6);
+  }
+
+  .stat-card {
+    min-height: var(--space-36) !important;
+  }
+
+  .stat-card h3 {
+    font-size: var(--font-size-4xl) !important;
+  }
+}
+
+/* Tablet Landscape (960px - 1199px) */
+@media (max-width: 1199px) and (min-width: 960px) {
+  .data-page {
+    padding: var(--space-4);
+  }
+
+  .fullscreen-content {
+    gap: var(--space-5);
+  }
+
+  .stats-row {
+    gap: 0;
+    padding: 0;
+  }
+
+  .stats-row .v-col {
+    padding: var(--space-1-5) !important;
+  }
+
+  .stat-card {
+    min-height: var(--space-32) !important;
+    padding: var(--space-3) !important;
+  }
+
+  .stat-card h3 {
+    font-size: var(--font-size-3xl) !important;
+  }
+
+  .stat-card .v-icon {
+    font-size: var(--font-size-5xl) !important;
+    width: var(--space-14) !important;
+    height: var(--space-14) !important;
+  }
+
+  .page-title-enhanced {
+    font-size: var(--font-size-3xl) !important;
+    padding: var(--space-3) var(--space-6);
+    gap: var(--space-3);
+  }
+
+  .page-header {
+    padding: var(--space-6);
+  }
+
+  .page-header .page-title {
+    font-size: var(--font-size-lg) !important;
+  }
+}
+
+/* Tablet Portrait (768px - 959px) */
+@media (max-width: 959px) and (min-width: 768px) {
+  .data-page {
+    padding: var(--space-3);
+  }
+
+  .fullscreen-content {
+    gap: var(--space-4);
+  }
+
+  .stats-row .v-col {
+    padding: var(--space-1) !important;
+  }
+
+  .stat-card {
+    min-height: var(--space-28) !important;
+    padding: var(--space-2-5) !important;
+  }
+
+  .stat-card h3 {
+    font-size: var(--font-size-2xl) !important;
+  }
+
+  .stat-card p {
+    font-size: var(--font-size-sm) !important;
+  }
+
+  .stat-card .v-icon {
+    font-size: var(--font-size-4xl) !important;
+    width: var(--space-12) !important;
+    height: var(--space-12) !important;
+  }
+
+  .stat-icon {
+    margin-bottom: var(--space-3);
+    padding: var(--space-2);
+  }
+
+  .page-title-enhanced {
+    font-size: var(--font-size-2xl) !important;
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .page-header {
+    padding: var(--space-5);
+    margin-bottom: var(--space-5);
+  }
+
+  .page-header .page-title {
+    font-size: var(--font-size-base-plus) !important;
+  }
+
+  .title-icon-animated {
+    font-size: var(--font-size-3xl);
+  }
+
+  .data-table-card .v-card-title {
+    padding: var(--space-4);
+  }
+
+  .add-button,
+  .add-expense-btn,
+  .add-item-btn,
+  .add-engineer-btn,
+  .add-task-btn,
+  .add-category-btn,
+  .add-user-btn,
+  .add-purchase-btn,
+  .add-sale-btn {
+    padding: var(--space-2-5) var(--space-5) !important;
+    font-size: var(--font-size-sm) !important;
+  }
+}
+
+/* Mobile Large (600px - 767px) */
+@media (max-width: 767px) and (min-width: 600px) {
+  .data-page {
+    padding: var(--space-2);
+  }
+
+  .fullscreen-content {
+    gap: var(--space-3);
+  }
+
+  .stats-row .v-col {
+    padding: var(--space-1) !important;
+  }
+
+  .stat-card {
+    min-height: var(--space-24) !important;
+    padding: var(--space-2) !important;
+  }
+
+  .stat-card h3 {
+    font-size: var(--font-size-xl) !important;
+    margin-bottom: var(--space-1-5) !important;
+  }
+
+  .stat-card p {
+    font-size: var(--font-size-xs) !important;
+  }
+
+  .stat-card .v-icon {
+    font-size: var(--font-size-3xl) !important;
+    width: var(--space-10) !important;
+    height: var(--space-10) !important;
+  }
+
+  .stat-icon {
+    margin-bottom: var(--space-2);
+    padding: var(--space-1-5);
+  }
+
+  .page-title-enhanced {
+    font-size: var(--font-size-xl) !important;
+    padding: var(--space-2-5) var(--space-3);
+    gap: var(--space-2);
+    flex-direction: column;
+  }
+
+  .page-header {
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+    border-radius: var(--radius-xl);
+  }
+
+  .page-header .page-title {
+    font-size: var(--font-size-base) !important;
+  }
+
+  .page-header .page-subtitle {
+    font-size: var(--font-size-xs) !important;
+  }
+
+  .title-icon-animated {
+    font-size: var(--font-size-2xl);
+  }
+
+  .data-table-card .v-card-title {
+    padding: var(--space-3);
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .add-button,
+  .add-expense-btn,
+  .add-item-btn,
+  .add-engineer-btn,
+  .add-task-btn,
+  .add-category-btn,
+  .add-user-btn,
+  .add-purchase-btn,
+  .add-sale-btn {
+    padding: var(--space-2) var(--space-4) !important;
+    font-size: var(--font-size-xs) !important;
+    width: 100%;
+  }
+
+  .add-button :deep(.v-icon),
+  .add-expense-btn :deep(.v-icon),
+  .add-item-btn :deep(.v-icon),
+  .add-engineer-btn :deep(.v-icon),
+  .add-task-btn :deep(.v-icon) {
+    font-size: var(--font-size-lg) !important;
+  }
+}
+
+/* Mobile (up to 599px) */
+@media (max-width: 599px) {
+  .data-page {
+    padding: var(--space-2);
+  }
+
+  .fullscreen-content {
+    gap: var(--space-2);
+  }
+
+  .stats-row .v-col {
+    padding: var(--space-0-5) !important;
+  }
+
+  .stat-card {
+    min-height: var(--space-20) !important;
+    padding: var(--space-1-5) !important;
+  }
+
+  .stat-card h3 {
+    font-size: var(--font-size-lg) !important;
+    margin-bottom: var(--space-1) !important;
+  }
+
+  .stat-card p {
+    font-size: var(--font-size-2xs) !important;
+  }
+
+  .stat-card .v-icon {
+    font-size: var(--font-size-2xl) !important;
+    width: var(--space-8) !important;
+    height: var(--space-8) !important;
+  }
+
+  .stat-icon {
+    margin-bottom: var(--space-1-5);
+    padding: var(--space-1);
+  }
+
+  .page-header-enhanced {
+    padding: var(--space-3) var(--space-2);
+    max-height: none;
+  }
+
+  .page-title-enhanced {
+    font-size: var(--font-size-lg) !important;
+    padding: var(--space-2);
+    gap: var(--space-1-5);
+    flex-direction: column;
+    border-radius: var(--radius-xl);
+  }
+
+  .page-header {
+    padding: var(--space-3);
+    margin-bottom: var(--space-3);
+    border-radius: var(--radius-lg);
+  }
+
+  .page-header .page-title {
+    font-size: var(--font-size-sm-plus) !important;
+    margin-bottom: var(--space-1);
+  }
+
+  .page-header .page-subtitle {
+    font-size: var(--font-size-2xs) !important;
+  }
+
+  .title-icon-animated {
+    font-size: var(--font-size-xl);
+  }
+
+  .data-table-card {
+    border-radius: var(--radius-xl) !important;
+  }
+
+  .data-table-card .v-card-title {
+    padding: var(--space-2-5);
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+  }
+
+  .data-table-card .v-card-title span {
+    font-size: var(--font-size-sm) !important;
+  }
+
+  .add-button,
+  .add-expense-btn,
+  .add-item-btn,
+  .add-engineer-btn,
+  .add-task-btn,
+  .add-category-btn,
+  .add-user-btn,
+  .add-purchase-btn,
+  .add-sale-btn {
+    padding: var(--space-2) var(--space-3) !important;
+    font-size: var(--font-size-xs) !important;
+    border-radius: var(--radius-lg) !important;
+    width: 100%;
+  }
+
+  .add-button :deep(.v-icon),
+  .add-expense-btn :deep(.v-icon),
+  .add-item-btn :deep(.v-icon),
+  .add-engineer-btn :deep(.v-icon),
+  .add-task-btn :deep(.v-icon) {
+    font-size: var(--font-size-base) !important;
+  }
+
+  /* Table responsive */
+  .v-data-table table thead tr th,
+  .v-data-table__wrapper table thead tr th,
+  table thead tr th {
+    font-size: var(--font-size-xs) !important;
+    padding: var(--space-2) var(--space-1) !important;
+  }
+
+  .v-data-table table thead tr th .v-data-table-header__content,
+  .v-data-table__wrapper table thead tr th .v-data-table-header__content {
+    font-size: var(--font-size-xs) !important;
+  }
+}
+
+/* Small Mobile (up to 380px) */
+@media (max-width: 380px) {
+  .data-page {
+    padding: var(--space-1);
+  }
+
+  .stat-card {
+    min-height: var(--space-16) !important;
+    padding: var(--space-1) !important;
+  }
+
+  .stat-card h3 {
+    font-size: var(--font-size-base) !important;
+  }
+
+  .stat-card p {
+    font-size: 0.625rem !important;
+  }
+
+  .stat-card .v-icon {
+    font-size: var(--font-size-xl) !important;
+    width: var(--space-6) !important;
+    height: var(--space-6) !important;
+  }
+
+  .stat-icon {
+    margin-bottom: var(--space-1);
+    padding: var(--space-0-5);
+  }
+
+  .page-title-enhanced {
+    font-size: var(--font-size-base) !important;
+    padding: var(--space-1-5);
+  }
+
+  .page-header .page-title {
+    font-size: var(--font-size-sm) !important;
+  }
+
+  .title-icon-animated {
+    font-size: var(--font-size-lg);
+  }
+
+  .add-button,
+  .add-expense-btn,
+  .add-item-btn,
+  .add-engineer-btn,
+  .add-task-btn,
+  .add-category-btn,
+  .add-user-btn,
+  .add-purchase-btn,
+  .add-sale-btn {
+    padding: var(--space-1-5) var(--space-2) !important;
+    font-size: var(--font-size-2xs) !important;
+  }
+
+  .data-table-card .v-card-title span {
+    font-size: var(--font-size-xs) !important;
+  }
+}

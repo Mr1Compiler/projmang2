@@ -253,3 +253,358 @@
   background: var(--text-white) !important;
   padding: 0 8px !important;
 }
+
+/* ============================================
+   Page Header Styles
+   ============================================ */
+.users-page-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  color: var(--color-gray-800);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.users-page-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-600);
+  font-weight: 400;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(30, 64, 175, 0.5);
+}
+
+/* ============================================
+   Add User Button with Shimmer
+   ============================================ */
+.add-user-btn {
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 50%, var(--color-emerald-700) 100%) !important;
+  color: var(--text-white) !important;
+  border-radius: var(--radius-xl) !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all var(--transition-normal) !important;
+  box-shadow: var(--shadow-emerald-md) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-user-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left var(--transition-slow);
+}
+
+.add-user-btn:hover::before {
+  left: 100%;
+}
+
+.add-user-btn:hover {
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: var(--shadow-emerald-lg) !important;
+}
+
+/* ============================================
+   User Stats Cards
+   ============================================ */
+.user-stat-card {
+  background: var(--text-white) !important;
+  border-radius: var(--radius-2xl) !important;
+  padding: 1.5rem !important;
+  transition: all var(--transition-normal);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  min-height: 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--space-1);
+  background: linear-gradient(90deg, var(--color-indigo-500), var(--color-violet-500));
+}
+
+.user-stat-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Color variant borders */
+.user-stat-card.primary {
+  border: 2px solid var(--color-indigo-500);
+}
+
+.user-stat-card.primary::before {
+  background: linear-gradient(90deg, var(--color-indigo-400), var(--color-indigo-600));
+}
+
+.user-stat-card.success {
+  border: 2px solid var(--color-emerald-500);
+}
+
+.user-stat-card.success::before {
+  background: linear-gradient(90deg, var(--color-emerald-400), var(--color-emerald-600));
+}
+
+.user-stat-card.warning {
+  border: 2px solid var(--color-amber-500);
+}
+
+.user-stat-card.warning::before {
+  background: linear-gradient(90deg, var(--color-amber-400), var(--color-amber-600));
+}
+
+.user-stat-card.info {
+  border: 2px solid var(--color-violet-500);
+}
+
+.user-stat-card.info::before {
+  background: linear-gradient(90deg, var(--color-violet-400), var(--color-violet-600));
+}
+
+/* ============================================
+   User Stat Icon Wrappers
+   ============================================ */
+.user-stat-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.user-stat-icon-wrapper.primary {
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-indigo-600) 100%);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+}
+
+.user-stat-icon-wrapper.success {
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%);
+  box-shadow: var(--shadow-emerald-md);
+}
+
+.user-stat-icon-wrapper.warning {
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%);
+  box-shadow: var(--shadow-amber-md);
+}
+
+.user-stat-icon-wrapper.info {
+  background: linear-gradient(135deg, var(--color-violet-500) 0%, var(--color-violet-600) 100%);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+}
+
+.user-stat-icon-wrapper .v-icon {
+  color: var(--text-white) !important;
+}
+
+/* ============================================
+   User Stat Content
+   ============================================ */
+.user-stat-value {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  color: var(--color-gray-900);
+  margin-bottom: 0.25rem;
+}
+
+.user-stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  font-weight: 500;
+}
+
+/* ============================================
+   Enhanced Table Header
+   ============================================ */
+.users-table .v-data-table__th {
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-indigo-700) 100%) !important;
+  background-size: 200% 100%;
+  color: var(--text-white) !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  animation: usersHeaderShimmer 8s ease-in-out infinite;
+}
+
+@keyframes usersHeaderShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================================
+   Table Row Enhancements
+   ============================================ */
+.users-table .v-data-table__tr {
+  transition: all var(--transition-normal);
+}
+
+.users-table .v-data-table__tr:nth-child(even) {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(99, 102, 241, 0.01) 100%);
+}
+
+.users-table .v-data-table__tr:nth-child(odd) {
+  background: var(--text-white);
+}
+
+.users-table .v-data-table__tr:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.05) 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
+/* ============================================
+   Table Footer Styles
+   ============================================ */
+.users-table .v-data-table-footer {
+  background: linear-gradient(135deg, var(--color-slate-100) 0%, var(--color-slate-50) 100%) !important;
+  border-top: 1px solid var(--color-slate-200);
+  padding: var(--space-3) var(--space-4);
+}
+
+.users-table .v-data-table-footer .v-btn {
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-indigo-600) 100%) !important;
+  color: var(--text-white) !important;
+  border-radius: var(--radius-lg) !important;
+  transition: all var(--transition-normal);
+}
+
+.users-table .v-data-table-footer .v-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* ============================================
+   User Role Chips
+   ============================================ */
+.user-role-chip {
+  font-weight: 600 !important;
+  border-radius: var(--radius-full) !important;
+  padding: 0.25rem 0.75rem !important;
+}
+
+.user-role-chip.admin {
+  background: linear-gradient(135deg, var(--color-red-500) 0%, var(--color-red-600) 100%) !important;
+  color: var(--text-white) !important;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+}
+
+.user-role-chip.manager {
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-indigo-600) 100%) !important;
+  color: var(--text-white) !important;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+.user-role-chip.user {
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+}
+
+/* ============================================
+   User Status Chips
+   ============================================ */
+.user-status-chip {
+  font-weight: 600 !important;
+  border-radius: var(--radius-full) !important;
+  padding: 0.25rem 0.75rem !important;
+}
+
+.user-status-chip.active {
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%) !important;
+  color: var(--text-white) !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+}
+
+.user-status-chip.inactive {
+  background: linear-gradient(135deg, var(--color-gray-400) 0%, var(--color-gray-500) 100%) !important;
+  color: var(--text-white) !important;
+}
+
+.user-status-chip.pending {
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%) !important;
+  color: var(--text-white) !important;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+}
+
+/* ============================================
+   Enhanced Avatar Upload
+   ============================================ */
+.avatar-upload-container {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.avatar-upload-container:hover .avatar-upload-overlay {
+  opacity: 1;
+}
+
+.avatar-upload-icon {
+  color: var(--text-white) !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* ============================================
+   User Card Animations
+   ============================================ */
+@keyframes userCardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-card-animate {
+  animation: userCardFadeIn 0.5s ease-out forwards;
+}
+
+/* ============================================
+   Filter Section Animations
+   ============================================ */
+@keyframes usersPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+@keyframes usersGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.6); }
+}
+
+.users-filter-icon {
+  animation: usersPulse 2s ease-in-out infinite;
+}
+
+.users-filter-card:hover {
+  animation: usersGlow 1.5s ease-in-out infinite;
+}

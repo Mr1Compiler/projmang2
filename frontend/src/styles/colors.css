@@ -9,6 +9,7 @@
   --color-primary: #4338ca;
   --color-primary-light: #6366f1;
   --color-primary-dark: #3730a3;
+  --color-primary-darker: #312e81;
   --color-primary-variant: #312e81;
 
   /* الألوان الثانوية */
@@ -223,6 +224,10 @@
   --background-indigo-light: #eef2ff;
   --background-indigo-medium: #e0e7ff;
   --background-indigo-dark: #c7d2fe;
+
+  /* خلفية الصفحة الرئيسية - White Based Theme */
+  --page-background: var(--background-primary);
+  --page-header-background: linear-gradient(135deg, var(--background-primary) 0%, var(--background-secondary) 100%);
 
   /* ألوان الحدود - نظام نيلي موحد */
   --border-light: #e2e8f0;
@@ -713,6 +718,7 @@
    ======================================== */
 
 /* الوضع المظلم */
+/* الوضع المظلم - تم تعطيله حالياً للحفاظ على تصميم النظام
 @media (prefers-color-scheme: dark) {
   :root {
     --text-primary: #ffffff;
@@ -733,6 +739,7 @@
     --card-border: var(--border-light);
   }
 }
+*/
 
 /* ========================================
    ألوان مخصصة للمشاريع

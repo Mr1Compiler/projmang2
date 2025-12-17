@@ -359,6 +359,49 @@
   background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(124, 58, 237, 0.05));
 }
 
+/* Enhanced table header shimmer animation */
+@keyframes tableHeaderShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Table header with animated gradient */
+.table-header-animated {
+  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-700) 50%, var(--color-emerald-600) 100%) !important;
+  background-size: 200% 100%;
+  animation: tableHeaderShimmer 8s ease-in-out infinite;
+  color: var(--text-white) !important;
+  font-weight: 800 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Table with alternating row colors */
+.table-striped tbody tr:nth-child(even) {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(99, 102, 241, 0.01) 100%);
+}
+
+.table-striped tbody tr:nth-child(odd) {
+  background: var(--text-white);
+}
+
+/* Enhanced row hover */
+.table-hover-lift tbody tr {
+  transition: all var(--transition-normal);
+}
+
+.table-hover-lift tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.04) 100%) !important;
+}
+
+/* Table footer gradient */
+.table-footer-gradient {
+  background: linear-gradient(135deg, var(--color-slate-100) 0%, var(--color-slate-50) 100%) !important;
+  border-top: 1px solid var(--color-slate-200);
+}
+
 /* ========================================
    10. تأثيرات التنقل
    ======================================== */

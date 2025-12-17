@@ -1,27 +1,23 @@
 <template>
   <div class="task-management-page">
     <!-- Header Section -->
-    <div class="page-header">
-      <div class="header-content">
-        <div class="header-left">
-          <v-icon size="40" color="primary" class="mr-3">mdi-clipboard-list</v-icon>
-          <div>
-            <h1 class="page-title">إدارة المهام</h1>
-            <p class="page-subtitle">نظام شامل لإدارة المهام والمشاريع</p>
-          </div>
-        </div>
-        <div class="header-actions">
-          <v-btn
-            color="primary"
-            variant="elevated"
-            size="large"
-            prepend-icon="mdi-plus"
-            @click="showAddTaskDialog = true"
-          >
-            إضافة مهمة جديدة
-          </v-btn>
-        </div>
-      </div>
+    <PageHeader
+      title="إدارة المهام"
+      subtitle="نظام شامل لإدارة المهام والمشاريع"
+      mdi-icon="mdi-clipboard-list"
+    />
+
+    <!-- Add Button -->
+    <div class="d-flex justify-end mb-4">
+      <v-btn
+        color="primary"
+        variant="elevated"
+        size="large"
+        prepend-icon="mdi-plus"
+        @click="showAddTaskDialog = true"
+      >
+        إضافة مهمة جديدة
+      </v-btn>
     </div>
 
     <!-- Statistics Cards -->
@@ -440,6 +436,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { formatDate } from '@/utils/formatters'
+import { PageHeader } from '@/components/shared'
 
 // Reactive data
 const tasksLoading = ref(false)

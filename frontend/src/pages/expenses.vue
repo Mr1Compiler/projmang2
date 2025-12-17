@@ -2,13 +2,11 @@
   <v-container class="fill-height data-page" fluid>
     <div class="fullscreen-content">
       <!-- Header Section -->
-      <div class="page-header glass-effect gradient-animation">
-        <div class="header-top-content">
-          <h1 class="page-title">المصاريف الإدارية</h1>
-          <span class="page-icon">💰</span>
-        </div>
-        <p class="page-subtitle">إدارة وتتبع جميع المصاريف الإدارية والعامة</p>
-      </div>
+      <PageHeader
+        title="المصاريف الإدارية"
+        subtitle="إدارة وتتبع جميع المصاريف الإدارية والعامة"
+        icon="💰"
+      />
 
       <!-- Summary Cards -->
       <ExpenseStats
@@ -67,6 +65,7 @@ import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useExpensesStore } from '@/stores/expenses'
 import { usePermissions } from '@/composables/usePermissions'
+import { PageHeader } from '@/components/shared'
 import {
   ExpenseStats,
   ExpenseFilters,

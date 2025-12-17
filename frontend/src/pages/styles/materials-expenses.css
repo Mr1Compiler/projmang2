@@ -4,28 +4,15 @@
  */
 
 /* ============================================
-   Page Layout
+   Page Layout - White Based Theme
    ============================================ */
 .materials-expenses-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-300) 100%);
+  background: var(--page-background) !important;
   padding: 2rem;
 }
 
-/* ============================================
-   Page Header
-   ============================================ */
-.page-header {
-  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-500) 50%, var(--color-blue-600) 100%) !important;
-  color: var(--text-white);
-  padding: 2.5rem;
-  border-radius: var(--radius-2xl);
-  margin-bottom: 2rem;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-blue-intense);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
+/* Page Header styles moved to shared/styles/shared.css */
 
 .header-content {
   display: flex;
@@ -43,22 +30,6 @@
 .back-btn:hover {
   background: rgba(255, 255, 255, 0.25) !important;
   transform: translateX(-2px);
-}
-
-.page-title {
-  font-size: var(--font-size-5xl);
-  font-weight: 900;
-  margin: 0;
-  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
-  color: var(--text-white) !important;
-}
-
-.page-subtitle {
-  font-size: var(--font-size-xl);
-  margin: 0.8rem 0 0 0;
-  font-weight: 600;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  color: var(--text-white) !important;
 }
 
 /* ============================================
@@ -210,38 +181,7 @@
   justify-content: center;
 }
 
-.close-btn {
-  color: var(--text-white) !important;
-  position: absolute;
-  inset-inline-start: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.dialog-content {
-  padding: 1.5rem;
-  background: var(--text-white);
-}
-
-.dialog-actions {
-  padding: 1rem 1.5rem;
-  background: var(--text-white);
-  border-top: 1px solid var(--color-gray-300);
-  display: flex;
-  justify-content: flex-end;
-}
-
-.save-btn {
-  background: var(--color-blue-600) !important;
-  color: var(--text-white) !important;
-  font-weight: 800 !important;
-  border-radius: var(--radius-base) !important;
-  text-transform: none !important;
-}
-
-.save-btn:hover {
-  background: var(--color-blue-700) !important;
-}
+/* .close-btn, .dialog-content, .dialog-actions, .save-btn moved to form-dialog.css */
 
 .actions-card {
   background: var(--text-white);
@@ -294,10 +234,6 @@
 @media (max-width: 600px) {
   .materials-expenses-page {
     padding: 1rem;
-  }
-
-  .page-title {
-    font-size: var(--font-size-3xl-plus);
   }
 
   .header-content {

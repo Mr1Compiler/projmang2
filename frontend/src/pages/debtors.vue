@@ -1,13 +1,11 @@
 <template>
   <v-container fluid class="pa-6">
     <!-- Page Header -->
-    <div class="page-header glass-effect gradient-animation">
-      <div class="header-top-content">
-        <h1 class="page-title">إدارة المديونون</h1>
-        <span class="page-icon">💳</span>
-      </div>
-      <p class="page-subtitle">إدارة حسابات المديونون والمستحقات المالية</p>
-    </div>
+    <PageHeader
+      title="إدارة المديونون"
+      subtitle="إدارة حسابات المديونون والمستحقات المالية"
+      icon="💳"
+    />
 
     <!-- Statistics Cards -->
     <DebtorStats
@@ -89,6 +87,7 @@ import { storeToRefs } from 'pinia'
 import { toast } from 'vue3-toastify'
 import { useDebtorsStore } from '@/stores/debtors'
 import { usePermissions } from '@/composables/usePermissions'
+import { PageHeader } from '@/components/shared'
 import {
   DebtorStats,
   DebtorFilters,

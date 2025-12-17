@@ -7,12 +7,12 @@
  * Format a number as Iraqi Dinar currency
  * @param {number} amount - The amount to format
  * @param {Object} options - Formatting options
- * @param {string} [options.locale='ar-IQ'] - Locale for formatting
+ * @param {string} [options.locale='en-US'] - Locale for formatting (changed to EN for english digits)
  * @param {boolean} [options.showSymbol=true] - Whether to show currency symbol
  * @returns {string} Formatted currency string
  */
 export function formatCurrency(amount, options = {}) {
-  const { locale = 'ar-IQ', showSymbol = true } = options
+  const { locale = 'en-US', showSymbol = true } = options
 
   if (amount === null || amount === undefined) {
     return showSymbol ? '0 /.9' : '0'
@@ -24,17 +24,17 @@ export function formatCurrency(amount, options = {}) {
     maximumFractionDigits: 0,
   }).format(amount)
 
-  return showSymbol ? `${formatted} /.9` : formatted
+  return showSymbol ? `${formatted} د.ع` : formatted
 }
 
 /**
  * Format a number as currency with full Intl support
  * @param {number} amount - The amount to format
  * @param {string} [currency='IQD'] - Currency code
- * @param {string} [locale='ar-SA'] - Locale for formatting
+ * @param {string} [locale='en-US'] - Locale for formatting
  * @returns {string} Formatted currency string
  */
-export function formatCurrencyFull(amount, currency = 'IQD', locale = 'ar-SA') {
+export function formatCurrencyFull(amount, currency = 'IQD', locale = 'en-US') {
   if (amount === null || amount === undefined) {
     return new Intl.NumberFormat(locale, {
       style: 'currency',
@@ -59,19 +59,19 @@ export function formatAmount(amount) {
   if (amount === null || amount === undefined) {
     return '0 /.9'
   }
-  return `${amount.toLocaleString()} /.9`
+  return `${amount.toLocaleString('en-US')} د.ع`
 }
 
 /**
  * Format a date for display
  * @param {string|Date} date - The date to format
  * @param {Object} options - Formatting options
- * @param {string} [options.locale='ar-SA'] - Locale for formatting
+ * @param {string} [options.locale='en-US'] - Locale for formatting
  * @param {string} [options.format='short'] - Format type: 'short', 'long', 'full'
  * @returns {string} Formatted date string
  */
 export function formatDate(date, options = {}) {
-  const { locale = 'ar-SA', format = 'short' } = options
+  const { locale = 'en-US', format = 'short' } = options
 
   if (!date) {
     return 'تاريخ غير محدد'
@@ -112,10 +112,10 @@ export function formatDateForInput(date) {
 /**
  * Format a date and time for display
  * @param {string|Date} date - The date to format
- * @param {string} [locale='ar-SA'] - Locale for formatting
+ * @param {string} [locale='en-US'] - Locale for formatting
  * @returns {string} Formatted date and time string
  */
-export function formatDateTime(date, locale = 'ar-SA') {
+export function formatDateTime(date, locale = 'en-US') {
   if (!date) return 'تاريخ غير محدد'
 
   const dateObj = typeof date === 'string' ? new Date(date) : date
@@ -153,10 +153,10 @@ export function formatTime(time, showSeconds = false) {
 /**
  * Format a number with thousands separator
  * @param {number} number - The number to format
- * @param {string} [locale='ar-SA'] - Locale for formatting
+ * @param {string} [locale='en-US'] - Locale for formatting
  * @returns {string} Formatted number string
  */
-export function formatNumber(number, locale = 'ar-SA') {
+export function formatNumber(number, locale = 'en-US') {
   if (number === null || number === undefined) {
     return '0'
   }

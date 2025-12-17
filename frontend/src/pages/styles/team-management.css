@@ -4,10 +4,10 @@
  */
 
 /* ============================================
-   Page Container
+   Page Container - White Based Theme
    ============================================ */
 .team-management-page {
-  background: linear-gradient(135deg, var(--color-indigo-100) 0%, var(--color-indigo-200) 50%, var(--color-indigo-300) 100%);
+  background: var(--page-background) !important;
   min-height: 100vh;
   padding: 2rem 1rem;
 }
@@ -15,14 +15,7 @@
 /* ============================================
    Page Header
    ============================================ */
-.page-header {
-  background: linear-gradient(135deg, var(--text-white) 0%, var(--color-slate-50) 50%, var(--color-indigo-100) 100%);
-  border-radius: var(--radius-2xl);
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-indigo-sm);
-  border: 1px solid rgba(67, 56, 202, 0.2);
-}
+/* Page Header styles moved to shared/styles/shared.css */
 
 .header-content {
   display: flex;
@@ -36,14 +29,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.main-title {
-  font-size: var(--font-size-4xl-plus);
-  font-weight: 900;
-  color: var(--color-slate-800);
-  margin: 0;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .main-subtitle {
@@ -251,19 +236,9 @@
 }
 
 /* ============================================
-   Add Member Dialog
+   Add Member Dialog - Base styles in form-dialog.css
    ============================================ */
-.add-member-dialog.image-style-dialog {
-  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-500) 100%);
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
-}
-
-.add-member-dialog .dialog-header {
-  background: linear-gradient(135deg, var(--color-emerald-600), var(--color-emerald-500));
-  padding: var(--space-5);
-  color: var(--text-white);
-}
+/* Dialog base styles moved to src/styles/form-dialog.css */
 
 .add-member-dialog .dialog-title {
   font-size: var(--font-size-2xl);
@@ -271,43 +246,14 @@
   color: var(--text-white);
 }
 
-.add-member-dialog .dialog-body {
-  padding: var(--space-8);
-  background: var(--text-white) !important;
-}
-
-.add-member-dialog .dialog-actions {
-  padding: var(--space-5) 30px;
-  background: var(--color-slate-100);
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--space-3);
-}
-
 /* ============================================
-   View Member Dialog
+   View Member Dialog - Base styles in form-dialog.css
    ============================================ */
-.view-member-dialog {
-  border-radius: var(--radius-2xl);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.view-member-dialog .dialog-header {
-  background: linear-gradient(135deg, var(--color-indigo-700) 0%, var(--color-indigo-500) 100%);
-  color: var(--text-white);
-  padding: 1.5rem;
-  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
-}
+/* Dialog base styles moved to src/styles/form-dialog.css */
 
 .view-member-dialog .dialog-title {
   font-size: var(--font-size-2xl);
   font-weight: 700;
-}
-
-.view-member-dialog .dialog-actions {
-  padding: 1.5rem;
-  background: rgba(248, 250, 252, 0.5);
-  border-radius: 0 0 20px 20px;
 }
 
 /* ============================================
@@ -390,17 +336,9 @@
     padding: 1rem 0.5rem;
   }
 
-  .page-header {
-    padding: 1.5rem;
-  }
-
   .header-content {
     flex-direction: column;
     text-align: center;
-  }
-
-  .main-title {
-    font-size: var(--font-size-3xl-plus);
   }
 
   .main-subtitle {

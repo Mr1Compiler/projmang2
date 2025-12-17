@@ -4,10 +4,10 @@
  */
 
 /* ============================================
-   Page Layout
+   Page Layout - White Based Theme
    ============================================ */
 .project-expenses-page {
-  background: linear-gradient(135deg, var(--color-slate-50) 0%, var(--color-slate-200) 100%);
+  background: var(--page-background) !important;
   min-height: 100vh;
   padding: var(--space-5);
 }
@@ -15,23 +15,12 @@
 /* ============================================
    Page Header
    ============================================ */
+/* Page Header styles moved to shared/styles/shared.css */
+
 .header-card {
   background: linear-gradient(135deg, var(--color-blue-800) 0%, var(--color-blue-500) 100%) !important;
   color: var(--text-white) !important;
   border-radius: var(--radius-2xl) !important;
-}
-
-.page-title {
-  font-size: var(--font-size-4xl-plus) !important;
-  font-weight: 800 !important;
-  margin-bottom: var(--space-2) !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
-}
-
-.page-subtitle {
-  font-size: var(--font-size-lg-plus) !important;
-  opacity: 0.9 !important;
-  margin: 0 !important;
 }
 
 .header-actions {
@@ -325,67 +314,13 @@
 }
 
 /* ============================================
-   Dialog Styles
+   Dialog Styles - Now centralized in form-dialog.css
    ============================================ */
+/* Dialog styles moved to src/styles/form-dialog.css */
+
 .add-expense-dialog {
   border-radius: var(--radius-2xl) !important;
   overflow: hidden !important;
-}
-
-.dialog-header {
-  background: linear-gradient(135deg, var(--color-indigo-600) 0%, var(--color-indigo-500) 100%) !important;
-  color: var(--text-white) !important;
-  font-weight: 800 !important;
-  font-size: var(--font-size-xl-plus) !important;
-  padding: var(--space-6) 28px !important;
-}
-
-.close-btn {
-  color: var(--text-white) !important;
-  background: rgba(255, 255, 255, 0.2) !important;
-  border-radius: var(--radius-lg) !important;
-}
-
-.close-btn:hover {
-  background: rgba(255, 255, 255, 0.3) !important;
-  transform: scale(1.05) !important;
-}
-
-.dialog-content {
-  padding: var(--space-6) !important;
-  background: var(--text-white) !important;
-}
-
-.dialog-actions {
-  padding: var(--space-5) 28px !important;
-  background: linear-gradient(135deg, var(--text-white) 0%, var(--color-violet-50) 100%) !important;
-  border-top: 2px solid var(--color-violet-200) !important;
-}
-
-.cancel-btn {
-  color: var(--color-violet-600) !important;
-  font-weight: 700 !important;
-  border-radius: var(--radius-xl) !important;
-}
-
-.cancel-btn:hover {
-  transform: translateY(-2px) !important;
-}
-
-.save-btn {
-  background: linear-gradient(135deg, var(--color-violet-600) 0%, var(--color-violet-500) 100%) !important;
-  color: var(--text-white) !important;
-  font-weight: 800 !important;
-  border-radius: var(--radius-xl) !important;
-}
-
-.save-btn:hover {
-  transform: translateY(-3px) !important;
-}
-
-.save-btn:disabled {
-  background: linear-gradient(135deg, var(--color-slate-200) 0%, var(--color-slate-300) 100%) !important;
-  color: var(--color-slate-400) !important;
 }
 
 /* ============================================
@@ -394,10 +329,6 @@
 @media (max-width: 600px) {
   .project-expenses-page {
     padding: var(--space-2-5);
-  }
-
-  .page-title {
-    font-size: var(--font-size-3xl-plus) !important;
   }
 
   .stat-number {

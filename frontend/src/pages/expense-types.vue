@@ -2,11 +2,11 @@
   <v-container class="fill-height data-page" fluid>
     <div class="fullscreen-content">
       <!-- Header Section -->
-      <div class="page-header glass-effect gradient-animation">
-        <span class="page-icon star-twinkle">📋</span>
-        <h1 class="page-title text-glow fade-in">أنواع المصروفات</h1>
-        <p class="page-subtitle fade-in">إدارة وتصنيف جميع أنواع المصروفات في النظام</p>
-      </div>
+      <PageHeader
+        title="أنواع المصروفات"
+        subtitle="إدارة وتصنيف جميع أنواع المصروفات في النظام"
+        icon="📋"
+      />
 
       <!-- Statistics Cards -->
       <v-row class="mb-6">
@@ -307,6 +307,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { toast } from 'vue3-toastify'
 import { formatAmount } from '@/utils/formatters'
+import { PageHeader } from '@/components/shared'
 
 // متغيرات الحالة الأساسية
 const loading = ref(false)

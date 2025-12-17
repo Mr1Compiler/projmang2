@@ -20,6 +20,7 @@ import '@/styles/colors.css'
 import '@/styles/rtl.css'
 import '@/styles/visual-effects.css'
 import '@/styles/table-headers.css'
+import '@/styles/form-dialog.css'
 import '@mdi/font/css/materialdesignicons.css'
 import 'vue3-toastify/dist/index.css'
 

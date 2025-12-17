@@ -1,39 +1,35 @@
 <template>
   <v-container fluid class="project-expenses-page">
     <!-- Header Section -->
+    <PageHeader
+      :title="projectName"
+      subtitle="تفاصيل مصاريف المشروع"
+      mdi-icon="mdi-cash-multiple"
+    />
+
     <v-row class="mb-6">
       <v-col cols="12">
-        <v-card class="header-card" elevation="3">
-          <v-card-text class="pa-6">
-            <div class="d-flex align-center justify-space-between">
-              <div>
-                <h1 class="page-title">{{ projectName }}</h1>
-                <p class="page-subtitle">تفاصيل مصاريف المشروع</p>
-              </div>
-              <div class="header-actions">
-                <v-btn
-                  color="success"
-                  variant="elevated"
-                  @click="addExpense"
-                  class="add-btn-header"
-                  size="large"
-                >
-                  <v-icon left>mdi-plus</v-icon>
-                  إضافة مصروف
-                </v-btn>
-                <v-btn
-                  color="primary"
-                  variant="outlined"
-                  @click="goBack"
-                  class="back-btn"
-                >
-                  <v-icon left>mdi-arrow-right</v-icon>
-                  العودة
-                </v-btn>
-              </div>
-            </div>
-          </v-card-text>
-        </v-card>
+        <div class="d-flex justify-end gap-2">
+          <v-btn
+            color="success"
+            variant="elevated"
+            @click="addExpense"
+            class="add-btn-header"
+            size="large"
+          >
+            <v-icon left>mdi-plus</v-icon>
+            إضافة مصروف
+          </v-btn>
+          <v-btn
+            color="primary"
+            variant="outlined"
+            @click="goBack"
+            class="back-btn"
+          >
+            <v-icon left>mdi-arrow-right</v-icon>
+            العودة
+          </v-btn>
+        </div>
       </v-col>
     </v-row>
 
@@ -359,6 +355,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { toast } from 'vue3-toastify'
 import { formatAmount } from '@/utils/formatters'
+import { PageHeader } from '@/components/shared'
 
 const route = useRoute()
 const router = useRouter()

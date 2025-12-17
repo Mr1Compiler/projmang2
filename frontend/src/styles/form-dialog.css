@@ -1,18 +1,71 @@
 /* ========================================
-   تنسيق الحقول - نفس تنسيق صفحة المصروفات
+   تنسيق الحقول والنوافذ - نظام نيلي/أزرق موحد
+   Form & Dialog Styles - Blue/Indigo Theme
+   Following FRONTEND_RULES.md guidelines
    ======================================== */
 
-.image-style-dialog {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(5, 150, 105, 0.3);
+/* ========================================
+   1. النوافذ المنبثقة العامة - General Dialogs
+   ======================================== */
+
+.v-dialog .v-card {
+  border-radius: var(--radius-xl) !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow-modal) !important;
+  border: 2px solid var(--color-blue-200) !important;
+  background: var(--background-primary) !important;
 }
 
+/* نافذة المشروع الحديثة */
+.modern-project-dialog,
+.modern-dialog {
+  border-radius: var(--radius-2xl) !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow-modal-lg) !important;
+  background: var(--background-primary) !important;
+  position: relative !important;
+  border: 2px solid var(--color-blue-200) !important;
+}
+
+/* ========================================
+   2. رأس النافذة - Dialog Header
+   ======================================== */
+
 .dialog-header {
-  background: linear-gradient(135deg, #059669, #10b981);
-  padding: var(--space-5);
-  color: white;
+  background: var(--gradient-info) !important;
+  padding: var(--space-6) !important;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  position: relative;
+  box-shadow: var(--shadow-blue-lg) !important;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.3) !important;
+  color: var(--text-white);
+}
+
+.header-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(15px);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow: var(--shadow-lg);
+}
+
+.header-icon .v-icon {
+  color: var(--text-white) !important;
+  font-size: var(--font-size-2xl) !important;
+}
+
+.image-style-dialog {
+  background: var(--gradient-info);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-blue-xl);
 }
 
 .header-content {
@@ -28,373 +81,564 @@
 }
 
 .header-title {
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-white) !important;
 }
 
 .close-btn {
-  color: white !important;
+  color: var(--text-white) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--radius-md) !important;
 }
 
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ========================================
+   3. محتوى النافذة - Dialog Body
+   ======================================== */
+
 .dialog-body {
-  padding: var(--space-7);
-  background: white !important;
+  padding: var(--space-6);
+  background: var(--background-primary) !important;
 }
 
 .form-fields {
-  margin-bottom: var(--space-5);
-}
-
-.form-field {
   margin-bottom: var(--space-4);
 }
 
-/* تحسين ألوان الحقول في القائمة المنبثقة */
-.form-field .v-field__input {
-  color: #1a1a1a !important;
-  font-weight: 600 !important;
-  background: white !important;
-  border-radius: var(--radius-lg) !important;
-  font-size: var(--font-size-base) !important;
-  padding: var(--space-3) 16px !important;
+.form-field {
+  margin-bottom: var(--space-3);
 }
 
-/* إصلاح لون النص في جميع الحقول */
+/* ========================================
+   4. تنسيق الحقول - Form Fields
+   ======================================== */
+
+/* النص داخل الحقول - لون داكن واضح */
+.form-field .v-field__input,
 .form-field .v-field__input input,
 .form-field .v-field__input textarea,
-.form-field .v-field__input .v-field__input {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-.form-field .v-field__outline {
-  border-color: #059669 !important;
-  border-width: var(--space-0-5) !important;
-}
-
-.form-field .v-label {
-  color: #059669 !important;
-  font-weight: 700 !important;
+.form-field input,
+.form-field textarea {
+  color: var(--text-primary) !important;
+  font-weight: var(--font-weight-medium) !important;
   font-size: var(--font-size-base) !important;
-  background: white !important;
-  padding: 0 8px !important;
+  caret-color: var(--color-primary) !important;
 }
 
-/* إصلاح لون النص في التسميات */
-.form-field .v-field__field .v-label,
-.form-field .v-field--focused .v-label {
-  color: #059669 !important;
-  background: white !important;
+/* خلفية الحقول */
+.form-field .v-field {
+  background: var(--background-primary) !important;
+}
+
+.form-field .v-field__field {
+  background: var(--background-primary) !important;
+}
+
+/* حدود الحقل */
+.form-field .v-field__outline {
+  border-color: var(--color-blue-400) !important;
+  border-width: 2px !important;
 }
 
 .form-field .v-field--focused .v-field__outline {
-  border-color: #059669 !important;
-  border-width: var(--space-0-5) !important;
-  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1) !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: var(--ring-blue) !important;
+}
+
+/* تسمية الحقل */
+.form-field .v-label {
+  color: var(--color-blue-700) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  font-size: var(--font-size-sm) !important;
+  background: var(--background-primary) !important;
+  padding: 0 var(--space-1) !important;
 }
 
 .form-field .v-field--focused .v-label {
-  color: #059669 !important;
-  font-weight: 700 !important;
-  font-size: var(--font-size-sm) !important;
-  background: white !important;
-  padding: 0 8px !important;
-  margin: 0 !important;
-  border-radius: var(--radius-base) !important;
-  text-shadow: none !important;
-  letter-spacing: normal !important;
-  box-shadow: none !important;
-  border: none !important;
-  transform: none !important;
-  position: static !important;
-  z-index: auto !important;
-  font-family: inherit !important;
-  text-transform: none !important;
+  color: var(--color-primary) !important;
 }
 
-/* تحسين ألوان القوائم المنسدلة */
-.form-field .v-select .v-field__input {
-  color: #1a1a1a !important;
-  font-weight: 600 !important;
-  font-size: var(--font-size-base) !important;
-  padding: var(--space-3) 16px !important;
-}
-
-.form-field .v-select .v-field__outline {
-  border-color: #059669 !important;
-  border-width: var(--space-0-5) !important;
-}
-
-.form-field .v-select .v-label {
-  color: #059669 !important;
-  font-weight: 700 !important;
-  font-size: var(--font-size-sm) !important;
-  background: white !important;
-  padding: 0 8px !important;
-  margin: 0 !important;
-  border-radius: var(--radius-base) !important;
-  text-shadow: none !important;
-  letter-spacing: normal !important;
-  box-shadow: none !important;
-  border: none !important;
-  position: static !important;
-  z-index: auto !important;
-  font-family: inherit !important;
-  text-transform: none !important;
-}
-
-/* تحسين ألوان رسائل الخطأ */
+/* رسائل الخطأ */
 .form-field .v-messages__message {
-  color: #dc2626 !important;
-  font-weight: 500 !important;
-  font-size: var(--font-size-xs-plus) !important;
+  color: var(--color-error) !important;
+  font-weight: var(--font-weight-medium) !important;
+  font-size: var(--font-size-xs) !important;
 }
 
-/* تحسين ألوان النصوص في الحقول */
-.form-field .v-field__input::placeholder {
-  color: #6b7280 !important;
-  font-weight: 500 !important;
-  font-size: var(--font-size-base-minus) !important;
+/* Placeholder */
+.form-field .v-field__input::placeholder,
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--text-secondary) !important;
+  opacity: 0.7 !important;
 }
 
-/* تحسين ألوان النصوص المكتوبة */
-.form-field .v-field__input input {
-  color: #1a1a1a !important;
-  font-weight: 600 !important;
-  font-size: var(--font-size-base) !important;
-}
-
-/* إصلاح شامل للنصوص في الحقول */
-.form-field input,
-.form-field textarea,
-.form-field .v-field__input,
-.form-field .v-field__input *,
-.form-field .v-input__control,
-.form-field .v-input__control * {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* تحسين ألوان النصوص في textarea */
-.form-field .v-textarea .v-field__input {
-  color: #1a1a1a !important;
-  font-weight: 600 !important;
-  font-size: var(--font-size-base) !important;
-  line-height: 1.5 !important;
-}
-
-/* تحسين ألوان الأيقونات */
+/* الأيقونات داخل الحقول */
 .form-field .v-icon {
-  color: #059669 !important;
+  color: var(--color-primary) !important;
 }
 
-/* تحسين ألوان القوائم المنسدلة المفتوحة */
-.form-field .v-list {
-  background: white !important;
-  border: 2px solid #059669 !important;
+/* ========================================
+   5. القوائم المنسدلة - Dropdowns
+   ======================================== */
+
+/* القائمة المنسدلة */
+.form-field .v-select .v-field__input {
+  color: var(--text-primary) !important;
+}
+
+.form-field .v-select__selection-text {
+  color: var(--text-primary) !important;
+}
+
+/* قائمة الخيارات */
+.v-list {
+  background: var(--background-primary) !important;
+}
+
+.v-list-item {
+  color: var(--text-primary) !important;
+}
+
+.v-list-item-title {
+  color: var(--text-primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+.v-list-item:hover {
+  background: var(--color-blue-50) !important;
+}
+
+.v-list-item--active {
+  background: var(--color-primary) !important;
+}
+
+.v-list-item--active .v-list-item-title {
+  color: var(--text-white) !important;
+}
+
+/* ========================================
+   6. أزرار النوافذ - Dialog Buttons
+   ======================================== */
+
+.dialog-actions {
+  padding: var(--space-5) var(--space-6);
+  background: var(--background-secondary) !important;
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--space-3);
+  border-top: 1px solid var(--border-light);
+}
+
+.dialog-actions .v-btn {
   border-radius: var(--radius-lg) !important;
-  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  padding: var(--space-3) var(--space-5) !important;
+  text-transform: none !important;
 }
 
-/* إصلاح النصوص في القوائم المنسدلة */
-.form-field .v-list *,
-.form-field .v-menu *,
-.form-field .v-overlay *,
-.form-field .v-list-item * {
-  color: #1a1a1a !important;
-  background: white !important;
+/* زر الحفظ */
+.dialog-actions .v-btn--variant-elevated,
+.dialog-actions .save-btn,
+.dialog-actions .submit-btn {
+  background: var(--gradient-info) !important;
+  color: var(--text-white) !important;
+  box-shadow: var(--shadow-blue-md) !important;
 }
 
-.form-field .v-list-item {
-  color: #1a1a1a !important;
-  font-weight: 600 !important;
-  font-size: var(--font-size-base) !important;
-  padding: var(--space-3) 16px !important;
+.dialog-actions .v-btn--variant-elevated:hover,
+.dialog-actions .save-btn:hover,
+.dialog-actions .submit-btn:hover {
+  box-shadow: var(--shadow-blue-lg) !important;
+  transform: translateY(-1px) !important;
 }
 
-.form-field .v-list-item:hover {
-  background: #f1f5f9 !important;
-  color: #059669 !important;
-  font-weight: 700 !important;
+/* زر الإلغاء */
+.dialog-actions .v-btn--variant-text,
+.dialog-actions .v-btn--variant-outlined,
+.dialog-actions .cancel-btn {
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-medium) !important;
+  background: var(--background-primary) !important;
 }
 
-.form-field .v-list-item--active {
-  background: #059669 !important;
-  color: white !important;
-  font-weight: 700 !important;
+.dialog-actions .v-btn--variant-text:hover,
+.dialog-actions .v-btn--variant-outlined:hover,
+.dialog-actions .cancel-btn:hover {
+  background: var(--background-tertiary) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
 }
 
-/* إصلاح شامل لجميع النصوص في النافذة */
-.image-style-dialog .form-field *,
-.image-style-dialog .dialog-body *,
-.image-style-dialog .v-field *,
-.image-style-dialog .v-input *,
-.image-style-dialog .v-select *,
-.image-style-dialog .v-textarea * {
-  color: #1a1a1a !important;
+/* ========================================
+   7. محاذاة RTL للنوافذ
+   ======================================== */
+
+.v-dialog .v-card,
+.modern-dialog,
+.modern-project-dialog {
+  direction: rtl !important;
+  text-align: end !important;
 }
 
-/* استثناء للتسميات */
-.image-style-dialog .form-field .v-label {
-  color: #059669 !important;
+.dialog-header {
+  direction: rtl !important;
+  text-align: end !important;
 }
 
-/* إصلاح النصوص في الحقول المحددة */
-.image-style-dialog .form-field .v-field--focused input,
-.image-style-dialog .form-field .v-field--focused textarea,
-.image-style-dialog .form-field .v-field--focused .v-field__input,
-.image-style-dialog .form-field .v-field--focused .v-field__input * {
-  color: #1a1a1a !important;
-  background: white !important;
+.dialog-header .header-left {
+  order: 2;
 }
 
-/* إصلاح النصوص في القوائم المنسدلة المحددة */
-.image-style-dialog .form-field .v-field--focused .v-select__selection,
-.image-style-dialog .form-field .v-field--focused .v-field__input {
-  color: #1a1a1a !important;
-  background: white !important;
+.dialog-header .close-btn {
+  order: 1;
+  margin-inline-start: auto !important;
+  margin-inline-end: 0 !important;
 }
 
-/* تحسين ألوان النصوص في القوائم المنسدلة */
-.form-field .v-list-item .v-list-item-title {
-  color: inherit !important;
-  font-weight: inherit !important;
-  font-size: inherit !important;
-}
-
-/* إصلاح نهائي لجميع النصوص */
 .dialog-body {
-  background: white !important;
+  direction: rtl !important;
+  text-align: end !important;
 }
 
-.dialog-body .v-field,
-.dialog-body .v-input,
-.dialog-body .v-select,
-.dialog-body .v-textarea {
-  background: white !important;
+.form-field {
+  direction: rtl !important;
+  text-align: end !important;
 }
 
-.dialog-body .v-field__input,
-.dialog-body .v-field__input *,
-.dialog-body .v-field__field,
-.dialog-body .v-field__field * {
-  color: #1a1a1a !important;
-  background: white !important;
+.form-field .v-field__input {
+  text-align: end !important;
+  direction: rtl !important;
 }
 
-/* إصلاح النصوص في القوائم المنسدلة المفتوحة */
-.v-overlay__content .v-list,
-.v-overlay__content .v-list *,
-.v-menu__content .v-list,
-.v-menu__content .v-list * {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* إصلاح خاص لقائمة أنواع المصروفات */
-.v-list-item,
-.v-list-item *,
-.v-list-item .v-list-item-title,
-.v-list-item .v-list-item-subtitle,
-.v-list-item .v-list-item-content,
-.v-list-item .v-list-item-content * {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* إصلاح القوائم المنسدلة العامة */
-.v-menu .v-list,
-.v-menu .v-list *,
-.v-menu .v-list-item,
-.v-menu .v-list-item * {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* إصلاح القوائم المنسدلة في جميع الحالات */
-.v-list,
-.v-list *,
-.v-list .v-list-item,
-.v-list .v-list-item *,
-.v-list .v-list-item-title,
-.v-list .v-list-item-subtitle {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* إصلاح شامل لجميع القوائم المنسدلة في الصفحة */
-.v-select .v-list,
-.v-select .v-list *,
-.v-select .v-list-item,
-.v-select .v-list-item *,
-.v-select .v-list-item-title,
-.v-select .v-list-item-subtitle {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* إصلاح القوائم المنسدلة في الصفحة الرئيسية */
-.data-page .v-list,
-.data-page .v-list *,
-.data-page .v-list-item,
-.data-page .v-list-item *,
-.data-page .v-list-item-title,
-.data-page .v-list-item-subtitle {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* إصلاح شامل لجميع القوائم المنسدلة في Vuetify */
-.v-list-item,
-.v-list-item-title,
-.v-list-item-subtitle,
-.v-list-item-content,
-.v-list-item-content * {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* إصلاح القوائم المنسدلة في جميع الأماكن */
-.v-menu__content,
-.v-menu__content *,
-.v-overlay__content,
-.v-overlay__content * {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* إصلاح النصوص في القوائم المنسدلة المفتوحة */
-.v-menu__content .v-list-item,
-.v-menu__content .v-list-item *,
-.v-overlay__content .v-list-item,
-.v-overlay__content .v-list-item * {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* إصلاح نهائي لجميع القوائم المنسدلة */
-.v-select__menu,
-.v-select__menu *,
-.v-select__menu .v-list-item,
-.v-select__menu .v-list-item * {
-  color: #1a1a1a !important;
-  background: white !important;
-}
-
-/* إصلاح شامل لجميع عناصر القوائم */
-.v-list-item__content,
-.v-list-item__content *,
-.v-list-item__title,
-.v-list-item__subtitle {
-  color: #1a1a1a !important;
-  background: white !important;
+.form-field .v-label {
+  inset-inline-end: var(--space-3) !important;
+  inset-inline-start: auto !important;
 }
 
 .dialog-actions {
-  padding: var(--space-5) 30px;
-  background: #f1f5f9;
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--space-3);
+  direction: rtl !important;
+  justify-content: flex-start !important;
 }
 
+/* ========================================
+   8. تحسين خلفية النافذة
+   ======================================== */
+
+.v-overlay__scrim {
+  background: rgba(15, 23, 42, 0.6) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+/* ========================================
+   9. إصلاحات Vuetify المحددة
+   ======================================== */
+
+/* إصلاح النص في v-text-field */
+.v-text-field input {
+  color: var(--text-primary) !important;
+}
+
+.v-text-field .v-field__input {
+  color: var(--text-primary) !important;
+}
+
+/* إصلاح النص في v-textarea */
+.v-textarea textarea {
+  color: var(--text-primary) !important;
+}
+
+.v-textarea .v-field__input {
+  color: var(--text-primary) !important;
+}
+
+/* إصلاح النص في v-select */
+.v-select .v-field__input {
+  color: var(--text-primary) !important;
+}
+
+.v-select .v-select__selection {
+  color: var(--text-primary) !important;
+}
+
+/* إصلاح الـ autocomplete */
+.v-autocomplete .v-field__input {
+  color: var(--text-primary) !important;
+}
+
+.v-autocomplete input {
+  color: var(--text-primary) !important;
+}
+
+/* إصلاح date picker */
+.v-date-picker input {
+  color: var(--text-primary) !important;
+}
+
+/* ========================================
+   10. إصلاحات عامة للحقول في كل مكان
+   ======================================== */
+
+/* جميع حقول الإدخال في النظام */
+.v-field input,
+.v-field textarea {
+  color: var(--text-primary) !important;
+}
+
+.v-field .v-field__input {
+  color: var(--text-primary) !important;
+}
+
+/* خلفية الحقول */
+.v-field__field {
+  background: var(--background-primary) !important;
+}
+
+/* Labels */
+.v-label {
+  color: var(--color-blue-700) !important;
+}
+
+.v-field--focused .v-label {
+  color: var(--color-primary) !important;
+}
+
+/* حدود الحقول */
+.v-field__outline__start,
+.v-field__outline__end,
+.v-field__outline__notch::before,
+.v-field__outline__notch::after {
+  border-color: var(--color-blue-300) !important;
+}
+
+.v-field--focused .v-field__outline__start,
+.v-field--focused .v-field__outline__end,
+.v-field--focused .v-field__outline__notch::before,
+.v-field--focused .v-field__outline__notch::after {
+  border-color: var(--color-primary) !important;
+}
+
+/* ========================================
+   11. توحيد الفئات المتناثرة
+   Unified Legacy Classes (black-list, black-dropdown-select, custom-input-field)
+   ======================================== */
+
+/*
+ * هذه الفئات كانت مستخدمة بشكل متناثر في الصفحات
+ * الآن موحدة هنا للحفاظ على التناسق
+ */
+
+/* فئة black-list - للقوائم المنسدلة */
+.black-list .v-field__input,
+.black-list .v-select__selection-text,
+.black-list .v-select__selection,
+.black-list input {
+  color: var(--text-primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+.black-list .v-field {
+  background: var(--background-primary) !important;
+}
+
+.black-list .v-label {
+  color: var(--color-blue-700) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+.black-list .v-field--focused .v-label {
+  color: var(--color-primary) !important;
+}
+
+/* فئة black-dropdown-select - بديل لـ black-list */
+.black-dropdown-select .v-field__input,
+.black-dropdown-select .v-select__selection-text,
+.black-dropdown-select .v-select__selection,
+.black-dropdown-select input {
+  color: var(--text-primary) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+.black-dropdown-select .v-field {
+  background: var(--background-primary) !important;
+}
+
+.black-dropdown-select .v-label {
+  color: var(--color-blue-700) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+.black-dropdown-select .v-field--focused .v-label {
+  color: var(--color-primary) !important;
+}
+
+/* فئة custom-input-field - للحقول المخصصة */
+.custom-input-field,
+.custom-input-container input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  background: var(--background-primary);
+  border: 2px solid var(--color-blue-300);
+  border-radius: var(--radius-lg);
+  outline: none;
+  transition: all 0.2s ease;
+  direction: rtl;
+  text-align: end;
+}
+
+.custom-input-field:focus,
+.custom-input-container input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--ring-blue);
+}
+
+.custom-input-field::placeholder,
+.custom-input-container input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.custom-input-container {
+  position: relative;
+  width: 100%;
+}
+
+/* ========================================
+   12. تسميات الحقول الموحدة
+   Unified Field Labels
+   ======================================== */
+
+.field-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-blue-700);
+  margin-bottom: var(--space-2);
+  text-align: end;
+}
+
+.form-field-simple {
+  margin-bottom: var(--space-4);
+}
+
+.form-field-simple .field-label {
+  margin-bottom: var(--space-2);
+}
+
+/* ========================================
+   13. فئة bg-filter-input للفلاتر
+   Filter Input Background
+   ======================================== */
+
+.bg-filter-input .v-field {
+  background: var(--background-primary) !important;
+}
+
+.bg-filter-input .v-field__input,
+.bg-filter-input input {
+  color: var(--text-primary) !important;
+}
+
+.bg-filter-input .v-label {
+  color: var(--color-blue-700) !important;
+}
+
+/* ========================================
+   14. تحسينات النوافذ العامة
+   General Dialog Improvements
+   ======================================== */
+
+/* توحيد كل النوافذ لاستخدام نفس التنسيق */
+.v-dialog .v-card .v-card-text {
+  color: var(--text-primary) !important;
+}
+
+.v-dialog .v-card .v-card-title {
+  color: var(--text-primary) !important;
+}
+
+/* تحسين قراءة النص في النوافذ */
+.v-dialog .v-card p,
+.v-dialog .v-card span,
+.v-dialog .v-card label {
+  color: var(--text-primary);
+}
+
+/* ========================================
+   15. إصلاح حقول التاريخ
+   Date Field Fixes
+   ======================================== */
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="time"] {
+  color: var(--text-primary) !important;
+  background: var(--background-primary) !important;
+}
+
+.form-field input[type="date"],
+.form-field input[type="datetime-local"],
+.form-field input[type="time"] {
+  color: var(--text-primary) !important;
+}
+
+/* ========================================
+   16. إصلاح حقول الأرقام
+   Number Field Fixes
+   الأرقام تظهر على اليمين في RTL
+   ======================================== */
+
+/* All number inputs - maximum specificity */
+input[type="number"],
+input[type="number"].v-field__input,
+.v-input input[type="number"],
+.v-text-field input[type="number"],
+.v-field input[type="number"],
+.v-field__input input[type="number"],
+.v-field--active input[type="number"],
+.v-field--focused input[type="number"] {
+  color: var(--text-primary) !important;
+  text-align: right !important;
+  direction: ltr !important;
+}
+
+/* Vuetify input container alignment */
+.v-text-field .v-field__input,
+.v-number-input .v-field__input {
+  justify-content: flex-end !important;
+}
+
+/* Dialog and form specific */
+.dialog-body input[type="number"],
+.v-dialog input[type="number"],
+.v-dialog .v-field input[type="number"],
+.v-dialog .v-field__input input[type="number"],
+.form-field input[type="number"],
+.v-card input[type="number"] {
+  text-align: right !important;
+  direction: ltr !important;
+}
+
+/* Force number input wrapper to align content right */
+.v-field:has(input[type="number"]) .v-field__input {
+  justify-content: flex-end !important;
+  text-align: right !important;
+}
+
+/* Hide spin buttons for cleaner look (optional) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

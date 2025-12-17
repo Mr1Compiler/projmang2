@@ -157,6 +157,211 @@
   border-radius: var(--radius-2xl) !important;
 }
 
+/* ============================================
+   Form Card Styles (from backup)
+   ============================================ */
+.profile-form-card {
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12) !important;
+  overflow: visible !important;
+  background: var(--text-white) !important;
+  border: 2px solid var(--color-gray-300) !important;
+}
+
+.profile-form-header {
+  background: var(--text-white) !important;
+  color: var(--color-gray-800) !important;
+  padding: 20px 24px !important;
+  border-bottom: 1px solid var(--color-slate-200) !important;
+  box-shadow: none !important;
+}
+
+.profile-form-title {
+  font-size: var(--font-size-xl-plus) !important;
+  font-weight: 700 !important;
+  color: var(--color-gray-800) !important;
+  margin: 0 !important;
+  font-family: var(--font-primary) !important;
+  text-shadow: none !important;
+}
+
+.profile-form-content {
+  padding: 24px !important;
+  background: var(--text-white) !important;
+  border: 2px solid var(--color-gray-300) !important;
+  border-radius: var(--radius-lg) !important;
+  margin: 20px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.profile-form-instruction {
+  font-size: var(--font-size-sm) !important;
+  color: var(--color-gray-500) !important;
+  margin-bottom: 24px !important;
+  line-height: 1.6 !important;
+  font-family: var(--font-primary) !important;
+}
+
+/* ============================================
+   Form Field Wrappers
+   ============================================ */
+.profile-form-field-wrapper {
+  margin-bottom: 16px !important;
+  padding: 12px !important;
+  background: var(--text-white) !important;
+  border: 1.5px solid var(--color-gray-300) !important;
+  border-radius: var(--radius-md) !important;
+  transition: all var(--transition-fast) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  flex: 1 !important;
+}
+
+.profile-form-field-wrapper:hover {
+  border-color: var(--color-gray-400) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) !important;
+}
+
+.profile-form-field-wrapper:focus-within {
+  border-color: var(--color-blue-500) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.profile-form-label {
+  display: block !important;
+  font-size: var(--font-size-sm-minus) !important;
+  font-weight: 600 !important;
+  color: var(--color-gray-700) !important;
+  margin-bottom: 6px !important;
+  font-family: var(--font-primary) !important;
+  text-align: end !important;
+}
+
+.required-star {
+  color: var(--color-red-500) !important;
+  font-weight: 700 !important;
+  margin-inline-end: 2px !important;
+}
+
+/* Form Input Deep Selectors */
+.profile-form-input :deep(.v-field) {
+  background: var(--text-white) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.profile-form-input :deep(.v-field__outline) {
+  border-color: var(--color-gray-300) !important;
+  border-width: 1.5px !important;
+}
+
+.profile-form-input :deep(.v-field--focused .v-field__outline) {
+  border-color: var(--color-blue-500) !important;
+  border-width: 2px !important;
+}
+
+.profile-form-input :deep(.v-field__input) {
+  color: var(--color-gray-800) !important;
+  font-size: var(--font-size-sm) !important;
+  padding: 10px 12px !important;
+  text-align: end !important;
+  direction: rtl !important;
+}
+
+/* ============================================
+   Form Buttons
+   ============================================ */
+.profile-form-cancel-btn {
+  min-width: 120px !important;
+  height: 44px !important;
+  border-radius: var(--radius-md) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  color: var(--color-gray-500) !important;
+  border-color: var(--color-gray-300) !important;
+  background: var(--text-white) !important;
+}
+
+.profile-form-cancel-btn:hover {
+  background: var(--color-slate-50) !important;
+  border-color: var(--color-gray-400) !important;
+}
+
+.profile-form-continue-btn {
+  min-width: 140px !important;
+  height: 44px !important;
+  border-radius: var(--radius-md) !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  background: var(--color-emerald-500) !important;
+  color: var(--text-white) !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3) !important;
+}
+
+.profile-form-continue-btn:hover {
+  background: var(--color-emerald-600) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
+.profile-form-continue-btn:disabled {
+  background: var(--color-gray-300) !important;
+  color: var(--color-gray-400) !important;
+  box-shadow: none !important;
+}
+
+/* ============================================
+   Engineer Stats Cards
+   ============================================ */
+.engineer-stat-card {
+  background: var(--text-white) !important;
+  border-radius: var(--radius-2xl) !important;
+  padding: 1.5rem !important;
+  transition: all var(--transition-normal);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.engineer-stat-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.engineer-stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.engineer-stat-icon.primary {
+  background: linear-gradient(135deg, var(--color-blue-500) 0%, var(--color-blue-600) 100%);
+  box-shadow: var(--shadow-blue-md);
+}
+
+.engineer-stat-icon.success {
+  background: linear-gradient(135deg, var(--color-emerald-500) 0%, var(--color-emerald-600) 100%);
+  box-shadow: var(--shadow-emerald-md);
+}
+
+.engineer-stat-icon.warning {
+  background: linear-gradient(135deg, var(--color-amber-500) 0%, var(--color-amber-600) 100%);
+  box-shadow: var(--shadow-amber-md);
+}
+
+.engineer-stat-value {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  color: var(--color-gray-900);
+  margin-bottom: 0.25rem;
+}
+
+.engineer-stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  font-weight: 500;
+}
+
 /* Responsive */
 @media (max-width: var(--space-96)) {
   .dialog-body {

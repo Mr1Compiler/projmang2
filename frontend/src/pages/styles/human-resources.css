@@ -4,11 +4,11 @@
  */
 
 /* ============================================
-   Page Container
+   Page Container - White Based Theme
    ============================================ */
 .data-page,
 .human-resources-page {
-  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 100%);
+  background: var(--page-background) !important;
   min-height: 100vh;
   padding: var(--space-5);
   overflow-x: hidden;
@@ -31,41 +31,7 @@
   overflow-x: hidden;
 }
 
-/* ============================================
-   Page Header
-   ============================================ */
-.page-header {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  border-radius: var(--radius-xl);
-  padding: var(--space-4) 24px;
-  margin-bottom: var(--space-5);
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-.page-icon {
-  font-size: var(--font-size-3xl-plus);
-  display: block;
-  margin-bottom: var(--space-2);
-  animation: star-twinkle 2s ease-in-out infinite;
-}
-
-.page-title {
-  font-size: var(--font-size-2xl);
-  font-weight: 800;
-  color: var(--text-white);
-  margin-bottom: var(--space-1-5);
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.page-subtitle {
-  font-size: var(--font-size-sm-plus);
-  color: rgba(255, 255, 255, 0.9);
-  margin: 0;
-}
+/* Page Header styles moved to shared/styles/shared.css */
 
 /* ============================================
    Statistics Row
@@ -287,53 +253,9 @@
 }
 
 /* ============================================
-   Dialog Styles
+   Dialog Styles - Now centralized in form-dialog.css
    ============================================ */
-.image-style-dialog {
-  background: linear-gradient(135deg, var(--color-emerald-600) 0%, var(--color-emerald-500) 100%);
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
-}
-
-.dialog-header {
-  background: linear-gradient(135deg, var(--color-emerald-600), var(--color-emerald-500));
-  padding: var(--space-5);
-  color: var(--text-white);
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.header-title {
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-}
-
-.close-btn {
-  color: var(--text-white) !important;
-}
-
-.dialog-body {
-  padding: var(--space-8);
-  background: var(--text-white) !important;
-}
-
-.dialog-actions {
-  padding: var(--space-5) 30px;
-  background: var(--color-slate-100);
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--space-3);
-}
+/* Dialog styles moved to src/styles/form-dialog.css */
 
 /* ============================================
    Details Dialog
@@ -515,13 +437,5 @@
 
   .stat-number {
     font-size: var(--font-size-base) !important;
-  }
-
-  .page-title {
-    font-size: var(--font-size-xl);
-  }
-
-  .page-subtitle {
-    font-size: var(--font-size-base);
   }
 }

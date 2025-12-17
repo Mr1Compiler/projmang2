@@ -2,11 +2,11 @@
   <v-container class="fill-height data-page" fluid>
     <div class="fullscreen-content">
       <!-- Header Section -->
-      <div class="page-header glass-effect gradient-animation">
-        <span class="page-icon star-twinkle">💰</span>
-        <h1 class="page-title text-glow fade-in">إدارة المبيعات</h1>
-        <p class="page-subtitle fade-in">إدارة وتتبع جميع عمليات البيع والمبيعات</p>
-      </div>
+      <PageHeader
+        title="إدارة المبيعات"
+        subtitle="إدارة وتتبع جميع عمليات البيع والمبيعات"
+        icon="💰"
+      />
 
       <!-- Summary Cards -->
       <v-row class="mb-6 stats-row full-width">
@@ -399,6 +399,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { formatCurrency } from '@/utils/formatters'
+import { PageHeader } from '@/components/shared'
 
 // متغيرات الحالة الأساسية
 const loading = ref(false)

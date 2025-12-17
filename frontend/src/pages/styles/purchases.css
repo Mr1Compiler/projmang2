@@ -4,10 +4,10 @@
  */
 
 /* ============================================
-   Page Container
+   Page Container - White Based Theme
    ============================================ */
 .data-page {
-  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-violet-600) 100%);
+  background: var(--page-background) !important;
   min-height: 100vh;
   padding: var(--space-5);
 }
@@ -28,41 +28,7 @@
   align-items: center;
 }
 
-/* ============================================
-   Page Header
-   ============================================ */
-.page-header {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  backdrop-filter: blur(20px);
-  border-radius: var(--radius-xl);
-  padding: var(--space-4) 24px;
-  margin-bottom: var(--space-5);
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 100%;
-}
-
-.page-icon {
-  font-size: var(--font-size-3xl-plus);
-  display: block;
-  margin-bottom: var(--space-2);
-  animation: star-twinkle 2s ease-in-out infinite;
-}
-
-.page-title {
-  font-size: var(--font-size-2xl);
-  font-weight: 800;
-  color: var(--text-white);
-  margin-bottom: var(--space-1-5);
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.page-subtitle {
-  font-size: var(--font-size-sm-plus);
-  color: rgba(255, 255, 255, 0.9);
-  margin: 0;
-  font-weight: 500;
-}
+/* Page Header styles moved to shared/styles/shared.css */
 
 /* ============================================
    Statistics Cards
@@ -227,64 +193,9 @@
 }
 
 /* ============================================
-   Dialog Styles
+   Dialog Styles - Now centralized in form-dialog.css
    ============================================ */
-.image-style-dialog {
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
-}
-
-.dialog-header {
-  background: linear-gradient(135deg, var(--color-blue-600) 0%, var(--color-blue-500) 100%);
-  padding: var(--space-5);
-  color: var(--text-white);
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.header-icon {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-full);
-  padding: var(--space-2);
-}
-
-.header-title {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-}
-
-.close-btn {
-  color: var(--text-white) !important;
-}
-
-.dialog-body {
-  padding: var(--space-6);
-  background: var(--text-white);
-}
-
-.dialog-actions {
-  padding: var(--space-4) var(--space-6);
-  background: var(--color-slate-50);
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--space-3);
-}
-
-.primary-btn {
-  background: linear-gradient(135deg, var(--color-blue-600) 0%, var(--color-blue-500) 100%) !important;
-  color: var(--text-white) !important;
-  font-weight: 600 !important;
-}
+/* Dialog styles moved to src/styles/form-dialog.css */
 
 /* ============================================
    Animations
@@ -309,23 +220,11 @@
   .data-page {
     padding: var(--space-3);
   }
-
-  .page-header {
-    padding: var(--space-3) var(--space-4);
-  }
-
-  .page-title {
-    font-size: var(--font-size-xl);
-  }
 }
 
 @media (max-width: 600px) {
   .data-page {
     padding: var(--space-2);
-  }
-
-  .page-title {
-    font-size: var(--font-size-lg);
   }
 
   .stat-card {

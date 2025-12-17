@@ -1,23 +1,23 @@
 <template>
   <div class="work-day-details-page">
     <!-- Header Section -->
-    <div class="page-header glass-effect gradient-animation">
-      <div class="header-content">
-        <v-btn 
-          icon="mdi-arrow-left" 
-          @click="goBack" 
-          class="back-btn"
-          size="large"
-          color="white"
-        >
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <div class="header-text">
-          <h1 class="page-title text-glow fade-in">تفاصيل يوم العمل</h1>
-          <p class="page-subtitle fade-in">معلومات مفصلة عن يوم العمل المحدد</p>
-        </div>
-      </div>
+    <div class="d-flex align-center mb-4">
+      <v-btn
+        icon="mdi-arrow-left"
+        @click="goBack"
+        class="back-btn me-3"
+        size="large"
+        variant="text"
+        color="primary"
+      >
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
     </div>
+    <PageHeader
+      title="تفاصيل يوم العمل"
+      subtitle="معلومات مفصلة عن يوم العمل المحدد"
+      mdi-icon="mdi-calendar-clock"
+    />
 
 
     <!-- Work Day Info Card -->
@@ -307,6 +307,7 @@
 import { ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue3-toastify'
+import { PageHeader } from '@/components/shared'
 
 const router = useRouter()
 

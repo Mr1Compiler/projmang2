@@ -66,6 +66,101 @@
   font-weight: 700 !important;
 }
 
+/* ============================================
+   Enhanced Table Header Styles
+   ============================================ */
+.expense-table .v-data-table__th,
+.data-table-card .v-data-table__th {
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-indigo-700) 100%) !important;
+  background-size: 200% 100%;
+  color: var(--text-white) !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  animation: headerShimmer 8s ease-in-out infinite;
+}
+
+/* Header shimmer animation */
+@keyframes headerShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================================
+   Table Row Styles
+   ============================================ */
+.expense-table .v-data-table__tr,
+.data-table-card .v-data-table__tr {
+  transition: all var(--transition-normal);
+}
+
+/* Alternating row backgrounds */
+.expense-table .v-data-table__tr:nth-child(even),
+.data-table-card .v-data-table__tr:nth-child(even) {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(99, 102, 241, 0.01) 100%);
+}
+
+.expense-table .v-data-table__tr:nth-child(odd),
+.data-table-card .v-data-table__tr:nth-child(odd) {
+  background: var(--text-white);
+}
+
+/* Row hover effect */
+.expense-table .v-data-table__tr:hover,
+.data-table-card .v-data-table__tr:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.05) 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
+/* ============================================
+   Table Footer Styles
+   ============================================ */
+.expense-table .v-data-table-footer,
+.data-table-card .v-data-table-footer {
+  background: linear-gradient(135deg, var(--color-slate-100) 0%, var(--color-slate-50) 100%) !important;
+  border-top: 1px solid var(--color-slate-200);
+  padding: var(--space-3) var(--space-4);
+}
+
+/* Pagination styling */
+.expense-table .v-data-table-footer .v-btn,
+.data-table-card .v-data-table-footer .v-btn {
+  background: linear-gradient(135deg, var(--color-indigo-500) 0%, var(--color-indigo-600) 100%) !important;
+  color: var(--text-white) !important;
+  border-radius: var(--radius-lg) !important;
+  transition: all var(--transition-normal);
+}
+
+.expense-table .v-data-table-footer .v-btn:hover,
+.data-table-card .v-data-table-footer .v-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* ============================================
+   Filter Section Animations
+   ============================================ */
+@keyframes modernPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+@keyframes modernGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.6); }
+}
+
+.filter-icon {
+  animation: modernPulse 2s ease-in-out infinite;
+}
+
+.filter-card:hover {
+  animation: modernGlow 1.5s ease-in-out infinite;
+}
+
 /* Responsive */
 @media (max-width: var(--space-96)) {
   .stats-row > .v-col {

@@ -1,33 +1,32 @@
 <template>
   <div class="work-days-page">
-    <!-- Page Title Header -->
-    <div class="page-title-header">
-      <div class="header-left-section">
-        <v-btn icon="mdi-arrow-left" @click="goBack" class="nav-btn">
+    <!-- Page Header -->
+    <PageHeader
+      title="ايام العمل"
+      subtitle="إدارة وتتبع أيام العمل للمشاريع"
+      mdi-icon="mdi-calendar-clock"
+    />
+
+    <!-- Actions Bar -->
+    <div class="d-flex align-center justify-space-between mb-4">
+      <div class="d-flex align-center gap-2">
+        <v-btn icon="mdi-arrow-left" @click="goBack" variant="text" color="primary">
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
-        <v-btn icon="mdi-plus" @click="addWorkDay" class="nav-btn add-btn">
-          <v-icon>mdi-plus</v-icon>
+        <v-btn color="success" variant="elevated" @click="addWorkDay" prepend-icon="mdi-plus">
+          إضافة يوم عمل
         </v-btn>
-        <v-icon class="title-icon">mdi-calendar-clock</v-icon>
-        <h1 class="page-title-text text-white-important">ايام العمل</h1>
       </div>
-      <div class="header-right-section">
-        <div class="search-section">
-          <div class="search-box">
-            <v-icon class="search-icon">mdi-magnify</v-icon>
-            <v-text-field
-              v-model="searchQuery"
-              placeholder="البحث..."
-              variant="plain"
-              hide-details
-              class="search-input"
-            />
-            <v-btn color="primary" variant="elevated" class="search-btn">
-              بحث
-            </v-btn>
-          </div>
-        </div>
+      <div class="d-flex align-center gap-2">
+        <v-text-field
+          v-model="searchQuery"
+          placeholder="البحث..."
+          prepend-inner-icon="mdi-magnify"
+          variant="outlined"
+          density="compact"
+          hide-details
+          style="max-width: 300px;"
+        />
       </div>
     </div>
 
@@ -270,6 +269,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { PageHeader } from '@/components/shared'
 
 const router = useRouter()
 

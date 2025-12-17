@@ -2,13 +2,11 @@
   <div class="fill-height data-page">
     <div>
       <!-- Header Section -->
-      <div class="page-header glass-effect gradient-animation">
-        <div class="header-top-content">
-          <h1 class="page-title">الإيرادات</h1>
-          <span class="page-icon">💰</span>
-        </div>
-        <p class="page-subtitle">إدارة وتتبع جميع مصادر الإيرادات</p>
-      </div>
+      <PageHeader
+        title="الإيرادات"
+        subtitle="إدارة وتتبع جميع مصادر الإيرادات"
+        icon="💰"
+      />
 
       <!-- Summary Cards -->
       <div class="cards-container">
@@ -180,6 +178,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { formatCurrency, formatDate, formatDateForInput } from '@/utils/formatters'
+import { PageHeader } from '@/components/shared'
 
 // ========================================
 // متغيرات الحالة الأساسية
