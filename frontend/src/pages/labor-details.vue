@@ -75,14 +75,16 @@
       </v-card-title>
 
       <v-data-table
+        v-model:page="currentPage"
         :headers="laborHeaders"
         :items="laborData"
         :search="laborSearch"
-        :items-per-page="10"
+        :items-per-page="DEFAULT_LIMIT"
         class="project-table"
         no-data-text="لا توجد بيانات متاحة"
         loading-text="جاري التحميل..."
         hover
+        hide-default-footer
       >
         <!-- Serial Number Column -->
         <template #item.id="{ index }">
@@ -139,6 +141,18 @@
           </div>
         </template>
       </v-data-table>
+
+      <!-- Pagination -->
+      <div class="d-flex justify-center pa-4" v-if="totalPages > 0">
+        <v-pagination
+          v-model="currentPage"
+          :length="totalPages"
+          :total-visible="7"
+          rounded="circle"
+          density="comfortable"
+          active-color="primary"
+        />
+      </div>
     </v-card>
 
     <!-- Add New Labor Dialog - Clean Form Style -->
@@ -351,6 +365,7 @@
 import { ref, computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { listLaborByWorkDay, createLabor, deleteLabor as deleteLaborApi } from '@/api/materials'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 const router = useRouter()
 const route = useRoute()
@@ -392,6 +407,12 @@ const laborHeaders = [
 
 // Data from backend
 const laborData = ref([])
+
+// Pagination state
+const currentPage = ref(1)
+
+// Computed total pages for pagination
+const totalPages = computed(() => Math.ceil(laborData.value.length / DEFAULT_LIMIT))
 
 // Methods
 const goBack = () => {

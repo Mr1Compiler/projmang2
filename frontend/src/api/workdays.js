@@ -1,16 +1,35 @@
 import { apiFetch } from './client'
+import { DEFAULT_PAGE, DEFAULT_LIMIT } from '../constants/pagination'
 
-export async function listWorkDays({ projectId, page = 1, limit = 20 } = {}) {
+export async function listWorkDays({ projectId, page = DEFAULT_PAGE, limit = DEFAULT_LIMIT } = {}) {
   if (projectId) {
-    const result = await apiFetch(`/projects/${projectId}/workdays`, { method: 'GET' })
-    return result?.data || result || []
+    const query = new URLSearchParams({ page, limit }).toString()
+    const result = await apiFetch(`/projects/${projectId}/workdays?${query}`, { method: 'GET' })
+    const paginatedData = result?.data || {}
+    if (Array.isArray(paginatedData)) {
+      return { data: paginatedData, total: paginatedData.length, page, limit, totalPages: 1 }
+    }
+    return {
+      data: paginatedData.data || [],
+      total: paginatedData.total || 0,
+      page: paginatedData.page || page,
+      limit: paginatedData.limit || limit,
+      totalPages: paginatedData.totalPages || 0
+    }
   }
   const query = new URLSearchParams({ page, limit }).toString()
   const result = await apiFetch(`/workdays?${query}`, { method: 'GET' })
-  // Some endpoints may wrap data; normalize to array if possible
-  if (Array.isArray(result)) return result
-  if (Array.isArray(result?.data)) return result.data
-  return []
+  const paginatedData = result?.data || {}
+  if (Array.isArray(paginatedData)) {
+    return { data: paginatedData, total: paginatedData.length, page, limit, totalPages: 1 }
+  }
+  return {
+    data: paginatedData.data || [],
+    total: paginatedData.total || 0,
+    page: paginatedData.page || page,
+    limit: paginatedData.limit || limit,
+    totalPages: paginatedData.totalPages || 0
+  }
 }
 
 export async function getWorkDay(id) {

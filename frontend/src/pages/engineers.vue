@@ -123,11 +123,12 @@
           :headers="tableHeaders"
           :items="engineers"
           :search="searchQuery"
+          :loading="loading"
           class="elevation-0"
           no-data-text="لا يوجد مهندسين"
           loading-text="جاري التحميل..."
-          items-per-page="10"
-          show-current-page
+          :items-per-page="-1"
+          hide-default-footer
         >
           <!-- Avatar Column -->
           <template v-slot:item.avatar="{ item }">
@@ -228,6 +229,18 @@
             </div>
           </template>
         </v-data-table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-center pa-4 pagination-container" v-if="totalPages > 0">
+          <v-pagination
+            v-model="currentPage"
+            :length="totalPages"
+            :total-visible="7"
+            @update:model-value="onPageChange"
+            rounded="circle"
+            color="primary"
+          />
+        </div>
       </v-card>
 
       <!-- Add/Edit Engineer Dialog - Profile Form Style (مثل نموذج إضافة المهمة) -->
@@ -654,10 +667,16 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { listUsers, createUser, updateUser, deleteUser as deleteUserApi } from '@/api/users'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 // Reactive data - يتم تحميل البيانات من API المستخدمين
 const engineers = ref([])
 const loading = ref(false)
+
+// Pagination state
+const currentPage = ref(1)
+const totalItems = ref(0)
+const totalPages = ref(0)
 
 const searchQuery = ref('')
 const dialog = ref(false)
@@ -869,10 +888,17 @@ const removeProjectFromEngineer = (projectId) => {
 // دالة تحميل المهندسين من API المستخدمين
 // ========================================
 
-// دالة للتحقق إذا كان المستخدم مهندس بناءً على المسمى الوظيفي
-const isEngineer = (jobTitle) => {
-  if (!jobTitle) return false
-  const title = jobTitle.toLowerCase()
+// دالة للتحقق إذا كان المستخدم مهندس بناءً على الدور أو المسمى الوظيفي
+const isEngineer = (user) => {
+  // أولاً: التحقق من حقل الدور إذا كان موجوداً
+  if (user.role) {
+    const role = String(user.role).toLowerCase()
+    if (role === 'engineer' || role === 'مهندس') return true
+  }
+
+  // ثانياً: التحقق من المسمى الوظيفي
+  if (!user.jobTitle) return false
+  const title = user.jobTitle.toLowerCase()
   // التحقق من الكلمات المفتاحية للمهندسين بالعربية والإنجليزية
   const engineerKeywords = [
     'engineer', 'مهندس', 'مهندسة', 'هندسة',
@@ -881,18 +907,22 @@ const isEngineer = (jobTitle) => {
   return engineerKeywords.some(keyword => title.includes(keyword))
 }
 
+// جميع المهندسين (بعد الفلترة)
+const allEngineers = ref([])
+
 const loadEngineers = async () => {
   loading.value = true
   try {
-    const response = await listUsers({ limit: 100 })
+    // جلب جميع المستخدمين (بحد أقصى 100) لأن الفلترة تتم على الواجهة
+    const response = await listUsers({ page: 1, limit: 100 })
     console.log('Users data received for engineers:', response)
 
     if (response.data) {
-      // فلترة المستخدمين الذين هم مهندسين فقط بناءً على المسمى الوظيفي
-      const engineerUsers = response.data.filter(user => isEngineer(user.jobTitle))
+      // فلترة المستخدمين الذين هم مهندسين فقط بناءً على الدور أو المسمى الوظيفي
+      const engineerUsers = response.data.filter(user => isEngineer(user))
 
       // تحويل بيانات المستخدمين إلى تنسيق المهندسين
-      engineers.value = engineerUsers.map(user => ({
+      allEngineers.value = engineerUsers.map(user => ({
         id: user.id,
         name: user.fullName || '',
         email: user.email || '',
@@ -908,12 +938,33 @@ const loadEngineers = async () => {
         fullName: user.fullName || '',
         jobTitle: user.jobTitle || ''
       }))
+
+      // حساب عدد الصفحات بناءً على عدد المهندسين المفلترين
+      totalItems.value = allEngineers.value.length
+      totalPages.value = Math.ceil(allEngineers.value.length / DEFAULT_LIMIT)
+      currentPage.value = 1
+
+      // عرض الصفحة الأولى
+      updateDisplayedEngineers()
     }
   } catch (error) {
     console.error('Error loading engineers:', error)
   } finally {
     loading.value = false
   }
+}
+
+// تحديث المهندسين المعروضين بناءً على الصفحة الحالية
+const updateDisplayedEngineers = () => {
+  const start = (currentPage.value - 1) * DEFAULT_LIMIT
+  const end = start + DEFAULT_LIMIT
+  engineers.value = allEngineers.value.slice(start, end)
+}
+
+// Handle page change
+const onPageChange = (page) => {
+  currentPage.value = page
+  updateDisplayedEngineers()
 }
 
 // Lifecycle
@@ -990,23 +1041,23 @@ onMounted(() => {
 
 .profile-form-field-wrapper {
   margin-bottom: 16px !important;
-  padding: 12px !important;
-  background: #ffffff !important;
-  border: 1.5px solid #d1d5db !important;
-  border-radius: 6px !important;
-  transition: all 0.2s ease !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  transition: none !important;
+  box-shadow: none !important;
   flex: 1 !important;
 }
 
 .profile-form-field-wrapper:hover {
-  border-color: #9ca3af !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .profile-form-field-wrapper:focus-within {
-  border-color: #3b82f6 !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .profile-form-label {
@@ -1030,8 +1081,19 @@ onMounted(() => {
 }
 
 .profile-form-input :deep(.v-field) {
-  background: #ffffff !important;
-  border-radius: 4px !important;
+  background: #f9fafb !important;
+  border-radius: 6px !important;
+  border: 1.5px solid #d1d5db !important;
+  transition: all 0.2s ease !important;
+}
+
+.profile-form-input :deep(.v-field:hover) {
+  border-color: #9ca3af !important;
+}
+
+.profile-form-input :deep(.v-field--focused) {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
 }
 
 .profile-form-input :deep(.v-field__outline) {
@@ -4806,5 +4868,21 @@ body .black-dropdown-menu .v-list-item {
     transform: scale(4);
     opacity: 0;
   }
+}
+
+/* Pagination Styles */
+.pagination-container {
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin: 0 16px 16px 16px;
+}
+
+.pagination-container :deep(.v-pagination__item) {
+  color: #333 !important;
+}
+
+.pagination-container :deep(.v-pagination__item--is-active) {
+  background: #1976d2 !important;
+  color: white !important;
 }
 </style>

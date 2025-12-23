@@ -182,7 +182,8 @@
             class="work-days-table"
             no-data-text="لا توجد بيانات"
             loading-text="جاري التحميل..."
-            items-per-page="10"
+            :items-per-page="-1"
+            hide-default-footer
           >
         <!-- Serial Number Column -->
         <template v-slot:item.serial="{ item }">
@@ -262,6 +263,19 @@
           </div>
         </template>
           </v-data-table>
+
+          <!-- Pagination -->
+          <div class="d-flex justify-center pa-4" v-if="totalPages > 0">
+            <v-pagination
+              v-model="currentPage"
+              :length="totalPages"
+              :total-visible="7"
+              @update:model-value="onPageChange"
+              rounded="circle"
+              density="comfortable"
+              active-color="primary"
+            />
+          </div>
         </div>
       </v-card-text>
     </v-card>
@@ -284,6 +298,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { listWorkDays, createWorkDay, updateWorkDay, deleteWorkDay as apiDeleteWorkDay, listWorkSubCategories } from '@/api/workdays'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 const router = useRouter()
 const route = useRoute()
@@ -313,6 +328,12 @@ const tableHeaders = [
 
 // Work days data
 const workDaysData = ref([])
+
+// Pagination state
+const currentPage = ref(1)
+const itemsPerPage = ref(DEFAULT_LIMIT)
+const totalItems = ref(0)
+const totalPages = ref(0)
 
 // Form data
 const workDayForm = ref({
@@ -816,15 +837,21 @@ const resetForm = () => {
   formValid.value = false
 }
 
-const loadWorkDays = async () => {
+const loadWorkDays = async (page = currentPage.value) => {
   loading.value = true
   error.value = ''
   try {
-    const data = await listWorkDays({ projectId: projectId.value })
-    const normalized = Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : [])
+    const response = await listWorkDays({ projectId: projectId.value, page, limit: itemsPerPage.value })
+    const normalized = Array.isArray(response.data) ? response.data : (Array.isArray(response) ? response : [])
+
+    // Update pagination state
+    totalItems.value = response.total || normalized.length
+    totalPages.value = response.totalPages || 1
+    currentPage.value = response.page || page
+
     workDaysData.value = normalized.map((w, idx) => ({
       id: w.id,
-      serial: idx + 1,
+      serial: (currentPage.value - 1) * itemsPerPage.value + idx + 1,
       date: formatDate(w.workDate),
       day: formatDayName(w.workDate),
       workPeriod: '-', // backend does not provide; keep placeholder
@@ -837,6 +864,12 @@ const loadWorkDays = async () => {
   } finally {
     loading.value = false
   }
+}
+
+// Handle page change
+const onPageChange = (page) => {
+  currentPage.value = page
+  loadWorkDays(page)
 }
 
 const formatDate = (value) => {

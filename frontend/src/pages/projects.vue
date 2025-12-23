@@ -52,9 +52,9 @@
       <v-data-table
         :headers="headers"
         :items="filteredProjects"
-        :items-per-page="limit"
+        :items-per-page="-1"
         :loading="loading"
-        :page.sync="page"
+        hide-default-footer
         class="elevation-0"
       >
         <template #item.status="{ item }">
@@ -80,6 +80,19 @@
           </div>
         </template>
       </v-data-table>
+
+      <!-- Pagination -->
+      <div class="d-flex justify-center pa-4" v-if="totalPages > 0">
+        <v-pagination
+          v-model="page"
+          :length="totalPages"
+          :total-visible="7"
+          @update:model-value="onPageChange"
+          rounded="circle"
+          density="comfortable"
+          active-color="primary"
+        />
+      </div>
     </v-card>
   </v-container>
 </template>
@@ -87,13 +100,16 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { listProjects, getProjectStats } from '@/api/projects'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 const loading = ref(false)
 const error = ref('')
 const projects = ref([])
 const stats = ref({})
 const page = ref(1)
-const limit = ref(10)
+const limit = ref(DEFAULT_LIMIT)
+const totalItems = ref(0)
+const totalPages = ref(0)
 const search = ref('')
 
 const headers = [
@@ -148,15 +164,21 @@ function formatCurrency(value) {
   }).format(value) + ' IQD'
 }
 
-async function loadData() {
+async function loadData(pageNum = page.value) {
   loading.value = true
   error.value = ''
   try {
-    const [list, statsData] = await Promise.all([
-      listProjects({ page: page.value, limit: limit.value }),
+    const [response, statsData] = await Promise.all([
+      listProjects({ page: pageNum, limit: limit.value }),
       getProjectStats({ period: 'all' }),
     ])
-    projects.value = Array.isArray(list) ? list : []
+
+    // Update pagination state
+    projects.value = response.data || []
+    totalItems.value = response.total || 0
+    totalPages.value = response.totalPages || 0
+    page.value = response.page || pageNum
+
     stats.value = statsData || {}
   } catch (err) {
     console.error('Projects load error', err)
@@ -164,6 +186,12 @@ async function loadData() {
   } finally {
     loading.value = false
   }
+}
+
+// Handle page change
+function onPageChange(newPage) {
+  page.value = newPage
+  loadData(newPage)
 }
 
 onMounted(loadData)

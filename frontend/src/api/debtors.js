@@ -1,14 +1,23 @@
 import { apiFetch } from './client'
+import { DEFAULT_PAGE, DEFAULT_LIMIT } from '../constants/pagination'
 
 // ============ Debtors ============
 
-export async function listDebtors() {
-  const result = await apiFetch('/debtors', { method: 'GET' })
-  // Handle paginated response: {success: true, data: {data: [...], total, page, limit, totalPages}}
-  if (Array.isArray(result?.data?.data)) return result.data.data
-  if (Array.isArray(result?.data)) return result.data
-  if (Array.isArray(result)) return result
-  return []
+export async function listDebtors({ page = DEFAULT_PAGE, limit = DEFAULT_LIMIT } = {}) {
+  const query = new URLSearchParams({ page, limit }).toString()
+  const result = await apiFetch(`/debtors?${query}`, { method: 'GET' })
+  // Return full pagination response
+  const paginatedData = result?.data || {}
+  if (Array.isArray(paginatedData)) {
+    return { data: paginatedData, total: paginatedData.length, page, limit, totalPages: 1 }
+  }
+  return {
+    data: paginatedData.data || [],
+    total: paginatedData.total || 0,
+    page: paginatedData.page || page,
+    limit: paginatedData.limit || limit,
+    totalPages: paginatedData.totalPages || 0
+  }
 }
 
 export async function getDebtorById(id) {

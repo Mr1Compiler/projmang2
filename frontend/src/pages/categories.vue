@@ -107,11 +107,13 @@
           class="categories-table"
           no-data-text="لا توجد تصنيفات"
           loading-text="جاري التحميل..."
+          :items-per-page="-1"
+          hide-default-footer
         >
           <!-- Sequence Column -->
           <template v-slot:item.sequence="{ index }">
             <div class="sequence-number">
-              {{ index + 1 }}
+              {{ (currentPage - 1) * itemsPerPage + index + 1 }}
             </div>
           </template>
 
@@ -187,6 +189,19 @@
             </div>
           </template>
         </v-data-table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-center pa-4" v-if="totalPages > 0">
+          <v-pagination
+            v-model="currentPage"
+            :length="totalPages"
+            :total-visible="7"
+            @update:model-value="onPageChange"
+            rounded="circle"
+            density="comfortable"
+            active-color="primary"
+          />
+        </div>
       </v-card>
 
       <!-- Add/Edit Category Dialog -->
@@ -650,6 +665,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 import {
   listCategories,
   createCategory,
@@ -721,6 +737,12 @@ const statusOptions = [
 // Categories data from backend
 const categories = ref([])
 
+// Pagination state
+const currentPage = ref(1)
+const itemsPerPage = ref(DEFAULT_LIMIT)
+const totalItems = ref(0)
+const totalPages = ref(0)
+
 // Sub Categories data from backend
 const subCategories = ref([])
 
@@ -748,27 +770,29 @@ const filteredCategories = computed(() => {
 })
 
 // ============ Load Data from Backend ============
-const loadCategories = async () => {
+const loadCategories = async (page = currentPage.value) => {
   loading.value = true
   error.value = ''
   try {
-    const result = await listCategories()
-    // Response structure: { success: true, data: { data: [...], total, page, limit, totalPages } }
-    if (Array.isArray(result?.data?.data)) {
-      categories.value = result.data.data
-    } else if (Array.isArray(result?.data)) {
-      categories.value = result.data
-    } else if (Array.isArray(result)) {
-      categories.value = result
-    } else {
-      categories.value = []
-    }
+    const response = await listCategories({ page, limit: itemsPerPage.value })
+
+    // Update pagination state
+    categories.value = response.data || []
+    totalItems.value = response.total || 0
+    totalPages.value = response.totalPages || 0
+    currentPage.value = response.page || page
   } catch (err) {
     console.error('Failed to load categories:', err)
     error.value = err?.message || 'فشل تحميل التصنيفات'
   } finally {
     loading.value = false
   }
+}
+
+// Handle page change
+const onPageChange = (page) => {
+  currentPage.value = page
+  loadCategories(page)
 }
 
 const loadStats = async () => {

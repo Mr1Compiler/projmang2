@@ -187,6 +187,8 @@
             :headers="headers"
             :items="filteredDebtors"
             :loading="loading"
+            :items-per-page="-1"
+            hide-default-footer
             class="elevation-0 debtors-data-table"
             no-data-text="لا توجد بيانات"
             loading-text="جاري التحميل..."
@@ -279,6 +281,19 @@
               </div>
             </template>
           </v-data-table>
+
+          <!-- Pagination -->
+          <div class="d-flex justify-center pa-4" v-if="totalPages > 0">
+            <v-pagination
+              v-model="currentPage"
+              :length="totalPages"
+              :total-visible="7"
+              @update:model-value="onPageChange"
+              rounded="circle"
+              density="comfortable"
+              active-color="primary"
+            />
+          </div>
         </v-card>
       </v-container>
 
@@ -686,6 +701,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { listDebtors, createDebtor, updateDebtor, deleteDebtor as deleteDebtorApi, getDebtorStats } from '@/api/debtors'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 // البيانات التفاعلية
 const loading = ref(false)
@@ -715,6 +731,13 @@ const debtorForm = ref({
 
 // قائمة المدينين - from backend
 const debtors = ref([])
+
+// Pagination state
+const currentPage = ref(1)
+const itemsPerPage = ref(DEFAULT_LIMIT)
+const totalItems = ref(0)
+const totalPages = ref(0)
+
 const debtorStats = ref({
   total: 0,
   active: 0,
@@ -919,17 +942,23 @@ const getDueDateStatus = (dueDate) => {
 }
 
 // Load debtors from backend
-const loadDebtors = async () => {
+const loadDebtors = async (page = currentPage.value) => {
   loading.value = true
   try {
     // Load debtors list and stats in parallel
-    const [data, stats] = await Promise.all([
-      listDebtors(),
+    const [response, stats] = await Promise.all([
+      listDebtors({ page, limit: itemsPerPage.value }),
       getDebtorStats()
     ])
-    console.log('Debtors data received:', data)
+    console.log('Debtors data received:', response)
     console.log('Debtors stats received:', stats)
-    debtors.value = data
+
+    // Update pagination state
+    debtors.value = response.data
+    totalItems.value = response.total
+    totalPages.value = response.totalPages
+    currentPage.value = response.page
+
     if (stats) {
       debtorStats.value = stats
     }
@@ -938,6 +967,12 @@ const loadDebtors = async () => {
   } finally {
     loading.value = false
   }
+}
+
+// Handle page change
+const onPageChange = (page) => {
+  currentPage.value = page
+  loadDebtors(page)
 }
 
 const openAddDialog = () => {

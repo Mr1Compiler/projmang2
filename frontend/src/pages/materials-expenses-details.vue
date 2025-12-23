@@ -68,15 +68,17 @@
 
       <!-- Materials Table -->
       <v-data-table
+        v-model:page="materialsPage"
         :headers="materialsHeaders"
         :items="materialsData"
         :search="materialsSearch"
-        :items-per-page="10"
+        :items-per-page="DEFAULT_LIMIT"
         :loading="loading"
         class="data-table materials-table"
         no-data-text="لا توجد بيانات متاحة"
         loading-text="جاري التحميل..."
         density="comfortable"
+        hide-default-footer
       >
         <template v-slot:item.notes="{ item }">
           {{ item.notes || '-' }}
@@ -92,6 +94,18 @@
           />
         </template>
       </v-data-table>
+
+      <!-- Materials Pagination -->
+      <div class="d-flex justify-center pa-4" v-if="materialsTotalPages > 0">
+        <v-pagination
+          v-model="materialsPage"
+          :length="materialsTotalPages"
+          :total-visible="7"
+          rounded="circle"
+          density="comfortable"
+          active-color="primary"
+        />
+      </div>
     </v-card>
 
     <!-- Project Expenses Section -->
@@ -142,15 +156,17 @@
 
       <!-- Expenses Table -->
       <v-data-table
+        v-model:page="expensesPage"
         :headers="expensesHeaders"
         :items="expensesData"
         :search="expensesSearch"
-        :items-per-page="10"
+        :items-per-page="DEFAULT_LIMIT"
         :loading="expensesLoading"
         class="data-table expenses-table"
         no-data-text="لا توجد بيانات متاحة"
         loading-text="جاري التحميل..."
         density="comfortable"
+        hide-default-footer
       >
         <template v-slot:item.expenseDate="{ item }">
           {{ formatDate(item.expenseDate) }}
@@ -181,6 +197,18 @@
           />
         </template>
       </v-data-table>
+
+      <!-- Expenses Pagination -->
+      <div class="d-flex justify-center pa-4" v-if="expensesTotalPages > 0">
+        <v-pagination
+          v-model="expensesPage"
+          :length="expensesTotalPages"
+          :total-visible="7"
+          rounded="circle"
+          density="comfortable"
+          active-color="primary"
+        />
+      </div>
     </v-card>
 
     <!-- Add Material Dialog - Clean Form Style -->
@@ -480,6 +508,7 @@ import { ref, computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { listMaterialsByWorkDay, createMaterial, deleteMaterial as deleteMaterialApi } from '@/api/materials'
 import { listExpensesByProject, createExpense, deleteExpense as deleteExpenseApi } from '@/api/expenses'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 const router = useRouter()
 const route = useRoute()
@@ -503,6 +532,10 @@ const expenseFormValid = ref(false)
 const loading = ref(false)
 const form = ref(null)
 const expenseForm = ref(null)
+
+// Pagination state
+const materialsPage = ref(1)
+const expensesPage = ref(1)
 
 // Form data - aligned with backend DTOs
 const newMaterial = ref({
@@ -558,6 +591,10 @@ const expensesHeaders = [
 const materialsData = ref([])
 const expensesData = ref([])
 
+// Computed total pages for pagination
+const materialsTotalPages = computed(() => Math.ceil(materialsData.value.length / DEFAULT_LIMIT))
+const expensesTotalPages = computed(() => Math.ceil(expensesData.value.length / DEFAULT_LIMIT))
+
 // Methods
 const goBack = () => {
   const query = {}
@@ -587,8 +624,9 @@ const loadExpenses = async () => {
   if (!projectId.value) return
   expensesLoading.value = true
   try {
-    const data = await listExpensesByProject(projectId.value)
-    expensesData.value = data
+    const result = await listExpensesByProject(projectId.value)
+    // Handle both array and pagination response formats
+    expensesData.value = Array.isArray(result) ? result : (result.data || [])
   } catch (err) {
     console.error('Error loading expenses:', err)
   } finally {

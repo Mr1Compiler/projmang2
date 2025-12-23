@@ -174,7 +174,8 @@
             :items="filteredUsers"
             :search="searchQuery"
             class="elevation-0 users-data-table"
-            :items-per-page="10"
+            :items-per-page="-1"
+            hide-default-footer
           >
             <template v-slot:item.user="{ item }">
               <div class="d-flex align-center">
@@ -247,6 +248,19 @@
               />
             </template>
           </v-data-table>
+
+          <!-- Pagination -->
+          <div class="d-flex justify-center pa-4" v-if="pagination.totalPages > 0">
+            <v-pagination
+              v-model="pagination.page"
+              :length="pagination.totalPages"
+              :total-visible="7"
+              @update:model-value="onPageChange"
+              rounded="circle"
+              density="comfortable"
+              active-color="primary"
+            />
+          </div>
         </v-card>
 
         <!-- إحصائيات إضافية -->
@@ -809,6 +823,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { listUsers, createUser, updateUser, updateUserPassword, deleteUser as deleteUserApi } from '@/api/users'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 // البيانات التفاعلية
 const loading = ref(false)
@@ -872,7 +887,7 @@ const users = ref([])
 const pagination = ref({
   total: 0,
   page: 1,
-  limit: 20,
+  limit: DEFAULT_LIMIT,
   totalPages: 0
 })
 
@@ -1260,7 +1275,7 @@ const loadUsers = async () => {
       pagination.value = {
         total: response.total || 0,
         page: response.page || 1,
-        limit: response.limit || 20,
+        limit: response.limit || DEFAULT_LIMIT,
         totalPages: response.totalPages || 0
       }
     } else if (Array.isArray(response)) {
@@ -1283,6 +1298,12 @@ const mapJobTitleToRole = (jobTitle) => {
   if (title.includes('accountant') || title.includes('محاسب')) return 'accountant'
   if (title.includes('reviewer') || title.includes('مراجع')) return 'reviewer'
   return 'employee'
+}
+
+// Handle page change
+const onPageChange = (page) => {
+  pagination.value.page = page
+  loadUsers()
 }
 
 // ========================================

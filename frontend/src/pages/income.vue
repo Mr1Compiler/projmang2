@@ -114,6 +114,8 @@
           :headers="headers"
           :items="incomeSources"
           :loading="loading"
+          :items-per-page="-1"
+          hide-default-footer
           class="elevation-1 income-table"
         >
           <template v-slot:item.amount="{ item }">
@@ -142,6 +144,19 @@
             </v-btn>
           </template>
         </v-data-table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-center pa-4" v-if="totalPages > 0">
+          <v-pagination
+            v-model="currentPage"
+            :length="totalPages"
+            :total-visible="7"
+            @update:model-value="onPageChange"
+            rounded="circle"
+            density="comfortable"
+            active-color="primary"
+          />
+        </div>
         </v-card>
       </div>
 
@@ -312,6 +327,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { listIncome, createIncome, updateIncome, deleteIncome as deleteIncomeApi, getIncomeStats } from '@/api/income'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 // ========================================
 // متغيرات الحالة الأساسية
@@ -362,6 +378,13 @@ const onIncomeDateSelected = (date) => {
 // البيانات الأساسية
 // ========================================
 const incomeSources = ref([])
+
+// Pagination state
+const currentPage = ref(1)
+const itemsPerPage = ref(DEFAULT_LIMIT)
+const totalItems = ref(0)
+const totalPages = ref(0)
+
 const incomeStats = ref({
   total: 0,
   totalAmount: 0,
@@ -517,17 +540,23 @@ const getStatusText = (status) => {
 // ========================================
 // دوال تحميل البيانات من API
 // ========================================
-const loadIncome = async () => {
+const loadIncome = async (page = currentPage.value) => {
   loading.value = true
   try {
     // Load income list and stats in parallel
-    const [data, stats] = await Promise.all([
-      listIncome(),
+    const [response, stats] = await Promise.all([
+      listIncome({ page, limit: itemsPerPage.value }),
       getIncomeStats()
     ])
-    console.log('Income data received:', data)
+    console.log('Income data received:', response)
     console.log('Income stats received:', stats)
-    incomeSources.value = data
+
+    // Update pagination state
+    incomeSources.value = response.data
+    totalItems.value = response.total
+    totalPages.value = response.totalPages
+    currentPage.value = response.page
+
     if (stats) {
       incomeStats.value = stats
     }
@@ -536,6 +565,12 @@ const loadIncome = async () => {
   } finally {
     loading.value = false
   }
+}
+
+// Handle page change
+const onPageChange = (page) => {
+  currentPage.value = page
+  loadIncome(page)
 }
 
 // ========================================

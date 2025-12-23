@@ -164,18 +164,19 @@
           :items="filteredExpenses"
           :search="expenseSearchQuery"
           class="project-table"
-          :items-per-page="10"
+          :items-per-page="-1"
           :loading="loading"
           hover
           no-data-text="لا توجد بيانات"
           loading-text="جاري التحميل..."
+          hide-default-footer
           :header-props="{
             style: 'background: linear-gradient(135deg, #047857 0%, #059669 100%); color: white; font-weight: 700;'
           }"
         >
           <!-- Serial Number Column -->
           <template #item.serial="{ index }">
-            <span class="serial-number">{{ index + 1 }}</span>
+            <span class="serial-number">{{ (currentPage - 1) * itemsPerPage + index + 1 }}</span>
           </template>
 
           <!-- Name Column -->
@@ -248,6 +249,19 @@
             </div>
           </template>
         </v-data-table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-center pa-4" v-if="totalPages > 0">
+          <v-pagination
+            v-model="currentPage"
+            :length="totalPages"
+            :total-visible="7"
+            @update:model-value="onPageChange"
+            rounded="circle"
+            density="comfortable"
+            active-color="primary"
+          />
+        </div>
       </v-card>
 
       <!-- Add/Edit Administrative Expense Dialog - Clean Form Style -->
@@ -416,8 +430,15 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { listExpenses, createExpense, updateExpense, deleteExpense as deleteExpenseApi, getExpenseStats } from '@/api/expenses'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 const router = useRouter()
+
+// Pagination state
+const currentPage = ref(1)
+const itemsPerPage = ref(DEFAULT_LIMIT)
+const totalItems = ref(0)
+const totalPages = ref(0)
 
 // متغيرات الحالة الأساسية
 const loading = ref(false)
@@ -759,17 +780,23 @@ const getStatusText = (status) => {
 }
 
 // ============ Load Data from Backend ============
-const loadExpenses = async () => {
+const loadExpenses = async (page = currentPage.value) => {
   loading.value = true
   try {
     // Load expenses list and stats in parallel
-    const [data, stats] = await Promise.all([
-      listExpenses(),
+    const [response, stats] = await Promise.all([
+      listExpenses({ page, limit: itemsPerPage.value }),
       getExpenseStats()
     ])
-    console.log('Expenses data received:', data)
+    console.log('Expenses response received:', response)
     console.log('Expenses stats received:', stats)
-    expenses.value = data
+
+    // Update pagination state
+    expenses.value = response.data
+    totalItems.value = response.total
+    totalPages.value = response.totalPages
+    currentPage.value = response.page
+
     if (stats) {
       expenseStats.value = stats
     }
@@ -778,6 +805,12 @@ const loadExpenses = async () => {
   } finally {
     loading.value = false
   }
+}
+
+// Handle page change
+const onPageChange = (page) => {
+  currentPage.value = page
+  loadExpenses(page)
 }
 
 onMounted(() => {

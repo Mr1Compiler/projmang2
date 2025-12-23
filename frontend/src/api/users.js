@@ -1,27 +1,22 @@
 import { apiFetch } from './client'
+import { DEFAULT_PAGE, DEFAULT_LIMIT } from '../constants/pagination'
 
 /**
  * List all users with pagination
  * @param {Object} params - Query parameters
- * @param {number} params.page - Page number (default: 1)
- * @param {number} params.limit - Items per page (max 100, default: 20)
+ * @param {number} params.page - Page number (default: DEFAULT_PAGE)
+ * @param {number} params.limit - Items per page (max 100, default: DEFAULT_LIMIT)
  * @returns {Promise<{data: Array, total: number, page: number, limit: number, totalPages: number}>}
  */
-export async function listUsers(params = {}) {
-  const query = new URLSearchParams()
-  if (params.page) query.append('page', params.page.toString())
-  if (params.limit) query.append('limit', params.limit.toString())
-  const queryString = query.toString()
-  const result = await apiFetch(`/users${queryString ? `?${queryString}` : ''}`)
-  // API returns: { success: true, data: { data: [...], total, page, limit, totalPages } }
-  // result is { success, data: PaginatedResponse }
-  // PaginatedResponse is { data: users[], total, page, limit, totalPages }
+export async function listUsers({ page = DEFAULT_PAGE, limit = DEFAULT_LIMIT } = {}) {
+  const query = new URLSearchParams({ page, limit }).toString()
+  const result = await apiFetch(`/users?${query}`)
   const paginatedData = result?.data || {}
   return {
     data: paginatedData.data || [],
     total: paginatedData.total || 0,
-    page: paginatedData.page || 1,
-    limit: paginatedData.limit || 20,
+    page: paginatedData.page || page,
+    limit: paginatedData.limit || limit,
     totalPages: paginatedData.totalPages || 0
   }
 }

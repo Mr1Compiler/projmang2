@@ -558,6 +558,18 @@
             </v-card>
           </v-col>
         </v-row>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-center pa-4" v-if="totalPages > 0">
+          <v-pagination
+            v-model="currentPage"
+            :length="totalPages"
+            :total-visible="7"
+            @update:model-value="onPageChange"
+            rounded="circle"
+          />
+        </div>
+
         <div v-else class="pa-6 text-center text-medium-emphasis">
           <v-icon size="4rem" color="grey-lighten-1">mdi-folder-open-outline</v-icon>
           <h3 class="text-h5 text-grey-lighten-1 mt-4">لا يوجد مشاريع</h3>
@@ -1384,6 +1396,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { listProjects, getProjectStats, getProjectWorkdays, getProject, createProject, updateProject } from '@/api/projects'
+import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 // عنوان الصفحة
 document.title = 'إدارة المشاريع الهندسية - نظام إدارة المشاريع'
@@ -1392,6 +1405,12 @@ const router = useRouter()
 
 // متغيرات الحالة الأساسية
 const loading = ref(false)
+
+// Pagination state
+const currentPage = ref(1)
+const totalItems = ref(0)
+const totalPages = ref(0)
+
 const dialog = ref(false)
 const deleteDialog = ref(false)
 const detailsDialog = ref(false)
@@ -2275,11 +2294,11 @@ function mapStatus(status) {
   return statusMap[status] || status || 'pending'
 }
 
-async function loadProjectsFromApi() {
+async function loadProjectsFromApi(page = 1) {
   loading.value = true
   try {
     const [list, stats] = await Promise.all([
-      listProjects({ page: 1, limit: 50 }),
+      listProjects({ page, limit: DEFAULT_LIMIT }),
       getProjectStats({ period: 'all' })
     ])
     const listData = Array.isArray(list)
@@ -2314,11 +2333,22 @@ async function loadProjectsFromApi() {
       projects.value = mapped
     }
     projectStats.value = stats?.data || stats || {}
+
+    // Update pagination
+    totalItems.value = list.total || 0
+    totalPages.value = list.totalPages || 0
+    currentPage.value = list.page || page
   } catch (err) {
     console.error('فشل تحميل المشاريع من الخادم', err)
   } finally {
     loading.value = false
   }
+}
+
+// Handle page change
+function onPageChange(page) {
+  currentPage.value = page
+  loadProjectsFromApi(page)
 }
 
 onMounted(() => {
