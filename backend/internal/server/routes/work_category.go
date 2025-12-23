@@ -18,6 +18,7 @@ func RegisterWorkCategoryRoutes(rg *gin.RouterGroup, c *container.Container) {
 	}
 	{
 		categories.GET("", categoriesAuthz("read"), c.WorkCategoryHandler.GetAll)
+		categories.GET("/stats", categoriesAuthz("read"), c.WorkCategoryHandler.GetStats)
 		categories.GET("/:id", categoriesAuthz("read"), c.WorkCategoryHandler.GetByID)
 		categories.POST("", categoriesAuthz("write"), auditCategory("create"), c.WorkCategoryHandler.Create)
 		categories.PUT("/:id", categoriesAuthz("write"), auditCategory("update"), c.WorkCategoryHandler.Update)

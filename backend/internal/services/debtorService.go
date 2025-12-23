@@ -11,7 +11,8 @@ import (
 )
 
 var (
-	ErrDebtorNotFound = errors.New("debtor not found")
+	ErrDebtorNotFound      = errors.New("debtor not found")
+	ErrDebtorStatsNotFound = errors.New("debtor stats not found")
 )
 
 type DebtorService struct {
@@ -126,6 +127,22 @@ func (s *DebtorService) Delete(ctx context.Context, id int64) error {
 		return err
 	}
 	return nil
+}
+
+func (s *DebtorService) GetStats(ctx context.Context, period string) (*dtos.DebtorStatsResponse, error) {
+	stats, err := s.debtorRepo.GetStats(ctx, period)
+	if err != nil {
+		return nil, err
+	}
+
+	return &dtos.DebtorStatsResponse{
+		Total:       stats.Total,
+		Active:      stats.Active,
+		Paid:        stats.Paid,
+		TotalDebt:   stats.TotalDebt,
+		ActiveDebt:  stats.ActiveDebt,
+		AverageDebt: stats.AverageDebt,
+	}, nil
 }
 
 // DTO conversion helpers

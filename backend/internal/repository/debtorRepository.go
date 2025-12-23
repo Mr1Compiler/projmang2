@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"time"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -14,6 +15,17 @@ type DebtorRepositoryInterface interface {
 	Create(ctx context.Context, debtor *models.Debtor) (*models.Debtor, error)
 	Update(ctx context.Context, id int64, debtor *models.Debtor) (*models.Debtor, error)
 	Delete(ctx context.Context, id int64) error
+	GetStats(ctx context.Context, period string) (*DebtorStatsResult, error)
+}
+
+// DebtorStatsResult holds aggregated debtor statistics
+type DebtorStatsResult struct {
+	Total         int64   `json:"total"`
+	Active        int64   `json:"active"`
+	Paid          int64   `json:"paid"`
+	TotalDebt     float64 `json:"totalDebt"`
+	ActiveDebt    float64 `json:"activeDebt"`
+	AverageDebt   float64 `json:"averageDebt"`
 }
 
 type DebtorRepository struct {
@@ -135,4 +147,48 @@ func (r *DebtorRepository) Delete(ctx context.Context, id int64) error {
 		return pgx.ErrNoRows
 	}
 	return nil
+}
+
+func (r *DebtorRepository) GetStats(ctx context.Context, period string) (*DebtorStatsResult, error) {
+	whereClause := buildDebtorPeriodWhereClause(period, "createdAt")
+
+	query := `
+		SELECT
+			COUNT(*) as total,
+			COUNT(*) FILTER (WHERE status = 'active') as active,
+			COUNT(*) FILTER (WHERE status = 'paid') as paid,
+			COALESCE(SUM(totalDebt), 0) as total_debt,
+			COALESCE(SUM(totalDebt) FILTER (WHERE status = 'active'), 0) as active_debt,
+			COALESCE(AVG(totalDebt), 0) as average_debt
+		FROM debtors
+	` + whereClause
+
+	var stats DebtorStatsResult
+	err := r.db.QueryRow(ctx, query).Scan(
+		&stats.Total,
+		&stats.Active,
+		&stats.Paid,
+		&stats.TotalDebt,
+		&stats.ActiveDebt,
+		&stats.AverageDebt,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return &stats, nil
+}
+
+func buildDebtorPeriodWhereClause(period, dateColumn string) string {
+	now := time.Now()
+	switch period {
+	case "month":
+		startOfMonth := time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, now.Location())
+		return " WHERE " + dateColumn + " >= '" + startOfMonth.Format("2006-01-02") + "'"
+	case "year":
+		startOfYear := time.Date(now.Year(), 1, 1, 0, 0, 0, 0, now.Location())
+		return " WHERE " + dateColumn + " >= '" + startOfYear.Format("2006-01-02") + "'"
+	default:
+		return ""
+	}
 }

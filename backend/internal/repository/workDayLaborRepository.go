@@ -13,8 +13,11 @@ type WorkDayLaborRepositoryInterface interface {
 	GetByID(ctx context.Context, id int64) (*models.WorkDayLabor, error)
 	GetByWorkDayID(ctx context.Context, workDayID int64) ([]models.WorkDayLabor, error)
 	Create(ctx context.Context, labor *models.WorkDayLabor) (*models.WorkDayLabor, error)
+	CreateWithTx(ctx context.Context, tx pgx.Tx, labor *models.WorkDayLabor) (*models.WorkDayLabor, error)
 	Update(ctx context.Context, id int64, labor *models.WorkDayLabor) (*models.WorkDayLabor, error)
+	UpdateWithTx(ctx context.Context, tx pgx.Tx, id int64, labor *models.WorkDayLabor) (*models.WorkDayLabor, error)
 	Delete(ctx context.Context, id int64) error
+	DeleteWithTx(ctx context.Context, tx pgx.Tx, id int64) error
 }
 
 type WorkDayLaborRepository struct {
@@ -134,6 +137,25 @@ func (r *WorkDayLaborRepository) Create(ctx context.Context, labor *models.WorkD
 	return labor, nil
 }
 
+func (r *WorkDayLaborRepository) CreateWithTx(ctx context.Context, tx pgx.Tx, labor *models.WorkDayLabor) (*models.WorkDayLabor, error) {
+	query := `
+		INSERT INTO workDayLabor (workDayId, workerName, jobTitle, phone, address, quantity, cost, notes)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+		RETURNING id, createdAt
+	`
+
+	err := tx.QueryRow(ctx, query,
+		labor.WorkDayID, labor.WorkerName, labor.JobTitle, labor.Phone,
+		labor.Address, labor.Quantity, labor.Cost, labor.Notes,
+	).Scan(&labor.ID, &labor.CreatedAt)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return labor, nil
+}
+
 func (r *WorkDayLaborRepository) Update(ctx context.Context, id int64, labor *models.WorkDayLabor) (*models.WorkDayLabor, error) {
 	query := `
 		UPDATE workDayLabor
@@ -159,9 +181,46 @@ func (r *WorkDayLaborRepository) Update(ctx context.Context, id int64, labor *mo
 	return labor, nil
 }
 
+func (r *WorkDayLaborRepository) UpdateWithTx(ctx context.Context, tx pgx.Tx, id int64, labor *models.WorkDayLabor) (*models.WorkDayLabor, error) {
+	query := `
+		UPDATE workDayLabor
+		SET workerName = $1, jobTitle = $2, phone = $3, address = $4,
+		    quantity = $5, cost = $6, notes = $7
+		WHERE id = $8
+		RETURNING id, workDayId, workerName, jobTitle, phone, address,
+		          quantity, cost, notes, createdAt
+	`
+
+	err := tx.QueryRow(ctx, query,
+		labor.WorkerName, labor.JobTitle, labor.Phone,
+		labor.Address, labor.Quantity, labor.Cost, labor.Notes, id,
+	).Scan(
+		&labor.ID, &labor.WorkDayID, &labor.WorkerName, &labor.JobTitle, &labor.Phone,
+		&labor.Address, &labor.Quantity, &labor.Cost, &labor.Notes, &labor.CreatedAt,
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return labor, nil
+}
+
 func (r *WorkDayLaborRepository) Delete(ctx context.Context, id int64) error {
 	query := `DELETE FROM workDayLabor WHERE id = $1`
 	result, err := r.db.Exec(ctx, query, id)
+	if err != nil {
+		return err
+	}
+	if result.RowsAffected() == 0 {
+		return pgx.ErrNoRows
+	}
+	return nil
+}
+
+func (r *WorkDayLaborRepository) DeleteWithTx(ctx context.Context, tx pgx.Tx, id int64) error {
+	query := `DELETE FROM workDayLabor WHERE id = $1`
+	result, err := tx.Exec(ctx, query, id)
 	if err != nil {
 		return err
 	}

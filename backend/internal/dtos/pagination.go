@@ -39,6 +39,21 @@ type PaginatedResponse[T any] struct {
 	TotalPages int   `json:"totalPages"`
 }
 
+// PeriodQuery represents period filter for stats endpoints
+type PeriodQuery struct {
+	Period string `form:"period"` // all, month, year
+}
+
+// Normalize sets default period to "month" if not specified or invalid
+func (p *PeriodQuery) Normalize() {
+	switch p.Period {
+	case "all", "month", "year":
+		// valid
+	default:
+		p.Period = "month" // default to current month
+	}
+}
+
 // NewPaginatedResponse creates a new paginated response
 func NewPaginatedResponse[T any](data []T, total int64, page, limit int) PaginatedResponse[T] {
 	// Ensure data is never null in JSON

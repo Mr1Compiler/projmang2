@@ -101,3 +101,24 @@ type UpdateIncome struct {
 	Status     *string    `json:"status"`
 	Notes      *string    `json:"notes"`
 }
+
+// ** Stats Response DTOs **
+
+type ExpenseStatsResponse struct {
+	Total         int64   `json:"total"`
+	TotalAmount   float64 `json:"totalAmount"`
+	Pending       int64   `json:"pending"`
+	Approved      int64   `json:"approved"`
+	Rejected      int64   `json:"rejected"`
+	DebtorCount   int64   `json:"debtorCount"`
+	AverageAmount float64 `json:"averageAmount"`
+}
+
+type IncomeStatsResponse struct {
+	Total         int64   `json:"total"`
+	TotalAmount   float64 `json:"totalAmount"`
+	Pending       int64   `json:"pending"`
+	Approved      int64   `json:"approved"`
+	Rejected      int64   `json:"rejected"`
+	AverageAmount float64 `json:"averageAmount"`
+}

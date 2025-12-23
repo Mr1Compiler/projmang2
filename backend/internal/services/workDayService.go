@@ -20,20 +20,20 @@ var (
 type WorkDayService struct {
 	db                  *pgxpool.Pool
 	workDayRepo         repository.WorkDayRepositoryInterface
-	projectRepo         repository.ProjectRepositoryInterface
+	projectService      *ProjectService
 	workSubCategoryRepo repository.WorkSubCategoryRepositoryInterface
 }
 
 func NewWorkDayService(
 	db *pgxpool.Pool,
 	workDayRepo repository.WorkDayRepositoryInterface,
-	projectRepo repository.ProjectRepositoryInterface,
+	projectService *ProjectService,
 	workSubCategoryRepo repository.WorkSubCategoryRepositoryInterface,
 ) *WorkDayService {
 	return &WorkDayService{
 		db:                  db,
 		workDayRepo:         workDayRepo,
-		projectRepo:         projectRepo,
+		projectService:      projectService,
 		workSubCategoryRepo: workSubCategoryRepo,
 	}
 }
@@ -149,8 +149,15 @@ func (s *WorkDayService) Delete(ctx context.Context, id int64) error {
 }
 
 func (s *WorkDayService) Complete(ctx context.Context, id int64) (*dtos.WorkDay, error) {
-	// Get the work day
-	workDay, err := s.workDayRepo.GetByID(ctx, id)
+	// Start transaction first to avoid race conditions
+	tx, err := s.db.Begin(ctx)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
+
+	// Get the work day with row lock to prevent concurrent updates
+	workDay, err := s.workDayRepo.GetByIDWithTx(ctx, tx, id)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
 			return nil, ErrWorkDayNotFound
@@ -177,16 +184,9 @@ func (s *WorkDayService) Complete(ctx context.Context, id int64) (*dtos.WorkDay,
 		return nil, err
 	}
 
-	// Start transaction for atomic updates
-	tx, err := s.db.Begin(ctx)
-	if err != nil {
-		return nil, err
-	}
-	defer tx.Rollback(ctx)
-
 	// Update project progress percentage if subcategory has a percentage
 	if subCategory.Percentage != nil && *subCategory.Percentage > 0 {
-		err = s.projectRepo.UpdateProgressPercentageWithTx(ctx, tx, workDay.ProjectID, *subCategory.Percentage)
+		err = s.projectService.UpdateProgressPercentageWithTx(ctx, tx, workDay.ProjectID, *subCategory.Percentage)
 		if err != nil {
 			if errors.Is(err, pgx.ErrNoRows) {
 				return nil, errors.New("project not found")
@@ -209,6 +209,11 @@ func (s *WorkDayService) Complete(ctx context.Context, id int64) (*dtos.WorkDay,
 
 	dto := toWorkDayDTO(updated)
 	return &dto, nil
+}
+
+// UpdateTotalCostWithTx updates the work day total cost by adding the specified amount within a transaction
+func (s *WorkDayService) UpdateTotalCostWithTx(ctx context.Context, tx pgx.Tx, workDayID int64, amountToAdd float64) error {
+	return s.workDayRepo.UpdateTotalCostWithTx(ctx, tx, workDayID, amountToAdd)
 }
 
 // DTO conversion helpers

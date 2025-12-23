@@ -13,8 +13,11 @@ type WorkDayEquipmentRepositoryInterface interface {
 	GetByID(ctx context.Context, id int64) (*models.WorkDayEquipment, error)
 	GetByWorkDayID(ctx context.Context, workDayID int64) ([]models.WorkDayEquipment, error)
 	Create(ctx context.Context, equipment *models.WorkDayEquipment) (*models.WorkDayEquipment, error)
+	CreateWithTx(ctx context.Context, tx pgx.Tx, equipment *models.WorkDayEquipment) (*models.WorkDayEquipment, error)
 	Update(ctx context.Context, id int64, equipment *models.WorkDayEquipment) (*models.WorkDayEquipment, error)
+	UpdateWithTx(ctx context.Context, tx pgx.Tx, id int64, equipment *models.WorkDayEquipment) (*models.WorkDayEquipment, error)
 	Delete(ctx context.Context, id int64) error
+	DeleteWithTx(ctx context.Context, tx pgx.Tx, id int64) error
 }
 
 type WorkDayEquipmentRepository struct {
@@ -131,6 +134,25 @@ func (r *WorkDayEquipmentRepository) Create(ctx context.Context, equipment *mode
 	return equipment, nil
 }
 
+func (r *WorkDayEquipmentRepository) CreateWithTx(ctx context.Context, tx pgx.Tx, equipment *models.WorkDayEquipment) (*models.WorkDayEquipment, error) {
+	query := `
+		INSERT INTO workDayEquipment (workDayId, equipmentName, quantity, cost, notes)
+		VALUES ($1, $2, $3, $4, $5)
+		RETURNING id, createdAt
+	`
+
+	err := tx.QueryRow(ctx, query,
+		equipment.WorkDayID, equipment.EquipmentName, equipment.Quantity,
+		equipment.Cost, equipment.Notes,
+	).Scan(&equipment.ID, &equipment.CreatedAt)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return equipment, nil
+}
+
 func (r *WorkDayEquipmentRepository) Update(ctx context.Context, id int64, equipment *models.WorkDayEquipment) (*models.WorkDayEquipment, error) {
 	query := `
 		UPDATE workDayEquipment
@@ -154,9 +176,44 @@ func (r *WorkDayEquipmentRepository) Update(ctx context.Context, id int64, equip
 	return equipment, nil
 }
 
+func (r *WorkDayEquipmentRepository) UpdateWithTx(ctx context.Context, tx pgx.Tx, id int64, equipment *models.WorkDayEquipment) (*models.WorkDayEquipment, error) {
+	query := `
+		UPDATE workDayEquipment
+		SET equipmentName = $1, quantity = $2, cost = $3, notes = $4
+		WHERE id = $5
+		RETURNING id, workDayId, equipmentName, quantity, cost, notes, createdAt
+	`
+
+	err := tx.QueryRow(ctx, query,
+		equipment.EquipmentName, equipment.Quantity,
+		equipment.Cost, equipment.Notes, id,
+	).Scan(
+		&equipment.ID, &equipment.WorkDayID, &equipment.EquipmentName, &equipment.Quantity,
+		&equipment.Cost, &equipment.Notes, &equipment.CreatedAt,
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return equipment, nil
+}
+
 func (r *WorkDayEquipmentRepository) Delete(ctx context.Context, id int64) error {
 	query := `DELETE FROM workDayEquipment WHERE id = $1`
 	result, err := r.db.Exec(ctx, query, id)
+	if err != nil {
+		return err
+	}
+	if result.RowsAffected() == 0 {
+		return pgx.ErrNoRows
+	}
+	return nil
+}
+
+func (r *WorkDayEquipmentRepository) DeleteWithTx(ctx context.Context, tx pgx.Tx, id int64) error {
+	query := `DELETE FROM workDayEquipment WHERE id = $1`
+	result, err := tx.Exec(ctx, query, id)
 	if err != nil {
 		return err
 	}

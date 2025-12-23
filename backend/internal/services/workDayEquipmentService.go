@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/dtos"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/models"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/repository"
@@ -15,12 +16,16 @@ var (
 )
 
 type WorkDayEquipmentService struct {
-	equipmentRepo repository.WorkDayEquipmentRepositoryInterface
+	db             *pgxpool.Pool
+	equipmentRepo  repository.WorkDayEquipmentRepositoryInterface
+	workDayService *WorkDayService
 }
 
-func NewWorkDayEquipmentService(equipmentRepo repository.WorkDayEquipmentRepositoryInterface) *WorkDayEquipmentService {
+func NewWorkDayEquipmentService(db *pgxpool.Pool, equipmentRepo repository.WorkDayEquipmentRepositoryInterface, workDayService *WorkDayService) *WorkDayEquipmentService {
 	return &WorkDayEquipmentService{
-		equipmentRepo: equipmentRepo,
+		db:             db,
+		equipmentRepo:  equipmentRepo,
+		workDayService: workDayService,
 	}
 }
 
@@ -73,8 +78,30 @@ func (s *WorkDayEquipmentService) Create(ctx context.Context, req dtos.CreateWor
 		Notes:         req.Notes,
 	}
 
-	created, err := s.equipmentRepo.Create(ctx, equipment)
+	// Calculate amount to add to work day total cost
+	amountToAdd := req.Quantity * req.Cost
+
+	// Start transaction
+	tx, err := s.db.Begin(ctx)
 	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
+
+	// Create equipment within transaction
+	created, err := s.equipmentRepo.CreateWithTx(ctx, tx, equipment)
+	if err != nil {
+		return nil, err
+	}
+
+	// Update work day total cost
+	err = s.workDayService.UpdateTotalCostWithTx(ctx, tx, req.WorkDayID, amountToAdd)
+	if err != nil {
+		return nil, err
+	}
+
+	// Commit transaction
+	if err := tx.Commit(ctx); err != nil {
 		return nil, err
 	}
 
@@ -91,22 +118,56 @@ func (s *WorkDayEquipmentService) Update(ctx context.Context, id int64, req dtos
 		return nil, err
 	}
 
+	// Calculate old and new amounts
+	oldAmount := existing.Quantity * existing.Cost
+	newQuantity := existing.Quantity
+	newCost := existing.Cost
+
 	// Apply partial updates
 	if req.EquipmentName != nil {
 		existing.EquipmentName = *req.EquipmentName
 	}
 	if req.Quantity != nil {
+		newQuantity = *req.Quantity
 		existing.Quantity = *req.Quantity
 	}
 	if req.Cost != nil {
+		newCost = *req.Cost
 		existing.Cost = *req.Cost
 	}
 	if req.Notes != nil {
 		existing.Notes = req.Notes
 	}
 
-	updated, err := s.equipmentRepo.Update(ctx, id, existing)
+	newAmount := newQuantity * newCost
+	amountDiff := newAmount - oldAmount
+
+	// Start transaction
+	tx, err := s.db.Begin(ctx)
 	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
+
+	// Update equipment within transaction
+	updated, err := s.equipmentRepo.UpdateWithTx(ctx, tx, id, existing)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, ErrWorkDayEquipmentNotFound
+		}
+		return nil, err
+	}
+
+	// Update work day total cost with difference
+	if amountDiff != 0 {
+		err = s.workDayService.UpdateTotalCostWithTx(ctx, tx, existing.WorkDayID, amountDiff)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	// Commit transaction
+	if err := tx.Commit(ctx); err != nil {
 		return nil, err
 	}
 
@@ -115,13 +176,45 @@ func (s *WorkDayEquipmentService) Update(ctx context.Context, id int64, req dtos
 }
 
 func (s *WorkDayEquipmentService) Delete(ctx context.Context, id int64) error {
-	err := s.equipmentRepo.Delete(ctx, id)
+	// Get equipment to know work day ID and amount to subtract
+	equipment, err := s.equipmentRepo.GetByID(ctx, id)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
 			return ErrWorkDayEquipmentNotFound
 		}
 		return err
 	}
+
+	// Calculate amount to subtract from work day total cost
+	amountToSubtract := equipment.Quantity * equipment.Cost
+
+	// Start transaction
+	tx, err := s.db.Begin(ctx)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(ctx)
+
+	// Delete equipment within transaction
+	err = s.equipmentRepo.DeleteWithTx(ctx, tx, id)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return ErrWorkDayEquipmentNotFound
+		}
+		return err
+	}
+
+	// Update work day total cost (subtract amount)
+	err = s.workDayService.UpdateTotalCostWithTx(ctx, tx, equipment.WorkDayID, -amountToSubtract)
+	if err != nil {
+		return err
+	}
+
+	// Commit transaction
+	if err := tx.Commit(ctx); err != nil {
+		return err
+	}
+
 	return nil
 }
 

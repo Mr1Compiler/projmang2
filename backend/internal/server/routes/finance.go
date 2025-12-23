@@ -18,6 +18,7 @@ func RegisterFinanceRoutes(rg *gin.RouterGroup, c *container.Container) {
 	}
 	{
 		expenses.GET("", expensesAuthz("read"), c.ExpenseHandler.GetAll)
+		expenses.GET("/stats", expensesAuthz("read"), c.ExpenseHandler.GetStats)
 		expenses.GET("/:id", expensesAuthz("read"), c.ExpenseHandler.GetByID)
 		expenses.POST("", expensesAuthz("write"), auditExpense("create"), c.ExpenseHandler.Create)
 		expenses.PUT("/:id", expensesAuthz("write"), auditExpense("update"), c.ExpenseHandler.Update)
@@ -34,6 +35,7 @@ func RegisterFinanceRoutes(rg *gin.RouterGroup, c *container.Container) {
 	}
 	{
 		income.GET("", incomeAuthz("read"), c.IncomeHandler.GetAll)
+		income.GET("/stats", incomeAuthz("read"), c.IncomeHandler.GetStats)
 		income.GET("/:id", incomeAuthz("read"), c.IncomeHandler.GetByID)
 		income.POST("", incomeAuthz("write"), auditIncome("create"), c.IncomeHandler.Create)
 		income.PUT("/:id", incomeAuthz("write"), auditIncome("update"), c.IncomeHandler.Update)

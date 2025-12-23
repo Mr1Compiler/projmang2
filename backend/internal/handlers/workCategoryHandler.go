@@ -124,6 +124,28 @@ func (h *WorkCategoryHandler) Delete(c *gin.Context) {
 	response.Success(c, nil)
 }
 
+// GetStats handles GET /work-categories/stats
+func (h *WorkCategoryHandler) GetStats(c *gin.Context) {
+	var periodQuery dtos.PeriodQuery
+	if err := c.ShouldBindQuery(&periodQuery); err != nil {
+		response.ValidationError(c, err)
+		return
+	}
+	periodQuery.Normalize()
+
+	stats, err := h.categoryService.GetStats(c.Request.Context(), periodQuery.Period)
+	if err != nil {
+		if errors.Is(err, services.ErrWorkCategoryStatsNotFound) {
+			response.NotFound(c, err.Error())
+			return
+		}
+		response.InternalError(c, "failed to fetch work category stats")
+		return
+	}
+
+	response.Success(c, stats)
+}
+
 // parseID extracts an int64 ID from the URL path
 func (h *WorkCategoryHandler) parseID(c *gin.Context, param string) (int64, error) {
 	idStr := c.Param(param)

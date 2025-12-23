@@ -18,3 +18,11 @@ type CreateTeamMember struct {
 	ProjectID int64 `json:"projectId" binding:"required"`
 	UserID    int64 `json:"userId" binding:"required"`
 }
+
+// Stats Response DTO
+type TeamMemberStatsResponse struct {
+	Total          int64   `json:"total"`
+	UniqueUsers    int64   `json:"uniqueUsers"`
+	UniqueProjects int64   `json:"uniqueProjects"`
+	AvgPerProject  float64 `json:"avgPerProject"`
+}

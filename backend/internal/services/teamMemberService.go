@@ -11,7 +11,8 @@ import (
 )
 
 var (
-	ErrTeamMemberNotFound = errors.New("team member not found")
+	ErrTeamMemberNotFound      = errors.New("team member not found")
+	ErrTeamMemberStatsNotFound = errors.New("team member stats not found")
 )
 
 type TeamMemberService struct {
@@ -101,6 +102,20 @@ func (s *TeamMemberService) Delete(ctx context.Context, id int64) error {
 		return err
 	}
 	return nil
+}
+
+func (s *TeamMemberService) GetStats(ctx context.Context, period string) (*dtos.TeamMemberStatsResponse, error) {
+	stats, err := s.teamMemberRepo.GetStats(ctx, period)
+	if err != nil {
+		return nil, err
+	}
+
+	return &dtos.TeamMemberStatsResponse{
+		Total:          stats.Total,
+		UniqueUsers:    stats.UniqueUsers,
+		UniqueProjects: stats.UniqueProjects,
+		AvgPerProject:  stats.AvgPerProject,
+	}, nil
 }
 
 // DTO conversion helper

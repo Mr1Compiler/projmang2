@@ -21,6 +21,7 @@ func RegisterRoutes(router *gin.Engine, c *container.Container) {
 	api.Use(auth.JWTMiddleware(c.JWTManager))
 
 	// Register all domain routes
+	RegisterDashboardRoutes(api, c)
 	RegisterProjectRoutes(api, c)
 	RegisterWorkDayRoutes(api, c)
 	RegisterWorkCategoryRoutes(api, c)

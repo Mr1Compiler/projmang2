@@ -74,3 +74,11 @@ type UpdateWorkSubCategory struct {
 	Percentage  *float64 `json:"percentage"`
 	Status      *string  `json:"status"`
 }
+
+// Stats Response DTO
+type WorkCategoryStatsResponse struct {
+	Total            int64 `json:"total"`
+	Active           int64 `json:"active"`
+	Inactive         int64 `json:"inactive"`
+	TotalSubcategory int64 `json:"totalSubcategory"`
+}

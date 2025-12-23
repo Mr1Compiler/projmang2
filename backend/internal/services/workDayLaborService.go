@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/dtos"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/models"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/repository"
@@ -15,12 +16,16 @@ var (
 )
 
 type WorkDayLaborService struct {
-	laborRepo repository.WorkDayLaborRepositoryInterface
+	db             *pgxpool.Pool
+	laborRepo      repository.WorkDayLaborRepositoryInterface
+	workDayService *WorkDayService
 }
 
-func NewWorkDayLaborService(laborRepo repository.WorkDayLaborRepositoryInterface) *WorkDayLaborService {
+func NewWorkDayLaborService(db *pgxpool.Pool, laborRepo repository.WorkDayLaborRepositoryInterface, workDayService *WorkDayService) *WorkDayLaborService {
 	return &WorkDayLaborService{
-		laborRepo: laborRepo,
+		db:             db,
+		laborRepo:      laborRepo,
+		workDayService: workDayService,
 	}
 }
 
@@ -76,8 +81,30 @@ func (s *WorkDayLaborService) Create(ctx context.Context, req dtos.CreateWorkDay
 		Notes:      req.Notes,
 	}
 
-	created, err := s.laborRepo.Create(ctx, labor)
+	// Calculate amount to add to work day total cost
+	amountToAdd := req.Quantity * req.Cost
+
+	// Start transaction
+	tx, err := s.db.Begin(ctx)
 	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
+
+	// Create labor within transaction
+	created, err := s.laborRepo.CreateWithTx(ctx, tx, labor)
+	if err != nil {
+		return nil, err
+	}
+
+	// Update work day total cost
+	err = s.workDayService.UpdateTotalCostWithTx(ctx, tx, req.WorkDayID, amountToAdd)
+	if err != nil {
+		return nil, err
+	}
+
+	// Commit transaction
+	if err := tx.Commit(ctx); err != nil {
 		return nil, err
 	}
 
@@ -94,6 +121,11 @@ func (s *WorkDayLaborService) Update(ctx context.Context, id int64, req dtos.Upd
 		return nil, err
 	}
 
+	// Calculate old and new amounts
+	oldAmount := existing.Quantity * existing.Cost
+	newQuantity := existing.Quantity
+	newCost := existing.Cost
+
 	// Apply partial updates
 	if req.WorkerName != nil {
 		existing.WorkerName = *req.WorkerName
@@ -108,17 +140,46 @@ func (s *WorkDayLaborService) Update(ctx context.Context, id int64, req dtos.Upd
 		existing.Address = req.Address
 	}
 	if req.Quantity != nil {
+		newQuantity = *req.Quantity
 		existing.Quantity = *req.Quantity
 	}
 	if req.Cost != nil {
+		newCost = *req.Cost
 		existing.Cost = *req.Cost
 	}
 	if req.Notes != nil {
 		existing.Notes = req.Notes
 	}
 
-	updated, err := s.laborRepo.Update(ctx, id, existing)
+	newAmount := newQuantity * newCost
+	amountDiff := newAmount - oldAmount
+
+	// Start transaction
+	tx, err := s.db.Begin(ctx)
 	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
+
+	// Update labor within transaction
+	updated, err := s.laborRepo.UpdateWithTx(ctx, tx, id, existing)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, ErrWorkDayLaborNotFound
+		}
+		return nil, err
+	}
+
+	// Update work day total cost with difference
+	if amountDiff != 0 {
+		err = s.workDayService.UpdateTotalCostWithTx(ctx, tx, existing.WorkDayID, amountDiff)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	// Commit transaction
+	if err := tx.Commit(ctx); err != nil {
 		return nil, err
 	}
 
@@ -127,13 +188,45 @@ func (s *WorkDayLaborService) Update(ctx context.Context, id int64, req dtos.Upd
 }
 
 func (s *WorkDayLaborService) Delete(ctx context.Context, id int64) error {
-	err := s.laborRepo.Delete(ctx, id)
+	// Get labor to know work day ID and amount to subtract
+	labor, err := s.laborRepo.GetByID(ctx, id)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
 			return ErrWorkDayLaborNotFound
 		}
 		return err
 	}
+
+	// Calculate amount to subtract from work day total cost
+	amountToSubtract := labor.Quantity * labor.Cost
+
+	// Start transaction
+	tx, err := s.db.Begin(ctx)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(ctx)
+
+	// Delete labor within transaction
+	err = s.laborRepo.DeleteWithTx(ctx, tx, id)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return ErrWorkDayLaborNotFound
+		}
+		return err
+	}
+
+	// Update work day total cost (subtract amount)
+	err = s.workDayService.UpdateTotalCostWithTx(ctx, tx, labor.WorkDayID, -amountToSubtract)
+	if err != nil {
+		return err
+	}
+
+	// Commit transaction
+	if err := tx.Commit(ctx); err != nil {
+		return err
+	}
+
 	return nil
 }
 

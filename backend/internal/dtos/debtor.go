@@ -53,3 +53,13 @@ type UpdateDebtor struct {
 	Status    *string    `json:"status"`
 	Notes     *string    `json:"notes"`
 }
+
+// Stats Response DTO
+type DebtorStatsResponse struct {
+	Total       int64   `json:"total"`
+	Active      int64   `json:"active"`
+	Paid        int64   `json:"paid"`
+	TotalDebt   float64 `json:"totalDebt"`
+	ActiveDebt  float64 `json:"activeDebt"`
+	AverageDebt float64 `json:"averageDebt"`
+}

@@ -11,7 +11,8 @@ import (
 )
 
 var (
-	ErrExpenseNotFound = errors.New("expense not found")
+	ErrExpenseNotFound      = errors.New("expense not found")
+	ErrExpenseStatsNotFound = errors.New("expense stats not found")
 )
 
 type ExpenseService struct {
@@ -143,6 +144,23 @@ func (s *ExpenseService) Delete(ctx context.Context, id int64) error {
 		return err
 	}
 	return nil
+}
+
+func (s *ExpenseService) GetStats(ctx context.Context, period string) (*dtos.ExpenseStatsResponse, error) {
+	stats, err := s.expenseRepo.GetStats(ctx, period)
+	if err != nil {
+		return nil, err
+	}
+
+	return &dtos.ExpenseStatsResponse{
+		Total:         stats.Total,
+		TotalAmount:   stats.TotalAmount,
+		Pending:       stats.Pending,
+		Approved:      stats.Approved,
+		Rejected:      stats.Rejected,
+		DebtorCount:   stats.DebtorCount,
+		AverageAmount: stats.AverageAmount,
+	}, nil
 }
 
 // DTO conversion helpers

@@ -131,6 +131,28 @@ func (h *TeamMemberHandler) Delete(c *gin.Context) {
 	response.Success(c, nil)
 }
 
+// GetStats handles GET /team-members/stats
+func (h *TeamMemberHandler) GetStats(c *gin.Context) {
+	var periodQuery dtos.PeriodQuery
+	if err := c.ShouldBindQuery(&periodQuery); err != nil {
+		response.ValidationError(c, err)
+		return
+	}
+	periodQuery.Normalize()
+
+	stats, err := h.teamMemberService.GetStats(c.Request.Context(), periodQuery.Period)
+	if err != nil {
+		if errors.Is(err, services.ErrTeamMemberStatsNotFound) {
+			response.NotFound(c, err.Error())
+			return
+		}
+		response.InternalError(c, "failed to fetch team member stats")
+		return
+	}
+
+	response.Success(c, stats)
+}
+
 // parseID extracts an int64 ID from the URL path
 func (h *TeamMemberHandler) parseID(c *gin.Context, param string) (int64, error) {
 	idStr := c.Param(param)

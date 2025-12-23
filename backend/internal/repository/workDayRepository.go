@@ -11,10 +11,12 @@ import (
 type WorkDayRepositoryInterface interface {
 	GetAll(ctx context.Context, limit, offset int) ([]models.WorkDay, int64, error)
 	GetByID(ctx context.Context, id int64) (*models.WorkDay, error)
+	GetByIDWithTx(ctx context.Context, tx pgx.Tx, id int64) (*models.WorkDay, error)
 	GetByProjectID(ctx context.Context, projectID int64) ([]models.WorkDay, error)
 	Create(ctx context.Context, workDay *models.WorkDay) (*models.WorkDay, error)
 	Update(ctx context.Context, id int64, workDay *models.WorkDay) (*models.WorkDay, error)
 	UpdateWithTx(ctx context.Context, tx pgx.Tx, id int64, workDay *models.WorkDay) (*models.WorkDay, error)
+	UpdateTotalCostWithTx(ctx context.Context, tx pgx.Tx, id int64, amountToAdd float64) error
 	Delete(ctx context.Context, id int64) error
 }
 
@@ -73,6 +75,28 @@ func (r *WorkDayRepository) GetByID(ctx context.Context, id int64) (*models.Work
 
 	var w models.WorkDay
 	err := r.db.QueryRow(ctx, query, id).Scan(
+		&w.ID, &w.ProjectID, &w.WorkSubCategoryID, &w.WorkDate, &w.Description,
+		&w.Status, &w.TotalCost, &w.Notes, &w.CreatedBy, &w.CreatedAt,
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &w, nil
+}
+
+func (r *WorkDayRepository) GetByIDWithTx(ctx context.Context, tx pgx.Tx, id int64) (*models.WorkDay, error) {
+	query := `
+		SELECT id, projectId, workSubCategoryId, workDate, description,
+		       status, totalCost, notes, createdBy, createdAt
+		FROM workDays
+		WHERE id = $1
+		FOR UPDATE
+	`
+
+	var w models.WorkDay
+	err := tx.QueryRow(ctx, query, id).Scan(
 		&w.ID, &w.ProjectID, &w.WorkSubCategoryID, &w.WorkDate, &w.Description,
 		&w.Status, &w.TotalCost, &w.Notes, &w.CreatedBy, &w.CreatedAt,
 	)
@@ -184,6 +208,18 @@ func (r *WorkDayRepository) UpdateWithTx(ctx context.Context, tx pgx.Tx, id int6
 	}
 
 	return workDay, nil
+}
+
+func (r *WorkDayRepository) UpdateTotalCostWithTx(ctx context.Context, tx pgx.Tx, id int64, amountToAdd float64) error {
+	query := `UPDATE workDays SET totalCost = totalCost + $1 WHERE id = $2`
+	result, err := tx.Exec(ctx, query, amountToAdd, id)
+	if err != nil {
+		return err
+	}
+	if result.RowsAffected() == 0 {
+		return pgx.ErrNoRows
+	}
+	return nil
 }
 
 func (r *WorkDayRepository) Delete(ctx context.Context, id int64) error {

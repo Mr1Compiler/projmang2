@@ -11,7 +11,8 @@ import (
 )
 
 var (
-	ErrIncomeNotFound = errors.New("income not found")
+	ErrIncomeNotFound      = errors.New("income not found")
+	ErrIncomeStatsNotFound = errors.New("income stats not found")
 )
 
 type IncomeService struct {
@@ -118,6 +119,22 @@ func (s *IncomeService) Delete(ctx context.Context, id int64) error {
 		return err
 	}
 	return nil
+}
+
+func (s *IncomeService) GetStats(ctx context.Context, period string) (*dtos.IncomeStatsResponse, error) {
+	stats, err := s.incomeRepo.GetStats(ctx, period)
+	if err != nil {
+		return nil, err
+	}
+
+	return &dtos.IncomeStatsResponse{
+		Total:         stats.Total,
+		TotalAmount:   stats.TotalAmount,
+		Pending:       stats.Pending,
+		Approved:      stats.Approved,
+		Rejected:      stats.Rejected,
+		AverageAmount: stats.AverageAmount,
+	}, nil
 }
 
 // DTO conversion helpers

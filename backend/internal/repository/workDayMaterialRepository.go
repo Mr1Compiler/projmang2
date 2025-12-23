@@ -13,8 +13,11 @@ type WorkDayMaterialRepositoryInterface interface {
 	GetByID(ctx context.Context, id int64) (*models.WorkDayMaterial, error)
 	GetByWorkDayID(ctx context.Context, workDayID int64) ([]models.WorkDayMaterial, error)
 	Create(ctx context.Context, material *models.WorkDayMaterial) (*models.WorkDayMaterial, error)
+	CreateWithTx(ctx context.Context, tx pgx.Tx, material *models.WorkDayMaterial) (*models.WorkDayMaterial, error)
 	Update(ctx context.Context, id int64, material *models.WorkDayMaterial) (*models.WorkDayMaterial, error)
+	UpdateWithTx(ctx context.Context, tx pgx.Tx, id int64, material *models.WorkDayMaterial) (*models.WorkDayMaterial, error)
 	Delete(ctx context.Context, id int64) error
+	DeleteWithTx(ctx context.Context, tx pgx.Tx, id int64) error
 }
 
 type WorkDayMaterialRepository struct {
@@ -131,6 +134,25 @@ func (r *WorkDayMaterialRepository) Create(ctx context.Context, material *models
 	return material, nil
 }
 
+func (r *WorkDayMaterialRepository) CreateWithTx(ctx context.Context, tx pgx.Tx, material *models.WorkDayMaterial) (*models.WorkDayMaterial, error) {
+	query := `
+		INSERT INTO workDayMaterials (workDayId, materialName, quantity, cost, notes)
+		VALUES ($1, $2, $3, $4, $5)
+		RETURNING id, createdAt
+	`
+
+	err := tx.QueryRow(ctx, query,
+		material.WorkDayID, material.MaterialName, material.Quantity,
+		material.Cost, material.Notes,
+	).Scan(&material.ID, &material.CreatedAt)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return material, nil
+}
+
 func (r *WorkDayMaterialRepository) Update(ctx context.Context, id int64, material *models.WorkDayMaterial) (*models.WorkDayMaterial, error) {
 	query := `
 		UPDATE workDayMaterials
@@ -154,9 +176,44 @@ func (r *WorkDayMaterialRepository) Update(ctx context.Context, id int64, materi
 	return material, nil
 }
 
+func (r *WorkDayMaterialRepository) UpdateWithTx(ctx context.Context, tx pgx.Tx, id int64, material *models.WorkDayMaterial) (*models.WorkDayMaterial, error) {
+	query := `
+		UPDATE workDayMaterials
+		SET materialName = $1, quantity = $2, cost = $3, notes = $4
+		WHERE id = $5
+		RETURNING id, workDayId, materialName, quantity, cost, notes, createdAt
+	`
+
+	err := tx.QueryRow(ctx, query,
+		material.MaterialName, material.Quantity,
+		material.Cost, material.Notes, id,
+	).Scan(
+		&material.ID, &material.WorkDayID, &material.MaterialName, &material.Quantity,
+		&material.Cost, &material.Notes, &material.CreatedAt,
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return material, nil
+}
+
 func (r *WorkDayMaterialRepository) Delete(ctx context.Context, id int64) error {
 	query := `DELETE FROM workDayMaterials WHERE id = $1`
 	result, err := r.db.Exec(ctx, query, id)
+	if err != nil {
+		return err
+	}
+	if result.RowsAffected() == 0 {
+		return pgx.ErrNoRows
+	}
+	return nil
+}
+
+func (r *WorkDayMaterialRepository) DeleteWithTx(ctx context.Context, tx pgx.Tx, id int64) error {
+	query := `DELETE FROM workDayMaterials WHERE id = $1`
+	result, err := tx.Exec(ctx, query, id)
 	if err != nil {
 		return err
 	}

@@ -11,7 +11,8 @@ import (
 )
 
 var (
-	ErrWorkCategoryNotFound = errors.New("work category not found")
+	ErrWorkCategoryNotFound      = errors.New("work category not found")
+	ErrWorkCategoryStatsNotFound = errors.New("work category stats not found")
 )
 
 type WorkCategoryService struct {
@@ -106,6 +107,20 @@ func (s *WorkCategoryService) Delete(ctx context.Context, id int64) error {
 		return err
 	}
 	return nil
+}
+
+func (s *WorkCategoryService) GetStats(ctx context.Context, period string) (*dtos.WorkCategoryStatsResponse, error) {
+	stats, err := s.categoryRepo.GetStats(ctx, period)
+	if err != nil {
+		return nil, err
+	}
+
+	return &dtos.WorkCategoryStatsResponse{
+		Total:            stats.Total,
+		Active:           stats.Active,
+		Inactive:         stats.Inactive,
+		TotalSubcategory: stats.TotalSubcategory,
+	}, nil
 }
 
 // DTO conversion helpers

@@ -1,7 +1,9 @@
 package server
 
 import (
+	"context"
 	"log"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/config"
@@ -13,6 +15,7 @@ type Server struct {
 	port      string
 	router    *gin.Engine
 	container *container.Container
+	httpSrv   *http.Server
 }
 
 func NewServer(port string, c *container.Container, cfg *config.Config) *Server {
@@ -41,6 +44,17 @@ func (s *Server) Router() *gin.Engine {
 }
 
 func (s *Server) Run() error {
+	s.httpSrv = &http.Server{
+		Addr:    "0.0.0.0:" + s.port,
+		Handler: s.router,
+	}
 	log.Printf("Server starting on port %s", s.port)
-	return s.router.Run("0.0.0.0:" + s.port)
+	return s.httpSrv.ListenAndServe()
+}
+
+func (s *Server) Shutdown(ctx context.Context) error {
+	if s.httpSrv == nil {
+		return nil
+	}
+	return s.httpSrv.Shutdown(ctx)
 }

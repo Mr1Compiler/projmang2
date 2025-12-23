@@ -14,6 +14,7 @@ type ProjectSummary struct {
 	ProgressPercentage float64    `json:"progressPercentage"`
 	WarningCost        float64    `json:"warningCost"`
 	TotalCost          float64    `json:"totalCost"`
+	CurrentSpending    float64    `json:"currentSpending"`
 }
 
 type Project struct {
@@ -32,6 +33,7 @@ type Project struct {
 	Notes              *string    `json:"notes"`
 	CreatedBy          *int64     `json:"createdBy"`
 	CreatedAt          time.Time  `json:"createdAt"`
+	CurrentSpending    float64    `json:"currentSpending"`
 }
 
 // Request DTOs
@@ -62,4 +64,14 @@ type UpdateProject struct {
 	Status             *string    `json:"status"`
 	ProgressPercentage *float64   `json:"progressPercentage"`
 	Notes              *string    `json:"notes"`
+}
+
+// Stats Response DTO
+type ProjectStatsResponse struct {
+	Total           int64   `json:"total"`
+	Pending         int64   `json:"pending"`
+	InProgress      int64   `json:"inProgress"`
+	Completed       int64   `json:"completed"`
+	TotalBudget     float64 `json:"totalBudget"`
+	AverageProgress float64 `json:"averageProgress"`
 }

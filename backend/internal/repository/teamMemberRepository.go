@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"time"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -15,6 +16,15 @@ type TeamMemberRepositoryInterface interface {
 	GetByUserID(ctx context.Context, userID int64) ([]models.TeamMember, error)
 	Create(ctx context.Context, teamMember *models.TeamMember) (*models.TeamMember, error)
 	Delete(ctx context.Context, id int64) error
+	GetStats(ctx context.Context, period string) (*TeamMemberStatsResult, error)
+}
+
+// TeamMemberStatsResult holds aggregated team member statistics
+type TeamMemberStatsResult struct {
+	Total          int64   `json:"total"`
+	UniqueUsers    int64   `json:"uniqueUsers"`
+	UniqueProjects int64   `json:"uniqueProjects"`
+	AvgPerProject  float64 `json:"avgPerProject"`
 }
 
 type TeamMemberRepository struct {
@@ -160,4 +170,47 @@ func (r *TeamMemberRepository) Delete(ctx context.Context, id int64) error {
 		return pgx.ErrNoRows
 	}
 	return nil
+}
+
+func (r *TeamMemberRepository) GetStats(ctx context.Context, period string) (*TeamMemberStatsResult, error) {
+	whereClause := buildTeamMemberPeriodWhereClause(period, "createdAt")
+
+	query := `
+		SELECT
+			COUNT(*) as total,
+			COUNT(DISTINCT userId) as unique_users,
+			COUNT(DISTINCT projectId) as unique_projects,
+			COALESCE(
+				CAST(COUNT(*) AS FLOAT) / NULLIF(COUNT(DISTINCT projectId), 0),
+				0
+			) as avg_per_project
+		FROM teamMembers
+	` + whereClause
+
+	var stats TeamMemberStatsResult
+	err := r.db.QueryRow(ctx, query).Scan(
+		&stats.Total,
+		&stats.UniqueUsers,
+		&stats.UniqueProjects,
+		&stats.AvgPerProject,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return &stats, nil
+}
+
+func buildTeamMemberPeriodWhereClause(period, dateColumn string) string {
+	now := time.Now()
+	switch period {
+	case "month":
+		startOfMonth := time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, now.Location())
+		return " WHERE " + dateColumn + " >= '" + startOfMonth.Format("2006-01-02") + "'"
+	case "year":
+		startOfYear := time.Date(now.Year(), 1, 1, 0, 0, 0, 0, now.Location())
+		return " WHERE " + dateColumn + " >= '" + startOfYear.Format("2006-01-02") + "'"
+	default:
+		return ""
+	}
 }
