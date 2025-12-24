@@ -199,3 +199,15 @@ func (r *UserRepository) Delete(ctx context.Context, id int64) error {
 	}
 	return nil
 }
+
+func (r *UserRepository) UpdateLastLogin(ctx context.Context, userID int64) error {
+	query := `UPDATE users SET lastlogin = NOW() AT TIME ZONE 'UTC' WHERE id = $1`
+	result, err := r.db.Exec(ctx, query, userID)
+	if err != nil {
+		return err
+	}
+	if result.RowsAffected() == 0 {
+		return pgx.ErrNoRows
+	}
+	return nil
+}

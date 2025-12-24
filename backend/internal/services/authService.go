@@ -76,6 +76,11 @@ func (s *AuthService) Login(ctx context.Context, username, password string) (*Lo
 		return nil, ErrUserInactive
 	}
 
+	// Update last login time - non-critical, log error but don't fail login
+	if err := s.userRepo.UpdateLastLogin(ctx, creds.ID); err != nil {
+		log.Printf("WARN: failed to update last login for user %d: %v", creds.ID, err)
+	}
+
 	accessToken, err := s.jwtManager.GenerateToken(creds.ID, creds.Username)
 	if err != nil {
 		return nil, err
