@@ -84,14 +84,24 @@
           {{ item.notes || '-' }}
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-btn
-            icon="mdi-delete"
-            size="small"
-            color="error"
-            variant="text"
-            @click="deleteMaterial(item)"
-            title="حذف المادة"
-          />
+          <div class="action-buttons">
+            <v-btn
+              icon="mdi-pencil"
+              size="small"
+              color="primary"
+              variant="text"
+              @click="openEditMaterialDialog(item)"
+              title="تعديل المادة"
+            />
+            <v-btn
+              icon="mdi-delete"
+              size="small"
+              color="error"
+              variant="text"
+              @click="deleteMaterial(item)"
+              title="حذف المادة"
+            />
+          </div>
         </template>
       </v-data-table>
 
@@ -347,6 +357,142 @@
       </v-card>
     </v-dialog>
 
+    <!-- Edit Material Dialog -->
+    <v-dialog v-model="showEditMaterialDialog" max-width="900" scrollable persistent>
+      <v-card class="clean-dialog-card clean-form-card">
+        <!-- Header Section -->
+        <v-card-title class="clean-dialog-header clean-form-header">
+          <h2 class="clean-form-title">تعديل معلومات المادة</h2>
+        </v-card-title>
+
+        <!-- Form Content -->
+        <v-card-text class="clean-form-content">
+          <p class="clean-form-instruction">
+            قم بتعديل المعلومات المطلوبة. جميع الحقول المميزة بعلامة النجمة (*) مطلوبة.
+          </p>
+
+          <v-form ref="editMaterialForm" v-model="editMaterialFormValid">
+            <!-- الصف الأول: اسم المادة، الكمية، التكلفة -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" md="4" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    اسم المادة <span class="required-star">*</span>
+                  </label>
+                  <v-text-field
+                    v-model="editMaterial.materialName"
+                    variant="outlined"
+                    density="comfortable"
+                    placeholder="أدخل اسم المادة"
+                    :rules="[v => !!v || 'اسم المادة مطلوب']"
+                    required
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+
+              <v-col cols="12" md="4" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    الكمية <span class="required-star">*</span>
+                  </label>
+                  <v-text-field
+                    v-model.number="editMaterial.quantity"
+                    type="number"
+                    variant="outlined"
+                    density="comfortable"
+                    placeholder="0"
+                    :rules="[v => (v > 0) || 'الكمية يجب أن تكون أكبر من صفر']"
+                    required
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+
+              <v-col cols="12" md="4" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    التكلفة (د.ع) <span class="required-star">*</span>
+                  </label>
+                  <v-text-field
+                    v-model.number="editMaterial.cost"
+                    type="number"
+                    variant="outlined"
+                    density="comfortable"
+                    placeholder="0"
+                    :rules="[v => (v > 0) || 'التكلفة يجب أن تكون أكبر من صفر']"
+                    required
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+
+            <!-- الصف الثاني: السعر الكلي -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    السعر الكلي (د.ع)
+                  </label>
+                  <v-text-field
+                    :value="(editMaterial.quantity * editMaterial.cost) || 0"
+                    variant="outlined"
+                    density="comfortable"
+                    placeholder="0"
+                    readonly
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+
+            <!-- الصف الثالث: الملاحظات -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">الملاحظات</label>
+                  <v-textarea
+                    v-model="editMaterial.notes"
+                    variant="outlined"
+                    rows="4"
+                    density="comfortable"
+                    placeholder="أدخل الملاحظات الإضافية"
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card-text>
+
+        <!-- Footer Actions -->
+        <v-card-actions class="clean-form-actions">
+          <v-spacer />
+          <v-btn
+            class="clean-form-cancel-btn"
+            variant="outlined"
+            @click="closeEditMaterialDialog"
+          >
+            إلغاء
+          </v-btn>
+          <v-btn
+            class="clean-form-continue-btn"
+            variant="elevated"
+            :disabled="!editMaterialFormValid"
+            @click="saveEditMaterial"
+          >
+            حفظ التعديلات
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <!-- Add Expense Dialog - Clean Form Style -->
     <v-dialog v-model="showAddExpenseDialog" max-width="900" scrollable persistent>
       <v-card class="clean-dialog-card clean-form-card">
@@ -506,7 +652,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { listMaterialsByWorkDay, createMaterial, deleteMaterial as deleteMaterialApi } from '@/api/materials'
+import { listMaterialsByWorkDay, createMaterial, updateMaterial, deleteMaterial as deleteMaterialApi } from '@/api/materials'
 import { listExpensesByProject, createExpense, deleteExpense as deleteExpenseApi } from '@/api/expenses'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
 
@@ -532,6 +678,18 @@ const expenseFormValid = ref(false)
 const loading = ref(false)
 const form = ref(null)
 const expenseForm = ref(null)
+
+// Edit material dialog state
+const showEditMaterialDialog = ref(false)
+const editMaterialFormValid = ref(false)
+const editMaterialForm = ref(null)
+const editingMaterialId = ref(null)
+const editMaterial = ref({
+  materialName: '',
+  quantity: 0,
+  cost: 0,
+  notes: ''
+})
 
 // Pagination state
 const materialsPage = ref(1)
@@ -795,6 +953,54 @@ const deleteMaterial = async (item) => {
       await loadMaterials()
     } catch (err) {
       console.error('Error deleting material:', err)
+    }
+  }
+}
+
+// Edit material functions
+const openEditMaterialDialog = (item) => {
+  editingMaterialId.value = item.id
+  editMaterial.value = {
+    materialName: item.materialName,
+    quantity: item.quantity,
+    cost: item.cost,
+    notes: item.notes || ''
+  }
+  showEditMaterialDialog.value = true
+}
+
+const closeEditMaterialDialog = () => {
+  showEditMaterialDialog.value = false
+  if (editMaterialForm.value) {
+    editMaterialForm.value.reset()
+  }
+  editingMaterialId.value = null
+  editMaterial.value = {
+    materialName: '',
+    quantity: 0,
+    cost: 0,
+    notes: ''
+  }
+}
+
+const saveEditMaterial = async () => {
+  const { valid } = await editMaterialForm.value.validate()
+  if (valid) {
+    try {
+      const payload = {
+        materialName: editMaterial.value.materialName,
+        quantity: Number(editMaterial.value.quantity),
+        cost: Number(editMaterial.value.cost)
+      }
+      if (editMaterial.value.notes && editMaterial.value.notes.trim()) {
+        payload.notes = editMaterial.value.notes.trim()
+      }
+
+      await updateMaterial(editingMaterialId.value, payload)
+      await loadMaterials()
+      closeEditMaterialDialog()
+    } catch (err) {
+      console.error('Error updating material:', err)
     }
   }
 }
@@ -1877,6 +2083,26 @@ watch(projectId, (newId) => {
 .clean-form-continue-btn:disabled {
   background: #cccccc !important;
   color: #999999 !important;
+}
+
+/* Action buttons styling */
+.action-buttons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-buttons .v-btn {
+  min-width: 28px !important;
+  height: 28px !important;
+  border-radius: 4px !important;
+  transition: all 0.3s ease !important;
+}
+
+.action-buttons .v-btn:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Responsive */

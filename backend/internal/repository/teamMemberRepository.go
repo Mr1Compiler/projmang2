@@ -36,17 +36,24 @@ func NewTeamMemberRepository(db *pgxpool.Pool) *TeamMemberRepository {
 }
 
 func (r *TeamMemberRepository) GetAll(ctx context.Context, limit, offset int) ([]models.TeamMember, int64, error) {
-	// Get total count
+	// Get total count (only team members linked to active projects)
 	var total int64
-	countQuery := `SELECT COUNT(*) FROM teamMembers`
+	countQuery := `
+		SELECT COUNT(*)
+		FROM teamMembers tm
+		JOIN projects p ON tm.projectId = p.id
+		WHERE p.isActive = TRUE
+	`
 	if err := r.db.QueryRow(ctx, countQuery).Scan(&total); err != nil {
 		return nil, 0, err
 	}
 
 	query := `
-		SELECT id, projectId, userId
-		FROM teamMembers
-		ORDER BY createdAt DESC
+		SELECT tm.id, tm.projectId, tm.userId
+		FROM teamMembers tm
+		JOIN projects p ON tm.projectId = p.id
+		WHERE p.isActive = TRUE
+		ORDER BY tm.createdAt DESC
 		LIMIT $1 OFFSET $2
 	`
 
@@ -117,10 +124,11 @@ func (r *TeamMemberRepository) GetByProjectID(ctx context.Context, projectID int
 
 func (r *TeamMemberRepository) GetByUserID(ctx context.Context, userID int64) ([]models.TeamMember, error) {
 	query := `
-		SELECT id, projectId, userId, createdAt, updatedAt
-		FROM teamMembers
-		WHERE userId = $1
-		ORDER BY createdAt DESC
+		SELECT tm.id, tm.projectId, tm.userId, tm.createdAt, tm.updatedAt
+		FROM teamMembers tm
+		JOIN projects p ON tm.projectId = p.id
+		WHERE tm.userId = $1 AND p.isActive = TRUE
+		ORDER BY tm.createdAt DESC
 	`
 
 	rows, err := r.db.Query(ctx, query, userID)
@@ -173,18 +181,27 @@ func (r *TeamMemberRepository) Delete(ctx context.Context, id int64) error {
 }
 
 func (r *TeamMemberRepository) GetStats(ctx context.Context, period string) (*TeamMemberStatsResult, error) {
-	whereClause := buildTeamMemberPeriodWhereClause(period, "createdAt")
+	periodClause := buildTeamMemberPeriodWhereClause(period, "tm.createdAt")
+
+	// Filter team members: only those linked to active projects
+	var whereClause string
+	if periodClause == "" {
+		whereClause = " WHERE p.isActive = TRUE"
+	} else {
+		whereClause = periodClause + " AND p.isActive = TRUE"
+	}
 
 	query := `
 		SELECT
 			COUNT(*) as total,
-			COUNT(DISTINCT userId) as unique_users,
-			COUNT(DISTINCT projectId) as unique_projects,
+			COUNT(DISTINCT tm.userId) as unique_users,
+			COUNT(DISTINCT tm.projectId) as unique_projects,
 			COALESCE(
-				CAST(COUNT(*) AS FLOAT) / NULLIF(COUNT(DISTINCT projectId), 0),
+				CAST(COUNT(*) AS FLOAT) / NULLIF(COUNT(DISTINCT tm.projectId), 0),
 				0
 			) as avg_per_project
-		FROM teamMembers
+		FROM teamMembers tm
+		JOIN projects p ON tm.projectId = p.id
 	` + whereClause
 
 	var stats TeamMemberStatsResult

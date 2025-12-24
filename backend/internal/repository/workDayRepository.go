@@ -29,17 +29,24 @@ func NewWorkDayRepository(db *pgxpool.Pool) *WorkDayRepository {
 }
 
 func (r *WorkDayRepository) GetAll(ctx context.Context, limit, offset int) ([]models.WorkDay, int64, error) {
-	// Get total count
+	// Get total count (only workdays linked to active projects)
 	var total int64
-	countQuery := `SELECT COUNT(*) FROM workDays`
+	countQuery := `
+		SELECT COUNT(*)
+		FROM workDays w
+		JOIN projects p ON w.projectId = p.id
+		WHERE p.isActive = TRUE
+	`
 	if err := r.db.QueryRow(ctx, countQuery).Scan(&total); err != nil {
 		return nil, 0, err
 	}
 
 	query := `
-		SELECT id, projectId, workSubCategoryId, workDate, status, totalCost
-		FROM workDays
-		ORDER BY createdAt DESC
+		SELECT w.id, w.projectId, w.workSubCategoryId, w.workDate, w.description, w.notes, w.status, w.totalCost
+		FROM workDays w
+		JOIN projects p ON w.projectId = p.id
+		WHERE p.isActive = TRUE
+		ORDER BY w.createdAt DESC
 		LIMIT $1 OFFSET $2
 	`
 
@@ -54,7 +61,7 @@ func (r *WorkDayRepository) GetAll(ctx context.Context, limit, offset int) ([]mo
 		var w models.WorkDay
 		err := rows.Scan(
 			&w.ID, &w.ProjectID, &w.WorkSubCategoryID, &w.WorkDate,
-			&w.Status, &w.TotalCost,
+			&w.Description, &w.Notes, &w.Status, &w.TotalCost,
 		)
 		if err != nil {
 			return nil, 0, err
@@ -110,7 +117,7 @@ func (r *WorkDayRepository) GetByIDWithTx(ctx context.Context, tx pgx.Tx, id int
 
 func (r *WorkDayRepository) GetByProjectID(ctx context.Context, projectID int64) ([]models.WorkDay, error) {
 	query := `
-		SELECT id, projectId, workSubCategoryId, workDate, status, totalCost
+		SELECT id, projectId, workSubCategoryId, workDate, description, notes, status, totalCost
 		FROM workDays
 		WHERE projectId = $1
 		ORDER BY workDate DESC
@@ -127,7 +134,7 @@ func (r *WorkDayRepository) GetByProjectID(ctx context.Context, projectID int64)
 		var w models.WorkDay
 		err := rows.Scan(
 			&w.ID, &w.ProjectID, &w.WorkSubCategoryID, &w.WorkDate,
-			&w.Status, &w.TotalCost,
+			&w.Description, &w.Notes, &w.Status, &w.TotalCost,
 		)
 		if err != nil {
 			return nil, err

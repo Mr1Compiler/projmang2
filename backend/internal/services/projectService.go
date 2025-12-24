@@ -11,8 +11,9 @@ import (
 )
 
 var (
-	ErrProjectNotFound      = errors.New("project not found")
-	ErrProjectStatsNotFound = errors.New("project stats not found")
+	ErrProjectNotFound            = errors.New("project not found")
+	ErrProjectStatsNotFound       = errors.New("project stats not found")
+	ErrWarningCostExceedsTotalCost = errors.New("warning cost must be less than or equal to total cost")
 )
 
 type ProjectService struct {
@@ -75,6 +76,11 @@ func (s *ProjectService) GetByID(ctx context.Context, id int64) (*dtos.Project, 
 }
 
 func (s *ProjectService) Create(ctx context.Context, req dtos.CreateProject) (*dtos.Project, error) {
+	// Validate that warning cost is less than or equal to total cost
+	if req.WarningCost > req.TotalCost {
+		return nil, ErrWarningCostExceedsTotalCost
+	}
+
 	project := &models.Project{
 		Name:               req.Name,
 		Type:               req.Type,
@@ -85,7 +91,7 @@ func (s *ProjectService) Create(ctx context.Context, req dtos.CreateProject) (*d
 		Duration:           req.Duration,
 		WarningCost:        req.WarningCost,
 		TotalCost:          req.TotalCost,
-		Status:             "draft",
+		Status:             "in_progress",
 		ProgressPercentage: 0,
 		Notes:              req.Notes,
 		CreatedBy:          req.CreatedBy,
@@ -147,6 +153,11 @@ func (s *ProjectService) Update(ctx context.Context, id int64, req dtos.UpdatePr
 		existing.Notes = req.Notes
 	}
 
+	// Validate that warning cost is less than or equal to total cost
+	if existing.WarningCost > existing.TotalCost {
+		return nil, ErrWarningCostExceedsTotalCost
+	}
+
 	updated, err := s.projectRepo.Update(ctx, id, existing)
 	if err != nil {
 		return nil, err
@@ -194,13 +205,16 @@ func toProjectSummaryDTO(p models.Project) dtos.ProjectSummary {
 		ID:                 p.ID,
 		Name:               p.Name,
 		Type:               p.Type,
+		Description:        p.Description,
 		ClientPhone:        p.ClientPhone,
 		Location:           p.Location,
 		StartDate:          p.StartDate,
+		Duration:           p.Duration,
 		Status:             p.Status,
 		ProgressPercentage: p.ProgressPercentage,
 		WarningCost:        p.WarningCost,
 		TotalCost:          p.TotalCost,
+		Notes:              p.Notes,
 	}
 }
 

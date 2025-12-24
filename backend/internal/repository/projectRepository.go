@@ -41,17 +41,18 @@ func NewProjectRepository(db *pgxpool.Pool) *ProjectRepository {
 }
 
 func (r *ProjectRepository) GetAll(ctx context.Context, limit, offset int) ([]models.Project, int64, error) {
-	// Get total count
+	// Get total count (only active projects)
 	var total int64
-	countQuery := `SELECT COUNT(*) FROM projects`
+	countQuery := `SELECT COUNT(*) FROM projects WHERE isActive = TRUE`
 	if err := r.db.QueryRow(ctx, countQuery).Scan(&total); err != nil {
 		return nil, 0, err
 	}
 
 	query := `
-		SELECT id, name, type, clientPhone, location, startDate,
-		       status, progressPercentage, warningCost, totalCost
+		SELECT id, name, type, description, clientPhone, location, startDate,
+		       duration, status, progressPercentage, warningCost, totalCost, notes
 		FROM projects
+		WHERE isActive = TRUE
 		ORDER BY createdAt DESC
 		LIMIT $1 OFFSET $2
 	`
@@ -66,9 +67,9 @@ func (r *ProjectRepository) GetAll(ctx context.Context, limit, offset int) ([]mo
 	for rows.Next() {
 		var p models.Project
 		err := rows.Scan(
-			&p.ID, &p.Name, &p.Type, &p.ClientPhone, &p.Location,
-			&p.StartDate, &p.Status, &p.ProgressPercentage,
-			&p.WarningCost, &p.TotalCost,
+			&p.ID, &p.Name, &p.Type, &p.Description, &p.ClientPhone, &p.Location,
+			&p.StartDate, &p.Duration, &p.Status, &p.ProgressPercentage,
+			&p.WarningCost, &p.TotalCost, &p.Notes,
 		)
 		if err != nil {
 			return nil, 0, err
@@ -85,7 +86,7 @@ func (r *ProjectRepository) GetByID(ctx context.Context, id int64) (*models.Proj
 		       duration, warningCost, totalCost, status, progressPercentage,
 		       notes, createdBy, createdAt
 		FROM projects
-		WHERE id = $1
+		WHERE id = $1 AND isActive = TRUE
 	`
 
 	var p models.Project
@@ -157,7 +158,8 @@ func (r *ProjectRepository) Update(ctx context.Context, id int64, project *model
 }
 
 func (r *ProjectRepository) Delete(ctx context.Context, id int64) error {
-	query := `DELETE FROM projects WHERE id = $1`
+	// Soft delete: set isActive to FALSE instead of deleting
+	query := `UPDATE projects SET isActive = FALSE WHERE id = $1 AND isActive = TRUE`
 	result, err := r.db.Exec(ctx, query, id)
 	if err != nil {
 		return err
@@ -193,7 +195,15 @@ func (r *ProjectRepository) UpdateProgressPercentageWithTx(ctx context.Context, 
 }
 
 func (r *ProjectRepository) GetStats(ctx context.Context, period string) (*ProjectStatsResult, error) {
-	whereClause := buildPeriodWhereClause(period, "createdAt")
+	periodClause := buildPeriodWhereClause(period, "createdAt")
+
+	// Combine isActive filter with period filter
+	var whereClause string
+	if periodClause == "" {
+		whereClause = " WHERE isActive = TRUE"
+	} else {
+		whereClause = periodClause + " AND isActive = TRUE"
+	}
 
 	query := `
 		SELECT

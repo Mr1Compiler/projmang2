@@ -814,7 +814,7 @@ const loadStats = async () => {
 const loadSubCategories = async () => {
   try {
     const result = await listSubCategories()
-    subCategories.value = result
+    subCategories.value = result.data || []
   } catch (err) {
     console.error('Failed to load subcategories:', err)
   }

@@ -288,6 +288,8 @@ func toWorkDaySummaryDTO(w models.WorkDay) dtos.WorkDaySummary {
 		ProjectID:         w.ProjectID,
 		WorkSubCategoryID: w.WorkSubCategoryID,
 		WorkDate:          w.WorkDate,
+		Description:       w.Description,
+		Notes:             w.Notes,
 		Status:            w.Status,
 		TotalCost:         w.TotalCost,
 	}

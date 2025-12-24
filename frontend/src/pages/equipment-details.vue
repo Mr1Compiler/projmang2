@@ -121,6 +121,15 @@
         <template #item.actions="{ item }">
           <div class="action-buttons">
             <v-btn
+              icon="mdi-pencil"
+              size="small"
+              color="primary"
+              variant="text"
+              @click="openEditDialog(item)"
+              title="تعديل الآلة"
+              class="action-btn"
+            />
+            <v-btn
               icon="mdi-delete"
               size="small"
               color="error"
@@ -284,6 +293,144 @@
       </v-card>
     </v-dialog>
 
+    <!-- Edit Equipment Dialog -->
+    <v-dialog v-model="showEditDialog" max-width="900" scrollable persistent>
+      <v-card class="clean-dialog-card clean-form-card">
+        <!-- Header Section -->
+        <v-card-title class="clean-dialog-header clean-form-header">
+          <h2 class="clean-form-title">تعديل معلومات الآلة</h2>
+        </v-card-title>
+
+        <!-- Form Content -->
+        <v-card-text class="clean-form-content">
+          <p class="clean-form-instruction">
+            قم بتعديل المعلومات المطلوبة. جميع الحقول المميزة بعلامة النجمة (*) مطلوبة.
+          </p>
+
+          <v-form ref="editForm" v-model="editFormValid">
+            <!-- الصف الأول: اسم الآلة -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    اسم الآلة <span class="required-star">*</span>
+                  </label>
+                  <v-text-field
+                    v-model="editEquipment.equipmentName"
+                    variant="outlined"
+                    density="comfortable"
+                    placeholder="أدخل اسم الآلة"
+                    :rules="[v => !!v || 'اسم الآلة مطلوب']"
+                    required
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+
+            <!-- الصف الثاني: العدد، التكلفة -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    العدد <span class="required-star">*</span>
+                  </label>
+                  <v-text-field
+                    v-model.number="editEquipment.quantity"
+                    variant="outlined"
+                    density="comfortable"
+                    type="number"
+                    placeholder="0"
+                    :rules="[v => (v > 0) || 'العدد يجب أن يكون أكبر من صفر']"
+                    required
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    التكلفة (د.ع) <span class="required-star">*</span>
+                  </label>
+                  <v-text-field
+                    v-model.number="editEquipment.cost"
+                    variant="outlined"
+                    density="comfortable"
+                    type="number"
+                    placeholder="0"
+                    :rules="[v => (v > 0) || 'التكلفة يجب أن تكون أكبر من صفر']"
+                    required
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+
+            <!-- الصف الثالث: المجموع -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    المجموع (د.ع)
+                  </label>
+                  <v-text-field
+                    :value="(editEquipment.quantity * editEquipment.cost) || 0"
+                    variant="outlined"
+                    density="comfortable"
+                    type="number"
+                    placeholder="0"
+                    readonly
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+
+            <!-- الصف الرابع: الملاحظات -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">ملاحظات</label>
+                  <v-textarea
+                    v-model="editEquipment.notes"
+                    variant="outlined"
+                    rows="4"
+                    density="comfortable"
+                    placeholder="أدخل ملاحظات إضافية"
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card-text>
+
+        <v-card-actions class="clean-form-actions">
+          <v-spacer />
+          <v-btn
+            class="clean-form-cancel-btn"
+            variant="outlined"
+            @click="closeEditDialog"
+          >
+            إلغاء
+          </v-btn>
+          <v-btn
+            class="clean-form-continue-btn"
+            variant="elevated"
+            :disabled="!editFormValid"
+            @click="saveEditEquipment"
+          >
+            حفظ التعديلات
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     </div>
   </div>
 </template>
@@ -291,7 +438,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { listEquipmentByWorkDay, createEquipment, deleteEquipment as deleteEquipmentApi } from '@/api/materials'
+import { listEquipmentByWorkDay, createEquipment, updateEquipment, deleteEquipment as deleteEquipmentApi } from '@/api/materials'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 const router = useRouter()
@@ -307,6 +454,18 @@ const showAddDialog = ref(false)
 const formValid = ref(false)
 const loading = ref(false)
 const form = ref(null)
+
+// Edit dialog state
+const showEditDialog = ref(false)
+const editFormValid = ref(false)
+const editForm = ref(null)
+const editingEquipmentId = ref(null)
+const editEquipment = ref({
+  equipmentName: '',
+  quantity: 0,
+  cost: 0,
+  notes: ''
+})
 
 // Pagination state
 const currentPage = ref(1)
@@ -435,6 +594,54 @@ const deleteEquipment = async (item) => {
       await loadEquipment()
     } catch (err) {
       console.error('Error deleting equipment:', err)
+    }
+  }
+}
+
+// Edit functions
+const openEditDialog = (item) => {
+  editingEquipmentId.value = item.id
+  editEquipment.value = {
+    equipmentName: item.equipmentName,
+    quantity: item.quantity,
+    cost: item.cost,
+    notes: item.notes || ''
+  }
+  showEditDialog.value = true
+}
+
+const closeEditDialog = () => {
+  showEditDialog.value = false
+  if (editForm.value) {
+    editForm.value.reset()
+  }
+  editingEquipmentId.value = null
+  editEquipment.value = {
+    equipmentName: '',
+    quantity: 0,
+    cost: 0,
+    notes: ''
+  }
+}
+
+const saveEditEquipment = async () => {
+  const { valid } = await editForm.value.validate()
+  if (valid) {
+    try {
+      const payload = {
+        equipmentName: editEquipment.value.equipmentName,
+        quantity: Number(editEquipment.value.quantity),
+        cost: Number(editEquipment.value.cost)
+      }
+      if (editEquipment.value.notes && editEquipment.value.notes.trim()) {
+        payload.notes = editEquipment.value.notes.trim()
+      }
+
+      await updateEquipment(editingEquipmentId.value, payload)
+      await loadEquipment()
+      closeEditDialog()
+    } catch (err) {
+      console.error('Error updating equipment:', err)
     }
   }
 }

@@ -10,6 +10,8 @@ type WorkDaySummary struct {
 	ProjectID         int64     `json:"projectId"`
 	WorkSubCategoryID *int64    `json:"workSubCategoryId"`
 	WorkDate          time.Time `json:"workDate"`
+	Description       *string   `json:"description"`
+	Notes             *string   `json:"notes"`
 	Status            string    `json:"status"`
 	TotalCost         float64   `json:"totalCost"`
 }

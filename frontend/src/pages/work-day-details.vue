@@ -30,38 +30,38 @@
         <v-row>
           <v-col cols="12" md="6">
             <div class="info-item">
-              <label>مكان العمل:</label>
-              <span>{{ workDayInfo.location || 'موقع البناء الرئيسي' }}</span>
-            </div>
-          </v-col>
-          <v-col cols="12" md="6">
-            <div class="info-item">
-              <label>رقم الاستمارة:</label>
-              <span>{{ workDayInfo.formNumber || 'FORM-001' }}</span>
-            </div>
-          </v-col>
-          <v-col cols="12" md="6">
-            <div class="info-item">
-              <label>فترة العمل:</label>
-              <span>{{ workDayInfo.workPeriod || '08:00 - 16:00' }}</span>
-            </div>
-          </v-col>
-          <v-col cols="12" md="6">
-            <div class="info-item">
-              <label>اليوم:</label>
-              <span>{{ workDayInfo.day || 'الاثنين' }}</span>
-            </div>
-          </v-col>
-          <v-col cols="12" md="6">
-            <div class="info-item">
-              <label>نوع العمل:</label>
-              <span>{{ workDayInfo.workType || 'بناء' }}</span>
+              <label>الوصف:</label>
+              <span>{{ workDayInfo.description || 'غير محدد' }}</span>
             </div>
           </v-col>
           <v-col cols="12" md="6">
             <div class="info-item">
               <label>التاريخ:</label>
-              <span>{{ workDayInfo.date || '2024-01-15' }}</span>
+              <span dir="ltr">{{ workDayInfo.date || '-' }}</span>
+            </div>
+          </v-col>
+          <v-col cols="12" md="6">
+            <div class="info-item">
+              <label>اليوم:</label>
+              <span>{{ workDayInfo.day || '-' }}</span>
+            </div>
+          </v-col>
+          <v-col cols="12" md="6">
+            <div class="info-item">
+              <label>الحالة:</label>
+              <span>{{ workDayInfo.status || '-' }}</span>
+            </div>
+          </v-col>
+          <v-col cols="12" md="6">
+            <div class="info-item">
+              <label>التكلفة الإجمالية:</label>
+              <span dir="ltr">{{ workDayInfo.totalCost || '0' }}</span>
+            </div>
+          </v-col>
+          <v-col cols="12" md="6">
+            <div class="info-item">
+              <label>ملاحظات:</label>
+              <span>{{ workDayInfo.notes || 'لا توجد ملاحظات' }}</span>
             </div>
           </v-col>
         </v-row>
@@ -319,6 +319,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { getWorkDay } from '../api/workdays'
 
 const router = useRouter()
 const route = useRoute()
@@ -360,13 +361,47 @@ const showCategoryDialog = ref(false)
 const selectedCategory = ref({})
 
 const workDayInfo = ref({
-  location: 'موقع البناء الرئيسي',
-  formNumber: 'FORM-001',
-  workPeriod: '08:00 - 16:00',
-  day: 'الاثنين',
-  workType: 'بناء',
-  date: '2024-01-15'
+  location: '',
+  description: '',
+  date: '',
+  day: '',
+  status: '',
+  totalCost: 0,
+  notes: ''
 })
+const loading = ref(false)
+
+// Fetch work day data from backend
+const loadWorkDayInfo = async () => {
+  if (!workDayId.value) return
+
+  loading.value = true
+  try {
+    const data = await getWorkDay(workDayId.value)
+    if (data) {
+      // Format the date
+      const workDate = new Date(data.workDate)
+      const dayNames = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت']
+
+      const year = workDate.getFullYear()
+      const month = String(workDate.getMonth() + 1).padStart(2, '0')
+      const dayNum = String(workDate.getDate()).padStart(2, '0')
+
+      workDayInfo.value = {
+        description: data.description || 'غير محدد',
+        date: `${year}/${month}/${dayNum}`,
+        day: dayNames[workDate.getDay()],
+        status: data.status === 'completed' ? 'مكتمل' : 'قيد التنفيذ',
+        totalCost: data.totalCost || 0,
+        notes: data.notes || 'لا توجد ملاحظات'
+      }
+    }
+  } catch (err) {
+    console.error('Failed to load work day info:', err)
+  } finally {
+    loading.value = false
+  }
+}
 
 // Methods
 const goBack = () => {
@@ -454,7 +489,10 @@ watch(categoriesEnabled, () => {
 onMounted(() => {
   // تحميل حالة الكروت المحفوظة
   loadCategoriesState()
-  
+
+  // تحميل بيانات يوم العمل من الباكند
+  loadWorkDayInfo()
+
   console.log('✅ صفحة تفاصيل يوم العمل تم تحميلها بنجاح!')
   console.log('جميع العناصر ظاهرة ومتاحة للاستخدام')
 })
@@ -660,8 +698,9 @@ onMounted(() => {
 
 .info-item {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem 0.75rem !important;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 6px !important;
@@ -679,6 +718,7 @@ onMounted(() => {
   font-family: 'Cairo', 'Tajawal', 'Arial', sans-serif !important;
   letter-spacing: 0.3px !important;
   line-height: 1.3 !important;
+  white-space: nowrap;
 }
 
 .info-item span {

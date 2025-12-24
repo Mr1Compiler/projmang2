@@ -7,13 +7,16 @@ type ProjectSummary struct {
 	ID                 int64      `json:"id"`
 	Name               string     `json:"name"`
 	Type               *string    `json:"type"`
+	Description        *string    `json:"description"`
 	ClientPhone        *string    `json:"clientPhone"`
 	Location           *string    `json:"location"`
 	StartDate          *time.Time `json:"startDate"`
+	Duration           *int       `json:"duration"`
 	Status             string     `json:"status"`
 	ProgressPercentage float64    `json:"progressPercentage"`
 	WarningCost        float64    `json:"warningCost"`
 	TotalCost          float64    `json:"totalCost"`
+	Notes              *string    `json:"notes"`
 	CurrentSpending    float64    `json:"currentSpending"`
 }
 

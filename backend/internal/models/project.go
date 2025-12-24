@@ -19,4 +19,5 @@ type Project struct {
 	CreatedBy          *int64     `json:"createdBy" db:"createdby"`
 	CreatedAt          time.Time  `json:"createdAt" db:"createdat"`
 	UpdatedAt          time.Time  `json:"updatedAt" db:"updatedat"`
+	IsActive           bool       `json:"isActive" db:"isactive"`
 }

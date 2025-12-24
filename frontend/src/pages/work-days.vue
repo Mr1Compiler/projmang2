@@ -131,7 +131,7 @@
           <v-btn
             class="clean-form-continue-btn"
             variant="elevated"
-            :disabled="!formValid"
+            :disabled="!formValid || (isEditing && !hasFormChanges)"
             :loading="saving"
             @click="saveWorkDay"
           >
@@ -423,6 +423,21 @@ const workDayForm = ref({
   workSubCategoryId: null
 })
 
+// Original form data for change detection
+const originalFormData = ref(null)
+
+// Check if form has changes (for edit mode)
+const hasFormChanges = computed(() => {
+  if (!isEditing.value || !originalFormData.value) return true
+  return (
+    workDayForm.value.date !== originalFormData.value.date ||
+    workDayForm.value.description !== originalFormData.value.description ||
+    workDayForm.value.notes !== originalFormData.value.notes ||
+    workDayForm.value.status !== originalFormData.value.status ||
+    workDayForm.value.workSubCategoryId !== originalFormData.value.workSubCategoryId
+  )
+})
+
 // Work subcategories
 const workSubCategories = ref([])
 const loadingSubCategories = ref(false)
@@ -440,7 +455,9 @@ const selectedDate = ref(null)
 // Computed property for formatted date display
 const formattedDate = computed(() => {
   if (!workDayForm.value.date) return ''
-  const date = new Date(workDayForm.value.date)
+  // Parse date string (YYYY-MM-DD) without timezone conversion
+  const [year, month, day] = workDayForm.value.date.split('-').map(Number)
+  const date = new Date(year, month - 1, day, 12, 0, 0)
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 })
 
@@ -814,11 +831,32 @@ const closeAddForm = () => {
 
 const editWorkDay = (item) => {
   isEditing.value = true
-  workDayForm.value = {
-    ...item,
-    workPeriodFrom: item.workPeriod?.split('-')[0] || '',
-    workPeriodTo: item.workPeriod?.split('-')[1] || '',
+
+  // Parse date properly to avoid timezone issues
+  let dateValue = ''
+  let dateForPicker = null
+  if (item.workDate) {
+    const dateStr = item.workDate.split('T')[0]
+    dateValue = dateStr
+    // Create date at noon to avoid timezone shifting
+    const [year, month, day] = dateStr.split('-').map(Number)
+    dateForPicker = new Date(year, month - 1, day, 12, 0, 0)
   }
+
+  // Map item fields to form fields properly
+  const formData = {
+    id: item.id,
+    date: dateValue,
+    description: item.description || '',
+    notes: item.notes || '',
+    status: item.status || 'draft',
+    workSubCategoryId: item.workSubCategoryId ? Number(item.workSubCategoryId) : null,
+  }
+  workDayForm.value = { ...formData }
+  // Store original data for change detection
+  originalFormData.value = { ...formData }
+  // Initialize selected date for date picker
+  selectedDate.value = dateForPicker
   showAddForm.value = true
 }
 
@@ -984,6 +1022,7 @@ const resetForm = () => {
     status: 'draft',
     workSubCategoryId: null
   }
+  originalFormData.value = null
   formValid.value = false
 }
 
@@ -1008,6 +1047,11 @@ const loadWorkDays = async (page = currentPage.value) => {
       workType: w.status || '',
       about: w.description || w.notes || '',
       status: w.status || 'draft', // Keep status for complete button visibility
+      // Preserve original API fields for editing
+      workDate: w.workDate,
+      description: w.description || '',
+      notes: w.notes || '',
+      workSubCategoryId: w.workSubCategoryId || null,
     }))
   } catch (err) {
     console.error('فشل جلب أيام العمل', err)

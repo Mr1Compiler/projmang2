@@ -130,6 +130,15 @@
         <template #item.actions="{ item }">
           <div class="action-buttons">
             <v-btn
+              icon="mdi-pencil"
+              size="small"
+              color="primary"
+              variant="text"
+              @click="openEditDialog(item)"
+              title="تعديل العامل"
+              class="action-btn"
+            />
+            <v-btn
               icon="mdi-delete"
               size="small"
               color="error"
@@ -211,7 +220,7 @@
               <v-col cols="12" md="6" class="clean-form-column">
                 <div class="clean-form-field-wrapper">
                   <label class="clean-form-label">
-                    العدد <span class="required-star">*</span>
+                    عدد الأيام <span class="required-star">*</span>
                   </label>
                   <v-text-field
                     v-model.number="newLabor.quantity"
@@ -219,7 +228,7 @@
                     density="comfortable"
                     type="number"
                     placeholder="0"
-                    :rules="[v => (v > 0) || 'العدد يجب أن يكون أكبر من صفر']"
+                    :rules="[v => (v > 0) || 'عدد الأيام يجب أن يكون أكبر من صفر']"
                     required
                     hide-details="auto"
                     class="clean-form-input"
@@ -342,20 +351,192 @@
       </v-card>
     </v-dialog>
 
-    <!-- Simple Dialog for Add Worker - Disabled, using clean-form dialog instead -->
-    <!-- <SimpleDialog
-      :open="showAddDialog"
-      title="إضافة عامل"
-      save-text="حفظ"
-      icon="mdi-account-plus"
-      @close="closeAddDialog"
-      @save="saveWorker"
-    >
-      <LaborForm
-        v-model="newWorker"
-        ref="laborFormRef"
-      />
-    </SimpleDialog> -->
+    <!-- Edit Labor Dialog -->
+    <v-dialog v-model="showEditDialog" max-width="900" scrollable persistent>
+      <v-card class="clean-dialog-card clean-form-card">
+        <!-- Header Section -->
+        <v-card-title class="clean-dialog-header clean-form-header">
+          <h2 class="clean-form-title">تعديل معلومات العامل</h2>
+        </v-card-title>
+
+        <!-- Form Content -->
+        <v-card-text class="clean-form-content">
+          <p class="clean-form-instruction">
+            قم بتعديل المعلومات المطلوبة. جميع الحقول المميزة بعلامة النجمة (*) مطلوبة.
+          </p>
+
+          <v-form ref="editForm" v-model="editFormValid">
+            <!-- الصف الأول: اسم العامل، المهنة -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    اسم العامل <span class="required-star">*</span>
+                  </label>
+                  <v-text-field
+                    v-model="editLabor.workerName"
+                    variant="outlined"
+                    density="comfortable"
+                    placeholder="أدخل اسم العامل"
+                    :rules="[v => !!v || 'اسم العامل مطلوب']"
+                    required
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    المهنة
+                  </label>
+                  <v-text-field
+                    v-model="editLabor.jobTitle"
+                    variant="outlined"
+                    density="comfortable"
+                    placeholder="أدخل المهنة"
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+
+            <!-- الصف الثاني: العدد، الأجرة اليومية -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    عدد الأيام <span class="required-star">*</span>
+                  </label>
+                  <v-text-field
+                    v-model.number="editLabor.quantity"
+                    variant="outlined"
+                    density="comfortable"
+                    type="number"
+                    placeholder="0"
+                    :rules="[v => (v > 0) || 'عدد الأيام يجب أن يكون أكبر من صفر']"
+                    required
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    الأجرة اليومية (د.ع) <span class="required-star">*</span>
+                  </label>
+                  <v-text-field
+                    v-model.number="editLabor.cost"
+                    variant="outlined"
+                    density="comfortable"
+                    type="number"
+                    placeholder="0"
+                    :rules="[v => (v > 0) || 'الأجرة يجب أن تكون أكبر من صفر']"
+                    required
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+
+            <!-- الصف الثالث: المجموع، رقم الهاتف -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    المجموع (د.ع)
+                  </label>
+                  <v-text-field
+                    :value="(editLabor.quantity * editLabor.cost) || 0"
+                    variant="outlined"
+                    density="comfortable"
+                    type="number"
+                    placeholder="0"
+                    readonly
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    رقم الهاتف
+                  </label>
+                  <v-text-field
+                    v-model="editLabor.phone"
+                    variant="outlined"
+                    density="comfortable"
+                    placeholder="07XX XXX XXXX"
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+
+            <!-- الصف الرابع: العنوان -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" md="6" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">
+                    العنوان
+                  </label>
+                  <v-text-field
+                    v-model="editLabor.address"
+                    variant="outlined"
+                    density="comfortable"
+                    placeholder="أدخل العنوان"
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+
+            <!-- الصف الخامس: الملاحظات -->
+            <v-row class="clean-form-row">
+              <v-col cols="12" class="clean-form-column">
+                <div class="clean-form-field-wrapper">
+                  <label class="clean-form-label">ملاحظات</label>
+                  <v-textarea
+                    v-model="editLabor.notes"
+                    variant="outlined"
+                    rows="4"
+                    density="comfortable"
+                    placeholder="أدخل ملاحظات إضافية"
+                    hide-details="auto"
+                    class="clean-form-input"
+                  />
+                </div>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-card-text>
+
+        <v-card-actions class="clean-form-actions">
+          <v-spacer />
+          <v-btn
+            class="clean-form-cancel-btn"
+            variant="outlined"
+            @click="closeEditDialog"
+          >
+            إلغاء
+          </v-btn>
+          <v-btn
+            class="clean-form-continue-btn"
+            variant="elevated"
+            :disabled="!editFormValid"
+            @click="saveEditLabor"
+          >
+            حفظ التعديلات
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     </div>
   </div>
@@ -364,7 +545,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { listLaborByWorkDay, createLabor, deleteLabor as deleteLaborApi } from '@/api/materials'
+import { listLaborByWorkDay, createLabor, updateLabor, deleteLabor as deleteLaborApi } from '@/api/materials'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
 
 const router = useRouter()
@@ -377,12 +558,27 @@ const projectId = computed(() => route.query.projectId || null)
 // Reactive data
 const laborSearch = ref('')
 const showAddDialog = ref(false)
+const showEditDialog = ref(false)
 const formValid = ref(false)
+const editFormValid = ref(false)
 const loading = ref(false)
 const form = ref(null)
+const editForm = ref(null)
+const editingLaborId = ref(null)
 
 // Form data - aligned with backend DTO
 const newLabor = ref({
+  workerName: '',
+  jobTitle: '',
+  quantity: 0,
+  cost: 0,
+  phone: '',
+  address: '',
+  notes: ''
+})
+
+// Edit form data
+const editLabor = ref({
   workerName: '',
   jobTitle: '',
   quantity: 0,
@@ -397,7 +593,7 @@ const laborHeaders = [
   { title: 'التسلسل', key: 'id', sortable: false },
   { title: 'اسم العامل', key: 'workerName', sortable: true },
   { title: 'المهنة', key: 'jobTitle', sortable: true },
-  { title: 'العدد', key: 'quantity', sortable: true },
+  { title: 'عدد الأيام', key: 'quantity', sortable: true },
   { title: 'الأجرة اليومية', key: 'cost', sortable: true },
   { title: 'المجموع', key: 'total', sortable: true },
   { title: 'رقم الهاتف', key: 'phone', sortable: true },
@@ -531,6 +727,70 @@ const deleteLabor = async (item) => {
       await loadLabor()
     } catch (err) {
       console.error('Error deleting labor:', err)
+    }
+  }
+}
+
+// Edit functions
+const openEditDialog = (item) => {
+  editingLaborId.value = item.id
+  editLabor.value = {
+    workerName: item.workerName || '',
+    jobTitle: item.jobTitle || '',
+    quantity: item.quantity || 0,
+    cost: item.cost || 0,
+    phone: item.phone || '',
+    address: item.address || '',
+    notes: item.notes || ''
+  }
+  showEditDialog.value = true
+}
+
+const closeEditDialog = () => {
+  showEditDialog.value = false
+  editingLaborId.value = null
+  if (editForm.value) {
+    editForm.value.reset()
+  }
+  editLabor.value = {
+    workerName: '',
+    jobTitle: '',
+    quantity: 0,
+    cost: 0,
+    phone: '',
+    address: '',
+    notes: ''
+  }
+}
+
+const saveEditLabor = async () => {
+  const { valid } = await editForm.value.validate()
+  if (valid && editingLaborId.value) {
+    try {
+      const payload = {
+        workerName: editLabor.value.workerName,
+        quantity: Number(editLabor.value.quantity),
+        cost: Number(editLabor.value.cost)
+      }
+      // Optional fields
+      if (editLabor.value.jobTitle && editLabor.value.jobTitle.trim()) {
+        payload.jobTitle = editLabor.value.jobTitle.trim()
+      }
+      if (editLabor.value.phone && editLabor.value.phone.trim()) {
+        payload.phone = editLabor.value.phone.trim()
+      }
+      if (editLabor.value.address && editLabor.value.address.trim()) {
+        payload.address = editLabor.value.address.trim()
+      }
+      if (editLabor.value.notes && editLabor.value.notes.trim()) {
+        payload.notes = editLabor.value.notes.trim()
+      }
+
+      await updateLabor(editingLaborId.value, payload)
+      await loadLabor()
+      closeEditDialog()
+    } catch (err) {
+      console.error('Error updating labor:', err)
     }
   }
 }

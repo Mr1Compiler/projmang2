@@ -38,17 +38,24 @@ func NewExpenseRepository(db *pgxpool.Pool) *ExpenseRepository {
 }
 
 func (r *ExpenseRepository) GetAll(ctx context.Context, limit, offset int) ([]models.Expense, int64, error) {
-	// Get total count
+	// Get total count (only expenses with no project OR linked to active projects)
 	var total int64
-	countQuery := `SELECT COUNT(*) FROM expenses`
+	countQuery := `
+		SELECT COUNT(*)
+		FROM expenses e
+		LEFT JOIN projects p ON e.projectId = p.id
+		WHERE (e.projectId IS NULL OR p.isActive = TRUE)
+	`
 	if err := r.db.QueryRow(ctx, countQuery).Scan(&total); err != nil {
 		return nil, 0, err
 	}
 
 	query := `
-		SELECT id, name, amount, type, expenseDate, projectId, status
-		FROM expenses
-		ORDER BY createdAt DESC
+		SELECT e.id, e.name, e.amount, e.type, e.expenseDate, e.projectId, e.status
+		FROM expenses e
+		LEFT JOIN projects p ON e.projectId = p.id
+		WHERE (e.projectId IS NULL OR p.isActive = TRUE)
+		ORDER BY e.createdAt DESC
 		LIMIT $1 OFFSET $2
 	`
 
@@ -181,17 +188,26 @@ func (r *ExpenseRepository) Delete(ctx context.Context, id int64) error {
 }
 
 func (r *ExpenseRepository) GetStats(ctx context.Context, period string) (*ExpenseStatsResult, error) {
-	whereClause := buildExpensePeriodWhereClause(period, "createdAt")
+	periodClause := buildExpensePeriodWhereClause(period, "e.createdAt")
+
+	// Filter expenses: only those with no project OR linked to active projects
+	var whereClause string
+	if periodClause == "" {
+		whereClause = " WHERE (e.projectId IS NULL OR p.isActive = TRUE)"
+	} else {
+		whereClause = periodClause + " AND (e.projectId IS NULL OR p.isActive = TRUE)"
+	}
 
 	query := `
 		SELECT
 			COUNT(*) as total,
-			COALESCE(SUM(amount), 0) as total_amount,
-			COUNT(*) FILTER (WHERE status = 'pending') as pending,
-			COUNT(*) FILTER (WHERE status = 'approved') as approved,
-			COUNT(*) FILTER (WHERE status = 'rejected') as rejected,
-			COALESCE(AVG(amount), 0) as average_amount
-		FROM expenses
+			COALESCE(SUM(e.amount), 0) as total_amount,
+			COUNT(*) FILTER (WHERE e.status = 'pending') as pending,
+			COUNT(*) FILTER (WHERE e.status = 'approved') as approved,
+			COUNT(*) FILTER (WHERE e.status = 'rejected') as rejected,
+			COALESCE(AVG(e.amount), 0) as average_amount
+		FROM expenses e
+		LEFT JOIN projects p ON e.projectId = p.id
 	` + whereClause
 
 	var stats ExpenseStatsResult

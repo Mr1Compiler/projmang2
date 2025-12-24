@@ -72,6 +72,10 @@ func (h *ProjectHandler) Create(c *gin.Context) {
 
 	project, err := h.projectService.Create(c.Request.Context(), req)
 	if err != nil {
+		if errors.Is(err, services.ErrWarningCostExceedsTotalCost) {
+			response.BadRequest(c, err.Error())
+			return
+		}
 		response.InternalError(c, "failed to create project")
 		return
 	}
@@ -100,6 +104,10 @@ func (h *ProjectHandler) Update(c *gin.Context) {
 	if err != nil {
 		if errors.Is(err, services.ErrProjectNotFound) {
 			response.NotFound(c, err.Error())
+			return
+		}
+		if errors.Is(err, services.ErrWarningCostExceedsTotalCost) {
+			response.BadRequest(c, err.Error())
 			return
 		}
 		response.InternalError(c, "failed to update project")

@@ -510,6 +510,11 @@
                   </div>
 
                   <div class="detail-item">
+                    <v-icon size="small" color="warning">mdi-alert-circle</v-icon>
+                    <span class="detail-text">حد التنبيه: {{ formatCurrency(project.warningCost) }}</span>
+                  </div>
+
+                  <div class="detail-item">
                     <v-icon size="small" :color="project.currentSpending > project.warningCost ? 'error' : 'info'">mdi-cash</v-icon>
                     <span class="detail-text" :class="project.currentSpending > project.warningCost ? 'text-error' : ''">المصروف: {{ formatCurrency(project.currentSpending) }}</span>
                   </div>
@@ -541,19 +546,27 @@
                 </div>
               </v-card-text>
 
-              <v-card-actions class="project-card-actions">
-                <v-spacer />
-        <v-btn
-          color="primary"
+              <v-card-actions class="project-card-actions d-flex ga-2">
+                <v-btn
+                  color="warning"
+                  variant="elevated"
+                  size="default"
+                  @click="editProject(project)"
+                  class="edit-btn flex-grow-1 d-flex justify-center align-center"
+                >
+                  <v-icon class="me-2">mdi-pencil</v-icon>
+                  <span>تعديل</span>
+                </v-btn>
+                <v-btn
+                  color="primary"
                   variant="elevated"
                   size="default"
                   @click="viewProjectDetails(project)"
-                  class="details-btn"
-                  block
+                  class="details-btn flex-grow-1 d-flex justify-center align-center"
                 >
                   <v-icon class="me-2">mdi-eye</v-icon>
-                  عرض التفاصيل
-        </v-btn>
+                  <span>عرض التفاصيل</span>
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -763,7 +776,7 @@
               لإتمام {{ isEditing ? 'تعديل' : 'إضافة' }} المشروع، يرجى توفير المعلومات التالية. يرجى ملاحظة أن جميع الحقول المميزة بعلامة النجمة (*) مطلوبة.
             </p>
 
-            <v-form ref="form" v-model="formValid">
+            <v-form ref="projectFormRef" v-model="formValid">
               <!-- الصف الأول: اسم، نوع، مكان المشروع -->
               <v-row class="profile-form-row">
                 <v-col cols="12" md="4">
@@ -806,11 +819,11 @@
                 <v-col cols="12" md="4">
                   <v-text-field
                     v-model.number="projectForm.initialCost"
-                    label="التكلفة المبدئية (د.ع) *"
+                    label="حد التنبيه (د.ع) *"
                     type="number"
                     variant="outlined"
                     density="comfortable"
-                    :rules="[v => v > 0 || 'التكلفة يجب أن تكون أكبر من صفر']"
+                    :rules="warningCostRules"
                     required
                     hide-details="auto"
                   />
@@ -834,7 +847,7 @@
                     type="number"
                     variant="outlined"
                     density="comfortable"
-                    :rules="[v => v > 0 || 'التكلفة يجب أن تكون أكبر من صفر']"
+                    :rules="totalCostRules"
                     required
                     hide-details="auto"
                   />
@@ -844,14 +857,34 @@
               <!-- الصف الثالث: تاريخ البدء ورقم الهاتف -->
               <v-row class="profile-form-row">
                 <v-col cols="12" md="6">
-                  <v-text-field
-                    v-model="projectForm.startDate"
-                    label="تاريخ البدء"
-                    type="date"
-                    variant="outlined"
-                    density="comfortable"
-                    hide-details="auto"
-                  />
+                  <v-menu
+                    v-model="startDateMenu"
+                    :close-on-content-click="false"
+                    location="bottom"
+                  >
+                    <template v-slot:activator="{ props }">
+                      <v-text-field
+                        v-model="formattedStartDate"
+                        label="تاريخ البدء"
+                        readonly
+                        v-bind="props"
+                        variant="outlined"
+                        density="comfortable"
+                        hide-details="auto"
+                        prepend-inner-icon="mdi-calendar"
+                        dir="ltr"
+                        style="text-align: left;"
+                      />
+                    </template>
+                    <v-date-picker
+                      v-model="selectedStartDate"
+                      @update:model-value="onStartDateSelected"
+                      color="primary"
+                      show-adjacent-months
+                      :first-day-of-week="6"
+                      class="rtl-date-picker"
+                    />
+                  </v-menu>
                 </v-col>
 
                 <v-col cols="12" md="6">
@@ -1393,7 +1426,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { listProjects, getProjectStats, getProjectWorkdays, getProject, createProject, updateProject } from '@/api/projects'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
@@ -1415,6 +1448,7 @@ const dialog = ref(false)
 const deleteDialog = ref(false)
 const detailsDialog = ref(false)
 const formValid = ref(false)
+const projectFormRef = ref(null)
 const isEditing = ref(false)
 const searchQuery = ref('')
 const selectedCategory = ref('')
@@ -1676,6 +1710,53 @@ const projectForm = ref({
   notes: '',
   category: ''
 })
+
+// Validation rules for cost fields (computed to react to changes)
+const warningCostRules = computed(() => [
+  v => Number(v) > 0 || 'حد التنبيه يجب أن يكون أكبر من صفر',
+  v => Number(v) <= Number(projectForm.value.totalCost) || 'حد التنبيه يجب أن يكون أقل من أو يساوي التكلفة الإجمالية'
+])
+
+const totalCostRules = computed(() => [
+  v => Number(v) > 0 || 'التكلفة يجب أن تكون أكبر من صفر',
+  v => Number(v) >= Number(projectForm.value.initialCost) || 'التكلفة الإجمالية يجب أن تكون أكبر من أو تساوي حد التنبيه'
+])
+
+// Watch cost fields to trigger form revalidation for cross-field validation
+watch(() => projectForm.value.initialCost, () => {
+  if (projectFormRef.value) {
+    projectFormRef.value.validate()
+  }
+})
+
+watch(() => projectForm.value.totalCost, () => {
+  if (projectFormRef.value) {
+    projectFormRef.value.validate()
+  }
+})
+
+// Date picker state for start date
+const startDateMenu = ref(false)
+const selectedStartDate = ref(null)
+
+// Computed property for formatted start date display
+const formattedStartDate = computed(() => {
+  if (!projectForm.value.startDate) return ''
+  const date = new Date(projectForm.value.startDate)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}/${month}/${day}`
+})
+
+// Handle start date selection from picker
+const onStartDateSelected = (date) => {
+  if (date) {
+    const d = new Date(date)
+    projectForm.value.startDate = d.toISOString().split('T')[0]
+  }
+  startDateMenu.value = false
+}
 
 // البيانات الأساسية (يتم جلبها من الـ API)
 const projects = ref([])
@@ -1980,6 +2061,8 @@ async function loadWorkdays(projectId) {
 // دوال إدارة البيانات
 const openAddProjectDialog = () => {
   isEditing.value = false
+  // Set today's date as default
+  const today = new Date().toISOString().split('T')[0]
   projectForm.value = {
     name: '',
     type: '',
@@ -1987,7 +2070,7 @@ const openAddProjectDialog = () => {
     initialCost: 0,
     totalCost: 0,
     duration: 0,
-    startDate: '',
+    startDate: today,
     phone: '',
     user: '',
     status: 'pending',
@@ -1997,6 +2080,8 @@ const openAddProjectDialog = () => {
     notes: '',
     category: ''
   }
+  // Initialize selected date for picker
+  selectedStartDate.value = new Date()
   dialog.value = true
 }
 
@@ -2023,7 +2108,26 @@ const editProjectFromDetails = () => {
 
 const editProject = (project) => {
   isEditing.value = true
-  projectForm.value = { ...project }
+  // Map API fields to form fields
+  projectForm.value = {
+    name: project.name || '',
+    type: project.type || '',
+    location: project.location || '',
+    initialCost: project.warningCost || 0,
+    totalCost: project.totalCost || 0,
+    duration: project.duration || 0,
+    startDate: project.startDate ? project.startDate.split('T')[0] : '',
+    phone: project.clientPhone || '',
+    user: '',
+    status: project.status || 'pending',
+    priority: 'medium',
+    progress: project.progressPercentage || 0,
+    description: project.description || '',
+    notes: project.notes || '',
+    category: ''
+  }
+  // Initialize selected date for picker with the project's start date
+  selectedStartDate.value = project.startDate ? new Date(project.startDate) : null
   selectedProject.value = project
   dialog.value = true
 }
@@ -10273,6 +10377,19 @@ onMounted(() => {
   50% {
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
   }
+}
+
+/* RTL Date Picker Styles */
+.rtl-date-picker {
+  direction: rtl !important;
+}
+
+.rtl-date-picker :deep(.v-date-picker-header) {
+  direction: rtl !important;
+}
+
+.rtl-date-picker :deep(.v-date-picker-month__day) {
+  direction: rtl !important;
 }
 
 </style>

@@ -66,6 +66,7 @@ func (r *DashboardRepository) GetProjectStats(ctx context.Context) (*ProjectStat
 			COUNT(*) FILTER (WHERE status = 'in_progress') as active,
 			COUNT(*) FILTER (WHERE status = 'completed') as completed
 		FROM projects
+		WHERE isActive = TRUE
 	`
 
 	var stats ProjectStats
@@ -79,8 +80,13 @@ func (r *DashboardRepository) GetProjectStats(ctx context.Context) (*ProjectStat
 		return nil, err
 	}
 
-	// Get total engineers (team members)
-	engineerQuery := `SELECT COUNT(*) FROM teammembers`
+	// Get total engineers (unique users from active projects only)
+	engineerQuery := `
+		SELECT COUNT(DISTINCT tm.userId)
+		FROM teamMembers tm
+		JOIN projects p ON tm.projectId = p.id
+		WHERE p.isActive = TRUE
+	`
 	err = r.db.QueryRow(ctx, engineerQuery).Scan(&stats.TotalEngineers)
 	if err != nil {
 		return nil, err
@@ -97,6 +103,7 @@ func (r *DashboardRepository) GetFinancialStats(ctx context.Context, period stri
 		firstDay := time.Date(month.Year(), month.Month(), 1, 0, 0, 0, 0, time.UTC)
 		lastDay := firstDay.AddDate(0, 1, -1)
 
+		// Income is not linked to projects, so no filtering needed
 		incomeQuery := `
 			SELECT COALESCE(SUM(amount), 0)
 			FROM income
@@ -107,10 +114,13 @@ func (r *DashboardRepository) GetFinancialStats(ctx context.Context, period stri
 			return nil, err
 		}
 
+		// Expenses: only count those with no project OR linked to active projects
 		expenseQuery := `
-			SELECT COALESCE(SUM(amount), 0)
-			FROM expenses
-			WHERE expenseDate >= $1 AND expenseDate <= $2
+			SELECT COALESCE(SUM(e.amount), 0)
+			FROM expenses e
+			LEFT JOIN projects p ON e.projectId = p.id
+			WHERE e.expenseDate >= $1 AND e.expenseDate <= $2
+			AND (e.projectId IS NULL OR p.isActive = TRUE)
 		`
 		err = r.db.QueryRow(ctx, expenseQuery, firstDay, lastDay).Scan(&stats.TotalExpenses)
 		if err != nil {
@@ -124,7 +134,13 @@ func (r *DashboardRepository) GetFinancialStats(ctx context.Context, period stri
 			return nil, err
 		}
 
-		expenseQuery := `SELECT COALESCE(SUM(amount), 0) FROM expenses`
+		// Expenses: only count those with no project OR linked to active projects
+		expenseQuery := `
+			SELECT COALESCE(SUM(e.amount), 0)
+			FROM expenses e
+			LEFT JOIN projects p ON e.projectId = p.id
+			WHERE (e.projectId IS NULL OR p.isActive = TRUE)
+		`
 		err = r.db.QueryRow(ctx, expenseQuery).Scan(&stats.TotalExpenses)
 		if err != nil {
 			return nil, err
@@ -142,6 +158,7 @@ func (r *DashboardRepository) GetProjectProgress(ctx context.Context, status str
 		query = `
 			SELECT id, name, progressPercentage
 			FROM projects
+			WHERE isActive = TRUE
 			ORDER BY progressPercentage DESC
 			LIMIT $1
 		`
@@ -150,7 +167,7 @@ func (r *DashboardRepository) GetProjectProgress(ctx context.Context, status str
 		query = `
 			SELECT id, name, progressPercentage
 			FROM projects
-			WHERE status = $1
+			WHERE status = $1 AND isActive = TRUE
 			ORDER BY progressPercentage DESC
 			LIMIT $2
 		`
