@@ -84,6 +84,7 @@
             </div>
             <v-spacer />
             <v-btn
+              v-if="canCreate"
               class="add-button btn-glow light-sweep smooth-transition"
               @click="openAddCategoryDialog"
               elevation="2"
@@ -178,6 +179,7 @@
                 title="عرض الأصناف الثانوية"
               />
               <v-btn
+                v-if="canUpdate"
                 icon="mdi-pencil"
                 variant="text"
                 size="x-small"
@@ -279,6 +281,7 @@
                   </div>
                   <div class="d-flex">
                     <v-btn
+                      v-if="canUpdate"
                       icon="mdi-pencil"
                       size="x-small"
                       color="primary"
@@ -286,6 +289,7 @@
                       @click="editSubCategoryFromEdit(subCat)"
                     />
                     <v-btn
+                      v-if="canDelete"
                       icon="mdi-delete"
                       size="x-small"
                       color="error"
@@ -373,6 +377,7 @@
                 </div>
                 <div class="sub-category-actions">
                   <v-btn
+                    v-if="canUpdate"
                     icon="mdi-pencil"
                     variant="text"
                     size="small"
@@ -381,6 +386,7 @@
                     class="sub-action-btn"
                   />
                   <v-btn
+                    v-if="canDelete"
                     icon="mdi-delete"
                     variant="text"
                     size="small"
@@ -677,6 +683,10 @@ import {
   updateSubCategory,
   deleteSubCategory as apiDeleteSubCategory
 } from '@/api/categories'
+import { usePermissions } from '@/composables/usePermissions'
+
+// Permissions
+const { canCreate, canUpdate, canDelete } = usePermissions('/categories')
 
 // State variables
 const dialog = ref(false)

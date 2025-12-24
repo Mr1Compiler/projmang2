@@ -169,6 +169,7 @@
                       <v-icon size="16">mdi-eye</v-icon>
                     </v-btn>
                     <v-btn
+                      v-if="canUpdate"
                       size="small"
                       color="success"
                       variant="text"
@@ -180,6 +181,7 @@
                       <v-icon size="16">mdi-pencil</v-icon>
                     </v-btn>
                     <v-btn
+                      v-if="canUpdate"
                       size="small"
                       :color="item.status === 'active' ? 'warning' : 'success'"
                       variant="text"
@@ -191,6 +193,7 @@
                       <v-icon size="16">{{ item.status === 'active' ? 'mdi-pause' : 'mdi-play' }}</v-icon>
                     </v-btn>
                     <v-btn
+                      v-if="canDelete"
                       size="small"
                       color="error"
                       variant="text"
@@ -353,6 +356,10 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { usePermissions } from '@/composables/usePermissions'
+
+// Permissions
+const { canCreate, canUpdate, canDelete } = usePermissions('/expense-types')
 
 // متغيرات الحالة الأساسية
 const loading = ref(false)

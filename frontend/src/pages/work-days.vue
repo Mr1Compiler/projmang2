@@ -162,6 +162,7 @@
           </div>
         </div>
         <v-btn
+          v-if="canCreate"
           class="add-button btn-glow light-sweep smooth-transition"
           @click="addWorkDay"
           elevation="2"
@@ -220,6 +221,7 @@
         <template v-slot:item.actions="{ item }">
           <div class="actions-buttons">
             <v-btn
+              v-if="canDelete"
               size="small"
               variant="tonal"
               color="error"
@@ -230,6 +232,7 @@
               <v-icon size="18">mdi-delete-outline</v-icon>
             </v-btn>
             <v-btn
+              v-if="canUpdate"
               size="small"
               variant="tonal"
               color="grey-darken-1"
@@ -250,7 +253,7 @@
               <v-icon size="18">mdi-eye-outline</v-icon>
             </v-btn>
             <v-btn
-              v-if="item.status !== 'completed'"
+              v-if="item.status !== 'completed' && canUpdate"
               size="small"
               variant="tonal"
               color="success"
@@ -261,7 +264,7 @@
               <v-icon size="18">mdi-check</v-icon>
             </v-btn>
             <v-btn
-              v-else
+              v-else-if="item.status === 'completed' && canUpdate"
               size="small"
               variant="tonal"
               color="warning"
@@ -378,9 +381,13 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { listWorkDays, createWorkDay, updateWorkDay, deleteWorkDay as apiDeleteWorkDay, completeWorkDay, uncompleteWorkDay, listWorkSubCategories } from '@/api/workdays'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
+import { usePermissions } from '@/composables/usePermissions'
 
 const router = useRouter()
 const route = useRoute()
+
+// Permissions
+const { canCreate, canUpdate, canDelete } = usePermissions('/workdays')
 
 // State
 const showAddForm = ref(false)

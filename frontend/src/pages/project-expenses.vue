@@ -12,6 +12,7 @@
               </div>
               <div class="header-actions">
                 <v-btn
+                  v-if="canCreate"
                   color="success"
                   variant="elevated"
                   @click="addExpense"
@@ -145,7 +146,7 @@
           </v-card-title>
           <v-card-text>
             <!-- Add Expense Button (Alternative) -->
-            <div class="add-expense-section mb-4">
+            <div v-if="canCreate" class="add-expense-section mb-4">
               <v-btn
                 color="primary"
                 variant="elevated"
@@ -223,6 +224,7 @@
                     <v-icon size="16">mdi-eye</v-icon>
                   </v-btn>
                   <v-btn
+                    v-if="canUpdate"
                     size="small"
                     color="success"
                     variant="text"
@@ -234,6 +236,7 @@
                     <v-icon size="16">mdi-pencil</v-icon>
                   </v-btn>
                   <v-btn
+                    v-if="canDelete"
                     size="small"
                     color="error"
                     variant="text"
@@ -254,6 +257,7 @@
 
     <!-- Add Expense Button -->
     <v-fab
+      v-if="canCreate"
       color="primary"
       icon="mdi-plus"
       size="large"
@@ -367,9 +371,13 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { usePermissions } from '@/composables/usePermissions'
 
 const route = useRoute()
 const router = useRouter()
+
+// Permissions
+const { canCreate, canUpdate, canDelete } = usePermissions('/expenses')
 
 // Project data from route params
 const projectName = ref('')

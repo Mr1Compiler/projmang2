@@ -222,6 +222,7 @@
               class="action-btn view-btn"
             />
             <v-btn
+              v-if="canUpdate"
               icon="mdi-pencil"
               size="small"
               color="warning"
@@ -230,6 +231,7 @@
               class="action-btn edit-btn"
             />
             <v-btn
+              v-if="canUpdate"
               icon="mdi-key"
               size="small"
               color="primary"
@@ -238,6 +240,7 @@
               class="action-btn reset-btn"
             />
             <v-btn
+              v-if="canDelete"
               icon="mdi-delete"
               size="small"
               color="error"
@@ -441,6 +444,10 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { usePermissions } from '@/composables/usePermissions'
+
+// Permissions for team-members
+const { canCreate, canUpdate, canDelete } = usePermissions('/team-members')
 
 // Reactive data
 const loading = ref(false)

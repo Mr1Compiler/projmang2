@@ -235,18 +235,20 @@
     <!-- Actions Section -->
     <v-card class="actions-card" elevation="2">
       <v-card-text class="text-center">
-        <v-btn 
-          color="primary" 
-          size="small" 
+        <v-btn
+          v-if="canUpdate"
+          color="primary"
+          size="small"
           class="me-2 action-button"
           @click="editWorkDay"
         >
           <v-icon class="me-2" size="18">mdi-pencil</v-icon>
           تعديل يوم العمل
         </v-btn>
-        <v-btn 
-          color="error" 
-          size="small" 
+        <v-btn
+          v-if="canDelete"
+          color="error"
+          size="small"
           class="ms-2 action-button"
           @click="deleteWorkDay"
         >
@@ -320,9 +322,13 @@
 import { ref, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { getWorkDay } from '../api/workdays'
+import { usePermissions } from '@/composables/usePermissions'
 
 const router = useRouter()
 const route = useRoute()
+
+// Permissions
+const { canCreate, canUpdate, canDelete } = usePermissions('/workdays')
 
 // Get workDayId and projectId from query params
 const workDayId = ref(route.query.id || null)

@@ -86,6 +86,7 @@
             <v-chip class="ms-3" style="background-color: rgba(255, 255, 255, 0.3) !important; color: white !important; border: 1px solid rgba(255, 255, 255, 0.5); font-size: 0.75rem !important; height: 20px !important;" size="x-small">{{ engineers.length }}</v-chip>
         </div>
           <v-btn
+            v-if="canCreate"
             class="add-button btn-glow light-sweep smooth-transition"
             @click="openAddEngineerDialog"
             elevation="2"
@@ -205,6 +206,7 @@
                 @click="viewEngineer(item)"
               />
         <v-btn
+                v-if="canUpdate"
                 icon="mdi-pencil"
                     size="small"
           variant="text"
@@ -220,6 +222,7 @@
                 title="إضافة مشروع"
               />
                   <v-btn
+                v-if="canDelete"
                 icon="mdi-delete"
                     size="small"
                 variant="text"
@@ -509,6 +512,7 @@
                       </v-list-item-title>
                       <template v-slot:append>
                         <v-btn
+                          v-if="canDelete"
                           icon="mdi-delete"
                           size="small"
                           variant="text"
@@ -668,6 +672,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { listUsers, createUser, updateUser, deleteUser as deleteUserApi } from '@/api/users'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
+import { usePermissions } from '@/composables/usePermissions'
+
+// Permissions - engineers page uses /users permissions
+const { canCreate, canUpdate, canDelete } = usePermissions('/users')
 
 // Reactive data - يتم تحميل البيانات من API المستخدمين
 const engineers = ref([])

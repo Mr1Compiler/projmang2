@@ -1,112 +1,113 @@
--- Seed Script: SuperAdmin, Pages, Roles, and Permissions
--- Run this after migrations to set up initial data
+-- =============================================
+-- Seed Script: Fresh Database Setup
+-- Run this after migrations on a clean database
+-- =============================================
 
 -- =============================================
--- 1. INSERT PAGES (all routes from your system)
+-- 1. CLEAR ALL DATA (for fresh start)
+-- =============================================
+TRUNCATE TABLE rolepages, userroles, users, pages, roles RESTART IDENTITY CASCADE;
+
+-- =============================================
+-- 2. INSERT PAGES
 -- =============================================
 
 INSERT INTO pages (name, route, icon, status) VALUES
-('Projects', '/projects', 'folder', 'active'),
-('Workdays', '/workdays', 'calendar', 'active'),
-('Workday Materials', '/workday-materials', 'package', 'active'),
-('Workday Labor', '/workday-labor', 'users', 'active'),
-('Workday Equipment', '/workday-equipment', 'tool', 'active'),
-('Work Categories', '/work-categories', 'layers', 'active'),
-('Work Subcategories', '/work-subcategories', 'list', 'active'),
-('Expenses', '/expenses', 'credit-card', 'active'),
-('Income', '/income', 'dollar-sign', 'active'),
-('Debtors', '/debtors', 'user-minus', 'active'),
-('Users', '/users', 'users', 'active'),
-('User Roles', '/user-roles', 'user-check', 'active'),
-('Roles', '/roles', 'shield', 'active'),
-('Pages', '/pages', 'file-text', 'active'),
-('Role Pages', '/role-pages', 'link', 'active')
-ON CONFLICT DO NOTHING;
+-- صفحات السايدبار (تظهر في القائمة الجانبية)
+('لوحة التحكم', '/', 'mdi-view-dashboard', 'active'),
+('إدارة المشاريع', '/projects', 'mdi-folder-multiple', 'active'),
+('المصروفات', '/expenses', 'mdi-chart-line', 'active'),
+('الإيرادات', '/income', 'mdi-trending-up', 'active'),
+('المديونون', '/debtors', 'mdi-credit-card', 'active'),
+('المستخدمين', '/users', 'mdi-account-multiple', 'active'),
+('التصنيفات', '/categories', 'mdi-tag-multiple', 'active'),
+('الأدوار', '/roles', 'mdi-shield-account', 'active'),
+('إدارة الصفحات', '/pages', 'mdi-file-document-multiple', 'active'),
+-- صفحات API فقط (لا تظهر في السايدبار - للصلاحيات فقط)
+('أيام العمل', '/workdays', 'mdi-calendar-check', 'active'),
+('العمالة', '/workday-labor', 'mdi-account-hard-hat', 'active'),
+('المعدات', '/workday-equipment', 'mdi-tools', 'active'),
+('المواد', '/workday-materials', 'mdi-package-variant', 'active'),
+('صلاحيات الأدوار', '/role-pages', 'mdi-key', 'active'),
+('أدوار المستخدمين', '/user-roles', 'mdi-account-key', 'active'),
+('أعضاء الفريق', '/team-members', 'mdi-account-group', 'active'),
+('تصنيفات العمل', '/work-categories', 'mdi-shape', 'active'),
+('تصنيفات العمل الفرعية', '/work-subcategories', 'mdi-shape-outline', 'active');
 
 -- =============================================
--- 2. INSERT SUPERADMIN ROLE
+-- 3. INSERT ROLES
 -- =============================================
 
 INSERT INTO roles (name, description) VALUES
-('SuperAdmin', 'Full system access - can manage all resources and permissions')
-ON CONFLICT DO NOTHING;
+('مدير النظام', 'مدير النظام - صلاحيات إدارة المستخدمين والأدوار والصفحات فقط');
 
 -- =============================================
--- 3. ASSIGN ALL PERMISSIONS TO SUPERADMIN
+-- 4. ASSIGN SUPERADMIN PERMISSIONS
+-- Only management pages: users, roles, pages + their APIs
 -- =============================================
 
--- Get the SuperAdmin role ID and assign full permissions to all pages
 DO $$
 DECLARE
-    superadmin_role_id INTEGER;
-    page_record RECORD;
-    permissions_json VARCHAR(255);
+    admin_role_id INTEGER;
+    page_id INTEGER;
 BEGIN
-    -- Get SuperAdmin role ID
-    SELECT id INTO superadmin_role_id FROM roles WHERE name = 'SuperAdmin';
+    SELECT id INTO admin_role_id FROM roles WHERE name = 'مدير النظام';
 
-    -- Loop through all pages and assign full permissions
-    FOR page_record IN SELECT id, route FROM pages LOOP
-        -- Set permissions based on page type
-        IF page_record.route = '/users' THEN
-            permissions_json := '["read","write","delete","updatePassword","updateStatus"]';
-        ELSE
-            permissions_json := '["read","write","delete"]';
-        END IF;
+    -- المستخدمين
+    SELECT id INTO page_id FROM pages WHERE route = '/users';
+    INSERT INTO rolepages (roleid, pageid, permissions)
+    VALUES (admin_role_id, page_id, '["read","create","update","delete","updatePassword","updateStatus"]');
 
-        -- Insert role-page mapping (skip if exists)
-        INSERT INTO rolePages (roleId, pageId, permissions)
-        VALUES (superadmin_role_id, page_record.id, permissions_json)
-        ON CONFLICT DO NOTHING;
-    END LOOP;
+    -- الأدوار
+    SELECT id INTO page_id FROM pages WHERE route = '/roles';
+    INSERT INTO rolepages (roleid, pageid, permissions)
+    VALUES (admin_role_id, page_id, '["read","create","update","delete"]');
+
+    -- إدارة الصفحات
+    SELECT id INTO page_id FROM pages WHERE route = '/pages';
+    INSERT INTO rolepages (roleid, pageid, permissions)
+    VALUES (admin_role_id, page_id, '["read","create","update","delete"]');
+
+    -- صلاحيات الأدوار (API)
+    SELECT id INTO page_id FROM pages WHERE route = '/role-pages';
+    INSERT INTO rolepages (roleid, pageid, permissions)
+    VALUES (admin_role_id, page_id, '["read","create","update","delete"]');
+
+    -- أدوار المستخدمين (API)
+    SELECT id INTO page_id FROM pages WHERE route = '/user-roles';
+    INSERT INTO rolepages (roleid, pageid, permissions)
+    VALUES (admin_role_id, page_id, '["read","create","update","delete"]');
 END $$;
 
 -- =============================================
--- 4. CREATE SUPERADMIN USER
+-- 5. CREATE SUPERADMIN USER
 -- =============================================
 
 -- Password: Admin@123 (bcrypt hashed)
--- You should change this password after first login!
-INSERT INTO users (username, email, password, fullName, phone, jobTitle, status) VALUES
-('superadmin', 'admin@example.com', '$2a$10$N9qo8uLOickgx2ZMRZoMy.MqrqFnTqwy0Rl/NrJHkE9R8FBKX7g.C', 'Super Admin', '0000000000', 'System Administrator', 'active')
-ON CONFLICT (username) DO NOTHING;
+-- CHANGE THIS PASSWORD AFTER FIRST LOGIN!
+INSERT INTO users (username, email, password, fullname, phone, jobtitle, status) VALUES
+('superadmin', 'admin@system.com', '$2b$10$TZSD0FXAuC6R2SwRWsUhsuDJcVBgoNIcfj76wtdUI9lggU0euFVBC', 'مدير النظام', '0000000000', 'مدير النظام', 'active');
 
 -- =============================================
--- 5. ASSIGN SUPERADMIN ROLE TO SUPERADMIN USER
+-- 6. ASSIGN ROLE TO SUPERADMIN USER
 -- =============================================
 
 DO $$
 DECLARE
     superadmin_user_id INTEGER;
-    superadmin_role_id INTEGER;
+    admin_role_id INTEGER;
 BEGIN
     SELECT id INTO superadmin_user_id FROM users WHERE username = 'superadmin';
-    SELECT id INTO superadmin_role_id FROM roles WHERE name = 'SuperAdmin';
+    SELECT id INTO admin_role_id FROM roles WHERE name = 'مدير النظام';
 
-    -- Assign role to user (skip if exists)
-    INSERT INTO userRoles (userId, roleId)
-    VALUES (superadmin_user_id, superadmin_role_id)
-    ON CONFLICT DO NOTHING;
+    INSERT INTO userroles (userid, roleid)
+    VALUES (superadmin_user_id, admin_role_id);
 END $$;
 
 -- =============================================
--- VERIFICATION QUERIES (optional - run to verify)
+-- DONE! Login with:
+-- Username: superadmin
+-- Password: Admin@123
+--
+-- Then create مدير role with all pages for client admin
 -- =============================================
-
--- Check pages
--- SELECT * FROM pages;
-
--- Check roles
--- SELECT * FROM roles;
-
--- Check role-page permissions
--- SELECT r.name as role, p.name as page, rp.permissions
--- FROM rolePages rp
--- JOIN roles r ON rp.roleId = r.id
--- JOIN pages p ON rp.pageId = p.id;
-
--- Check user roles
--- SELECT u.username, r.name as role
--- FROM userRoles ur
--- JOIN users u ON ur.userId = u.id
--- JOIN roles r ON ur.roleId = r.id;

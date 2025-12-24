@@ -155,7 +155,7 @@ func (r *UserRoleRepository) GetUserPages(ctx context.Context, userID int64) ([]
 		JOIN rolePages rp ON ur.roleId = rp.roleId
 		JOIN pages p ON rp.pageId = p.id
 		WHERE ur.userId = $1 AND (p.status = 'active' OR p.status IS NULL)
-		ORDER BY p.name
+		ORDER BY p.id
 	`
 
 	rows, err := r.db.Query(ctx, query, userID)
@@ -167,6 +167,7 @@ func (r *UserRoleRepository) GetUserPages(ctx context.Context, userID int64) ([]
 	// Use map to merge permissions from multiple roles
 	pageMap := make(map[int64]*UserPage)
 	permSet := make(map[int64]map[string]bool)
+	var pageOrder []int64 // Track insertion order
 
 	for rows.Next() {
 		var pageID int64
@@ -188,6 +189,7 @@ func (r *UserRoleRepository) GetUserPages(ctx context.Context, userID int64) ([]
 				Icon:  icon,
 			}
 			permSet[pageID] = make(map[string]bool)
+			pageOrder = append(pageOrder, pageID) // Preserve order
 		}
 
 		// Parse and merge permissions
@@ -205,9 +207,10 @@ func (r *UserRoleRepository) GetUserPages(ctx context.Context, userID int64) ([]
 		return nil, err
 	}
 
-	// Convert map to slice and assign merged permissions
+	// Convert map to slice preserving order and assign merged permissions
 	var pages []UserPage
-	for pageID, page := range pageMap {
+	for _, pageID := range pageOrder {
+		page := pageMap[pageID]
 		for perm := range permSet[pageID] {
 			page.Permissions = append(page.Permissions, perm)
 		}

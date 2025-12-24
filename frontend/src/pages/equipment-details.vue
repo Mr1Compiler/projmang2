@@ -53,9 +53,10 @@
               <v-icon class="me-2">mdi-magnify</v-icon>
               بحث
             </v-btn>
-            <v-btn 
-              color="indigo" 
-              variant="elevated" 
+            <v-btn
+              v-if="canCreate"
+              color="indigo"
+              variant="elevated"
               class="add-btn"
               @click="openAddDialog"
               size="large"
@@ -121,6 +122,7 @@
         <template #item.actions="{ item }">
           <div class="action-buttons">
             <v-btn
+              v-if="canUpdate"
               icon="mdi-pencil"
               size="small"
               color="primary"
@@ -130,6 +132,7 @@
               class="action-btn"
             />
             <v-btn
+              v-if="canDelete"
               icon="mdi-delete"
               size="small"
               color="error"
@@ -440,9 +443,13 @@ import { ref, computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { listEquipmentByWorkDay, createEquipment, updateEquipment, deleteEquipment as deleteEquipmentApi } from '@/api/materials'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
+import { usePermissions } from '@/composables/usePermissions'
 
 const router = useRouter()
 const route = useRoute()
+
+// Permissions for workday-equipment
+const { canCreate, canUpdate, canDelete } = usePermissions('/workday-equipment')
 
 // Get workDayId and projectId from route query
 const workDayId = computed(() => route.query.workDayId || null)

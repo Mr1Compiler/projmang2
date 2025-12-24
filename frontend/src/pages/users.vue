@@ -156,6 +156,7 @@
                 تصدير البيانات
               </v-btn>
               <v-btn
+                v-if="canCreate"
                 class="add-button add-user-btn btn-glow light-sweep smooth-transition"
                 @click="showAddUserDialog = true"
                 elevation="2"
@@ -223,6 +224,7 @@
                 @click="viewUser(item)"
               />
               <v-btn
+                v-if="canUpdate"
                 icon="mdi-pencil"
                 size="small"
                 variant="elevated"
@@ -231,6 +233,7 @@
                 @click="editUser(item)"
               />
               <v-btn
+                v-if="canUpdatePassword"
                 icon="mdi-key"
                 size="small"
                 variant="elevated"
@@ -239,6 +242,7 @@
                 @click="resetPassword(item)"
               />
               <v-btn
+                v-if="canDelete"
                 icon="mdi-delete"
                 size="small"
                 variant="elevated"
@@ -292,59 +296,45 @@
   </div>
 
   <!-- نافذة حوار إضافة مستخدم جديد -->
-  <v-dialog v-model="showAddUserDialog" max-width="800px" persistent>
-    <v-card class="add-user-dialog">
-      <v-card-title class="dialog-header">
-        <div class="dialog-title">
-          <v-icon size="14" color="primary" class="me-1">mdi-account-plus</v-icon>
-          <h2>إضافة مستخدم جديد</h2>
+  <v-dialog v-model="showAddUserDialog" max-width="950px" persistent>
+    <v-card class="add-user-dialog" rounded="lg">
+      <!-- Header -->
+      <v-card-title class="dialog-header pa-4">
+        <div class="d-flex align-center">
+          <v-avatar color="white" size="44" class="me-3">
+            <v-icon color="primary" size="26">mdi-account-plus</v-icon>
+          </v-avatar>
+          <div>
+            <h3 class="text-h5 font-weight-bold text-white mb-0">إضافة مستخدم جديد</h3>
+            <span class="text-body-2 text-white-darken-1">أدخل بيانات المستخدم الجديد</span>
+          </div>
         </div>
-        <v-btn 
-          icon="mdi-close" 
-          variant="text" 
-          size="x-small"
+        <v-btn
+          icon="mdi-close"
+          variant="text"
+          size="default"
           @click="closeAddUserDialog"
           class="close-btn"
         />
       </v-card-title>
-      
-      <v-divider />
-      
-      <v-card-text class="dialog-content">
+
+      <!-- Form Content -->
+      <v-card-text class="dialog-content pa-8">
         <v-form ref="addUserForm" v-model="formValid" lazy-validation>
           <v-row>
-            <!-- الصورة الشخصية -->
-            <v-col cols="12" class="text-center" style="margin-bottom: 4px !important;">
-              <v-avatar size="60" class="user-avatar-upload">
-                <v-img 
-                  :src="newUser.avatar || 'https://via.placeholder.com/100x100?text=صورة'"
-                  alt="صورة المستخدم"
-                />
-              </v-avatar>
-              <div style="margin-top: 4px !important;">
-                <v-btn 
-                  size="x-small" 
-                  color="primary" 
-                  variant="outlined"
-                  prepend-icon="mdi-camera"
-                  style="font-size: 0.7rem !important; padding: 2px 8px !important; min-height: 24px !important;"
-                >
-                  تحديد صورة
-                </v-btn>
-              </div>
-            </v-col>
-
             <!-- اسم المستخدم -->
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="newUser.username"
-                label="اسم المستخدم *"
+                label="اسم المستخدم"
+                placeholder="أدخل اسم المستخدم"
                 :rules="usernameRules"
-                required
                 variant="outlined"
-                density="compact"
+                density="default"
                 prepend-inner-icon="mdi-account"
-                hint="يستخدم لتسجيل الدخول"
+                color="primary"
+                bg-color="grey-lighten-5"
+                class="mb-2"
               />
             </v-col>
 
@@ -352,12 +342,15 @@
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="newUser.fullName"
-                label="الاسم الكامل *"
+                label="الاسم الكامل"
+                placeholder="أدخل الاسم الكامل"
                 :rules="fullNameRules"
-                required
                 variant="outlined"
-                density="compact"
+                density="default"
                 prepend-inner-icon="mdi-account-outline"
+                color="primary"
+                bg-color="grey-lighten-5"
+                class="mb-2"
               />
             </v-col>
 
@@ -365,13 +358,16 @@
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="newUser.email"
-                label="البريد الإلكتروني *"
+                label="البريد الإلكتروني"
+                placeholder="example@domain.com"
                 :rules="emailRules"
-                required
                 variant="outlined"
-                density="compact"
-                prepend-inner-icon="mdi-email"
+                density="default"
+                prepend-inner-icon="mdi-email-outline"
                 type="email"
+                color="primary"
+                bg-color="grey-lighten-5"
+                class="mb-2"
               />
             </v-col>
 
@@ -379,13 +375,16 @@
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="newUser.phone"
-                label="رقم الهاتف *"
+                label="رقم الهاتف"
+                placeholder="07xxxxxxxx"
                 :rules="phoneRules"
-                required
                 variant="outlined"
-                density="compact"
-                prepend-inner-icon="mdi-phone"
+                density="default"
+                prepend-inner-icon="mdi-phone-outline"
                 type="tel"
+                color="primary"
+                bg-color="grey-lighten-5"
+                class="mb-2"
               />
             </v-col>
 
@@ -393,71 +392,109 @@
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="newUser.jobTitle"
-                label="المسمى الوظيفي *"
+                label="المسمى الوظيفي"
+                placeholder="مثال: مهندس برمجيات"
                 :rules="jobTitleRules"
-                required
                 variant="outlined"
-                density="compact"
-                prepend-inner-icon="mdi-briefcase"
-                hint="مثال: مهندس، محاسب، مدير مشروع"
+                density="default"
+                prepend-inner-icon="mdi-briefcase-outline"
+                color="primary"
+                bg-color="grey-lighten-5"
+                class="mb-2"
               />
             </v-col>
 
-            <!-- الحالة -->
+            <!-- الدور -->
             <v-col cols="12" md="6">
               <v-select
-                v-model="newUser.status"
-                :items="statusOptions"
-                label="الحالة *"
-                :rules="requiredRules"
-                required
+                v-model="newUser.roleId"
+                :items="roleSelectOptions"
+                item-title="title"
+                item-value="value"
+                label="الدور"
+                placeholder="اختر الدور"
+                :rules="[v => !!v || 'الدور مطلوب']"
                 variant="outlined"
-                density="compact"
-                prepend-inner-icon="mdi-account-check"
-                class="black-dropdown-select"
+                density="default"
+                prepend-inner-icon="mdi-shield-account-outline"
+                color="primary"
+                bg-color="grey-lighten-5"
+                class="mb-2"
               />
+            </v-col>
+
+            <!-- Divider for password section -->
+            <v-col cols="12" class="py-3">
+              <v-divider class="my-3" />
+              <div class="text-body-2 text-grey-darken-1 mb-3">
+                <v-icon size="20" class="me-2">mdi-lock-outline</v-icon>
+                معلومات تسجيل الدخول
+              </div>
             </v-col>
 
             <!-- كلمة المرور -->
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="newUser.password"
-                label="كلمة المرور *"
+                label="كلمة المرور"
+                placeholder="أدخل كلمة المرور"
                 :rules="passwordRules"
-                required
                 variant="outlined"
-                density="compact"
-                prepend-inner-icon="mdi-lock"
+                density="default"
+                prepend-inner-icon="mdi-lock-outline"
                 :type="showPassword ? 'text' : 'password'"
-                :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                 @click:append-inner="showPassword = !showPassword"
+                color="primary"
+                bg-color="grey-lighten-5"
+                hint="8 أحرف على الأقل"
+                persistent-hint
+                class="mb-2"
               />
             </v-col>
 
+            <!-- تأكيد كلمة المرور -->
+            <v-col cols="12" md="6">
+              <v-text-field
+                v-model="newUser.confirmPassword"
+                label="تأكيد كلمة المرور"
+                placeholder="أعد إدخال كلمة المرور"
+                :rules="confirmPasswordRules"
+                variant="outlined"
+                density="default"
+                prepend-inner-icon="mdi-lock-check-outline"
+                :type="showConfirmPassword ? 'text' : 'password'"
+                :append-inner-icon="showConfirmPassword ? 'mdi-eye-off' : 'mdi-eye'"
+                @click:append-inner="showConfirmPassword = !showConfirmPassword"
+                color="primary"
+                bg-color="grey-lighten-5"
+                class="mb-2"
+              />
+            </v-col>
           </v-row>
         </v-form>
       </v-card-text>
 
-      <v-divider />
-
-      <v-card-actions class="dialog-actions">
+      <!-- Actions -->
+      <v-card-actions class="dialog-actions pa-5">
         <v-spacer />
         <v-btn
-          color="grey"
           variant="outlined"
-          size="small"
+          size="large"
           @click="closeAddUserDialog"
-          class="me-2 cancel-btn-dialog"
+          class="me-3 px-8"
         >
           إلغاء
         </v-btn>
         <v-btn
           color="primary"
           variant="elevated"
-          size="small"
+          size="large"
           @click="saveNewUser"
           :loading="saving"
-          class="save-btn-dialog"
+          :disabled="!formValid"
+          class="px-8"
+          prepend-icon="mdi-check"
         >
           <v-icon start size="16">mdi-content-save</v-icon>
           حفظ المستخدم
@@ -823,7 +860,12 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { listUsers, createUser, updateUser, updateUserPassword, deleteUser as deleteUserApi } from '@/api/users'
+import { listRoles, assignRoleToUser } from '@/api/roles'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
+import { usePermissions } from '@/composables/usePermissions'
+
+// Permissions
+const { canCreate, canUpdate, canDelete, canUpdatePassword, canUpdateStatus } = usePermissions('/users')
 
 // البيانات التفاعلية
 const loading = ref(false)
@@ -837,6 +879,7 @@ const showAddUserDialog = ref(false)
 const formValid = ref(false)
 const saving = ref(false)
 const showPassword = ref(false)
+const showConfirmPassword = ref(false)
 const addUserForm = ref(null)
 
 // متغيرات نوافذ الإجراءات
@@ -851,16 +894,9 @@ const editSaving = ref(false)
 const resetLoading = ref(false)
 const deleteLoading = ref(false)
 
-// خيارات الفلاتر
-const roles = ref([
-  'مدير النظام',
-  'مدير المشاريع',
-  'مهندس',
-  'محاسب',
-  'موظف إداري',
-  'مراجع',
-  'مستخدم عادي'
-])
+// خيارات الفلاتر - يتم تحميلها من الـ API
+const roles = ref([])
+const rolesData = ref([]) // البيانات الكاملة للأدوار من الـ API
 
 const departments = ref([
   'تقنية المعلومات',
@@ -898,9 +934,9 @@ const newUser = ref({
   email: '',
   phone: '',
   jobTitle: '',
-  status: 'active',
   password: '',
-  avatar: ''
+  confirmPassword: '',
+  roleId: null // الدور المحدد
 })
 
 // خيارات النماذج
@@ -962,6 +998,11 @@ const jobTitleRules = [
 const passwordRules = [
   v => !!v || 'كلمة المرور مطلوبة',
   v => (v && v.length >= 8) || 'كلمة المرور يجب أن تكون على الأقل 8 أحرف'
+]
+
+const confirmPasswordRules = [
+  v => !!v || 'تأكيد كلمة المرور مطلوب',
+  v => v === newUser.value.password || 'كلمة المرور غير متطابقة'
 ]
 
 const requiredRules = [
@@ -1099,15 +1140,16 @@ const resetForm = () => {
     email: '',
     phone: '',
     jobTitle: '',
-    status: 'active',
     password: '',
-    avatar: ''
+    confirmPassword: '',
+    roleId: null
   }
   if (addUserForm.value) {
     addUserForm.value.resetValidation()
   }
   formValid.value = false
   showPassword.value = false
+  showConfirmPassword.value = false
 }
 
 const saveNewUser = async () => {
@@ -1129,7 +1171,17 @@ const saveNewUser = async () => {
     }
 
     // إرسال البيانات إلى الـ API
-    await createUser(userData)
+    const createdUser = await createUser(userData)
+
+    // تعيين الدور للمستخدم إذا تم اختياره
+    if (newUser.value.roleId && createdUser?.id) {
+      try {
+        await assignRoleToUser(createdUser.id, newUser.value.roleId)
+        console.log('تم تعيين الدور للمستخدم بنجاح')
+      } catch (roleError) {
+        console.error('خطأ في تعيين الدور:', roleError)
+      }
+    }
 
     // إعادة تحميل البيانات من الـ API
     await loadUsers()
@@ -1307,10 +1359,43 @@ const onPageChange = (page) => {
 }
 
 // ========================================
+// دالة تحميل الأدوار من الـ API
+// ========================================
+const loadRoles = async () => {
+  try {
+    const response = await listRoles()
+    console.log('Roles data received:', response)
+
+    // تخزين البيانات الكاملة - تأكد من أنها مصفوفة
+    rolesData.value = Array.isArray(response) ? response : []
+
+    // إنشاء قائمة للفلتر (أسماء الأدوار فقط)
+    roles.value = rolesData.value.map(role => role.name)
+
+  } catch (error) {
+    console.error('Error loading roles:', error)
+    rolesData.value = []
+    roles.value = []
+  }
+}
+
+// قائمة الأدوار للاختيار في النموذج
+const roleSelectOptions = computed(() => {
+  if (!Array.isArray(rolesData.value)) {
+    return []
+  }
+  return rolesData.value.map(role => ({
+    title: role.name,
+    value: role.id
+  }))
+})
+
+// ========================================
 // دورة الحياة
 // ========================================
 onMounted(() => {
   loadUsers()
+  loadRoles()
 })
 </script>
 
@@ -3106,18 +3191,21 @@ onMounted(() => {
 
   /* تنسيق نافذة إضافة المستخدم */
   .add-user-dialog {
-    background: #ffffff;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    max-height: 90vh;
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    overflow: visible !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 90vh !important;
   }
 
-  .add-user-dialog .dialog-content {
-    overflow-y: visible;
-    flex: 1;
+  .add-user-dialog .v-card-text {
+    overflow-y: auto !important;
+    flex: 1 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   .add-user-dialog .dialog-actions {
@@ -3129,40 +3217,39 @@ onMounted(() => {
   }
 
   .dialog-header {
-    background: linear-gradient(135deg, rgba(25, 118, 210, 0.7) 0%, rgba(21, 101, 192, 0.7) 100%);
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
     color: #ffffff;
-    padding: 3px 8px;
+    padding: 20px 24px;
     border-bottom: none;
-    backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 24px;
+    min-height: 60px;
   }
 
   .dialog-title {
     display: flex;
     align-items: center;
-    font-weight: 500;
-    font-size: 0.7rem;
-    gap: 3px;
+    font-weight: 600;
+    font-size: 1rem;
+    gap: 8px;
   }
 
   .dialog-title h2 {
     color: #ffffff;
     margin: 0;
-    font-weight: 500;
-    font-size: 0.7rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    line-height: 1.2;
   }
 
   .dialog-title .v-icon {
     color: #ffffff;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-    font-size: 14px !important;
-    width: 14px !important;
-    height: 14px !important;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    font-size: 24px !important;
+    width: 24px !important;
+    height: 24px !important;
   }
 
   .close-btn {
@@ -3170,9 +3257,9 @@ onMounted(() => {
     background: rgba(255, 255, 255, 0.2) !important;
     border-radius: 50% !important;
     transition: all 0.3s ease !important;
-    width: 18px !important;
-    height: 18px !important;
-    min-width: 18px !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
     padding: 0 !important;
   }
 
@@ -3182,80 +3269,68 @@ onMounted(() => {
   }
 
   .close-btn .v-icon {
-    font-size: 12px !important;
-    width: 12px !important;
-    height: 12px !important;
+    font-size: 18px !important;
+    width: 18px !important;
+    height: 18px !important;
   }
 
   .dialog-content {
-    padding: 8px 12px;
-    background: #ffffff;
+    padding: 32px !important;
+    background: #ffffff !important;
   }
 
-  /* تصغير المسافات بين الحقول */
+  /* تنسيق الحقول - عرض كامل */
   .add-user-dialog .v-row {
-    margin: 0 !important;
+    margin: -12px !important;
   }
 
   .add-user-dialog .v-col {
-    padding: 1px 4px !important;
+    padding: 12px !important;
   }
 
   .add-user-dialog .v-text-field,
   .add-user-dialog .v-select,
   .add-user-dialog .v-textarea {
-    margin-bottom: 0 !important;
+    width: 100% !important;
   }
 
-  .add-user-dialog .v-text-field .v-field,
-  .add-user-dialog .v-select .v-field,
-  .add-user-dialog .v-textarea .v-field {
-    margin-bottom: 0 !important;
+  .add-user-dialog .v-input {
+    width: 100% !important;
+  }
+
+  .add-user-dialog .v-input__control {
+    width: 100% !important;
+  }
+
+  .add-user-dialog .v-field {
+    width: 100% !important;
+  }
+
+  .add-user-dialog .v-field__field {
+    width: 100% !important;
   }
 
   .add-user-dialog .v-field__input {
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
-    min-height: 28px !important;
+    padding: 16px 14px !important;
+    min-height: 56px !important;
+    font-size: 1rem !important;
   }
 
   .add-user-dialog .v-field__prepend-inner {
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
+    padding-right: 12px !important;
   }
 
   .add-user-dialog .v-field__append-inner {
-    padding-top: 2px !important;
-    padding-bottom: 2px !important;
+    padding-left: 12px !important;
   }
 
   .add-user-dialog .v-input__details {
-    min-height: 0 !important;
-    padding-top: 0 !important;
-    margin-bottom: 0 !important;
-    margin-top: 0 !important;
-  }
-
-  .add-user-dialog .v-messages {
-    min-height: 0 !important;
-    margin-top: 0 !important;
-    padding: 0 !important;
+    padding-top: 6px !important;
+    padding-inline-start: 16px !important;
   }
 
   .add-user-dialog .v-messages__message {
-    line-height: 1.1 !important;
-    font-size: 0.65rem !important;
-    margin-top: 0 !important;
-    padding: 0 !important;
-  }
-
-  .add-user-dialog .v-field--variant-outlined {
-    --v-field-input-padding-top: 4px !important;
-    --v-field-input-padding-bottom: 4px !important;
-  }
-
-  .add-user-dialog .v-textarea .v-field__input {
-    min-height: 40px !important;
+    font-size: 0.85rem !important;
   }
 
   .dialog-actions {
@@ -3413,24 +3488,56 @@ onMounted(() => {
   .add-user-dialog .v-text-field .v-field,
   .add-user-dialog .v-select .v-field,
   .add-user-dialog .v-textarea .v-field {
-    background: rgba(124, 93, 196, 0.9);
+    background: #ffffff !important;
     border-radius: 12px;
-    border: 1px solid rgba(219, 15, 172, 0.2);
+    border: 1px solid #d1d5db !important;
     transition: all 0.3s ease;
   }
 
   .add-user-dialog .v-text-field .v-field:hover,
   .add-user-dialog .v-select .v-field:hover,
   .add-user-dialog .v-textarea .v-field:hover {
-    border-color: rgba(219, 15, 172, 0.4);
-    box-shadow: 0 4px 15px rgba(219, 15, 172, 0.1);
+    border-color: #1976d2 !important;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);
   }
 
-  .add-user-dialog .v-text-field.v-field--focused .v-field,
-  .add-user-dialog .v-select.v-field--focused .v-field,
-  .add-user-dialog .v-textarea.v-field--focused .v-field {
-    border-color: rgba(219, 15, 172, 0.6);
-    box-shadow: 0 6px 20px rgba(219, 15, 172, 0.2);
+  .add-user-dialog .v-field--focused .v-field,
+  .add-user-dialog .v-text-field .v-field--focused,
+  .add-user-dialog .v-select .v-field--focused,
+  .add-user-dialog .v-textarea .v-field--focused {
+    border-color: #1976d2 !important;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2) !important;
+  }
+
+  /* Fix input text color - make it black/dark */
+  .add-user-dialog .v-field__input,
+  .add-user-dialog .v-field__input input,
+  .add-user-dialog .v-text-field input,
+  .add-user-dialog .v-select input,
+  .add-user-dialog .v-textarea textarea {
+    color: #1a1a1a !important;
+    caret-color: #1976d2 !important;
+  }
+
+  .add-user-dialog .v-field__input::placeholder {
+    color: #9ca3af !important;
+  }
+
+  /* Fix select display text */
+  .add-user-dialog .v-select__selection,
+  .add-user-dialog .v-select__selection-text {
+    color: #1a1a1a !important;
+  }
+
+  /* Fix icons color */
+  .add-user-dialog .v-field__prepend-inner .v-icon,
+  .add-user-dialog .v-field__append-inner .v-icon {
+    color: #6b7280 !important;
+  }
+
+  .add-user-dialog .v-field--focused .v-field__prepend-inner .v-icon,
+  .add-user-dialog .v-field--focused .v-field__append-inner .v-icon {
+    color: #1976d2 !important;
   }
 
   /* تأثيرات إضافية للنافذة */
@@ -3743,27 +3850,144 @@ onMounted(() => {
 
 
 <style>
-/* تنسيقات إضافية قوية للتسميات - ضمان الوضوح */
+/* ========================================
+   إصلاح شامل لألوان النصوص في حوار إضافة المستخدم
+   ======================================== */
+
+/* إصلاح لون النص المكتوب في الحقول - أسود داكن */
+.add-user-dialog .v-field__input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+.add-user-dialog .v-field__input input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  caret-color: #1976d2 !important;
+}
+
+.add-user-dialog .v-text-field input,
+.add-user-dialog .v-text-field .v-field input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+.add-user-dialog .v-select .v-field__input,
+.add-user-dialog .v-select input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+.add-user-dialog .v-textarea textarea {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+/* إصلاح خلفية الحقول - أبيض */
+.add-user-dialog .v-field,
+.add-user-dialog .v-field__field,
+.add-user-dialog .v-field__overlay {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+/* إصلاح نص القائمة المنسدلة */
+.add-user-dialog .v-select__selection,
+.add-user-dialog .v-select__selection-text,
+.add-user-dialog .v-select .v-select__selection {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+/* ========================================
+   تنسيق القائمة المنسدلة للأدوار - خفيف
+   ======================================== */
+.v-menu > .v-overlay__content > .v-list,
+.v-select__content .v-list {
+  background: #ffffff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #e5e7eb !important;
+  padding: 8px !important;
+}
+
+.v-menu > .v-overlay__content > .v-list .v-list-item,
+.v-select__content .v-list-item {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  border-radius: 6px !important;
+  margin-bottom: 4px !important;
+  min-height: 44px !important;
+}
+
+.v-menu > .v-overlay__content > .v-list .v-list-item:hover,
+.v-select__content .v-list-item:hover {
+  background: #f3f4f6 !important;
+}
+
+.v-menu > .v-overlay__content > .v-list .v-list-item--active,
+.v-select__content .v-list-item--active {
+  background: #e0f2fe !important;
+  color: #1976d2 !important;
+}
+
+.v-menu > .v-overlay__content > .v-list .v-list-item-title,
+.v-select__content .v-list-item-title {
+  color: #1a1a1a !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+}
+
+.v-menu > .v-overlay__content > .v-list .v-list-item--active .v-list-item-title,
+.v-select__content .v-list-item--active .v-list-item-title {
+  color: #1976d2 !important;
+  font-weight: 600 !important;
+}
+
+/* تنسيقات التسميات - العناوين */
 .add-user-dialog .v-label,
-.add-user-dialog .v-field__label,
-.add-user-dialog .v-label--active,
-.add-user-dialog .v-field__label--active,
-.add-user-dialog .v-label--floating,
-.add-user-dialog .v-field__label--floating {
-  color: #000000 !important;
-  font-weight: 800 !important;
+.add-user-dialog .v-field-label {
+  color: #374151 !important;
+  font-weight: 500 !important;
   font-size: 1rem !important;
   opacity: 1 !important;
+}
+
+.add-user-dialog .v-field-label--floating,
+.add-user-dialog .v-label--floating {
+  color: #1976d2 !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
   background: white !important;
   padding: 0 8px !important;
-  text-shadow: none !important;
-  letter-spacing: 0.3px !important;
+  transform: translateY(-50%) !important;
+}
+
+/* تنسيق حقول outlined مع العناوين */
+.add-user-dialog .v-field--variant-outlined .v-field__outline__notch {
+  border-width: 0 !important;
+}
+
+.add-user-dialog .v-field--variant-outlined .v-field__outline__start,
+.add-user-dialog .v-field--variant-outlined .v-field__outline__end {
+  border-color: #d1d5db !important;
+  border-width: 2px !important;
+}
+
+.add-user-dialog .v-field--variant-outlined:hover .v-field__outline__start,
+.add-user-dialog .v-field--variant-outlined:hover .v-field__outline__end {
+  border-color: #9ca3af !important;
+}
+
+.add-user-dialog .v-field--variant-outlined.v-field--focused .v-field__outline__start,
+.add-user-dialog .v-field--variant-outlined.v-field--focused .v-field__outline__end {
+  border-color: #1976d2 !important;
 }
 
 .add-user-dialog .v-field--focused .v-label,
 .add-user-dialog .v-field--focused .v-field__label {
-  color: #000000 !important;
-  font-weight: 800 !important;
+  color: #1976d2 !important;
+  font-weight: 600 !important;
   opacity: 1 !important;
   background: white !important;
 }
@@ -3771,9 +3995,117 @@ onMounted(() => {
 .add-user-dialog .v-text-field .v-label,
 .add-user-dialog .v-select .v-label,
 .add-user-dialog .v-textarea .v-label {
-  color: #000000 !important;
-  font-weight: 800 !important;
+  color: #374151 !important;
+  font-weight: 600 !important;
   opacity: 1 !important;
+}
+
+/* إصلاح ألوان الأيقونات */
+.add-user-dialog .v-field__prepend-inner .v-icon,
+.add-user-dialog .v-field__append-inner .v-icon {
+  color: #6b7280 !important;
+}
+
+/* إصلاح الحدود */
+.add-user-dialog .v-field--variant-outlined .v-field__outline__start,
+.add-user-dialog .v-field--variant-outlined .v-field__outline__end,
+.add-user-dialog .v-field--variant-outlined .v-field__outline__notch::before,
+.add-user-dialog .v-field--variant-outlined .v-field__outline__notch::after {
+  border-color: #d1d5db !important;
+}
+
+.add-user-dialog .v-field--focused.v-field--variant-outlined .v-field__outline__start,
+.add-user-dialog .v-field--focused.v-field--variant-outlined .v-field__outline__end,
+.add-user-dialog .v-field--focused.v-field--variant-outlined .v-field__outline__notch::before,
+.add-user-dialog .v-field--focused.v-field--variant-outlined .v-field__outline__notch::after {
+  border-color: #1976d2 !important;
+}
+
+/* إصلاح رسائل التلميحات */
+.add-user-dialog .v-messages__message {
+  color: #6b7280 !important;
+}
+
+/* ========================================
+   إصلاح شامل لحجم وعرض حقول نموذج إضافة المستخدم
+   ======================================== */
+.add-user-dialog {
+  width: 100% !important;
+  max-width: 950px !important;
+}
+
+.add-user-dialog .v-card {
+  width: 100% !important;
+}
+
+.add-user-dialog .v-card-text,
+.add-user-dialog .dialog-content {
+  width: 100% !important;
+  padding: 32px 40px !important;
+  box-sizing: border-box !important;
+}
+
+.add-user-dialog .v-form {
+  width: 100% !important;
+}
+
+.add-user-dialog .v-row {
+  width: 100% !important;
+  margin: 0 -16px !important;
+}
+
+.add-user-dialog .v-col {
+  padding: 16px !important;
+  flex: 0 0 50% !important;
+  max-width: 50% !important;
+}
+
+.add-user-dialog .v-col[class*="cols-12"]:not([class*="md-6"]):not([class*="sm-6"]) {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+}
+
+.add-user-dialog .v-text-field,
+.add-user-dialog .v-select {
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+.add-user-dialog .v-input {
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+.add-user-dialog .v-input__control {
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+.add-user-dialog .v-field {
+  width: 100% !important;
+  min-width: 100% !important;
+  min-height: 56px !important;
+}
+
+.add-user-dialog .v-field__field {
+  width: 100% !important;
+  min-height: 56px !important;
+}
+
+.add-user-dialog .v-field__input {
+  width: 100% !important;
+  min-height: 56px !important;
+  padding: 16px !important;
+  font-size: 1rem !important;
+}
+
+.add-user-dialog .v-field__input input {
+  width: 100% !important;
+  font-size: 1rem !important;
+}
+
+.add-user-dialog .v-field__outline {
+  width: 100% !important;
 }
 
 /* ========================================

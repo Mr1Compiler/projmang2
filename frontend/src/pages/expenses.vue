@@ -145,6 +145,7 @@
           <div class="d-flex align-center justify-space-between" style="width: 100%;">
             <span class="title-text">المشاريع</span>
             <v-btn
+              v-if="canCreate"
               class="add-button-new btn-glow light-sweep smooth-transition"
               @click="openAddExpenseDialog"
               elevation="2"
@@ -225,6 +226,7 @@
           <template #item.actions="{ item }">
             <div class="action-buttons">
               <v-btn
+                v-if="canUpdate"
                 size="small"
                 color="primary"
                 variant="text"
@@ -236,6 +238,7 @@
                 <v-icon size="16">mdi-pencil</v-icon>
               </v-btn>
               <v-btn
+                v-if="canDelete"
                 size="small"
                 color="error"
                 variant="text"
@@ -431,8 +434,12 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { listExpenses, createExpense, updateExpense, deleteExpense as deleteExpenseApi, getExpenseStats } from '@/api/expenses'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
+import { usePermissions } from '@/composables/usePermissions'
 
 const router = useRouter()
+
+// Permissions
+const { canCreate, canUpdate, canDelete } = usePermissions('/expenses')
 
 // Pagination state
 const currentPage = ref(1)

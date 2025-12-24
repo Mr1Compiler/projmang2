@@ -174,6 +174,7 @@
         <v-card-title class="table-title indigo-title d-flex align-center justify-space-between">
           <span class="title-text">قائمة الموظفين</span>
           <v-btn
+            v-if="canCreate"
             class="add-button btn-glow light-sweep smooth-transition"
             @click="openAddEmployeeDialog"
             elevation="2"
@@ -265,6 +266,7 @@
                 <v-icon size="14">mdi-eye</v-icon>
               </v-btn>
               <v-btn
+                v-if="canUpdate"
                 size="small"
                 color="success"
                 variant="text"
@@ -276,6 +278,7 @@
                 <v-icon size="14">mdi-pencil</v-icon>
               </v-btn>
               <v-btn
+                v-if="canDelete"
                 size="small"
                 color="error"
                 variant="text"
@@ -1524,6 +1527,10 @@
 <script setup>
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
+import { usePermissions } from '@/composables/usePermissions'
+
+// Permissions
+const { canCreate, canUpdate, canDelete } = usePermissions('/human-resources')
 
 // ========================================
 // متغيرات الحالة الأساسية

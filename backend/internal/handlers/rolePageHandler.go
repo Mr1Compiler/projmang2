@@ -21,7 +21,25 @@ func NewRolePageHandler(rolePageService *services.RolePageService) *RolePageHand
 }
 
 // GetAll handles GET /role-pages
+// Supports optional roleId query parameter to filter by role
 func (h *RolePageHandler) GetAll(c *gin.Context) {
+	// Check for roleId filter
+	roleIDStr := c.Query("roleId")
+	if roleIDStr != "" {
+		roleID, err := strconv.ParseInt(roleIDStr, 10, 64)
+		if err != nil {
+			response.BadRequest(c, "invalid roleId")
+			return
+		}
+		rolePages, err := h.rolePageService.GetByRoleID(c.Request.Context(), roleID)
+		if err != nil {
+			response.InternalError(c, "failed to fetch role pages")
+			return
+		}
+		response.Success(c, rolePages)
+		return
+	}
+
 	var pagination dtos.PaginationQuery
 	if err := c.ShouldBindQuery(&pagination); err != nil {
 		response.ValidationError(c, err)

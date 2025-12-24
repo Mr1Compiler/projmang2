@@ -158,6 +158,7 @@
                       @click="viewTeamMember(item)"
                     />
                     <v-btn
+                      v-if="canUpdate"
                       icon="mdi-pencil"
                       size="x-small"
                       color="warning"
@@ -165,6 +166,7 @@
                       @click="editTeamMember(item)"
                     />
                     <v-btn
+                      v-if="canDelete"
                       icon="mdi-delete"
                       size="x-small"
                       color="error"
@@ -359,6 +361,7 @@
             <v-chip class="ms-3" color="primary" size="small" variant="elevated">{{ projects.length }}</v-chip>
           </div>
           <v-btn
+            v-if="canCreate"
             class="add-button btn-glow light-sweep smooth-transition"
             @click="openAddProjectDialog"
             elevation="2"
@@ -548,6 +551,7 @@
 
               <v-card-actions class="project-card-actions d-flex ga-2">
                 <v-btn
+                  v-if="canUpdate"
                   color="warning"
                   variant="elevated"
                   size="default"
@@ -1430,6 +1434,10 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { listProjects, getProjectStats, getProjectWorkdays, getProject, createProject, updateProject } from '@/api/projects'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
+import { usePermissions } from '@/composables/usePermissions'
+
+// Permissions - matches database page route
+const { canCreate, canUpdate, canDelete } = usePermissions('/projects')
 
 // عنوان الصفحة
 document.title = 'إدارة المشاريع الهندسية - نظام إدارة المشاريع'

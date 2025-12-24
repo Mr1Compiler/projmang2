@@ -19,10 +19,10 @@ func RegisterWorkDayRoutes(rg *gin.RouterGroup, c *container.Container) {
 	{
 		workDays.GET("", workDaysAuthz("read"), c.WorkDayHandler.GetAll)
 		workDays.GET("/:id", workDaysAuthz("read"), c.WorkDayHandler.GetByID)
-		workDays.POST("", workDaysAuthz("write"), auditWorkDay("create"), c.WorkDayHandler.Create)
-		workDays.PUT("/:id", workDaysAuthz("write"), auditWorkDay("update"), c.WorkDayHandler.Update)
-		workDays.PATCH("/:id/complete", workDaysAuthz("write"), auditWorkDay("complete"), c.WorkDayHandler.Complete)
-		workDays.PATCH("/:id/uncomplete", workDaysAuthz("write"), auditWorkDay("uncomplete"), c.WorkDayHandler.Uncomplete)
+		workDays.POST("", workDaysAuthz("create"), auditWorkDay("create"), c.WorkDayHandler.Create)
+		workDays.PUT("/:id", workDaysAuthz("update"), auditWorkDay("update"), c.WorkDayHandler.Update)
+		workDays.PATCH("/:id/complete", workDaysAuthz("update"), auditWorkDay("complete"), c.WorkDayHandler.Complete)
+		workDays.PATCH("/:id/uncomplete", workDaysAuthz("update"), auditWorkDay("uncomplete"), c.WorkDayHandler.Uncomplete)
 		workDays.DELETE("/:id", workDaysAuthz("delete"), auditWorkDay("delete"), c.WorkDayHandler.Delete)
 
 		// Nested routes for materials, labor, and equipment by work day ID
@@ -42,8 +42,8 @@ func RegisterWorkDayRoutes(rg *gin.RouterGroup, c *container.Container) {
 	{
 		materials.GET("", materialsAuthz("read"), c.WorkDayMaterialHandler.GetAll)
 		materials.GET("/:id", materialsAuthz("read"), c.WorkDayMaterialHandler.GetByID)
-		materials.POST("", materialsAuthz("write"), auditMaterial("create"), c.WorkDayMaterialHandler.Create)
-		materials.PUT("/:id", materialsAuthz("write"), auditMaterial("update"), c.WorkDayMaterialHandler.Update)
+		materials.POST("", materialsAuthz("create"), auditMaterial("create"), c.WorkDayMaterialHandler.Create)
+		materials.PUT("/:id", materialsAuthz("update"), auditMaterial("update"), c.WorkDayMaterialHandler.Update)
 		materials.DELETE("/:id", materialsAuthz("delete"), auditMaterial("delete"), c.WorkDayMaterialHandler.Delete)
 	}
 
@@ -58,8 +58,8 @@ func RegisterWorkDayRoutes(rg *gin.RouterGroup, c *container.Container) {
 	{
 		labor.GET("", laborAuthz("read"), c.WorkDayLaborHandler.GetAll)
 		labor.GET("/:id", laborAuthz("read"), c.WorkDayLaborHandler.GetByID)
-		labor.POST("", laborAuthz("write"), auditLabor("create"), c.WorkDayLaborHandler.Create)
-		labor.PUT("/:id", laborAuthz("write"), auditLabor("update"), c.WorkDayLaborHandler.Update)
+		labor.POST("", laborAuthz("create"), auditLabor("create"), c.WorkDayLaborHandler.Create)
+		labor.PUT("/:id", laborAuthz("update"), auditLabor("update"), c.WorkDayLaborHandler.Update)
 		labor.DELETE("/:id", laborAuthz("delete"), auditLabor("delete"), c.WorkDayLaborHandler.Delete)
 	}
 
@@ -74,8 +74,8 @@ func RegisterWorkDayRoutes(rg *gin.RouterGroup, c *container.Container) {
 	{
 		equipment.GET("", equipmentAuthz("read"), c.WorkDayEquipmentHandler.GetAll)
 		equipment.GET("/:id", equipmentAuthz("read"), c.WorkDayEquipmentHandler.GetByID)
-		equipment.POST("", equipmentAuthz("write"), auditEquipment("create"), c.WorkDayEquipmentHandler.Create)
-		equipment.PUT("/:id", equipmentAuthz("write"), auditEquipment("update"), c.WorkDayEquipmentHandler.Update)
+		equipment.POST("", equipmentAuthz("create"), auditEquipment("create"), c.WorkDayEquipmentHandler.Create)
+		equipment.PUT("/:id", equipmentAuthz("update"), auditEquipment("update"), c.WorkDayEquipmentHandler.Update)
 		equipment.DELETE("/:id", equipmentAuthz("delete"), auditEquipment("delete"), c.WorkDayEquipmentHandler.Delete)
 	}
 }

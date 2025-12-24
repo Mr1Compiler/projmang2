@@ -53,38 +53,8 @@
         </v-list-item>
       </v-list>
 
-      <!-- قسم المميزات -->
+      <!-- زر تسجيل الخروج -->
       <v-list class="pa-2" nav>
-        <v-list-item
-            v-for="feature in features"
-            :key="feature.title"
-          class="menu-item"
-          rounded="xl"
-        >
-          <template v-slot:prepend>
-            <v-icon color="white" class="me-3">
-              {{ feature.icon }}
-            </v-icon>
-          </template>
-          <v-list-item-title class="text-body-1 font-weight-medium text-white">
-            {{ feature.title }}
-          </v-list-item-title>
-        </v-list-item>
-          <!-- رابط إدارة الفريق -->
-        <v-list-item
-          to="/team-management"
-          class="menu-item"
-          rounded="xl"
-        >
-          <template v-slot:prepend>
-            <v-icon color="white" class="me-3">mdi-account-group</v-icon>
-          </template>
-          <v-list-item-title class="text-body-1 font-weight-medium text-white">
-            إدارة الفريق
-          </v-list-item-title>
-        </v-list-item>
-        
-        <!-- زر تسجيل الخروج -->
         <v-list-item
           @click="handleLogout"
           class="menu-item logout-menu-item"
@@ -135,13 +105,22 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { handleLogout as logoutUser, getCurrentUser } from '@/services/authService'
+import { useAuthStore } from '@/stores/auth'
+
+// Note: authStore is still used for logout and permissions loading
 
 const route = useRoute()
 const router = useRouter()
+const authStore = useAuthStore()
 const drawer = ref(true)
+
+// Load permissions from storage on mount
+onMounted(() => {
+  authStore.loadFromStorage()
+})
 
 // اسم المستخدم الحالي
 const currentUsername = computed(() => {
@@ -156,53 +135,39 @@ const isLoginPage = computed(() => {
 
 // دالة تسجيل الخروج
 const handleLogout = async () => {
+  authStore.clearAuth()
   await logoutUser()
   router.push('/login')
 }
 
-// قائمة التنقل الرئيسية
-const mainMenuItems = ref([
-  { title: 'الرئيسية', icon: 'mdi-view-dashboard', to: '/', active: false },
-{ title: 'المشاريع', icon: 'mdi-folder-multiple', to: '/project-management', active: false },
-  { title: 'إدارة المهام', icon: 'mdi-clipboard-list', to: '/task-management', active: false },
-  { title: 'المهندسين', icon: 'mdi-account-hard-hat', to: '/engineers', active: false },
-  { title: 'التصنيفات', icon: 'mdi-tag-multiple', to: '/categories', active: false },
-  { title: 'المصروفات الإدارية', icon: 'mdi-chart-line', to: '/expenses', active: false },
-  { title: 'أنواع المصروفات', icon: 'mdi-format-list-bulleted-type', to: '/expense-types', active: false },
-  { title: 'الإيرادات', icon: 'mdi-trending-up', to: '/income', active: false },
-  { title: 'المديونون', icon: 'mdi-credit-card', to: '/debtors', active: false },
-  { title: 'المستخدمين', icon: 'mdi-account-multiple', to: '/users', active: false },
-  { title: 'الموارد البشرية', icon: 'mdi-account-group', to: '/human-resources', active: false },
-  { title: 'بصمة الموظفين', icon: 'mdi-fingerprint', to: '/human-resources#fingerprint', active: false }
-])
+// قائمة التنقل المبنية ديناميكياً من صفحات المستخدم
+// الصفحات التي لها مسارات Vue فقط ستظهر في السايدبار
+const mainMenuItems = computed(() => {
+  return authStore.pages
+    .filter(page => {
+      // فقط الصفحات التي لها مسارات Vue (تبدأ بـ / وليست API routes)
+      const apiOnlyRoutes = [
+        '/workdays',
+        '/workday-labor',
+        '/workday-equipment',
+        '/workday-materials',
+        '/role-pages',
+        '/user-roles',
+        '/team-members',
+        '/work-categories',
+        '/work-subcategories'
+      ]
+      return !apiOnlyRoutes.includes(page.route)
+    })
+    .map(page => ({
+      title: page.name,
+      icon: page.icon || 'mdi-file-document',
+      to: page.route,
+      active: route.path === page.route
+    }))
+})
 
-const features = ref([
-  {
-    icon: 'mdi-chart-line',
-    title: 'تقارير المشاريع',
-    color: 'primary'
-  },
-  {
-    icon: 'mdi-calculator',
-    title: 'إدارة المالية',
-    color: 'warning'
-  },
-  {
-    icon: 'mdi-shield-check',
-    title: 'أمان عالي',
-    color: 'error'
-  }
-])
-
-// تحديث العنصر النشط حسب الصفحة الحالية
-const updateActiveMenuItem = () => {
-  mainMenuItems.value.forEach(item => {
-    item.active = item.to === route.path
-  })
-}
-
-// مراقبة تغيير الصفحة
-watch(() => route.path, updateActiveMenuItem, { immediate: true })
+// Active state is now computed in mainMenuItems
 </script>
 
 <style>

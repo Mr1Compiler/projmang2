@@ -85,6 +85,7 @@
               أيام العمل
               <v-spacer />
               <v-btn
+                v-if="canUpdate"
                 icon="mdi-pencil"
                 size="small"
                 variant="text"
@@ -195,9 +196,13 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { usePermissions } from '@/composables/usePermissions'
 
 const route = useRoute()
 const router = useRouter()
+
+// Permissions - matches database page route
+const { canCreate, canUpdate, canDelete } = usePermissions('/projects')
 
 const project = ref(null)
 const projectId = computed(() => route.params.id)

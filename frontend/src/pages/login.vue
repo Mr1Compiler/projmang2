@@ -81,8 +81,10 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { handleLogin as loginUser } from '@/services/authService'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
+const authStore = useAuthStore()
 
 const formData = ref({
   username: '',
@@ -104,10 +106,16 @@ const handleLogin = async () => {
   errorMessage.value = ''
 
   try {
-    await loginUser({
+    const session = await loginUser({
       username: formData.value.username.trim(),
       password: formData.value.password,
     })
+
+    // Set user in store
+    authStore.setUser({ id: session.userId, username: session.username })
+
+    // Fetch user pages and permissions
+    await authStore.fetchPages()
 
     await router.push('/')
   } catch (error) {

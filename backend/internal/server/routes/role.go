@@ -19,8 +19,8 @@ func RegisterRoleRoutes(rg *gin.RouterGroup, c *container.Container) {
 	{
 		roles.GET("", rolesAuthz("read"), c.RoleHandler.GetAll)
 		roles.GET("/:id", rolesAuthz("read"), c.RoleHandler.GetByID)
-		roles.POST("", rolesAuthz("write"), auditRole("create"), c.RoleHandler.Create)
-		roles.PUT("/:id", rolesAuthz("write"), auditRole("update"), c.RoleHandler.Update)
+		roles.POST("", rolesAuthz("create"), auditRole("create"), c.RoleHandler.Create)
+		roles.PUT("/:id", rolesAuthz("update"), auditRole("update"), c.RoleHandler.Update)
 		roles.DELETE("/:id", rolesAuthz("delete"), auditRole("delete"), c.RoleHandler.Delete)
 	}
 
@@ -35,8 +35,8 @@ func RegisterRoleRoutes(rg *gin.RouterGroup, c *container.Container) {
 	{
 		pages.GET("", pagesAuthz("read"), c.PageHandler.GetAll)
 		pages.GET("/:id", pagesAuthz("read"), c.PageHandler.GetByID)
-		pages.POST("", pagesAuthz("write"), auditPage("create"), c.PageHandler.Create)
-		pages.PUT("/:id", pagesAuthz("write"), auditPage("update"), c.PageHandler.Update)
+		pages.POST("", pagesAuthz("create"), auditPage("create"), c.PageHandler.Create)
+		pages.PUT("/:id", pagesAuthz("update"), auditPage("update"), c.PageHandler.Update)
 		pages.DELETE("/:id", pagesAuthz("delete"), auditPage("delete"), c.PageHandler.Delete)
 	}
 
@@ -51,8 +51,8 @@ func RegisterRoleRoutes(rg *gin.RouterGroup, c *container.Container) {
 	{
 		rolePages.GET("", rolePagesAuthz("read"), c.RolePageHandler.GetAll)
 		rolePages.GET("/:id", rolePagesAuthz("read"), c.RolePageHandler.GetByID)
-		rolePages.POST("", rolePagesAuthz("write"), auditRolePage("create"), c.RolePageHandler.Create)
-		rolePages.PUT("/:id", rolePagesAuthz("write"), auditRolePage("update"), c.RolePageHandler.Update)
+		rolePages.POST("", rolePagesAuthz("create"), auditRolePage("create"), c.RolePageHandler.Create)
+		rolePages.PUT("/:id", rolePagesAuthz("update"), auditRolePage("update"), c.RolePageHandler.Update)
 		rolePages.DELETE("/:id", rolePagesAuthz("delete"), auditRolePage("delete"), c.RolePageHandler.Delete)
 	}
 }

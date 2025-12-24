@@ -19,7 +19,7 @@ func RegisterTeamMemberRoutes(rg *gin.RouterGroup, c *container.Container) {
 		teamMembers.GET("", authz("read"), c.TeamMemberHandler.GetAll)
 		teamMembers.GET("/stats", authz("read"), c.TeamMemberHandler.GetStats)
 		teamMembers.GET("/:id", authz("read"), c.TeamMemberHandler.GetByID)
-		teamMembers.POST("", authz("write"), audit("create"), c.TeamMemberHandler.Create)
+		teamMembers.POST("", authz("create"), audit("create"), c.TeamMemberHandler.Create)
 		teamMembers.DELETE("/:id", authz("delete"), audit("delete"), c.TeamMemberHandler.Delete)
 	}
 }

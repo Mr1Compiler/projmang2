@@ -98,6 +98,7 @@
               تصدير Excel
             </v-btn>
             <v-btn
+              v-if="canCreate"
               class="add-button btn-glow light-sweep smooth-transition"
               @click="showAddDialog = true"
               elevation="2"
@@ -129,6 +130,7 @@
           </template>
           <template v-slot:item.actions="{ item }">
             <v-btn
+              v-if="canUpdate"
               size="small"
               color="primary"
               @click="editIncome(item)"
@@ -136,6 +138,7 @@
               <i class="mdi mdi-pencil"></i>
             </v-btn>
             <v-btn
+              v-if="canDelete"
               size="small"
               color="error"
               @click="deleteIncome(item)"
@@ -328,6 +331,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { listIncome, createIncome, updateIncome, deleteIncome as deleteIncomeApi, getIncomeStats } from '@/api/income'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
+import { usePermissions } from '@/composables/usePermissions'
+
+// Permissions
+const { canCreate, canUpdate, canDelete } = usePermissions('/income')
 
 // ========================================
 // متغيرات الحالة الأساسية

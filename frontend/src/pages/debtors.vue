@@ -153,6 +153,7 @@
             </div>
             <div class="d-flex align-center gap-2">
               <v-btn
+                v-if="canCreate"
                 class="add-button btn-glow light-sweep smooth-transition"
                 @click="openAddDialog"
                 elevation="2"
@@ -258,6 +259,7 @@
                   @click="viewDebtor(item)"
                 />
                 <v-btn
+                  v-if="canUpdate"
                   icon="mdi-pencil"
                   size="small"
                   variant="text"
@@ -269,9 +271,10 @@
                   variant="text"
                   color="success"
                   @click="markAsPaid(item)"
-                  v-if="item.status !== 'paid'"
+                  v-if="item.status !== 'paid' && canUpdate"
                 />
                 <v-btn
+                  v-if="canDelete"
                   icon="mdi-delete"
                   size="small"
                   variant="text"
@@ -556,12 +559,14 @@
                   </template>
                   <template v-slot:item.actions="{ item }">
                     <v-btn
+                      v-if="canUpdate"
                       icon="mdi-pencil"
                       size="small"
                       variant="text"
                       @click="editDebt(item)"
                     />
                     <v-btn
+                      v-if="canDelete"
                       icon="mdi-delete"
                       size="small"
                       variant="text"
@@ -579,6 +584,7 @@
                 <v-card-title class="d-flex align-center justify-space-between">
                   <span>قائمة التسديدات</span>
                   <v-btn
+                    v-if="canCreate"
                     color="success"
                     size="small"
                     prepend-icon="mdi-plus"
@@ -610,12 +616,14 @@
                   </template>
                   <template v-slot:item.actions="{ item }">
                     <v-btn
+                      v-if="canUpdate"
                       icon="mdi-pencil"
                       size="small"
                       variant="text"
                       @click="editPayment(item)"
                     />
                     <v-btn
+                      v-if="canDelete"
                       icon="mdi-delete"
                       size="small"
                       variant="text"
@@ -702,6 +710,10 @@
 import { ref, computed, onMounted } from 'vue'
 import { listDebtors, createDebtor, updateDebtor, deleteDebtor as deleteDebtorApi, getDebtorStats } from '@/api/debtors'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
+import { usePermissions } from '@/composables/usePermissions'
+
+// Permissions
+const { canCreate, canUpdate, canDelete } = usePermissions('/debtors')
 
 // البيانات التفاعلية
 const loading = ref(false)

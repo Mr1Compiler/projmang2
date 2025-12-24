@@ -20,8 +20,8 @@ func RegisterFinanceRoutes(rg *gin.RouterGroup, c *container.Container) {
 		expenses.GET("", expensesAuthz("read"), c.ExpenseHandler.GetAll)
 		expenses.GET("/stats", expensesAuthz("read"), c.ExpenseHandler.GetStats)
 		expenses.GET("/:id", expensesAuthz("read"), c.ExpenseHandler.GetByID)
-		expenses.POST("", expensesAuthz("write"), auditExpense("create"), c.ExpenseHandler.Create)
-		expenses.PUT("/:id", expensesAuthz("write"), auditExpense("update"), c.ExpenseHandler.Update)
+		expenses.POST("", expensesAuthz("create"), auditExpense("create"), c.ExpenseHandler.Create)
+		expenses.PUT("/:id", expensesAuthz("update"), auditExpense("update"), c.ExpenseHandler.Update)
 		expenses.DELETE("/:id", expensesAuthz("delete"), auditExpense("delete"), c.ExpenseHandler.Delete)
 	}
 
@@ -37,8 +37,8 @@ func RegisterFinanceRoutes(rg *gin.RouterGroup, c *container.Container) {
 		income.GET("", incomeAuthz("read"), c.IncomeHandler.GetAll)
 		income.GET("/stats", incomeAuthz("read"), c.IncomeHandler.GetStats)
 		income.GET("/:id", incomeAuthz("read"), c.IncomeHandler.GetByID)
-		income.POST("", incomeAuthz("write"), auditIncome("create"), c.IncomeHandler.Create)
-		income.PUT("/:id", incomeAuthz("write"), auditIncome("update"), c.IncomeHandler.Update)
+		income.POST("", incomeAuthz("create"), auditIncome("create"), c.IncomeHandler.Create)
+		income.PUT("/:id", incomeAuthz("update"), auditIncome("update"), c.IncomeHandler.Update)
 		income.DELETE("/:id", incomeAuthz("delete"), auditIncome("delete"), c.IncomeHandler.Delete)
 	}
 }

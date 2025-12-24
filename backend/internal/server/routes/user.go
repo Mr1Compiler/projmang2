@@ -19,8 +19,8 @@ func RegisterUserRoutes(rg *gin.RouterGroup, c *container.Container) {
 	{
 		users.GET("", usersAuthz("read"), c.UserHandler.GetAll)
 		users.GET("/:id", usersAuthz("read"), c.UserHandler.GetByID)
-		users.POST("", usersAuthz("write"), audit("create"), c.UserHandler.Create)
-		users.PUT("/:id", usersAuthz("write"), audit("update"), c.UserHandler.Update)
+		users.POST("", usersAuthz("create"), audit("create"), c.UserHandler.Create)
+		users.PUT("/:id", usersAuthz("update"), audit("update"), c.UserHandler.Update)
 		users.DELETE("/:id", usersAuthz("delete"), audit("delete"), c.UserHandler.Delete)
 		users.PUT("/:id/password", usersAuthz("updatePassword"), audit("password_change"), c.UserHandler.UpdatePassword)
 		users.PATCH("/:id/status", usersAuthz("updateStatus"), audit("status_change"), c.UserHandler.UpdateStatus)
@@ -41,7 +41,7 @@ func RegisterUserRoutes(rg *gin.RouterGroup, c *container.Container) {
 	{
 		userRoles.GET("", userRolesAuthz("read"), c.UserRoleHandler.GetAll)
 		userRoles.GET("/:id", userRolesAuthz("read"), c.UserRoleHandler.GetByID)
-		userRoles.POST("", userRolesAuthz("write"), auditUserRole("assign_role"), c.UserRoleHandler.Create)
+		userRoles.POST("", userRolesAuthz("create"), auditUserRole("assign_role"), c.UserRoleHandler.Create)
 		userRoles.DELETE("/:id", userRolesAuthz("delete"), auditUserRole("remove_role"), c.UserRoleHandler.Delete)
 	}
 }

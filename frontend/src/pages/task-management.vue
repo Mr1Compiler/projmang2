@@ -185,6 +185,7 @@
               class="action-btn view-btn"
             />
             <v-btn
+              v-if="canUpdate"
               icon="mdi-pencil"
               size="small"
               color="warning"
@@ -193,6 +194,7 @@
               class="action-btn edit-btn"
             />
             <v-btn
+              v-if="canDelete"
               icon="mdi-delete"
               size="small"
               color="error"
@@ -297,6 +299,10 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { usePermissions } from '@/composables/usePermissions'
+
+// Permissions - matches database page route
+const { canCreate, canUpdate, canDelete } = usePermissions('/projects')
 
 // Reactive data
 const loading = ref(false)

@@ -52,9 +52,10 @@
               <v-icon class="me-2" size="18">mdi-magnify</v-icon>
               بحث
             </v-btn>
-            <v-btn 
-              color="success" 
-              variant="elevated" 
+            <v-btn
+              v-if="canCreate"
+              color="success"
+              variant="elevated"
               class="add-btn"
               @click="openAddMaterialDialog"
               size="small"
@@ -86,6 +87,7 @@
         <template v-slot:item.actions="{ item }">
           <div class="action-buttons">
             <v-btn
+              v-if="canUpdate"
               icon="mdi-pencil"
               size="small"
               color="primary"
@@ -94,6 +96,7 @@
               title="تعديل المادة"
             />
             <v-btn
+              v-if="canDelete"
               icon="mdi-delete"
               size="small"
               color="error"
@@ -151,6 +154,7 @@
               بحث
             </v-btn>
             <v-btn
+              v-if="canCreate"
               color="warning"
               variant="elevated"
               class="add-btn"
@@ -198,6 +202,7 @@
         </template>
         <template v-slot:item.actions="{ item }">
           <v-btn
+            v-if="canDelete"
             icon="mdi-delete"
             size="small"
             color="error"
@@ -655,9 +660,13 @@ import { useRouter, useRoute } from 'vue-router'
 import { listMaterialsByWorkDay, createMaterial, updateMaterial, deleteMaterial as deleteMaterialApi } from '@/api/materials'
 import { listExpensesByProject, createExpense, deleteExpense as deleteExpenseApi } from '@/api/expenses'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
+import { usePermissions } from '@/composables/usePermissions'
 
 const router = useRouter()
 const route = useRoute()
+
+// Permissions for workday-materials
+const { canCreate, canUpdate, canDelete } = usePermissions('/workday-materials')
 
 // Get workDayId and projectId from route query - use computed to be reactive
 const workDayId = computed(() => route.query.workDayId || null)
