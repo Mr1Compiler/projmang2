@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/dtos"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/models"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/repository"
@@ -15,11 +16,13 @@ var (
 )
 
 type RolePageService struct {
+	db           *pgxpool.Pool
 	rolePageRepo repository.RolePageRepositoryInterface
 }
 
-func NewRolePageService(rolePageRepo repository.RolePageRepositoryInterface) *RolePageService {
+func NewRolePageService(db *pgxpool.Pool, rolePageRepo repository.RolePageRepositoryInterface) *RolePageService {
 	return &RolePageService{
+		db:           db,
 		rolePageRepo: rolePageRepo,
 	}
 }
@@ -112,6 +115,45 @@ func (s *RolePageService) Delete(ctx context.Context, id int64) error {
 		return err
 	}
 	return nil
+}
+
+func (s *RolePageService) UpdateAllByRoleID(ctx context.Context, roleID int64, req dtos.UpdateRolePagesRequest) ([]dtos.RolePage, error) {
+	// Start transaction
+	tx, err := s.db.Begin(ctx)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback(ctx)
+
+	// Delete all existing role pages for this role
+	err = s.rolePageRepo.DeleteAllByRoleIDWithTx(ctx, tx, roleID)
+	if err != nil {
+		return nil, err
+	}
+
+	// Create new role pages
+	var result []dtos.RolePage
+	for _, item := range req.Pages {
+		rolePage := &models.RolePage{
+			RoleID:      roleID,
+			PageID:      item.PageID,
+			Permissions: &item.Permissions,
+		}
+
+		created, err := s.rolePageRepo.CreateWithTx(ctx, tx, rolePage)
+		if err != nil {
+			return nil, err
+		}
+
+		result = append(result, toRolePageDTO(*created))
+	}
+
+	// Commit transaction
+	if err := tx.Commit(ctx); err != nil {
+		return nil, err
+	}
+
+	return result, nil
 }
 
 // DTO conversion helper

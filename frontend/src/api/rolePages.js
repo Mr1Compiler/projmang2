@@ -101,28 +101,24 @@ export async function deleteRolePage(id) {
 }
 
 /**
- * Bulk update role pages - removes all existing and creates new ones
+ * Bulk update role pages - atomically replaces all pages for a role in a single transaction
  * @param {number|string} roleId - Role ID
  * @param {Array<Object>} pagePermissions - Array of { pageId, permissions }
- * @returns {Promise<void>}
+ * @returns {Promise<Array>} Updated role-pages
  */
 export async function bulkUpdateRolePages(roleId, pagePermissions) {
-  // First get existing role-pages for this role
-  const existingRolePages = await getRolePagesByRoleId(roleId)
+  // Filter out pages with no permissions and format for backend
+  const pages = pagePermissions
+    .filter(pp => pp.permissions && pp.permissions.length > 0)
+    .map(pp => ({
+      pageId: Number(pp.pageId),
+      permissions: JSON.stringify(pp.permissions)
+    }))
 
-  // Delete all existing role-pages
-  for (const rp of existingRolePages) {
-    await deleteRolePage(rp.id)
-  }
+  const result = await apiFetch(`/rolePages/role/${roleId}`, {
+    method: 'PUT',
+    body: { pages }
+  })
 
-  // Create new role-pages
-  for (const pp of pagePermissions) {
-    if (pp.permissions && pp.permissions.length > 0) {
-      await createRolePage({
-        roleId: Number(roleId),
-        pageId: Number(pp.pageId),
-        permissions: pp.permissions
-      })
-    }
-  }
+  return result?.data || result
 }

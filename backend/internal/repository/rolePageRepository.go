@@ -15,6 +15,8 @@ type RolePageRepositoryInterface interface {
 	Create(ctx context.Context, rolePage *models.RolePage) (*models.RolePage, error)
 	Update(ctx context.Context, id int64, rolePage *models.RolePage) (*models.RolePage, error)
 	Delete(ctx context.Context, id int64) error
+	DeleteAllByRoleIDWithTx(ctx context.Context, tx pgx.Tx, roleID int64) error
+	CreateWithTx(ctx context.Context, tx pgx.Tx, rolePage *models.RolePage) (*models.RolePage, error)
 }
 
 type RolePageRepository struct {
@@ -153,4 +155,28 @@ func (r *RolePageRepository) Delete(ctx context.Context, id int64) error {
 		return pgx.ErrNoRows
 	}
 	return nil
+}
+
+func (r *RolePageRepository) DeleteAllByRoleIDWithTx(ctx context.Context, tx pgx.Tx, roleID int64) error {
+	query := `DELETE FROM rolePages WHERE roleId = $1`
+	_, err := tx.Exec(ctx, query, roleID)
+	return err
+}
+
+func (r *RolePageRepository) CreateWithTx(ctx context.Context, tx pgx.Tx, rolePage *models.RolePage) (*models.RolePage, error) {
+	query := `
+		INSERT INTO rolePages (roleId, pageId, permissions)
+		VALUES ($1, $2, $3)
+		RETURNING id, createdAt
+	`
+
+	err := tx.QueryRow(ctx, query,
+		rolePage.RoleID, rolePage.PageID, rolePage.Permissions,
+	).Scan(&rolePage.ID, &rolePage.CreatedAt)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return rolePage, nil
 }

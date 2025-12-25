@@ -72,6 +72,17 @@ type UpdateRolePage struct {
 	Permissions *string `json:"permissions"`
 }
 
+// RolePageItem represents a single page permission for batch update
+type RolePageItem struct {
+	PageID      int64  `json:"pageId" binding:"required"`
+	Permissions string `json:"permissions" binding:"required"`
+}
+
+// UpdateRolePagesRequest for atomic update of all role pages
+type UpdateRolePagesRequest struct {
+	Pages []RolePageItem `json:"pages" binding:"required"`
+}
+
 // ** UserRole DTOs **
 
 // Response DTO

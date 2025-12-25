@@ -159,6 +159,30 @@ func (h *RolePageHandler) Delete(c *gin.Context) {
 	response.Success(c, nil)
 }
 
+// UpdateAllByRoleID handles PUT /role-pages/role/:roleId
+// Atomically replaces all pages for a role in a single transaction
+func (h *RolePageHandler) UpdateAllByRoleID(c *gin.Context) {
+	roleID, err := h.parseID(c, "roleId")
+	if err != nil {
+		response.BadRequest(c, "invalid role id")
+		return
+	}
+
+	var req dtos.UpdateRolePagesRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		response.ValidationError(c, err)
+		return
+	}
+
+	rolePages, err := h.rolePageService.UpdateAllByRoleID(c.Request.Context(), roleID, req)
+	if err != nil {
+		response.InternalError(c, "failed to update role pages")
+		return
+	}
+
+	response.Success(c, rolePages)
+}
+
 // parseID extracts an int64 ID from the URL path
 func (h *RolePageHandler) parseID(c *gin.Context, param string) (int64, error) {
 	idStr := c.Param(param)

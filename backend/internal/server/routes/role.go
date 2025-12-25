@@ -53,6 +53,7 @@ func RegisterRoleRoutes(rg *gin.RouterGroup, c *container.Container) {
 		rolePages.GET("/:id", rolePagesAuthz("read"), c.RolePageHandler.GetByID)
 		rolePages.POST("", rolePagesAuthz("create"), auditRolePage("create"), c.RolePageHandler.Create)
 		rolePages.PUT("/:id", rolePagesAuthz("update"), auditRolePage("update"), c.RolePageHandler.Update)
+		rolePages.PUT("/role/:roleId", rolePagesAuthz("update"), auditRolePage("update"), c.RolePageHandler.UpdateAllByRoleID)
 		rolePages.DELETE("/:id", rolePagesAuthz("delete"), auditRolePage("delete"), c.RolePageHandler.Delete)
 	}
 }

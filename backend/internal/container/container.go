@@ -109,7 +109,7 @@ func New(db *pgxpool.Pool, cfg *config.Config) *Container {
 	teamMemberService := services.NewTeamMemberService(teamMemberRepo)
 	roleService := services.NewRoleService(roleRepo)
 	pageService := services.NewPageService(pageRepo)
-	rolePageService := services.NewRolePageService(rolePageRepo)
+	rolePageService := services.NewRolePageService(db, rolePageRepo)
 	authService := services.NewAuthService(db, userRepo, userRoleRepo, refreshTokenRepo, jwtManager, refreshExpiry)
 	auditLogService := services.NewAuditLogService(auditLogRepo)
 	dashboardService := services.NewDashboardService(dashboardRepo)
