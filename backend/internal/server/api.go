@@ -4,7 +4,9 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/config"
 	"github.com/mustafa91ameen/prjalgo/backend/internal/container"
@@ -25,7 +27,20 @@ func NewServer(port string, c *container.Container, cfg *config.Config) *Server 
 
 	// Register middlewares (order matters - timeout should be early)
 	router.Use(TimeoutMiddleware(cfg.QueryTimeout))
-	router.Use(CORSMiddleware())
+
+	// CORS Setup
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000", "http://localhost:5173", "https://chic-luck-production.up.railway.app"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization", "Accept", "Cache-Control", "X-Requested-With"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		AllowOriginFunc: func(origin string) bool {
+			// Allow all origins in production for now (or strictly control via env)
+			return true
+		},
+		MaxAge: 12 * time.Hour,
+	}))
 	router.Use(LoggingMiddleware())
 
 	return &Server{
