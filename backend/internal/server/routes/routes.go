@@ -13,6 +13,14 @@ func RegisterRoutes(router *gin.Engine, c *container.Container) {
 		ctx.JSON(200, gin.H{"status": "ok"})
 	})
 
+	// Root handler for default load balancer checks
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(200, gin.H{
+			"service": "Project Management API",
+			"status":  "running",
+		})
+	})
+
 	// Public routes (no auth required)
 	RegisterAuthRoutes(router, c)
 
