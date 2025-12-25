@@ -1,0 +1,26 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "frontend/Dockerfile"
+
+[deploy]
+startCommand = ""
+healthcheckPath = "/"
+restartPolicyType = "ON_FAILURE"
+
+[[services]]
+name = "frontend"
+rootDirectory = "frontend"
+
+[services.build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+[services.build.args]
+VITE_API_URL = "${VITE_API_URL}"
+
+[[services]]
+name = "backend"
+rootDirectory = "backend"
+
+[services.build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
