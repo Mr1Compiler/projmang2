@@ -76,7 +76,7 @@ export async function uncompleteWorkDay(id) {
 
 export async function listWorkSubCategories({ page = 1, limit = 100 } = {}) {
   const query = new URLSearchParams({ page, limit }).toString()
-  const result = await apiFetch(`/work-subcategories?${query}`, { method: 'GET' })
+  const result = await apiFetch(`/workSubcategories?${query}`, { method: 'GET' })
   // Response structure: { success: true, data: { data: [...], total, page, limit, totalPages } }
   if (Array.isArray(result?.data?.data)) return result.data.data
   if (Array.isArray(result?.data)) return result.data

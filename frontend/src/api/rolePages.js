@@ -13,7 +13,7 @@ export async function listRolePages(params = {}) {
   if (params.limit) queryParams.append('limit', params.limit)
 
   const queryString = queryParams.toString()
-  const path = queryString ? `/role-pages?${queryString}` : '/role-pages?limit=100'
+  const path = queryString ? `/rolePages?${queryString}` : '/rolePages?limit=100'
 
   const result = await apiFetch(path)
   return result?.data || { data: [], total: 0, page: 1, totalPages: 0 }
@@ -25,7 +25,7 @@ export async function listRolePages(params = {}) {
  * @returns {Promise<Object>} RolePage data
  */
 export async function getRolePage(id) {
-  const result = await apiFetch(`/role-pages/${id}`)
+  const result = await apiFetch(`/rolePages/${id}`)
   return result?.data || result
 }
 
@@ -35,7 +35,7 @@ export async function getRolePage(id) {
  * @returns {Promise<Array>} Array of role-page assignments
  */
 export async function getRolePagesByRoleId(roleId) {
-  const result = await apiFetch(`/role-pages?roleId=${roleId}&limit=100`)
+  const result = await apiFetch(`/rolePages?roleId=${roleId}&limit=100`)
   // Handle response - when using roleId filter, backend returns array directly
   const data = result?.data || []
   const rolePages = Array.isArray(data) ? data : []
@@ -62,7 +62,7 @@ export async function createRolePage(rolePageData) {
     pageId: rolePageData.pageId,
     permissions: JSON.stringify(rolePageData.permissions)
   }
-  const result = await apiFetch('/role-pages', {
+  const result = await apiFetch('/rolePages', {
     method: 'POST',
     body: payload
   })
@@ -81,7 +81,7 @@ export async function updateRolePage(id, rolePageData) {
   const payload = {
     permissions: JSON.stringify(rolePageData.permissions)
   }
-  const result = await apiFetch(`/role-pages/${id}`, {
+  const result = await apiFetch(`/rolePages/${id}`, {
     method: 'PUT',
     body: payload
   })
@@ -94,7 +94,7 @@ export async function updateRolePage(id, rolePageData) {
  * @returns {Promise<Object>} Response
  */
 export async function deleteRolePage(id) {
-  const result = await apiFetch(`/role-pages/${id}`, {
+  const result = await apiFetch(`/rolePages/${id}`, {
     method: 'DELETE'
   })
   return result?.data || result

@@ -41,9 +41,9 @@ func RegisterRoleRoutes(rg *gin.RouterGroup, c *container.Container) {
 	}
 
 	// Role Pages
-	rolePages := rg.Group("/role-pages")
+	rolePages := rg.Group("/rolePages")
 	rolePagesAuthz := func(perm string) gin.HandlerFunc {
-		return auth.AuthorizationMiddleware(c.PermissionChecker, "/role-pages", perm)
+		return auth.AuthorizationMiddleware(c.PermissionChecker, "/rolePages", perm)
 	}
 	auditRolePage := func(action string) gin.HandlerFunc {
 		return auth.AuditMiddleware(c.AuditLogService, action, "role_page")

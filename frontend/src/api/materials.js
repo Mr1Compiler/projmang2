@@ -10,7 +10,7 @@ export async function listMaterialsByWorkDay(workDayId) {
 }
 
 export async function createMaterial(payload) {
-  const result = await apiFetch(`/workday-materials`, {
+  const result = await apiFetch(`/workdayMaterials`, {
     method: 'POST',
     body: payload,
   })
@@ -18,7 +18,7 @@ export async function createMaterial(payload) {
 }
 
 export async function updateMaterial(id, payload) {
-  const result = await apiFetch(`/workday-materials/${id}`, {
+  const result = await apiFetch(`/workdayMaterials/${id}`, {
     method: 'PUT',
     body: payload,
   })
@@ -26,7 +26,7 @@ export async function updateMaterial(id, payload) {
 }
 
 export async function deleteMaterial(id) {
-  const result = await apiFetch(`/workday-materials/${id}`, {
+  const result = await apiFetch(`/workdayMaterials/${id}`, {
     method: 'DELETE',
   })
   return result?.data || result
@@ -42,7 +42,7 @@ export async function listLaborByWorkDay(workDayId) {
 }
 
 export async function createLabor(payload) {
-  const result = await apiFetch(`/workday-labor`, {
+  const result = await apiFetch(`/workdayLabor`, {
     method: 'POST',
     body: payload,
   })
@@ -50,7 +50,7 @@ export async function createLabor(payload) {
 }
 
 export async function updateLabor(id, payload) {
-  const result = await apiFetch(`/workday-labor/${id}`, {
+  const result = await apiFetch(`/workdayLabor/${id}`, {
     method: 'PUT',
     body: payload,
   })
@@ -58,7 +58,7 @@ export async function updateLabor(id, payload) {
 }
 
 export async function deleteLabor(id) {
-  const result = await apiFetch(`/workday-labor/${id}`, {
+  const result = await apiFetch(`/workdayLabor/${id}`, {
     method: 'DELETE',
   })
   return result?.data || result
@@ -74,7 +74,7 @@ export async function listEquipmentByWorkDay(workDayId) {
 }
 
 export async function createEquipment(payload) {
-  const result = await apiFetch(`/workday-equipment`, {
+  const result = await apiFetch(`/workdayEquipment`, {
     method: 'POST',
     body: payload,
   })
@@ -82,7 +82,7 @@ export async function createEquipment(payload) {
 }
 
 export async function updateEquipment(id, payload) {
-  const result = await apiFetch(`/workday-equipment/${id}`, {
+  const result = await apiFetch(`/workdayEquipment/${id}`, {
     method: 'PUT',
     body: payload,
   })
@@ -90,7 +90,7 @@ export async function updateEquipment(id, payload) {
 }
 
 export async function deleteEquipment(id) {
-  const result = await apiFetch(`/workday-equipment/${id}`, {
+  const result = await apiFetch(`/workdayEquipment/${id}`, {
     method: 'DELETE',
   })
   return result?.data || result

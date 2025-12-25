@@ -127,6 +127,6 @@ export async function getUserRoles(id) {
  * @returns {Promise<Array>} Team members
  */
 export async function getUserTeamMembers(id) {
-  const result = await apiFetch(`/users/${id}/team-members`)
+  const result = await apiFetch(`/users/${id}/teamMembers`)
   return result?.data || result
 }

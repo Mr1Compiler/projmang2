@@ -32,9 +32,9 @@ func RegisterWorkDayRoutes(rg *gin.RouterGroup, c *container.Container) {
 	}
 
 	// WorkDay Materials
-	materials := rg.Group("/workday-materials")
+	materials := rg.Group("/workdayMaterials")
 	materialsAuthz := func(perm string) gin.HandlerFunc {
-		return auth.AuthorizationMiddleware(c.PermissionChecker, "/workday-materials", perm)
+		return auth.AuthorizationMiddleware(c.PermissionChecker, "/workdayMaterials", perm)
 	}
 	auditMaterial := func(action string) gin.HandlerFunc {
 		return auth.AuditMiddleware(c.AuditLogService, action, "workday_material")
@@ -48,9 +48,9 @@ func RegisterWorkDayRoutes(rg *gin.RouterGroup, c *container.Container) {
 	}
 
 	// WorkDay Labor
-	labor := rg.Group("/workday-labor")
+	labor := rg.Group("/workdayLabor")
 	laborAuthz := func(perm string) gin.HandlerFunc {
-		return auth.AuthorizationMiddleware(c.PermissionChecker, "/workday-labor", perm)
+		return auth.AuthorizationMiddleware(c.PermissionChecker, "/workdayLabor", perm)
 	}
 	auditLabor := func(action string) gin.HandlerFunc {
 		return auth.AuditMiddleware(c.AuditLogService, action, "workday_labor")
@@ -64,9 +64,9 @@ func RegisterWorkDayRoutes(rg *gin.RouterGroup, c *container.Container) {
 	}
 
 	// WorkDay Equipment
-	equipment := rg.Group("/workday-equipment")
+	equipment := rg.Group("/workdayEquipment")
 	equipmentAuthz := func(perm string) gin.HandlerFunc {
-		return auth.AuthorizationMiddleware(c.PermissionChecker, "/workday-equipment", perm)
+		return auth.AuthorizationMiddleware(c.PermissionChecker, "/workdayEquipment", perm)
 	}
 	auditEquipment := func(action string) gin.HandlerFunc {
 		return auth.AuditMiddleware(c.AuditLogService, action, "workday_equipment")

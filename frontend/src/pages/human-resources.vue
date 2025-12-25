@@ -1530,7 +1530,7 @@ import { useRoute } from 'vue-router'
 import { usePermissions } from '@/composables/usePermissions'
 
 // Permissions
-const { canCreate, canUpdate, canDelete } = usePermissions('/human-resources')
+const { canCreate, canUpdate, canDelete } = usePermissions('/humanResources')
 
 // ========================================
 // متغيرات الحالة الأساسية

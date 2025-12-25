@@ -396,7 +396,7 @@ import { listUsers } from '@/api/users'
 import { usePermissions } from '@/composables/usePermissions'
 
 // Permissions
-const { canCreate, canUpdate, canDelete } = usePermissions('/team-members')
+const { canCreate, canUpdate, canDelete } = usePermissions('/teamMembers')
 
 // Data
 const loading = ref(false)

@@ -685,7 +685,7 @@ import {
 } from '@/api/categories'
 import { usePermissions } from '@/composables/usePermissions'
 
-// Permissions
+// Permissions - use /categories (stored in DB), router maps to /workCategories for API
 const { canCreate, canUpdate, canDelete } = usePermissions('/categories')
 
 // State variables

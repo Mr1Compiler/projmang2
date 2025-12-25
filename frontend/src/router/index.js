@@ -21,15 +21,16 @@ const routeToPermissionMap = {
   '/project-management': '/projects',
   '/task-management': '/projects',
   '/engineers': '/users',
-  '/expense-types': '/expenses',
-  '/human-resources': '/users',
-  '/team-management': '/projects',
-  '/working-day-details': '/work-day-details', // مسار بديل لنفس الصفحة
+  '/expense-types': '/expenseTypes',
+  '/human-resources': '/humanResources',
+  '/team-management': '/teamMembers',
+  '/working-day-details': '/workdays', // مسار بديل لنفس الصفحة
   '/work-days': '/workdays', // أيام العمل
   '/work-day-details': '/workdays', // تفاصيل يوم العمل
-  '/labor-details': '/workday-labor', // تفاصيل العمالة
-  '/equipment-details': '/workday-equipment', // تفاصيل المعدات
-  '/materials-expenses-details': '/workday-materials' // تفاصيل المواد
+  '/labor-details': '/workdayLabor', // تفاصيل العمالة
+  '/equipment-details': '/workdayEquipment', // تفاصيل المعدات
+  '/materials-expenses-details': '/workdayMaterials', // تفاصيل المواد
+  // Note: /categories is stored in DB as /categories, no mapping needed
 }
 
 // دالة لاستخراج المسار الأساسي من المسار الكامل

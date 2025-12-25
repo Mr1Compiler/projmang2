@@ -446,8 +446,8 @@
 import { ref, computed, onMounted } from 'vue'
 import { usePermissions } from '@/composables/usePermissions'
 
-// Permissions for team-members
-const { canCreate, canUpdate, canDelete } = usePermissions('/team-members')
+// Permissions for teamMembers
+const { canCreate, canUpdate, canDelete } = usePermissions('/teamMembers')
 
 // Reactive data
 const loading = ref(false)

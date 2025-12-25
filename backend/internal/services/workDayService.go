@@ -85,7 +85,7 @@ func (s *WorkDayService) Create(ctx context.Context, req dtos.CreateWorkDay) (*d
 		WorkSubCategoryID: req.WorkSubCategoryID,
 		WorkDate:          req.WorkDate,
 		Description:       req.Description,
-		Status:            "draft",
+		Status:            "pending",
 		TotalCost:         0,
 		Notes:             req.Notes,
 		CreatedBy:         req.CreatedBy,

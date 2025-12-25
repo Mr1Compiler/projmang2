@@ -665,8 +665,8 @@ import { usePermissions } from '@/composables/usePermissions'
 const router = useRouter()
 const route = useRoute()
 
-// Permissions for workday-materials
-const { canCreate, canUpdate, canDelete } = usePermissions('/workday-materials')
+// Permissions for workdayMaterials
+const { canCreate, canUpdate, canDelete } = usePermissions('/workdayMaterials')
 
 // Get workDayId and projectId from route query - use computed to be reactive
 const workDayId = computed(() => route.query.workDayId || null)

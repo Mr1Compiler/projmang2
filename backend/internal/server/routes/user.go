@@ -31,9 +31,9 @@ func RegisterUserRoutes(rg *gin.RouterGroup, c *container.Container) {
 	}
 
 	// User Roles
-	userRoles := rg.Group("/user-roles")
+	userRoles := rg.Group("/userRoles")
 	userRolesAuthz := func(perm string) gin.HandlerFunc {
-		return auth.AuthorizationMiddleware(c.PermissionChecker, "/user-roles", perm)
+		return auth.AuthorizationMiddleware(c.PermissionChecker, "/userRoles", perm)
 	}
 	auditUserRole := func(action string) gin.HandlerFunc {
 		return auth.AuditMiddleware(c.AuditLogService, action, "user_role")

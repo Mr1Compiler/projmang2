@@ -6,11 +6,11 @@ import (
 	"github.com/mustafa91ameen/prjalgo/backend/internal/container"
 )
 
-// RegisterTeamMemberRoutes sets up /team-members routes
+// RegisterTeamMemberRoutes sets up /teamMembers routes
 func RegisterTeamMemberRoutes(rg *gin.RouterGroup, c *container.Container) {
-	teamMembers := rg.Group("/team-members")
+	teamMembers := rg.Group("/teamMembers")
 	authz := func(perm string) gin.HandlerFunc {
-		return auth.AuthorizationMiddleware(c.PermissionChecker, "/team-members", perm)
+		return auth.AuthorizationMiddleware(c.PermissionChecker, "/teamMembers", perm)
 	}
 	audit := func(action string) gin.HandlerFunc {
 		return auth.AuditMiddleware(c.AuditLogService, action, "team_member")

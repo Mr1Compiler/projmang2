@@ -359,7 +359,7 @@ import { ref, computed, onMounted } from 'vue'
 import { usePermissions } from '@/composables/usePermissions'
 
 // Permissions
-const { canCreate, canUpdate, canDelete } = usePermissions('/expense-types')
+const { canCreate, canUpdate, canDelete } = usePermissions('/expenseTypes')
 
 // متغيرات الحالة الأساسية
 const loading = ref(false)

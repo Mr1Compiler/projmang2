@@ -148,14 +148,13 @@ const mainMenuItems = computed(() => {
       // فقط الصفحات التي لها مسارات Vue (تبدأ بـ / وليست API routes)
       const apiOnlyRoutes = [
         '/workdays',
-        '/workday-labor',
-        '/workday-equipment',
-        '/workday-materials',
-        '/role-pages',
-        '/user-roles',
-        '/team-members',
-        '/work-categories',
-        '/work-subcategories'
+        '/workdayLabor',
+        '/workdayEquipment',
+        '/workdayMaterials',
+        '/rolePages',
+        '/userRoles',
+        '/teamMembers',
+        '/workSubcategories'
       ]
       return !apiOnlyRoutes.includes(page.route)
     })

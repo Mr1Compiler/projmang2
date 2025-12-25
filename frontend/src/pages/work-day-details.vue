@@ -86,9 +86,9 @@
       <v-card-text>
         <v-row>
           <!-- Materials & Expenses Combined -->
-          <v-col cols="12" md="4">
-            <v-card 
-              class="category-card materials-expenses" 
+          <v-col cols="12" md="4" v-if="canReadMaterials">
+            <v-card
+              class="category-card materials-expenses"
               :class="{ 'disabled-card': !categoriesEnabled.materialsExpenses }"
               elevation="3"
               @click="categoriesEnabled.materialsExpenses ? showCategoryDetails('materials-expenses') : null"
@@ -134,9 +134,9 @@
           </v-col>
 
           <!-- Labor -->
-          <v-col cols="12" md="4">
-            <v-card 
-              class="category-card labor" 
+          <v-col cols="12" md="4" v-if="canReadLabor">
+            <v-card
+              class="category-card labor"
               :class="{ 'disabled-card': !categoriesEnabled.labor }"
               elevation="3"
               @click="categoriesEnabled.labor ? showCategoryDetails('labor') : null"
@@ -182,9 +182,9 @@
           </v-col>
 
           <!-- Equipment -->
-          <v-col cols="12" md="4">
-            <v-card 
-              class="category-card equipment" 
+          <v-col cols="12" md="4" v-if="canReadEquipment">
+            <v-card
+              class="category-card equipment"
               :class="{ 'disabled-card': !categoriesEnabled.equipment }"
               elevation="3"
               @click="categoriesEnabled.equipment ? showCategoryDetails('equipment') : null"
@@ -327,8 +327,13 @@ import { usePermissions } from '@/composables/usePermissions'
 const router = useRouter()
 const route = useRoute()
 
-// Permissions
+// Permissions for workdays
 const { canCreate, canUpdate, canDelete } = usePermissions('/workdays')
+
+// Permissions for sub-pages
+const { canRead: canReadMaterials } = usePermissions('/workdayMaterials')
+const { canRead: canReadLabor } = usePermissions('/workdayLabor')
+const { canRead: canReadEquipment } = usePermissions('/workdayEquipment')
 
 // Get workDayId and projectId from query params
 const workDayId = ref(route.query.id || null)

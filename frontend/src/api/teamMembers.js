@@ -10,7 +10,7 @@ import { DEFAULT_PAGE, DEFAULT_LIMIT } from '../constants/pagination'
  */
 export async function listTeamMembers({ page = DEFAULT_PAGE, limit = DEFAULT_LIMIT } = {}) {
   const query = new URLSearchParams({ page, limit }).toString()
-  const result = await apiFetch(`/team-members?${query}`)
+  const result = await apiFetch(`/teamMembers?${query}`)
   const paginatedData = result?.data || {}
   return {
     data: paginatedData.data || [],
@@ -27,7 +27,7 @@ export async function listTeamMembers({ page = DEFAULT_PAGE, limit = DEFAULT_LIM
  * @returns {Promise<Object>} Team member data
  */
 export async function getTeamMember(id) {
-  const result = await apiFetch(`/team-members/${id}`)
+  const result = await apiFetch(`/teamMembers/${id}`)
   return result?.data || result
 }
 
@@ -40,7 +40,7 @@ export async function getTeamMember(id) {
 export async function getTeamMemberStats(params = {}) {
   const query = new URLSearchParams(params).toString()
   const suffix = query ? `?${query}` : ''
-  const result = await apiFetch(`/team-members/stats${suffix}`)
+  const result = await apiFetch(`/teamMembers/stats${suffix}`)
   return result?.data || {}
 }
 
@@ -52,7 +52,7 @@ export async function getTeamMemberStats(params = {}) {
  * @returns {Promise<Object>} Created team member data
  */
 export async function createTeamMember(teamMemberData) {
-  const result = await apiFetch('/team-members', {
+  const result = await apiFetch('/teamMembers', {
     method: 'POST',
     body: teamMemberData
   })
@@ -65,7 +65,7 @@ export async function createTeamMember(teamMemberData) {
  * @returns {Promise<Object>} Response
  */
 export async function deleteTeamMember(id) {
-  const result = await apiFetch(`/team-members/${id}`, {
+  const result = await apiFetch(`/teamMembers/${id}`, {
     method: 'DELETE'
   })
   return result?.data || result

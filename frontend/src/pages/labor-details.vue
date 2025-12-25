@@ -555,8 +555,8 @@ import { usePermissions } from '@/composables/usePermissions'
 const router = useRouter()
 const route = useRoute()
 
-// Permissions for workday-labor
-const { canCreate, canUpdate, canDelete } = usePermissions('/workday-labor')
+// Permissions for workdayLabor
+const { canCreate, canUpdate, canDelete } = usePermissions('/workdayLabor')
 
 // Get workDayId and projectId from route query
 const workDayId = computed(() => route.query.workDayId || null)

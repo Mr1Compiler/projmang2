@@ -68,7 +68,7 @@ export async function deleteRole(id) {
  * @returns {Promise<Object>} Response
  */
 export async function assignRoleToUser(userId, roleId) {
-  const result = await apiFetch('/user-roles', {
+  const result = await apiFetch('/userRoles', {
     method: 'POST',
     body: { userId, roleId }
   })
@@ -81,7 +81,7 @@ export async function assignRoleToUser(userId, roleId) {
  * @returns {Promise<Object>} Response
  */
 export async function removeRoleFromUser(userRoleId) {
-  const result = await apiFetch(`/user-roles/${userRoleId}`, {
+  const result = await apiFetch(`/userRoles/${userRoleId}`, {
     method: 'DELETE'
   })
   return result?.data || result

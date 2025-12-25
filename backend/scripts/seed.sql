@@ -25,14 +25,13 @@ INSERT INTO pages (name, route, icon, status) VALUES
 ('إدارة الصفحات', '/pages', 'mdi-file-document-multiple', 'active'),
 -- صفحات API فقط (لا تظهر في السايدبار - للصلاحيات فقط)
 ('أيام العمل', '/workdays', 'mdi-calendar-check', 'active'),
-('العمالة', '/workday-labor', 'mdi-account-hard-hat', 'active'),
-('المعدات', '/workday-equipment', 'mdi-tools', 'active'),
-('المواد', '/workday-materials', 'mdi-package-variant', 'active'),
-('صلاحيات الأدوار', '/role-pages', 'mdi-key', 'active'),
-('أدوار المستخدمين', '/user-roles', 'mdi-account-key', 'active'),
-('أعضاء الفريق', '/team-members', 'mdi-account-group', 'active'),
-('تصنيفات العمل', '/work-categories', 'mdi-shape', 'active'),
-('تصنيفات العمل الفرعية', '/work-subcategories', 'mdi-shape-outline', 'active');
+('العمالة', '/workdayLabor', 'mdi-account-hard-hat', 'active'),
+('المعدات', '/workdayEquipment', 'mdi-tools', 'active'),
+('المواد', '/workdayMaterials', 'mdi-package-variant', 'active'),
+('صلاحيات الأدوار', '/rolePages', 'mdi-key', 'active'),
+('أدوار المستخدمين', '/userRoles', 'mdi-account-key', 'active'),
+('أعضاء الفريق', '/teamMembers', 'mdi-account-group', 'active'),
+('تصنيفات العمل الفرعية', '/workSubcategories', 'mdi-shape-outline', 'active');
 
 -- =============================================
 -- 3. INSERT ROLES
@@ -69,12 +68,17 @@ BEGIN
     VALUES (admin_role_id, page_id, '["read","create","update","delete"]');
 
     -- صلاحيات الأدوار (API)
-    SELECT id INTO page_id FROM pages WHERE route = '/role-pages';
+    SELECT id INTO page_id FROM pages WHERE route = '/rolePages';
     INSERT INTO rolepages (roleid, pageid, permissions)
     VALUES (admin_role_id, page_id, '["read","create","update","delete"]');
 
     -- أدوار المستخدمين (API)
-    SELECT id INTO page_id FROM pages WHERE route = '/user-roles';
+    SELECT id INTO page_id FROM pages WHERE route = '/userRoles';
+    INSERT INTO rolepages (roleid, pageid, permissions)
+    VALUES (admin_role_id, page_id, '["read","create","update","delete"]');
+
+    -- تصنيفات العمل الفرعية (API) - مطلوب لنموذج أيام العمل
+    SELECT id INTO page_id FROM pages WHERE route = '/workSubcategories';
     INSERT INTO rolepages (roleid, pageid, permissions)
     VALUES (admin_role_id, page_id, '["read","create","update","delete"]');
 END $$;

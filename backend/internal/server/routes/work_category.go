@@ -6,12 +6,12 @@ import (
 	"github.com/mustafa91ameen/prjalgo/backend/internal/container"
 )
 
-// RegisterWorkCategoryRoutes sets up /work-categories and /work-subcategories routes
+// RegisterWorkCategoryRoutes sets up /workCategories and /workSubcategories routes
 func RegisterWorkCategoryRoutes(rg *gin.RouterGroup, c *container.Container) {
-	// Work Categories
-	categories := rg.Group("/work-categories")
+	// Work Categories - API route is /workCategories but permission check uses /categories (DB page route)
+	categories := rg.Group("/workCategories")
 	categoriesAuthz := func(perm string) gin.HandlerFunc {
-		return auth.AuthorizationMiddleware(c.PermissionChecker, "/work-categories", perm)
+		return auth.AuthorizationMiddleware(c.PermissionChecker, "/categories", perm)
 	}
 	auditCategory := func(action string) gin.HandlerFunc {
 		return auth.AuditMiddleware(c.AuditLogService, action, "work_category")
@@ -26,9 +26,9 @@ func RegisterWorkCategoryRoutes(rg *gin.RouterGroup, c *container.Container) {
 	}
 
 	// Work Sub-Categories
-	subCategories := rg.Group("/work-subcategories")
+	subCategories := rg.Group("/workSubcategories")
 	subCategoriesAuthz := func(perm string) gin.HandlerFunc {
-		return auth.AuthorizationMiddleware(c.PermissionChecker, "/work-subcategories", perm)
+		return auth.AuthorizationMiddleware(c.PermissionChecker, "/workSubcategories", perm)
 	}
 	auditSubCategory := func(action string) gin.HandlerFunc {
 		return auth.AuditMiddleware(c.AuditLogService, action, "work_subcategory")
