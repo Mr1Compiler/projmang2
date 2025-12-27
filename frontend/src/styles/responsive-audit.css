@@ -1,0 +1,197 @@
+/* 
+   Responsive Audit & Safety Net 
+   Ensures basic responsiveness for all pages without altering logic or UI design.
+   This file acts as a safeguard for edge cases on various screen sizes.
+*/
+
+/* 1. Global Overflow Protection */
+html,
+body {
+  overflow-x: hidden;
+  /* Prevent horizontal scrolling on the page level */
+  width: 100%;
+}
+
+/* 2. Media Responsiveness */
+/* Ensure images, videos, and iframes never exceed their container width */
+img,
+video,
+iframe,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 3. Text Wrapping */
+/* Prevent long text from breaking layouts on small screens */
+.v-card-text,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+div {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* 4. Dialog Responsiveness */
+/* Ensure dialogs fit within the screen on mobile devices */
+@media (max-width: 600px) {
+  .v-dialog>.v-overlay__content {
+    max-width: 95vw !important;
+    margin: 8px !important;
+    width: 100% !important;
+  }
+
+  .v-card-title {
+    white-space: normal !important;
+    /* Allow long titles to wrap */
+    line-height: 1.4 !important;
+  }
+}
+
+/* 5. Table Responsiveness */
+/* Force horizontal scrolling for tables on small screens */
+@media (max-width: 960px) {
+  .v-data-table__wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .v-data-table table {
+    width: 100%;
+    min-width: 600px;
+    /* Ensure columns don't get too squashed */
+  }
+}
+
+/* 6. Container Padding on Mobile */
+/* Ensure content doesn't touch the edges on very small screens */
+@media (max-width: 480px) {
+  .v-container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .v-main {
+    padding-top: 12px !important;
+  }
+}
+
+/* 7. Input Field Adjustments */
+/* Ensure inputs don't overflow on small screens */
+.v-input {
+  max-width: 100%;
+}
+
+/* 8. Chart Container Responsiveness */
+/* Ensure chart containers resize correctly */
+.chart-container,
+.donut-chart-container,
+.line-chart-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden;
+}
+
+/* 9. Mobile Grid & Flex Adjustments */
+/* Force single column on mobile for standard grids */
+@media (max-width: 600px) {
+  .v-row {
+    margin: 0 !important;
+  }
+
+  .v-col {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding: 8px 0 !important;
+  }
+
+  /* Exception for small cols explicitly set for mobile */
+  .v-col-cols-6 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+
+  /* Adjust font sizes for mobile */
+  h1,
+  .text-h1 {
+    font-size: 1.75rem !important;
+  }
+
+  h2,
+  .text-h2 {
+    font-size: 1.5rem !important;
+  }
+
+  h3,
+  .text-h3 {
+    font-size: 1.25rem !important;
+  }
+
+  h4,
+  .text-h4 {
+    font-size: 1.1rem !important;
+  }
+
+  /* Adjust card padding */
+  .v-card-text,
+  .v-card-title {
+    padding: 12px !important;
+  }
+
+  /* Ensure full width for inputs */
+  .v-input,
+  .v-select,
+  .v-text-field {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Stack flex containers that are rows by default */
+  .d-flex:not(.flex-column):not(.v-app-bar-title):not(.v-toolbar-title) {
+    flex-wrap: wrap !important;
+  }
+
+  /* 10. Header Responsiveness */
+  .engineers-header-card .header-content {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 16px !important;
+    padding: 16px !important;
+  }
+
+  .engineers-header-card .header-right {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .engineers-header-card .header-text {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .engineers-header-card .main-title {
+    font-size: 1.5rem !important;
+    text-align: center !important;
+  }
+
+  .engineers-header-card .subtitle {
+    font-size: 0.9rem !important;
+    text-align: center !important;
+  }
+
+  /* Adjust header actions if present */
+  .header-actions {
+    width: 100% !important;
+    justify-content: center !important;
+    margin-top: 12px !important;
+  }
+}

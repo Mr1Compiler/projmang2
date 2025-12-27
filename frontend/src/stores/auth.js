@@ -21,7 +21,11 @@ export const useAuthStore = defineStore('auth', () => {
   // Computed
   const isAuthenticated = computed(() => {
     return localStorage.getItem('isAuthenticated') === 'true' &&
-           Boolean(localStorage.getItem('accessToken'))
+      Boolean(localStorage.getItem('accessToken'))
+  })
+
+  const isMobile = computed(() => {
+    return window.innerWidth < 960
   })
 
   const allowedRoutes = computed(() => {
@@ -106,6 +110,7 @@ export const useAuthStore = defineStore('auth', () => {
     isLoading,
     // Computed
     isAuthenticated,
+    isMobile,
     allowedRoutes,
     permissionsMap,
     // Actions

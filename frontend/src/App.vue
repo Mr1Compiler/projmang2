@@ -5,13 +5,24 @@
       v-if="!isLoginPage"
       v-model="drawer"
       location="right"
-      permanent
+      :temporary="$vuetify.display.mobile"
       width="320"
       class="modern-sidebar rtl-sidebar"
     >
       <!-- الشعار والعنوان -->
       <div class="sidebar-header pa-6">
-        <div class="text-center mb-6">
+        <div class="text-center mb-6 position-relative">
+          <!-- زر إغلاق الـ sidebar (يظهر على الشاشات الصغيرة أو عند الحاجة) -->
+          <v-btn
+            v-if="$vuetify.display.mobile"
+            icon
+            variant="text"
+            size="small"
+            @click="drawer = false"
+            class="sidebar-close-btn"
+          >
+            <v-icon color="white">mdi-close</v-icon>
+          </v-btn>
           <v-img
             class="mb-4 mx-auto logo-enhanced"
             height="80"
@@ -88,16 +99,18 @@
 
     <!-- المحتوى الرئيسي -->
     <v-main>
-      <!-- زر إظهار/إخفاء الـ Sidebar -->
+      <!-- زر إظهار/إخفاء الـ Sidebar المحسن -->
       <v-btn
-        v-if="!drawer"
+        v-if="!isLoginPage"
         icon
-        @click="drawer = true"
-        class="sidebar-toggle-btn-fixed"
+        @click="drawer = !drawer"
+        :class="['sidebar-toggle-btn-fixed', { 'sidebar-open': drawer }]"
         color="primary"
         size="large"
+        elevation="4"
       >
-        <v-icon>mdi-menu</v-icon>
+        <v-icon class="toggle-icon">{{ drawer ? 'mdi-menu-open' : 'mdi-menu' }}</v-icon>
+        <div class="toggle-ripple"></div>
       </v-btn>
       <router-view />
     </v-main>
@@ -115,7 +128,7 @@ import { useAuthStore } from '@/stores/auth'
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
-const drawer = ref(true)
+const drawer = ref(!authStore.isMobile) // Close by default on mobile
 
 // Load permissions from storage on mount
 onMounted(() => {
@@ -715,28 +728,326 @@ table thead tr th {
   color: #fca5a5 !important;
 }
 
-/* تحسينات للشاشات الصغيرة */
-@media (max-width: 960px) {
+/* ========================================
+   Responsive Design - التصميم المتجاوب
+   دعم جميع أجهزة iPad والهواتف
+   ======================================== */
+
+/* الهواتف الصغيرة (320px - 480px) */
+@media (max-width: 480px) {
+  .modern-sidebar {
+    width: 280px !important;
+  }
+
+  .sidebar-header {
+    padding: 12px !important;
+  }
+
+  .sidebar-header .text-h5 {
+    font-size: 0.7rem !important;
+  }
+
+  .sidebar-header .text-body-2 {
+    font-size: 0.5rem !important;
+  }
+
+  .logo-enhanced {
+    height: 60px !important;
+    width: 60px !important;
+  }
+
+  .modern-sidebar .v-list-item-title {
+    font-size: 0.6rem !important;
+  }
+
+  .menu-item {
+    min-height: 40px !important;
+    padding: 4px 8px !important;
+  }
+
+  .user-info-card {
+    padding: 8px !important;
+    gap: 8px !important;
+  }
+
+  .user-avatar {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .user-name {
+    font-size: 0.6rem !important;
+  }
+
+  .user-greeting {
+    font-size: 0.5rem !important;
+  }
+
+  .sidebar-toggle-btn-fixed {
+    top: 12px !important;
+    right: 12px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  /* v-main padding removed to let Vuetify handle layout */
+}
+
+/* الهواتف الكبيرة (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .modern-sidebar {
+    width: 300px !important;
+  }
+
+  .sidebar-header {
+    padding: 16px !important;
+  }
+
+  .sidebar-header .text-h5 {
+    font-size: 0.75rem !important;
+  }
+
+  .sidebar-header .text-body-2 {
+    font-size: 0.55rem !important;
+  }
+
+  .logo-enhanced {
+    height: 70px !important;
+    width: 70px !important;
+  }
+
+  .modern-sidebar .v-list-item-title {
+    font-size: 0.65rem !important;
+  }
+
+  .menu-item {
+    min-height: 44px !important;
+    padding: 6px 10px !important;
+  }
+
+  .user-info-card {
+    padding: 10px !important;
+    gap: 10px !important;
+  }
+
+  .user-avatar {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .user-name {
+    font-size: 0.7rem !important;
+  }
+
+  .user-greeting {
+    font-size: 0.55rem !important;
+  }
+
+  .sidebar-toggle-btn-fixed {
+    top: 14px !important;
+    right: 14px !important;
+  }
+
+  /* v-main padding removed */
+}
+
+/* iPad عمودي (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .modern-sidebar {
+    width: 280px !important;
+  }
+
+  .sidebar-header {
+    padding: 20px !important;
+  }
+
+  .sidebar-header .text-h5 {
+    font-size: 0.85rem !important;
+  }
+
+  .sidebar-header .text-body-2 {
+    font-size: 0.6rem !important;
+  }
+
+  .logo-enhanced {
+    height: 75px !important;
+    width: 75px !important;
+  }
+
+  .modern-sidebar .v-list-item-title {
+    font-size: 0.7rem !important;
+  }
+
+  .menu-item {
+    min-height: 48px !important;
+    padding: 8px 12px !important;
+  }
+
+  .user-info-card {
+    padding: 12px !important;
+    gap: 12px !important;
+  }
+
+  .user-avatar {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .user-name {
+    font-size: 0.75rem !important;
+  }
+
+  .user-greeting {
+    font-size: 0.6rem !important;
+  }
+
+  /* v-main padding removed */
+
+  /* تحسين الجداول على iPad */
+  .v-data-table {
+    font-size: 0.85rem !important;
+  }
+
+  .v-data-table table thead tr th {
+    font-size: 0.9rem !important;
+    padding: 12px 8px !important;
+  }
+
+  .v-data-table table tbody tr td {
+    font-size: 0.8rem !important;
+    padding: 10px 8px !important;
+  }
+}
+
+/* iPad أفقي والشاشات المتوسطة (1025px - 1366px) */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .modern-sidebar {
+    width: 300px !important;
+  }
+
+  .sidebar-header {
+    padding: 24px !important;
+  }
+
+  .sidebar-header .text-h5 {
+    font-size: 0.9rem !important;
+  }
+
+  .sidebar-header .text-body-2 {
+    font-size: 0.65rem !important;
+  }
+
+  .logo-enhanced {
+    height: 80px !important;
+    width: 80px !important;
+  }
+
+  .modern-sidebar .v-list-item-title {
+    font-size: 0.75rem !important;
+  }
+
+  .menu-item {
+    min-height: 50px !important;
+    padding: 10px 14px !important;
+  }
+
+  /* v-main padding removed */
+}
+
+/* الشاشات الكبيرة (1367px+) */
+@media (min-width: 1367px) {
+  .modern-sidebar {
+    width: 320px !important;
+  }
+
+  /* v-main padding removed */
+}
+
+/* تحسينات عامة للشاشات الصغيرة والمتوسطة */
+@media (max-width: 1024px) {
   .user-info-card {
     padding: 10px;
     gap: 10px;
   }
-  
-  .user-avatar {
-    width: 36px;
-    height: 36px;
-  }
-  
-  .user-name {
-    font-size: 0.85rem;
-  }
-  
+
   .logout-btn {
     height: 44px !important;
   }
-  
+
   .logout-text {
     font-size: 0.9rem;
+  }
+
+  /* تحسين الأزرار */
+  .v-btn {
+    min-width: auto !important;
+    padding: 8px 16px !important;
+  }
+
+  /* تحسين الحقول */
+  .v-text-field {
+    font-size: 0.9rem !important;
+  }
+
+  /* تحسين البطاقات */
+  .v-card {
+    margin-bottom: 16px !important;
+  }
+
+  .v-card-title {
+    font-size: 1rem !important;
+    padding: 12px 16px !important;
+  }
+
+  .v-card-text {
+    padding: 12px 16px !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* تحسينات خاصة للهواتف */
+@media (max-width: 767px) {
+  /* إخفاء بعض العناصر غير الضرورية على الهواتف */
+  .sidebar-header .text-body-2 {
+    display: none;
+  }
+
+  /* تحسين المسافات */
+  .v-list {
+    padding: 4px !important;
+  }
+
+  .v-list-item {
+    padding: 4px 8px !important;
+    min-height: 40px !important;
+  }
+
+  /* تحسين الجداول - تفعيل التمرير الأفقي */
+  .v-data-table__wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .v-data-table table {
+    min-width: 600px !important;
+  }
+}
+
+/* دعم اللمس على الأجهزة اللوحية */
+@media (hover: none) and (pointer: coarse) {
+  .menu-item {
+    min-height: 48px !important;
+    padding: 12px 16px !important;
+  }
+
+  .v-btn {
+    min-height: 44px !important;
+    padding: 12px 20px !important;
+  }
+
+  .sidebar-toggle-btn-fixed {
+    width: 48px !important;
+    height: 48px !important;
   }
 }
 
@@ -764,5 +1075,168 @@ table thead tr th {
   font-size: 1.1rem !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   letter-spacing: 0.5px !important;
+}
+
+/* ========================================
+   زر Toggle Sidebar المحسن
+   ======================================== */
+.sidebar-toggle-btn-fixed {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  z-index: 1000 !important;
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 8px 24px rgba(25, 118, 210, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 50%, #0d47a1 100%) !important;
+  overflow: visible !important;
+}
+
+.sidebar-toggle-btn-fixed::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(25, 118, 210, 0.3), rgba(21, 101, 192, 0.3));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+.sidebar-toggle-btn-fixed:hover::before {
+  opacity: 1;
+}
+
+.sidebar-toggle-btn-fixed:hover {
+  transform: scale(1.15) rotate(5deg) !important;
+  box-shadow: 0 12px 32px rgba(25, 118, 210, 0.5), 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+  background: linear-gradient(135deg, #1e88e5 0%, #1976d2 50%, #1565c0 100%) !important;
+}
+
+.sidebar-toggle-btn-fixed:active {
+  transform: scale(1.05) !important;
+}
+
+.sidebar-toggle-btn-fixed.sidebar-open {
+  background: linear-gradient(135deg, #43a047 0%, #388e3c 50%, #2e7d32 100%) !important;
+  box-shadow: 0 8px 24px rgba(67, 160, 71, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.sidebar-toggle-btn-fixed.sidebar-open:hover {
+  background: linear-gradient(135deg, #4caf50 0%, #43a047 50%, #388e3c 100%) !important;
+  box-shadow: 0 12px 32px rgba(67, 160, 71, 0.5), 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+.sidebar-toggle-btn-fixed .toggle-icon,
+.sidebar-toggle-btn-fixed .v-icon {
+  color: white !important;
+  font-size: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)) !important;
+}
+
+.sidebar-toggle-btn-fixed:hover .toggle-icon,
+.sidebar-toggle-btn-fixed:hover .v-icon {
+  transform: scale(1.1) !important;
+}
+
+.sidebar-toggle-btn-fixed.sidebar-open .toggle-icon,
+.sidebar-toggle-btn-fixed.sidebar-open .v-icon {
+  transform: rotate(180deg) !important;
+}
+
+.toggle-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+}
+
+.sidebar-toggle-btn-fixed:active .toggle-ripple {
+  width: 100px;
+  height: 100px;
+  opacity: 0;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+}
+
+/* زر إغلاق الـ sidebar */
+.sidebar-close-btn {
+  position: absolute !important;
+  top: 8px !important;
+  left: 8px !important;
+  z-index: 10 !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  transition: all 0.3s ease !important;
+}
+
+.sidebar-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: scale(1.15) rotate(90deg) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 960px) {
+  .sidebar-toggle-btn-fixed {
+    top: 16px !important;
+    right: 16px !important;
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+  }
+
+  .sidebar-toggle-btn-fixed .toggle-icon,
+  .sidebar-toggle-btn-fixed .v-icon {
+    font-size: 24px !important;
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-toggle-btn-fixed {
+    top: 12px !important;
+    right: 12px !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+  }
+
+  .sidebar-toggle-btn-fixed .toggle-icon,
+  .sidebar-toggle-btn-fixed .v-icon {
+    font-size: 22px !important;
+    width: 22px !important;
+    height: 22px !important;
+  }
 }
 </style>

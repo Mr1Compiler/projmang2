@@ -95,6 +95,7 @@ const handleBack = () => {
   gap: 1rem;
   font-family: var(--ds-font-family);
   max-width: 100%;
+  flex-wrap: wrap;
 }
 
 .ds-page-header-text {
@@ -156,5 +157,43 @@ const handleBack = () => {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-</style>
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .ds-page-header {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .ds-page-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .ds-page-header-title {
+    font-size: 1.25rem; /* Smaller font size for mobile */
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .ds-page-header-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .ds-page-header-back-btn {
+    align-self: flex-end; /* Move back button to the right/end when stacked */
+    margin-top: -3rem; /* Pull it up to align with title if desired, or keep separate */
+    position: absolute;
+    top: 1rem;
+    left: 1rem; /* Adjust based on RTL/LTR, assuming RTL based on other files */
+  }
+  
+  /* RTL Adjustment for back button absolute positioning */
+  :deep([dir="rtl"]) .ds-page-header-back-btn,
+  [dir="rtl"] .ds-page-header-back-btn {
+    left: 1rem;
+    right: auto;
+  }
+}
 

@@ -41,6 +41,35 @@ npm run build
 - **الإيرادات** (`/income`): إدارة وتتبع الإيرادات
 - **المصروفات** (`/expenses`): إدارة وتتبع المصروفات
 
+## 🚀 النشر (Deployment)
+
+### النشر على Railway (موصى به):
+
+1. ادفع المشروع إلى GitHub
+2. اذهب إلى [railway.app](https://railway.app)
+3. استورد المشروع من GitHub
+4. في Settings:
+   - Root Directory: `dist`
+   - Build Command: `npm run build`
+   - Start Command: `npm start`
+5. في Variables أضف: `VITE_API_URL=https://your-api.com/api`
+6. اضغط Deploy
+
+**للمزيد من التفاصيل، راجع:**
+- `RAILWAY_QUICK_START.md` - دليل النشر السريع على Railway
+- `DEPLOY_RAILWAY.md` - دليل النشر الشامل على Railway
+- `DEPLOY_QUICK_START.md` - دليل النشر السريع (Vercel/Netlify)
+- `DEPLOYMENT_GUIDE.md` - دليل النشر الشامل
+
+### ملفات التكوين الجاهزة:
+
+- ✅ `railway.json` - إعدادات Railway
+- ✅ `nixpacks.toml` - إعدادات Nixpacks لـ Railway
+- ✅ `vercel.json` - إعدادات Vercel
+- ✅ `netlify.toml` - إعدادات Netlify
+
+**⚠️ مهم:** قم بتحديث رابط API في متغيرات البيئة قبل النشر!
+
 ## الدعم
 
 © 2024 ارتكاز للحلول البرمجية - erticaz.com

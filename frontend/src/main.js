@@ -21,6 +21,7 @@ import '@/styles/rtl.css'
 import '@/styles/visual-effects.css'
 import '@/styles/table-headers.css'
 import '@mdi/font/css/materialdesignicons.css'
+import '@/styles/responsive-audit.css'
 
 const app = createApp(App)
 

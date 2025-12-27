@@ -258,22 +258,86 @@ const handleLogin = async () => {
   color: white !important;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
+/* Responsive - Only responsive improvements, no theme/logic changes */
+@media (max-width: 768px) {
+  .login-page {
+    padding: 16px;
+  }
+
   .login-container {
     max-width: 100%;
   }
 
   .header-content {
     padding: 20px;
+    gap: 12px;
+  }
+
+  .main-title {
+    font-size: 1.15rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+  }
+
+  .login-form-section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    padding: 12px;
+  }
+
+  .login-container {
+    max-width: 100%;
+  }
+
+  .header-content {
+    padding: 16px;
+    gap: 10px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-content .v-icon {
+    font-size: 32px !important;
   }
 
   .main-title {
     font-size: 1.1rem;
   }
 
+  .subtitle {
+    font-size: 0.75rem;
+  }
+
   .login-form-section {
-    padding: 20px;
+    padding: 16px;
+  }
+
+  .login-btn {
+    font-size: 0.9rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .login-page {
+    padding: 8px;
+  }
+
+  .header-content {
+    padding: 12px;
+  }
+
+  .main-title {
+    font-size: 1rem;
+  }
+
+  .login-form-section {
+    padding: 12px;
   }
 }
 </style>
