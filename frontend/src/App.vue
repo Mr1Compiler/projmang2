@@ -197,7 +197,6 @@ const mainMenuItems = computed(() => {
   background: linear-gradient(135deg, rgba(25, 118, 210, 0.7) 0%, rgba(21, 101, 192, 0.7) 100%) !important;
   border-left: none !important;
   box-shadow: -4px 0 20px rgba(25, 118, 210, 0.2) !important;
-  z-index: 5 !important;
   backdrop-filter: blur(10px);
 }
 
@@ -627,6 +626,7 @@ table thead tr th {
     rgba(255, 255, 255, 0.2)
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: pulse-border 2s ease-in-out infinite;

@@ -2859,10 +2859,30 @@ onMounted(() => {
   display: flex;
   gap: 0.75rem;
   flex-wrap: nowrap;
-  overflow: hidden;
+  overflow: visible; /* Changed from hidden to visible */
   padding: 0.5rem 0;
   width: 100%;
   justify-content: space-between;
+}
+
+@media (max-width: 1264px) {
+  .stats-cards-container {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+  
+  .stats-cards-container .modern-stat-card {
+    flex: 1 1 calc(50% - 0.75rem) !important;
+    min-width: 250px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-cards-container .modern-stat-card {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+  }
 }
 
 /* Modern Statistics Cards - نفس تصميم الصفحة الرئيسية */
