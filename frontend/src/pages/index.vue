@@ -933,16 +933,12 @@ const formatCurrency = (amount) => {
 /* Header Styles - نفس تنسيق صفحة المهندسين */
 .engineers-header-card {
   background: linear-gradient(135deg, rgba(25, 118, 210, 0.7) 0%, rgba(21, 101, 192, 0.7) 100%);
-  border-radius: 0;
-  width: 100vw;
+  border-radius: 0 0 24px 24px;
+  width: 100%;
   backdrop-filter: blur(10px);
-  max-width: 100vw;
   box-shadow: 0 8px 32px rgba(25, 118, 210, 0.3);
   position: relative;
   overflow: hidden;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  margin-top: 0;
   margin-bottom: 0;
   border: none;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -999,18 +995,16 @@ const formatCurrency = (amount) => {
 }
 
 .header-content {
-  padding: 12px 16px !important;
-  padding-top: 0 !important;
+  padding: 1.5rem 2rem !important;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  min-height: auto !important;
+  justify-content: space-between;
   background: linear-gradient(135deg, rgba(25, 118, 210, 0.1) 0%, rgba(21, 101, 192, 0.05) 100%);
   backdrop-filter: blur(10px);
   position: relative;
   z-index: 3;
   animation: fadeInUp 0.8s ease-out 0.2s both;
-  max-width: calc(100vw - 320px);
+  width: 100%;
   margin: 0 auto;
   border-radius: 0;
   border: none;

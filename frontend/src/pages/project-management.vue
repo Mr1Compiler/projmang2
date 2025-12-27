@@ -2547,12 +2547,8 @@ onMounted(() => {
 
 .engineers-header-card {
   background: linear-gradient(135deg, rgba(25, 118, 210, 0.7) 0%, rgba(21, 101, 192, 0.7) 100%);
-  border-radius: 0;
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  margin-top: 0;
+  border-radius: 0 0 24px 24px;
+  width: 100%;
   margin-bottom: 1.5rem;
   box-shadow: 0 8px 32px rgba(25, 118, 210, 0.3);
   position: relative;
@@ -2560,7 +2556,7 @@ onMounted(() => {
   border: none;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation: slideInFromTop 0.8s ease-out;
-  z-index: 1000 !important;
+  z-index: 10;
   isolation: isolate;
   backdrop-filter: blur(10px);
 }
@@ -2615,20 +2611,16 @@ onMounted(() => {
 }
 
 .header-content {
-  padding: 12px 16px !important;
-  padding-top: 0 !important;
+  padding: 1.5rem 2rem;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  min-height: auto !important;
-  background: linear-gradient(135deg, rgba(25, 118, 210, 0.1) 0%, rgba(21, 101, 192, 0.05) 100%);
-  backdrop-filter: blur(10px);
+  justify-content: space-between;
+  background: transparent;
   position: relative;
-  z-index: 1001 !important;
+  z-index: 2;
   animation: fadeInUp 0.8s ease-out 0.2s both;
-  max-width: calc(100vw - 320px);
+  width: 100%;
   margin: 0 auto;
-  margin-top: 0 !important;
 }
 
 .header-right {
