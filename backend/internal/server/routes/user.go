@@ -23,7 +23,7 @@ func RegisterUserRoutes(rg *gin.RouterGroup, c *container.Container) {
 		users.PUT("/:id", usersAuthz("update"), audit("update"), c.UserHandler.Update)
 		users.DELETE("/:id", usersAuthz("delete"), audit("delete"), c.UserHandler.Delete)
 		users.PUT("/:id/password", usersAuthz("updatePassword"), audit("password_change"), c.UserHandler.UpdatePassword)
-		users.PATCH("/:id/status", usersAuthz("updateStatus"), audit("status_change"), c.UserHandler.UpdateStatus)
+		users.PATCH("/:id/status", usersAuthz("update"), audit("status_change"), c.UserHandler.UpdateStatus)
 
 		// Nested routes under user
 		users.GET("/:id/roles", usersAuthz("read"), c.UserRoleHandler.GetByUserID)

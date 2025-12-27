@@ -120,10 +120,15 @@ const handleLogin = async () => {
     await router.push('/')
   } catch (error) {
     const status = error?.status
+    const message = error?.message || ''
     if (status === 0) {
       errorMessage.value = 'فشل الاتصال بالخادم. يرجى التأكد من تشغيل الخادم والمحاولة مجدداً.'
     } else if (status === 401) {
-      errorMessage.value = 'اسم المستخدم أو كلمة المرور غير صحيحة.'
+      if (message.includes('inactive')) {
+        errorMessage.value = 'حسابك غير مفعل. يرجى التواصل مع المسؤول.'
+      } else {
+        errorMessage.value = 'اسم المستخدم أو كلمة المرور غير صحيحة.'
+      }
     } else {
       errorMessage.value = error?.message || 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.'
     }

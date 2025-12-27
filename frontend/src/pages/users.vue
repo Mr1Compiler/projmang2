@@ -224,7 +224,7 @@
                 @click="viewUser(item)"
               />
               <v-btn
-                v-if="canUpdate"
+                v-if="canUpdate && canEditUser(item)"
                 icon="mdi-pencil"
                 size="small"
                 variant="elevated"
@@ -233,22 +233,22 @@
                 @click="editUser(item)"
               />
               <v-btn
-                v-if="canUpdatePassword"
-                icon="mdi-key"
+                v-if="canUpdatePassword && canEditUser(item)"
+                icon="mdi-lock-reset"
                 size="small"
                 variant="elevated"
-                class="reset-btn"
-                data-action="reset"
+                class="password-btn"
+                data-action="password"
                 @click="resetPassword(item)"
               />
               <v-btn
-                v-if="canDelete"
-                icon="mdi-delete"
+                v-if="canUpdate && canEditUser(item)"
+                :icon="item.status === 'active' ? 'mdi-account-off' : 'mdi-account-check'"
                 size="small"
                 variant="elevated"
-                class="delete-btn"
-                data-action="delete"
-                @click="deleteUser(item)"
+                :class="item.status === 'active' ? 'deactivate-btn' : 'activate-btn'"
+                :data-action="item.status === 'active' ? 'deactivate' : 'activate'"
+                @click="toggleUserStatus(item)"
               />
             </template>
           </v-data-table>
@@ -267,31 +267,6 @@
           </div>
         </v-card>
 
-        <!-- إحصائيات إضافية -->
-        <v-row class="mt-6">
-          <v-col cols="12" md="6">
-            <v-card class="chart-card" elevation="2">
-              <v-card-title class="text-h6 font-weight-bold">توزيع المستخدمين حسب الدور</v-card-title>
-              <v-card-text>
-                <div class="chart-placeholder">
-                  <v-icon size="64" color="primary">mdi-chart-pie</v-icon>
-                  <p class="text-body-1 mt-2">رسم بياني دائري للأدوار</p>
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col cols="12" md="6">
-            <v-card class="chart-card" elevation="2">
-              <v-card-title class="text-h6 font-weight-bold">نشاط المستخدمين</v-card-title>
-              <v-card-text>
-                <div class="chart-placeholder">
-                  <v-icon size="64" color="success">mdi-chart-line</v-icon>
-                  <p class="text-body-1 mt-2">رسم بياني خطي للنشاط</p>
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
     </v-container>
   </div>
 
@@ -333,7 +308,6 @@
                 density="default"
                 prepend-inner-icon="mdi-account"
                 color="primary"
-                bg-color="grey-lighten-5"
                 class="mb-2"
               />
             </v-col>
@@ -349,7 +323,6 @@
                 density="default"
                 prepend-inner-icon="mdi-account-outline"
                 color="primary"
-                bg-color="grey-lighten-5"
                 class="mb-2"
               />
             </v-col>
@@ -366,7 +339,6 @@
                 prepend-inner-icon="mdi-email-outline"
                 type="email"
                 color="primary"
-                bg-color="grey-lighten-5"
                 class="mb-2"
               />
             </v-col>
@@ -383,7 +355,6 @@
                 prepend-inner-icon="mdi-phone-outline"
                 type="tel"
                 color="primary"
-                bg-color="grey-lighten-5"
                 class="mb-2"
               />
             </v-col>
@@ -399,7 +370,6 @@
                 density="default"
                 prepend-inner-icon="mdi-briefcase-outline"
                 color="primary"
-                bg-color="grey-lighten-5"
                 class="mb-2"
               />
             </v-col>
@@ -418,7 +388,6 @@
                 density="default"
                 prepend-inner-icon="mdi-shield-account-outline"
                 color="primary"
-                bg-color="grey-lighten-5"
                 class="mb-2"
               />
             </v-col>
@@ -446,7 +415,6 @@
                 :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                 @click:append-inner="showPassword = !showPassword"
                 color="primary"
-                bg-color="grey-lighten-5"
                 hint="8 أحرف على الأقل"
                 persistent-hint
                 class="mb-2"
@@ -467,7 +435,6 @@
                 :append-inner-icon="showConfirmPassword ? 'mdi-eye-off' : 'mdi-eye'"
                 @click:append-inner="showConfirmPassword = !showConfirmPassword"
                 color="primary"
-                bg-color="grey-lighten-5"
                 class="mb-2"
               />
             </v-col>
@@ -504,99 +471,115 @@
   </v-dialog>
 
   <!-- نافذة عرض تفاصيل المستخدم -->
-  <v-dialog v-model="showViewUserDialog" max-width="600px">
+  <v-dialog v-model="showViewUserDialog" max-width="800px">
     <v-card class="view-user-dialog">
       <v-card-title class="dialog-header">
         <div class="dialog-title">
-          <v-icon size="32" color="primary" class="me-3">mdi-account-details</v-icon>
+          <v-icon size="32" class="me-3">mdi-account-details</v-icon>
           <h2>تفاصيل المستخدم</h2>
         </div>
-        <v-btn 
-          icon="mdi-close" 
-          variant="text" 
+        <v-btn
+          icon="mdi-close"
+          variant="text"
           @click="closeViewUserDialog"
           class="close-btn"
         />
       </v-card-title>
-      
+
       <v-divider />
-      
-      <v-card-text v-if="selectedUser" class="pa-6">
+
+      <v-card-text v-if="selectedUser" class="dialog-content">
         <v-row>
           <v-col cols="12" class="text-center mb-4">
-            <v-avatar size="100">
+            <v-avatar size="80">
               <v-img :src="selectedUser.avatar" />
             </v-avatar>
-            <h3 class="mt-3">{{ selectedUser.name }}</h3>
-            <v-chip 
-              :color="getStatusColor(selectedUser.status)" 
-              size="small" 
-              class="mt-2"
-            >
-              {{ getStatusText(selectedUser.status) }}
-            </v-chip>
           </v-col>
-          
+
+          <!-- اسم المستخدم -->
           <v-col cols="12" md="6">
-            <v-list density="compact">
-              <v-list-item>
-                <template v-slot:prepend>
-                  <v-icon color="primary">mdi-email</v-icon>
-                </template>
-                <v-list-item-title>البريد الإلكتروني</v-list-item-title>
-                <v-list-item-subtitle>{{ selectedUser.email }}</v-list-item-subtitle>
-              </v-list-item>
-              
-              <v-list-item>
-                <template v-slot:prepend>
-                  <v-icon color="success">mdi-phone</v-icon>
-                </template>
-                <v-list-item-title>رقم الهاتف</v-list-item-title>
-                <v-list-item-subtitle>{{ selectedUser.phone }}</v-list-item-subtitle>
-              </v-list-item>
-              
-              <v-list-item>
-                <template v-slot:prepend>
-                  <v-icon color="warning">mdi-account-tie</v-icon>
-                </template>
-                <v-list-item-title>الدور</v-list-item-title>
-                <v-list-item-subtitle>{{ getRoleText(selectedUser.role) }}</v-list-item-subtitle>
-              </v-list-item>
-            </v-list>
+            <v-text-field
+              :model-value="selectedUser.username"
+              label="اسم المستخدم"
+              variant="outlined"
+              readonly
+            />
           </v-col>
-          
+
+          <!-- الاسم الكامل -->
           <v-col cols="12" md="6">
-            <v-list density="compact">
-              <v-list-item>
-                <template v-slot:prepend>
-                  <v-icon color="info">mdi-office-building</v-icon>
-                </template>
-                <v-list-item-title>القسم</v-list-item-title>
-                <v-list-item-subtitle>{{ selectedUser.department }}</v-list-item-subtitle>
-              </v-list-item>
-              
-              <v-list-item>
-                <template v-slot:prepend>
-                  <v-icon color="purple">mdi-clock-outline</v-icon>
-                </template>
-                <v-list-item-title>آخر دخول</v-list-item-title>
-                <v-list-item-subtitle>{{ formatDate(selectedUser.lastLogin) }}</v-list-item-subtitle>
-              </v-list-item>
-              
-              <v-list-item>
-                <template v-slot:prepend>
-                  <v-icon color="teal">mdi-calendar-plus</v-icon>
-                </template>
-                <v-list-item-title>تاريخ الإنشاء</v-list-item-title>
-                <v-list-item-subtitle>{{ formatDate(selectedUser.createdAt) }}</v-list-item-subtitle>
-              </v-list-item>
-            </v-list>
+            <v-text-field
+              :model-value="selectedUser.fullName"
+              label="الاسم الكامل"
+              variant="outlined"
+              readonly
+            />
+          </v-col>
+
+          <!-- البريد الإلكتروني -->
+          <v-col cols="12" md="6">
+            <v-text-field
+              :model-value="selectedUser.email"
+              label="البريد الإلكتروني"
+              variant="outlined"
+              readonly
+            />
+          </v-col>
+
+          <!-- رقم الهاتف -->
+          <v-col cols="12" md="6">
+            <v-text-field
+              :model-value="selectedUser.phone"
+              label="رقم الهاتف"
+              variant="outlined"
+              readonly
+            />
+          </v-col>
+
+          <!-- المسمى الوظيفي -->
+          <v-col cols="12" md="6">
+            <v-text-field
+              :model-value="selectedUser.jobTitle"
+              label="المسمى الوظيفي"
+              variant="outlined"
+              readonly
+            />
+          </v-col>
+
+          <!-- الحالة -->
+          <v-col cols="12" md="6">
+            <v-text-field
+              :model-value="getStatusText(selectedUser.status)"
+              label="الحالة"
+              variant="outlined"
+              readonly
+            />
+          </v-col>
+
+          <!-- تاريخ الإنشاء -->
+          <v-col cols="12" md="6">
+            <v-text-field
+              :model-value="formatDate(selectedUser.createdAt)"
+              label="تاريخ الإنشاء"
+              variant="outlined"
+              readonly
+            />
+          </v-col>
+
+          <!-- آخر دخول -->
+          <v-col cols="12" md="6">
+            <v-text-field
+              :model-value="formatDate(selectedUser.lastLogin)"
+              label="آخر دخول"
+              variant="outlined"
+              readonly
+            />
           </v-col>
         </v-row>
       </v-card-text>
-      
+
       <v-divider />
-      
+
       <v-card-actions class="dialog-actions">
         <v-spacer />
         <v-btn
@@ -615,19 +598,19 @@
     <v-card class="edit-user-dialog">
       <v-card-title class="dialog-header">
         <div class="dialog-title">
-          <v-icon size="32" color="success" class="me-3">mdi-account-edit</v-icon>
+          <v-icon size="32" class="me-3">mdi-account-edit</v-icon>
           <h2>تعديل المستخدم</h2>
         </div>
-        <v-btn 
-          icon="mdi-close" 
-          variant="text" 
+        <v-btn
+          icon="mdi-close"
+          variant="text"
           @click="closeEditUserDialog"
           class="close-btn"
         />
       </v-card-title>
-      
+
       <v-divider />
-      
+
       <v-card-text v-if="selectedUser" class="dialog-content">
         <v-form ref="editUserForm" v-model="editFormValid" lazy-validation>
           <v-row>
@@ -643,7 +626,6 @@
                 v-model="selectedUser.username"
                 label="اسم المستخدم"
                 variant="outlined"
-                prepend-inner-icon="mdi-account"
                 hint="يستخدم لتسجيل الدخول"
               />
             </v-col>
@@ -654,7 +636,6 @@
                 v-model="selectedUser.fullName"
                 label="الاسم الكامل"
                 variant="outlined"
-                prepend-inner-icon="mdi-account-outline"
               />
             </v-col>
 
@@ -665,7 +646,6 @@
                 label="البريد الإلكتروني"
                 :rules="emailRules"
                 variant="outlined"
-                prepend-inner-icon="mdi-email"
               />
             </v-col>
 
@@ -675,7 +655,6 @@
                 v-model="selectedUser.phone"
                 label="رقم الهاتف"
                 variant="outlined"
-                prepend-inner-icon="mdi-phone"
               />
             </v-col>
 
@@ -685,7 +664,6 @@
                 v-model="selectedUser.jobTitle"
                 label="المسمى الوظيفي"
                 variant="outlined"
-                prepend-inner-icon="mdi-briefcase"
               />
             </v-col>
 
@@ -696,7 +674,6 @@
                 :items="statusOptions"
                 label="الحالة"
                 variant="outlined"
-                prepend-inner-icon="mdi-account-check"
               />
             </v-col>
           </v-row>
@@ -708,7 +685,6 @@
       <v-card-actions class="dialog-actions">
         <v-spacer />
         <v-btn
-          color="grey"
           variant="outlined"
           @click="closeEditUserDialog"
           class="me-2"
@@ -716,7 +692,7 @@
           إلغاء
         </v-btn>
         <v-btn
-          color="success"
+          color="primary"
           variant="elevated"
           @click="saveEditUser"
           :loading="editSaving"
@@ -733,47 +709,59 @@
     <v-card class="reset-password-dialog">
       <v-card-title class="dialog-header">
         <div class="dialog-title">
-          <v-icon size="32" color="warning" class="me-3">mdi-key-change</v-icon>
-          <h2>إعادة تعيين كلمة المرور</h2>
+          <v-icon size="32" class="me-3">mdi-lock-reset</v-icon>
+          <h2>تغيير كلمة المرور</h2>
         </div>
-        <v-btn 
-          icon="mdi-close" 
-          variant="text" 
+        <v-btn
+          icon="mdi-close"
+          variant="text"
           @click="closeResetPasswordDialog"
           class="close-btn"
         />
       </v-card-title>
-      
+
       <v-divider />
-      
+
       <v-card-text v-if="selectedUser" class="pa-6">
         <div class="text-center mb-4">
           <v-avatar size="60">
-            <v-img :src="selectedUser.avatar" />
+            <v-img v-if="selectedUser.avatar" :src="selectedUser.avatar" />
+            <v-icon v-else size="30">mdi-account</v-icon>
           </v-avatar>
           <h4 class="mt-2">{{ selectedUser.name }}</h4>
           <p class="text-caption">{{ selectedUser.email }}</p>
         </div>
-        
-        <v-alert 
-          type="warning" 
-          variant="tonal" 
-          class="mb-4"
-        >
-          سيتم إرسال كلمة مرور جديدة إلى البريد الإلكتروني للمستخدم
-        </v-alert>
-        
-        <p class="text-body-2 text-center">
-          هل أنت متأكد من إعادة تعيين كلمة المرور لهذا المستخدم؟
-        </p>
+
+        <v-form ref="resetPasswordForm" @submit.prevent="confirmResetPassword">
+          <v-text-field
+            v-model="resetPasswordData.password"
+            label="كلمة المرور الجديدة"
+            :rules="resetPasswordRules"
+            :type="showResetPassword ? 'text' : 'password'"
+            :append-inner-icon="showResetPassword ? 'mdi-eye-off' : 'mdi-eye'"
+            @click:append-inner="showResetPassword = !showResetPassword"
+            variant="outlined"
+            hint="8 أحرف على الأقل"
+            persistent-hint
+            class="mb-3"
+          />
+          <v-text-field
+            v-model="resetPasswordData.confirmPassword"
+            label="تأكيد كلمة المرور"
+            :rules="resetConfirmPasswordRules"
+            :type="showResetConfirmPassword ? 'text' : 'password'"
+            :append-inner-icon="showResetConfirmPassword ? 'mdi-eye-off' : 'mdi-eye'"
+            @click:append-inner="showResetConfirmPassword = !showResetConfirmPassword"
+            variant="outlined"
+          />
+        </v-form>
       </v-card-text>
-      
+
       <v-divider />
-      
+
       <v-card-actions class="dialog-actions">
         <v-spacer />
         <v-btn
-          color="grey"
           variant="outlined"
           @click="closeResetPasswordDialog"
           class="me-2"
@@ -781,76 +769,12 @@
           إلغاء
         </v-btn>
         <v-btn
-          color="warning"
+          color="primary"
           variant="elevated"
           @click="confirmResetPassword"
           :loading="resetLoading"
         >
-          إعادة تعيين
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
-
-  <!-- نافذة تأكيد الحذف -->
-  <v-dialog v-model="showDeleteConfirmDialog" max-width="500px">
-    <v-card class="delete-confirm-dialog">
-      <v-card-title class="dialog-header">
-        <div class="dialog-title">
-          <v-icon size="32" color="error" class="me-3">mdi-delete-alert</v-icon>
-          <h2>تأكيد الحذف</h2>
-        </div>
-        <v-btn 
-          icon="mdi-close" 
-          variant="text" 
-          @click="closeDeleteConfirmDialog"
-          class="close-btn"
-        />
-      </v-card-title>
-      
-      <v-divider />
-      
-      <v-card-text v-if="selectedUser" class="pa-6">
-        <div class="text-center mb-4">
-          <v-avatar size="60">
-            <v-img :src="selectedUser.avatar" />
-          </v-avatar>
-          <h4 class="mt-2">{{ selectedUser.name }}</h4>
-          <p class="text-caption">{{ selectedUser.email }}</p>
-        </div>
-        
-        <v-alert 
-          type="error" 
-          variant="tonal" 
-          class="mb-4"
-        >
-          تحذير: هذا الإجراء لا يمكن التراجع عنه!
-        </v-alert>
-        
-        <p class="text-body-2 text-center">
-          هل أنت متأكد من حذف هذا المستخدم نهائياً؟
-        </p>
-      </v-card-text>
-      
-      <v-divider />
-      
-      <v-card-actions class="dialog-actions">
-        <v-spacer />
-        <v-btn
-          color="grey"
-          variant="outlined"
-          @click="closeDeleteConfirmDialog"
-          class="me-2"
-        >
-          إلغاء
-        </v-btn>
-        <v-btn
-          color="error"
-          variant="elevated"
-          @click="confirmDeleteUser"
-          :loading="deleteLoading"
-        >
-          حذف نهائي
+          تغيير كلمة المرور
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -859,13 +783,27 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { listUsers, createUser, updateUser, updateUserPassword, deleteUser as deleteUserApi } from '@/api/users'
+import { listUsers, createUser, updateUser, updateUserPassword, updateUserStatus } from '@/api/users'
 import { listRoles, assignRoleToUser } from '@/api/roles'
 import { DEFAULT_LIMIT } from '@/constants/pagination'
 import { usePermissions } from '@/composables/usePermissions'
+import { useAuthStore } from '@/stores/auth'
+
+// Auth store
+const authStore = useAuthStore()
+const currentUserId = computed(() => authStore.user?.id)
+
+// Check if user can be edited (not self, not super admin)
+const canEditUser = (user) => {
+  // Can't edit yourself
+  if (user.id === currentUserId.value) return false
+  // Can't edit super admin (assuming role name or id check)
+  if (user.role === 'admin' || user.roleName === 'Super Admin' || user.roleName === 'admin') return false
+  return true
+}
 
 // Permissions
-const { canCreate, canUpdate, canDelete, canUpdatePassword, canUpdateStatus } = usePermissions('/users')
+const { canCreate, canUpdate, canUpdatePassword } = usePermissions('/users')
 
 // البيانات التفاعلية
 const loading = ref(false)
@@ -886,13 +824,20 @@ const addUserForm = ref(null)
 const showViewUserDialog = ref(false)
 const showEditUserDialog = ref(false)
 const showResetPasswordDialog = ref(false)
-const showDeleteConfirmDialog = ref(false)
 const selectedUser = ref(null)
 const editUserForm = ref(null)
 const editFormValid = ref(false)
 const editSaving = ref(false)
 const resetLoading = ref(false)
-const deleteLoading = ref(false)
+
+// متغيرات نافذة تغيير كلمة المرور
+const resetPasswordForm = ref(null)
+const showResetPassword = ref(false)
+const showResetConfirmPassword = ref(false)
+const resetPasswordData = ref({
+  password: '',
+  confirmPassword: ''
+})
 
 // خيارات الفلاتر - يتم تحميلها من الـ API
 const roles = ref([])
@@ -1003,6 +948,16 @@ const passwordRules = [
 const confirmPasswordRules = [
   v => !!v || 'تأكيد كلمة المرور مطلوب',
   v => v === newUser.value.password || 'كلمة المرور غير متطابقة'
+]
+
+const resetPasswordRules = [
+  v => !!v || 'كلمة المرور مطلوبة',
+  v => (v && v.length >= 8) || 'كلمة المرور يجب أن تكون على الأقل 8 أحرف'
+]
+
+const resetConfirmPasswordRules = [
+  v => !!v || 'تأكيد كلمة المرور مطلوب',
+  v => v === resetPasswordData.value.password || 'كلمة المرور غير متطابقة'
 ]
 
 const requiredRules = [
@@ -1122,9 +1077,15 @@ const resetPassword = (user) => {
   showResetPasswordDialog.value = true
 }
 
-const deleteUser = (user) => {
-  selectedUser.value = { ...user }
-  showDeleteConfirmDialog.value = true
+const toggleUserStatus = async (user) => {
+  try {
+    const newStatus = user.status === 'active' ? 'inactive' : 'active'
+    await updateUserStatus(user.id, newStatus)
+    await loadUsers()
+    console.log(`تم ${newStatus === 'active' ? 'تفعيل' : 'تعطيل'} المستخدم بنجاح`)
+  } catch (error) {
+    console.error('خطأ في تغيير حالة المستخدم:', error)
+  }
 }
 
 // دوال إدارة نافذة إضافة المستخدم
@@ -1199,15 +1160,20 @@ const saveNewUser = async () => {
 }
 
 // دوال إدارة نوافذ الإجراءات
-const closeViewUserDialog = () => {
+const closeAllDialogs = () => {
   showViewUserDialog.value = false
+  showEditUserDialog.value = false
+  showResetPasswordDialog.value = false
   selectedUser.value = null
+  editFormValid.value = false
+}
+
+const closeViewUserDialog = () => {
+  closeAllDialogs()
 }
 
 const closeEditUserDialog = () => {
-  showEditUserDialog.value = false
-  selectedUser.value = null
-  editFormValid.value = false
+  closeAllDialogs()
 }
 
 const saveEditUser = async () => {
@@ -1246,52 +1212,30 @@ const saveEditUser = async () => {
 }
 
 const closeResetPasswordDialog = () => {
-  showResetPasswordDialog.value = false
-  selectedUser.value = null
+  closeAllDialogs()
+  resetPasswordData.value = { password: '', confirmPassword: '' }
+  showResetPassword.value = false
+  showResetConfirmPassword.value = false
 }
 
 const confirmResetPassword = async () => {
+  // التحقق من صحة النموذج
+  const { valid } = await resetPasswordForm.value.validate()
+  if (!valid) return
+
   resetLoading.value = true
 
   try {
-    // Generate a random password (in production, you might want to use a more secure method)
-    const newPassword = Math.random().toString(36).slice(-10) + 'A1!'
-
     // إرسال كلمة المرور الجديدة إلى الـ API
-    await updateUserPassword(selectedUser.value.id, newPassword)
+    await updateUserPassword(selectedUser.value.id, resetPasswordData.value.password)
 
     closeResetPasswordDialog()
-    console.log('تم إعادة تعيين كلمة المرور بنجاح')
+    console.log('تم تغيير كلمة المرور بنجاح')
 
   } catch (error) {
-    console.error('خطأ في إعادة تعيين كلمة المرور:', error)
+    console.error('خطأ في تغيير كلمة المرور:', error)
   } finally {
     resetLoading.value = false
-  }
-}
-
-const closeDeleteConfirmDialog = () => {
-  showDeleteConfirmDialog.value = false
-  selectedUser.value = null
-}
-
-const confirmDeleteUser = async () => {
-  deleteLoading.value = true
-
-  try {
-    // حذف المستخدم من الـ API
-    await deleteUserApi(selectedUser.value.id)
-
-    // إعادة تحميل البيانات
-    await loadUsers()
-
-    closeDeleteConfirmDialog()
-    console.log('تم حذف المستخدم بنجاح')
-
-  } catch (error) {
-    console.error('خطأ في حذف المستخدم:', error)
-  } finally {
-    deleteLoading.value = false
   }
 }
 
@@ -2340,8 +2284,6 @@ onMounted(() => {
   border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
-.view-user-dialog .dialog-header,
-.edit-user-dialog .dialog-header,
 .reset-password-dialog .dialog-header,
 .delete-confirm-dialog .dialog-header {
   background: linear-gradient(135deg, rgba(71, 85, 105, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
@@ -2350,49 +2292,110 @@ onMounted(() => {
   padding: 1.5rem 2rem !important;
 }
 
-.view-user-dialog .v-list-item-title,
-.view-user-dialog .v-list-item-subtitle {
+.view-user-dialog .dialog-header {
+  background: #ffffff !important;
   color: #1a1a1a !important;
+  border-radius: 20px 20px 0 0 !important;
+  padding: 1.5rem 2rem !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.edit-user-dialog .dialog-header {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  border-radius: 20px 20px 0 0 !important;
+  padding: 1.5rem 2rem !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+/* تنسيق عنوان نافذة تفاصيل المستخدم */
+.view-user-dialog .dialog-title h2 {
+  color: #1a1a1a !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+}
+
+.view-user-dialog .dialog-title .v-icon {
+  color: #1a1a1a !important;
+}
+
+.view-user-dialog .close-btn {
+  color: #64748b !important;
+}
+
+.view-user-dialog .close-btn:hover {
+  color: #1a1a1a !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* تنسيق حقول نافذة تفاصيل المستخدم */
+.view-user-dialog .v-field {
+  background: #ffffff !important;
+}
+
+.view-user-dialog .v-field * {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+.view-user-dialog .v-field input,
+.view-user-dialog .v-field input[readonly],
+.view-user-dialog .v-field textarea,
+.view-user-dialog .v-field__input,
+.view-user-dialog .v-text-field input,
+.view-user-dialog input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  opacity: 1 !important;
+}
+
+.view-user-dialog .v-label,
+.view-user-dialog label,
+.view-user-dialog .v-field-label {
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+  opacity: 1 !important;
+}
+
+.view-user-dialog .v-card-text {
+  background: #ffffff !important;
+}
+
+.view-user-dialog .dialog-content {
+  background: #ffffff !important;
 }
 
 /* تنسيق شامل لنافذة تعديل المستخدم */
-.edit-user-dialog .v-field,
+.edit-user-dialog .v-field {
+  background: #ffffff !important;
+}
+
+.edit-user-dialog .v-field * {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+.edit-user-dialog .v-field input,
+.edit-user-dialog .v-field textarea,
 .edit-user-dialog .v-field__input,
+.edit-user-dialog .v-text-field input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  caret-color: #1a1a1a !important;
+}
+
 .edit-user-dialog .v-label,
-.edit-user-dialog .v-field__outline,
-.edit-user-dialog .v-field__append-inner,
-.edit-user-dialog .v-field__prepend-inner {
+.edit-user-dialog label,
+.edit-user-dialog .v-field-label {
   color: #1a1a1a !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 1px solid rgba(148, 163, 184, 0.3) !important;
-  border-radius: 12px !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  opacity: 1 !important;
 }
 
-.edit-user-dialog .v-field:hover,
-.edit-user-dialog .v-field:focus-within {
-  border-color: rgba(59, 130, 246, 0.5) !important;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
-}
-
-.edit-user-dialog .v-field__input {
-  padding: 12px 16px !important;
-  font-weight: 500 !important;
-  font-size: 0.95rem !important;
-}
-
-.edit-user-dialog .v-label {
-  font-weight: 600 !important;
-  color: #374151 !important;
-  margin-bottom: 4px !important;
-}
-
-.edit-user-dialog .v-icon {
-  color: #6b7280 !important;
-}
-
-.edit-user-dialog .v-select__selection {
+.edit-user-dialog .v-select__selection,
+.edit-user-dialog .v-select__selection-text {
   color: #1a1a1a !important;
-  font-weight: 500 !important;
+  -webkit-text-fill-color: #1a1a1a !important;
 }
 
 .edit-user-dialog .v-list-item {
@@ -2411,15 +2414,13 @@ onMounted(() => {
 
 /* تنسيق عنوان نافذة التعديل */
 .edit-user-dialog .dialog-title h2 {
-  color: #ffffff !important;
+  color: #1a1a1a !important;
   font-weight: 700 !important;
   font-size: 1.5rem !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 .edit-user-dialog .dialog-title .v-icon {
-  color: #10b981 !important;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)) !important;
+  color: #1a1a1a !important;
 }
 
 /* تنسيق أزرار نافذة التعديل */
@@ -2469,7 +2470,7 @@ onMounted(() => {
 
 /* تحسينات إضافية لنافذة التعديل */
 .edit-user-dialog .v-card-text {
-  background: linear-gradient(135deg, rgba(44, 33, 100, 0.98) 0%, rgba(45, 54, 102, 0.95) 100%) !important;
+  background: #ffffff !important;
   padding: 2rem !important;
 }
 
@@ -4243,6 +4244,219 @@ onMounted(() => {
   50% {
     transform: translateY(-8px);
   }
+}
+
+/* ========================================
+   إصلاح شامل لألوان النصوص في حوار تعديل المستخدم
+   ======================================== */
+
+/* إصلاح لون النص المكتوب في الحقول */
+.edit-user-dialog .v-field__input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+.edit-user-dialog .v-field__input input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  caret-color: #1976d2 !important;
+}
+
+.edit-user-dialog .v-text-field input,
+.edit-user-dialog .v-text-field .v-field input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+.edit-user-dialog .v-select .v-field__input,
+.edit-user-dialog .v-select input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+/* إصلاح خلفية الحقول */
+.edit-user-dialog .v-field,
+.edit-user-dialog .v-field__field,
+.edit-user-dialog .v-field__overlay {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+/* إصلاح نص القائمة المنسدلة */
+.edit-user-dialog .v-select__selection,
+.edit-user-dialog .v-select__selection-text,
+.edit-user-dialog .v-select .v-select__selection {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+/* تنسيقات التسميات - العناوين */
+.edit-user-dialog .v-label,
+.edit-user-dialog .v-field-label {
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  opacity: 1 !important;
+}
+
+.edit-user-dialog .v-field-label--floating,
+.edit-user-dialog .v-label--floating {
+  color: #1976d2 !important;
+  -webkit-text-fill-color: #1976d2 !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  background: white !important;
+  padding: 0 8px !important;
+}
+
+.edit-user-dialog .v-text-field .v-label,
+.edit-user-dialog .v-select .v-label {
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+/* إصلاح ألوان الأيقونات */
+.edit-user-dialog .v-field__prepend-inner .v-icon,
+.edit-user-dialog .v-field__append-inner .v-icon {
+  color: #6b7280 !important;
+}
+
+/* إصلاح رسائل التلميحات */
+.edit-user-dialog .v-messages__message {
+  color: #6b7280 !important;
+}
+
+/* ========================================
+   إصلاح شامل لألوان نافذة تغيير كلمة المرور
+   ======================================== */
+
+.reset-password-dialog .dialog-header {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.reset-password-dialog .dialog-title h2 {
+  color: #1a1a1a !important;
+}
+
+.reset-password-dialog .dialog-title .v-icon {
+  color: #1a1a1a !important;
+}
+
+.reset-password-dialog .v-card-text {
+  background: #ffffff !important;
+}
+
+.reset-password-dialog .v-field {
+  background: #ffffff !important;
+}
+
+.reset-password-dialog .v-field * {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+.reset-password-dialog .v-field input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  caret-color: #1976d2 !important;
+}
+
+.reset-password-dialog .v-label,
+.reset-password-dialog .v-field-label {
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+  opacity: 1 !important;
+}
+
+.reset-password-dialog .v-field-label--floating,
+.reset-password-dialog .v-label--floating {
+  color: #1976d2 !important;
+  -webkit-text-fill-color: #1976d2 !important;
+  background: white !important;
+}
+
+.reset-password-dialog .v-messages__message {
+  color: #6b7280 !important;
+}
+
+.reset-password-dialog h4 {
+  color: #1a1a1a !important;
+}
+
+.reset-password-dialog .text-caption {
+  color: #6b7280 !important;
+}
+
+/* ========================================
+   إصلاح ألوان نافذة تفاصيل المستخدم
+   ======================================== */
+
+.view-user-dialog .v-card {
+  background: #ffffff !important;
+}
+
+.view-user-dialog .dialog-header {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+.view-user-dialog .dialog-title h2 {
+  color: #1a1a1a !important;
+}
+
+.view-user-dialog .dialog-title .v-icon {
+  color: #1a1a1a !important;
+}
+
+.view-user-dialog .dialog-content {
+  background: #ffffff !important;
+}
+
+.view-user-dialog .v-field {
+  background: #ffffff !important;
+}
+
+.view-user-dialog .v-field__input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+.view-user-dialog .v-field__input input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+}
+
+.view-user-dialog input {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  opacity: 1 !important;
+}
+
+.view-user-dialog input[readonly] {
+  color: #1a1a1a !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  opacity: 1 !important;
+}
+
+.view-user-dialog .v-label {
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+  opacity: 1 !important;
+}
+
+.view-user-dialog .v-field-label {
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+  opacity: 1 !important;
+}
+
+.view-user-dialog .close-btn {
+  color: #64748b !important;
 }
 
 </style>

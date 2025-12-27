@@ -356,7 +356,7 @@
             <v-expansion-panel-text class="page-panel-content">
               <div class="permissions-grid">
                 <div
-                  v-for="perm in availablePermissions"
+                  v-for="perm in getPermissionsForPage(page)"
                   :key="perm.value"
                   class="permission-checkbox"
                 >
@@ -486,13 +486,26 @@ const pagePermissions = reactive({})
 // Track which pages are enabled (have at least one permission)
 const pageEnabled = reactive({})
 
-// Available permissions with Arabic labels (4 basic permissions)
-const availablePermissions = [
+// Base permissions for all pages
+const basePermissions = [
   { value: 'read', label: 'قراءة', color: 'success' },
   { value: 'create', label: 'إنشاء', color: 'primary' },
   { value: 'update', label: 'تعديل', color: 'warning' },
   { value: 'delete', label: 'حذف', color: 'error' }
 ]
+
+// Extra permissions for specific pages
+const extraPermissions = {
+  '/users': [
+    { value: 'updatePassword', label: 'تغيير كلمة المرور', color: 'purple' }
+  ]
+}
+
+// Get available permissions for a specific page
+const getPermissionsForPage = (page) => {
+  const extra = extraPermissions[page.route] || []
+  return [...basePermissions, ...extra]
+}
 
 // Snackbar
 const snackbar = reactive({
