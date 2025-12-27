@@ -196,4 +196,5 @@ const handleBack = () => {
     right: auto;
   }
 }
+</style>
 
